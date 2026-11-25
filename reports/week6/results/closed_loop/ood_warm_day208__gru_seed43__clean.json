@@ -1,0 +1,48 @@
+{
+  "status": "complete",
+  "run_id": "ood_warm_day208__gru_seed43__clean",
+  "episode_id": "ood_warm_day208",
+  "split": "ood_warm",
+  "model": "gru_seed43",
+  "family": "gru",
+  "condition": "clean",
+  "training_seed": 43,
+  "steps": 192,
+  "cost": 271.6473594621888,
+  "energy_kwh": 0.0,
+  "comfort_violation_rate": 0.5104166666666666,
+  "comfort_degree_hours": 71.73541589823252,
+  "center_tracking_mae_c": 5.178419601591338,
+  "decision_mean_ms": 46.61164423964692,
+  "decision_p95_ms": 55.29991695439093,
+  "fallback_count": 63,
+  "fallback_reasons": {
+    "no_valid_candidates": 63
+  },
+  "native_context_kpi": {
+    "tdis_tot": 38.79804289245509,
+    "idis_tot": 0,
+    "ener_tot": 0.000505288752569309,
+    "cost_tot": 0.0001280906987763198,
+    "emis_tot": 8.438322167907459e-05,
+    "pele_tot": 0.0020211533933545208,
+    "pgas_tot": null,
+    "pdih_tot": null,
+    "time_rat": 4.5413510841235795e-05
+  },
+  "native_final_kpi": {
+    "tdis_tot": 109.41790394168186,
+    "idis_tot": 0,
+    "ener_tot": 0.000505288752569309,
+    "cost_tot": 0.0001280906987763198,
+    "emis_tot": 8.438322167907459e-05,
+    "pele_tot": 0.0020211533933545208,
+    "pgas_tot": null,
+    "pdih_tot": null,
+    "time_rat": 7.298611966944275e-05
+  },
+  "native_ener_delta_kwh_m2": 0.0,
+  "warning": "Native final KPI covers context+evaluation; report differences only for additive cumulative quantities, never subtract maxima or ratios.",
+  "csv_sha256": "5369c0e6dde20e1b04f7f0af3df257b218c24c1507e5bce55e7bd158c9336b74",
+  "checkpoint_sha256": "6d7bfe1d3bcb2cd5aaa30773c62a231bae0ddb20dc14c016cd948d816f308c38"
+}

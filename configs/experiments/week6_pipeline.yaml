@@ -1,0 +1,90 @@
+protocol: configs/experiments/week6_evaluation.yaml
+residual_protocol: configs/experiments/week6_residual_evaluation.yaml
+expected_checkpoints: 11
+expected_closed_loop_runs: 204
+run_directory: reports/week6/results/reproduction
+verify:
+- command:
+  - scripts/check_week6_protocol.py
+- command:
+  - scripts/check_week6_open.py
+- command:
+  - scripts/check_week6_robustness.py
+  - --include-residual
+- command:
+  - scripts/check_week6_mpc.py
+- command:
+  - scripts/check_week6_closed_loop.py
+- command:
+  - scripts/finish_week6_residual.py
+- command:
+  - -m
+  - unittest
+  - tests.test_week6_control
+- &id001
+  command:
+  - scripts/check_week6_policy_ranking.py
+- command:
+  - -m
+  - unittest
+  - tests.test_week6_policy_ranking
+- &id002
+  command:
+  - scripts/bootstrap_week6.py
+report:
+- command:
+  - scripts/finish_week6_residual.py
+- command:
+  - scripts/rank_week6_residual.py
+- *id001
+- command:
+  - scripts/analyze_week6_consistency.py
+- command:
+  - scripts/plot_week6.py
+  - --all-models
+- command:
+  - scripts/evaluate_week6_degradation.py
+- *id002
+- command:
+  - scripts/report_week6_complete.py
+reproduce:
+- command:
+  - scripts/check_week6_service.py
+- command:
+  - scripts/check_week6_fallback.py
+- command:
+  - scripts/check_week6_energy.py
+- command:
+  - scripts/check_week6_deployed.py
+- command:
+  - scripts/collect_week6.py
+- command:
+  - scripts/train_week6.py
+- command:
+  - scripts/extend_residual_week6.py
+- command:
+  - scripts/evaluate_week6_open.py
+- command:
+  - scripts/evaluate_week6_open.py
+  env: &id003
+    WEEK6_MODELS_MANIFEST: reports/week6/results/residual_mlp/models.json
+    WEEK6_OPEN_OUTPUT: reports/week6/results/residual_mlp/open_loop
+- command:
+  - scripts/run_week6_control.py
+- command:
+  - scripts/run_week6_control.py
+  - --goal-shift
+- command:
+  - scripts/run_week6_control.py
+  - --robustness
+- command:
+  - scripts/run_week6_control.py
+  env: *id003
+- command:
+  - scripts/run_week6_control.py
+  - --goal-shift
+  env: *id003
+- command:
+  - scripts/run_week6_control.py
+  - --robustness
+  env: *id003

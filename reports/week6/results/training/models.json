@@ -1,0 +1,290 @@
+{
+  "models": [
+    {
+      "name": "persistence",
+      "kind": "persistence",
+      "checkpoint": "reports/week6/results/training/persistence.pt",
+      "sha256": "e694c3a9a716860947c443151678800588e0f879f2022fbc2b2ecd207ef811f2"
+    },
+    {
+      "name": "arx",
+      "kind": "arx",
+      "checkpoint": "reports/week6/results/training/arx.pt",
+      "val_loss": 0.11455519860640573,
+      "alpha": 100.0,
+      "sha256": "08dbf7ac2a67fb916050f472e1e7f1983bbd755c5d360808b06a060870a7b33e"
+    },
+    {
+      "name": "mlp_seed42",
+      "kind": "mlp",
+      "seed": 42,
+      "checkpoint": "reports/week6/results/training/mlp_seed42.pt",
+      "val_loss": 0.11073658615350723,
+      "best_epoch": 65,
+      "sha256": "573d58752b13a3f06c3c518fcd5e949088962fa9c3311bba475cfc0001625714"
+    },
+    {
+      "name": "mlp_seed43",
+      "kind": "mlp",
+      "seed": 43,
+      "checkpoint": "reports/week6/results/training/mlp_seed43.pt",
+      "val_loss": 0.1500983089208603,
+      "best_epoch": 31,
+      "sha256": "f4247272550db4b5fd6e0bbfdd87e2047251318ecd5c2db7ec8503709fae2088"
+    },
+    {
+      "name": "mlp_seed44",
+      "kind": "mlp",
+      "seed": 44,
+      "checkpoint": "reports/week6/results/training/mlp_seed44.pt",
+      "val_loss": 0.08666925877332687,
+      "best_epoch": 67,
+      "sha256": "a1915c276fd006cebf39611fa94093a0ed36528d41db874013fc5da683588bd5"
+    },
+    {
+      "name": "gru_seed42",
+      "kind": "gru",
+      "seed": 42,
+      "checkpoint": "reports/week6/results/training/gru_seed42.pt",
+      "val_loss": 0.09142190963029861,
+      "best_epoch": 54,
+      "sha256": "40b535beaa507ab2344ecd833deb699bca7ef2a98695abbd9e4af0c63fc5027a"
+    },
+    {
+      "name": "gru_seed43",
+      "kind": "gru",
+      "seed": 43,
+      "checkpoint": "reports/week6/results/training/gru_seed43.pt",
+      "val_loss": 0.07156345248222351,
+      "best_epoch": 87,
+      "sha256": "6d7bfe1d3bcb2cd5aaa30773c62a231bae0ddb20dc14c016cd948d816f308c38"
+    },
+    {
+      "name": "gru_seed44",
+      "kind": "gru",
+      "seed": 44,
+      "checkpoint": "reports/week6/results/training/gru_seed44.pt",
+      "val_loss": 0.0896432101726532,
+      "best_epoch": 61,
+      "sha256": "9fa693966c31547180d83bc1b6055d2fe84855ca9ed811835051284fb15e4e08"
+    }
+  ],
+  "train_episodes": [
+    "train_day040",
+    "train_day052",
+    "train_day064",
+    "train_day076",
+    "train_day088",
+    "train_day100",
+    "train_day112",
+    "train_day124"
+  ],
+  "val_episodes": [
+    "val_day136",
+    "val_day148"
+  ],
+  "train_sha256": "3ecddc85a98fee3b8c3d29bd93275abffbbd7cd722e2f998bcaf50996c2c932c",
+  "val_sha256": "fb9dc63d80b8da291d1ae960dda04969a7a4fa19b335fd9c20ec94f1c5f9efb6",
+  "normalization": "training windows only; equal scaled MSE across 5 observations and interval energy",
+  "config": {
+    "protocol_version": "week6-boptest-v1",
+    "environment": "boptest",
+    "url": "http://127.0.0.1:80",
+    "upstream_commit": "9b1610bf7a108826bb3d22c72bffd2d71d7bb0a9",
+    "case": "bestest_hydronic_heat_pump",
+    "asset_manifest": "reports/week6/results/assets/manifest.json",
+    "step_seconds": 900,
+    "warmup_seconds": 604800,
+    "history_steps": 16,
+    "context_steps": 96,
+    "episode_steps": 192,
+    "action": {
+      "point": "oveTSet_u",
+      "activation": "oveTSet_activate",
+      "unit": "K",
+      "experiment_bounds_c": [
+        18.0,
+        24.0
+      ],
+      "fallback": "release_to_embedded"
+    },
+    "measurements": [
+      "reaTZon_y",
+      "reaTSup_y",
+      "reaTRet_y",
+      "reaQFloHea_y",
+      "reaPHeaPum_y",
+      "reaPFan_y",
+      "reaPPumEmi_y"
+    ],
+    "state_names": [
+      "zone_c",
+      "supply_c",
+      "return_c",
+      "floor_heat_kw",
+      "electric_kw"
+    ],
+    "exogenous": [
+      "TDryBul",
+      "HGloHor"
+    ],
+    "horizons": [
+      1,
+      5,
+      10,
+      20
+    ],
+    "training_seeds": [
+      42,
+      43,
+      44
+    ],
+    "episodes": [
+      {
+        "episode_id": "train_day040",
+        "split": "train",
+        "start_day": 40,
+        "seed": 6082,
+        "policy": "scheduled"
+      },
+      {
+        "episode_id": "train_day052",
+        "split": "train",
+        "start_day": 52,
+        "seed": 6094,
+        "policy": "random_hold"
+      },
+      {
+        "episode_id": "train_day064",
+        "split": "train",
+        "start_day": 64,
+        "seed": 6106,
+        "policy": "scheduled"
+      },
+      {
+        "episode_id": "train_day076",
+        "split": "train",
+        "start_day": 76,
+        "seed": 6118,
+        "policy": "random_hold"
+      },
+      {
+        "episode_id": "train_day088",
+        "split": "train",
+        "start_day": 88,
+        "seed": 6130,
+        "policy": "scheduled"
+      },
+      {
+        "episode_id": "train_day100",
+        "split": "train",
+        "start_day": 100,
+        "seed": 6142,
+        "policy": "random_hold"
+      },
+      {
+        "episode_id": "train_day112",
+        "split": "train",
+        "start_day": 112,
+        "seed": 6154,
+        "policy": "scheduled"
+      },
+      {
+        "episode_id": "train_day124",
+        "split": "train",
+        "start_day": 124,
+        "seed": 6166,
+        "policy": "random_hold"
+      },
+      {
+        "episode_id": "val_day136",
+        "split": "val",
+        "start_day": 136,
+        "seed": 6178,
+        "policy": "scheduled"
+      },
+      {
+        "episode_id": "val_day148",
+        "split": "val",
+        "start_day": 148,
+        "seed": 6190,
+        "policy": "random_hold"
+      },
+      {
+        "episode_id": "id_test_day160",
+        "split": "id_test",
+        "start_day": 160,
+        "seed": 6202,
+        "policy": "scheduled"
+      },
+      {
+        "episode_id": "id_test_day172",
+        "split": "id_test",
+        "start_day": 172,
+        "seed": 6214,
+        "policy": "random_hold"
+      },
+      {
+        "episode_id": "ood_cold_day012",
+        "split": "ood_cold",
+        "start_day": 12,
+        "seed": 6054,
+        "policy": "scheduled"
+      },
+      {
+        "episode_id": "ood_cold_day024",
+        "split": "ood_cold",
+        "start_day": 24,
+        "seed": 6066,
+        "policy": "random_hold"
+      },
+      {
+        "episode_id": "ood_warm_day196",
+        "split": "ood_warm",
+        "start_day": 196,
+        "seed": 6238,
+        "policy": "scheduled"
+      },
+      {
+        "episode_id": "ood_warm_day208",
+        "split": "ood_warm",
+        "start_day": 208,
+        "seed": 6250,
+        "policy": "random_hold"
+      }
+    ],
+    "split_rule": "Each block owns [start-7days,start+3days); disjoint incl warmup/context.",
+    "ood_definition": "Calendar/weather shifts reserved before training; quantify weather support after collection. Not guaranteed temperature extrapolation.",
+    "energy_label": "Interval integral of reaPHeaPum_y + reaPFan_y + reaPPumEmi_y; native KPI delta checked. No setpoint-as-power.",
+    "control": {
+      "horizon": 12,
+      "candidates": 256,
+      "action_hold_steps": 4,
+      "seeds": [
+        42,
+        43,
+        44
+      ],
+      "time_budget_s": 5.0,
+      "comfort_weight": 1.0,
+      "energy_weight": 1.0,
+      "action_change_weight": 0.02
+    },
+    "robustness": {
+      "noise_std_c": [
+        0.0,
+        0.1,
+        0.3
+      ],
+      "missing_burst_steps": [
+        0,
+        1,
+        4
+      ],
+      "missing_sensor": "supply_c",
+      "fill": "last_valid",
+      "seed": 64042
+    },
+    "output": "reports/week6/results"
+  }
+}

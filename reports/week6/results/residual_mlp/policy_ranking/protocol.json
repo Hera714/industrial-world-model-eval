@@ -1,0 +1,7 @@
+{
+  "horizon": 20,
+  "weather": "persistence at origin",
+  "semantics": "Evaluate frozen realized action sequences, not counterfactual feedback policies. True costs are the same simulator trajectory prefixes.",
+  "invalid": "Negative energy/failed model rollout stays invalid; report validity and regret jointly; no invented score.",
+  "ties": "Absolute cost difference <=1e-6, omitted from sign agreement but counted."
+}

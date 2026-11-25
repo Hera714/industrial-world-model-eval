@@ -1,0 +1,62 @@
+[
+  {
+    "identity": {
+      "task": "closed_loop",
+      "episode": "id_test_day160",
+      "condition": "clean",
+      "model": "persistence"
+    },
+    "configuration_hash": "6e11834d98c92a5c82e2aadbeb53bfa1102ae710362d6767765a71ae90028b72",
+    "status": "failed",
+    "pid": 6850,
+    "attempt": 2,
+    "returncode": 1,
+    "result": "/home/hera/Projects/industrial-world-model-eval/reports/week7/batch_fast_failure/963b9cde3851028d1ce9778a/runs/20261125T125309756115Z_boptest_smoke_5e9413fd14ba",
+    "result_hashes": {}
+  },
+  {
+    "identity": {
+      "task": "closed_loop",
+      "episode": "id_test_day160",
+      "condition": "clean",
+      "model": "arx"
+    },
+    "configuration_hash": "6e11834d98c92a5c82e2aadbeb53bfa1102ae710362d6767765a71ae90028b72",
+    "status": "failed",
+    "pid": 6851,
+    "attempt": 2,
+    "returncode": 1,
+    "result": "/home/hera/Projects/industrial-world-model-eval/reports/week7/batch_fast_failure/8464a3ce2959f43dc3b9d567/runs/20261125T125309772800Z_boptest_smoke_6c46c6d1876a",
+    "result_hashes": {}
+  },
+  {
+    "identity": {
+      "task": "closed_loop",
+      "episode": "id_test_day160",
+      "condition": "noise_0p1",
+      "model": "persistence"
+    },
+    "configuration_hash": "6e11834d98c92a5c82e2aadbeb53bfa1102ae710362d6767765a71ae90028b72",
+    "status": "failed",
+    "pid": 6872,
+    "attempt": 2,
+    "returncode": 1,
+    "result": "/home/hera/Projects/industrial-world-model-eval/reports/week7/batch_fast_failure/9cca651ee2286019979cdd5d/runs/20261125T125311810961Z_boptest_smoke_f8578bd1f832",
+    "result_hashes": {}
+  },
+  {
+    "identity": {
+      "task": "closed_loop",
+      "episode": "id_test_day160",
+      "condition": "noise_0p1",
+      "model": "arx"
+    },
+    "configuration_hash": "6e11834d98c92a5c82e2aadbeb53bfa1102ae710362d6767765a71ae90028b72",
+    "status": "failed",
+    "pid": 6880,
+    "attempt": 2,
+    "returncode": 1,
+    "result": "/home/hera/Projects/industrial-world-model-eval/reports/week7/batch_fast_failure/4f9a36aea43b77db2d596a72/runs/20261125T125311816798Z_boptest_smoke_84de606398b6",
+    "result_hashes": {}
+  }
+]

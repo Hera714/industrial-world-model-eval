@@ -1,0 +1,7 @@
+Run directory: /home/hera/Projects/industrial-world-model-eval/reports/week7/batch_smoke/9cca651ee2286019979cdd5d/runs/20261125T124431185307Z_boptest_smoke_6aa069dc6a2c
+persistence id_test_day160 noise_0p1 step=0
+persistence id_test_day160 noise_0p1 step=24
+persistence id_test_day160 noise_0p1 step=48
+persistence id_test_day160 noise_0p1 step=72
+persistence id_test_day160 noise_0p1 step=96
+Benchmark completed: /home/hera/Projects/industrial-world-model-eval/reports/week7/batch_smoke/9cca651ee2286019979cdd5d/runs/20261125T124431185307Z_boptest_smoke_6aa069dc6a2c

@@ -1,0 +1,30 @@
+# 总说明：push/PR 运行短时静态与离线测试；真实 BOPTEST 需另行部署。
+name: Week7 CI
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  static-and-unit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+          cache-dependency-path: deployment/benchmark/requirements.lock
+      - name: 安装 CPU 依赖和静态检查工具
+        run: |
+          python -m pip install -r deployment/benchmark/requirements.lock
+          python -m pip install ruff==0.14.10
+      - name: Python 静态错误检查
+        run: |
+          python -m compileall -q benchmark controllers evaluators metrics models simulators tests scripts run_benchmark.py
+          ruff check --select E9,F63,F7,F82 benchmark controllers evaluators metrics models simulators tests scripts run_benchmark.py
+      - name: 不依赖服务和实验数据的短单元测试
+        run: python -m unittest tests.test_metrics tests.test_boptest_control tests.test_week6_control
+# 真实 BOPTEST 回合需要服务、FMU 和冻结资产，不在 GitHub 托管 runner 自动执行。

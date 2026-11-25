@@ -1,0 +1,25 @@
+{
+  "status": "passed",
+  "models": 11,
+  "seed": 6042,
+  "repeats": 2000,
+  "confidence": 0.95,
+  "method": "paired episode percentile bootstrap",
+  "tables": {
+    "condition_control_model_ci.csv": 132,
+    "condition_prediction_model_ci.csv": 6336,
+    "model_vs_embedded_model_ci.csv": 231,
+    "condition_control_family_ci.csv": 60,
+    "condition_prediction_family_ci.csv": 2880,
+    "model_vs_embedded_family_ci.csv": 105
+  },
+  "input_sha256": {
+    "reports/week6/results/degradation/paired_control_changes.csv": "897b9d6e315f9fb50b20e66c7cdd732e53141fa4f40adba646d09337fcbf49a8",
+    "reports/week6/results/degradation/paired_prediction_changes.csv": "532171773bb237351847e1807302020bcf8b39fd99b6efc723f40bc9fff05ca6",
+    "reports/week6/results/residual_mlp/control_comparison.csv": "134b171577bf9d84f403be2e8c13250e09ba59622f1c0102f227eb555147e820"
+  },
+  "checks": [
+    "constant differences give degenerate interval",
+    "missing episode values do not get dropped"
+  ]
+}

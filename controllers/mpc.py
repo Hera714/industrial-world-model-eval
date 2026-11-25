@@ -86,3 +86,10 @@ class RandomShootingMPC:
         elapsed=max(0.0,self.clock()-start)
         self.previous_action=action
         return np.array([action],dtype=np.float32),{'planning_time_s':elapsed,'fallback_reason':reason,'error_message':error_message}
+
+
+def create_boptest_mpc(model_spec, config, root='.'):
+    """公共入口：为BOPTEST历史模型创建相同预算的MPC，观测预测与区间能耗共同参与规划。"""
+    from models.dynamics_base import load_boptest_dynamics
+    from controllers.boptest_mpc import BoptestShootingMPC
+    return BoptestShootingMPC(load_boptest_dynamics(model_spec, root), config)

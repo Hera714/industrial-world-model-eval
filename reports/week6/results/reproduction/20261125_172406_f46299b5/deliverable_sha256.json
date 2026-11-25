@@ -1,0 +1,7 @@
+{
+  "reports/week6/week6.md": "51fa442ed10f917656586951dda223054b4cc2b90517ef28e02cadf4829a2da2",
+  "configs/experiments/week6_pipeline.yaml": "51a23fcb4189f2190107ee217e02dd04f921cf40d7d1428b1d893c0417cb9358",
+  "scripts/evaluate_week6.py": "385927e2eed3a71fc94fa9c36bccbabdeeabba5d353d72fce0e700750a1575c7",
+  "scripts/plot_week6.py": "2fde1a19228e60bdf2fec7d6878cb74d1b31a3395ff77caf3fb40482a428c55e",
+  "scripts/reproduce_week6.sh": "5948d3d942777b53603ea946f2219b3683104b90ccff139f4200944be506a4df"
+}

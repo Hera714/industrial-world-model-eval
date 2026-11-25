@@ -1,0 +1,3 @@
+     episode_id     model_a             model_b   rmse_a   rmse_b     cost_a     cost_b
+ id_test_day340 persistence residual_mlp_seed43 0.666642 1.879778 382.970768 108.403829
+ood_cold_day024  gru_seed43 residual_mlp_seed44 0.874176 1.062834 295.355573 102.039339

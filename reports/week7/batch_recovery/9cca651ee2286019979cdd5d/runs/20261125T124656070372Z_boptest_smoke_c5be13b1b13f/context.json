@@ -1,0 +1,9 @@
+{
+  "phase": "advance",
+  "task": "closed_loop",
+  "model": "persistence",
+  "episode": "id_test_day160",
+  "condition": "noise_0p1",
+  "step": 103,
+  "testid": "782c86e3-bb05-44d4-b10d-063198e9da27"
+}

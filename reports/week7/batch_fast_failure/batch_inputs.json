@@ -1,0 +1,311 @@
+{
+  "configuration": {
+    "dataset": {
+      "action_plan": "recorded_applied_actions",
+      "context_policy": "replay_recorded_actions",
+      "evaluation_episodes": [
+        "id_test_day160"
+      ],
+      "manifest": {
+        "path": "configs/benchmark/manifests/boptest_week6.json",
+        "sha256": "be36a387b8cd1c55a442f84b6b71bd945e1dc9a2c31635196686db16745b05a5"
+      },
+      "mode": "online",
+      "train_split": "train",
+      "validation_split": "val",
+      "weather_information": "persistence_at_origin"
+    },
+    "env": {
+      "action": {
+        "activation": "oveTSet_activate",
+        "api_unit": "K",
+        "bounds": [
+          18.0,
+          24.0
+        ],
+        "point": "oveTSet_u",
+        "unit": "degC"
+      },
+      "area_m2": 192.0,
+      "assets": {
+        "path": "reports/week6/results/assets/manifest.json",
+        "sha256": "68d47e8628ed24de43cf7546c9811989460631423bf8bf30b6e0a0e6592a0e5e"
+      },
+      "case": "bestest_hydronic_heat_pump",
+      "context_steps": 96,
+      "episode_steps": 8,
+      "step_seconds": 900,
+      "type": "boptest",
+      "upstream_commit": "9b1610bf7a108826bb3d22c72bffd2d71d7bb0a9",
+      "url": "http://127.0.0.1:9",
+      "version": "0.9.0",
+      "warmup_seconds": 604800
+    },
+    "evaluator": {
+      "baseline": "none",
+      "condition_matrix": {
+        "closed_loop": {
+          "conditions": [
+            "clean",
+            "noise_0p1"
+          ],
+          "episodes": [
+            "id_test_day160"
+          ]
+        }
+      },
+      "fault_conditions": [
+        "clean",
+        "noise_0p1"
+      ],
+      "faults": {
+        "noise_0p1": {
+          "channels": [
+            "zone_c",
+            "supply_c",
+            "return_c"
+          ],
+          "kind": "temperature_noise",
+          "std_degC": 0.1
+        }
+      },
+      "origin_stride_steps": 1,
+      "prediction_modes": [
+        "teacher_forcing",
+        "free_running"
+      ],
+      "tasks": [
+        "closed_loop"
+      ]
+    },
+    "failure_policy": {
+      "advance_failure": "stop_episode_no_retry",
+      "invalid_prediction": "stop_rollout_keep_prefix",
+      "planning_failure": "release_to_embedded",
+      "retries": {
+        "advance_requests": 0,
+        "read_requests": 0
+      },
+      "timeouts": {
+        "http_seconds": 0.1,
+        "planning_seconds": 5.0
+      }
+    },
+    "horizon": {
+      "action_hold_steps": 1,
+      "candidates": 32,
+      "mpc_steps": 4,
+      "prediction_steps": [
+        1,
+        4
+      ]
+    },
+    "metrics": {
+      "aggregation": "episode_then_fixed_training_seeds",
+      "control": [
+        "cost",
+        "energy_kwh",
+        "comfort_degree_hours",
+        "comfort_violation_rate",
+        "center_tracking_mae_c",
+        "decision_mean_ms",
+        "decision_p95_ms",
+        "fallback_count"
+      ],
+      "cost_weights": {
+        "action_change": 0.02,
+        "comfort": 1.0,
+        "energy": 1.0
+      },
+      "prediction": [
+        "mae",
+        "rmse",
+        "valid_fraction",
+        "physical_warning_fraction"
+      ],
+      "units": {
+        "comfort_integral": "degC*h",
+        "energy": "kWh",
+        "power": "kW",
+        "temperature": "degC",
+        "time": "s"
+      },
+      "validity": {
+        "absolute_divergence": 1000.0,
+        "interval_energy_kwh": [
+          0.0,
+          10.0
+        ],
+        "nonfinite": "stop_keep_prefix",
+        "water_degC": [
+          0.0,
+          90.0
+        ],
+        "zone_degC": [
+          0.0,
+          50.0
+        ]
+      }
+    },
+    "model": {
+      "device": "cpu",
+      "exogenous_names": [
+        "outdoor_c",
+        "solar_w_m2",
+        "sin_day",
+        "cos_day",
+        "sin_year",
+        "cos_year"
+      ],
+      "exogenous_units": [
+        "degC",
+        "W/m2",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      "history_steps": 16,
+      "input_features": 12,
+      "instances": [
+        {
+          "checkpoint": {
+            "path": "reports/week6/results/training/persistence.pt",
+            "sha256": "e694c3a9a716860947c443151678800588e0f879f2022fbc2b2ecd207ef811f2"
+          },
+          "kind": "persistence",
+          "name": "persistence"
+        },
+        {
+          "checkpoint": {
+            "path": "reports/week6/results/training/arx.pt",
+            "sha256": "08dbf7ac2a67fb916050f472e1e7f1983bbd755c5d360808b06a060870a7b33e"
+          },
+          "kind": "arx",
+          "name": "arx"
+        }
+      ],
+      "observation_names": [
+        "zone_c",
+        "supply_c",
+        "return_c",
+        "floor_heat_kw",
+        "electric_kw"
+      ],
+      "observation_units": [
+        "degC",
+        "degC",
+        "degC",
+        "kW",
+        "kW"
+      ],
+      "output_features": 6
+    },
+    "output": {
+      "directory": "reports/runs",
+      "existing_run": "new_unique_run",
+      "formats": {
+        "events": "jsonl",
+        "metrics": "json",
+        "prediction": "npz",
+        "report": "md",
+        "trajectory": "csv"
+      },
+      "run_name": "boptest_smoke"
+    },
+    "schema_version": "1.0",
+    "seed": {
+      "candidate": {
+        "base": 604200,
+        "offset": "source_step"
+      },
+      "model": {
+        "arx": null,
+        "persistence": null
+      },
+      "observation_fault": {
+        "base": 64042,
+        "offset_by_evaluator": {
+          "closed_loop": "start_day",
+          "open_loop": "source_step"
+        }
+      }
+    }
+  },
+  "inputs": {
+    "benchmark/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "benchmark/artifacts.py": "cd2cb6232abe53f72877948f2e042c2a78ad2d479818d432c78ef4c12e1bebf1",
+    "benchmark/config.py": "7577325740ff4b4b6823cd36bb4ff0c641e5ac5a4593729b169f14863791e383",
+    "benchmark/loaders.py": "203e5f0d41847d30386726fa2399ed030d0b37bb3b14027d90b0b0c7107d74f6",
+    "benchmark/regression.py": "7f1191afb67d20c0627715137d574c879e60cc3c9a1bd01f835521d6fa18b7e8",
+    "benchmark/runner.py": "c6872601c74f3c5e735b1f754c64850704d98c06d761c6cdf27d13ad64362fb3",
+    "configs/benchmark/manifests/boptest_week6.json": "be36a387b8cd1c55a442f84b6b71bd945e1dc9a2c31635196686db16745b05a5",
+    "controllers/boptest_mpc.py": "551e52f02530fa03016db3e2ae548d5cad5e48bc74994bc5df5aba1bbb1d7443",
+    "controllers/lqr.py": "94a8f401d218e923301abd80d57604da0df06eeca7e50fb32e8bcaf6a21c367e",
+    "controllers/mpc.py": "cecb70823235c9b3929e9c55513f3c160695a1bd39d1ed6732149d442f822938",
+    "controllers/rule_based.py": "833978da3dcdab595c7538bc3649431ef3b4fe7a0fc1b25bb9c0ba387321d134",
+    "controllers/safety.py": "1391e031db764d547971c128f5eea94c1ca306a80ceb8a330109017c25db7143",
+    "evaluators/benchmark_boptest.py": "c49d8af2b5c9666e3d91992e17fdf0837287aaff9258675f94d895ffd0467d33",
+    "evaluators/calibration.py": "7afffabdd82f4745e1eafe0c925bbdbd125d73118441f34cd77bcbd565f71f77",
+    "evaluators/closed_loop.py": "45dee3595d7432a1bf2e45c1a0a613e03402e0aaf80b4c848b67f2e63a219d46",
+    "evaluators/consistency.py": "b382b118d3f11eed93de60a64b4a331908527a6e8305f0bbf04ba8621adbf405",
+    "evaluators/prediction.py": "7433c493b0d35b8d10a3a9baa12b7af78516b3c085c7d3dc7f57cd8e8766f071",
+    "evaluators/robustness.py": "81c6fccb28a37cb6b8a520ce5634e61ff9158063c0d66e381010e041fe9b7d46",
+    "evaluators/rollout.py": "36954ee292f36a6af9bd18267ba7d9be48db9b4aed88a9c4a78e06cab2990947",
+    "evaluators/summary.py": "ae399d21607af4291ded3e6c3feb8996db2fe0cb0127df91d2d4f1b5d2f0e335",
+    "external/project1-boptest/testcases/bestest_hydronic_heat_pump/models/Resources/dataFromModel.csv": "c1414f6ba1549cfd10e829f66c5428eb245721d59b9fed169bed992386804b21",
+    "external/project1-boptest/testcases/bestest_hydronic_heat_pump/models/Resources/emissions.csv": "064be9c9f3c9bedfb9e6e4d2eac7df571ea85880edc6a58ef568e478cb63c4d8",
+    "external/project1-boptest/testcases/bestest_hydronic_heat_pump/models/Resources/prices.csv": "f5d0c517c44b28272b9c70dd2aac64980d6e166753d50db58a1c0575dddfc9df",
+    "external/project1-boptest/testcases/bestest_hydronic_heat_pump/models/Resources/weather.csv": "3f3afbb90b5d1f890335271c47b856c2238f134493e4d375725e22a7dee55265",
+    "external/project1-boptest/testcases/bestest_hydronic_heat_pump/models/config.json": "2c37eec6342fbb884ee1af544eaf4b1eba950a6b0fa200c7ae384f7801e38087",
+    "external/project1-boptest/testcases/bestest_hydronic_heat_pump/models/days.json": "147c5b546d599d14c9d9f03710ff631793540de65004238cd4b053fcffa1ad2c",
+    "external/project1-boptest/testcases/bestest_hydronic_heat_pump/models/kpis.json": "c07e1dc6e2cf9930594355e26c361bb6f2ef24f9e5a6edb21f7b78b3390a7bca",
+    "external/project1-boptest/testcases/bestest_hydronic_heat_pump/models/wrapped.fmu": "674b9500c1c89fdbec64f2c053af8ddcd06afebe63bd7c1b7fc708692a11863e",
+    "external/project1-boptest/version.txt": "9d8c94f1ad3ea96b1e2ac4914fda4cb93c76b4a3e0d8cc6dd8976d6c0b227d15",
+    "metrics/action_response.py": "23377bb2666716983fb5ee2d880085c857ac6d745c47fb802d81b3b33835395c",
+    "metrics/calibration.py": "889bc551974b9f1e76ebeaa5a0c3347b99c6464886d804d82ba40250abc84222",
+    "metrics/control.py": "854878b96822719b3c407763268c2a2d2924d1e8a4978ab664bff063c6c40580",
+    "metrics/prediction.py": "702584ab32df08e777897d6269f47bf6e72a91791f3e18dc16dc507b89cae7ee",
+    "metrics/probabilistic.py": "b691a695e006e5be193b45e8ce206344fc533da101c62bc468dbe9b7f20063d0",
+    "metrics/validity.py": "b31bb8bd33e217845e0e76f9d72f250b901c237dcd8971678b4cd1db3f9e0382",
+    "models/action_mlp.py": "48a53506e9ee0f164f3859eef1333a32345cd78fdc380db31ed7e4b96b389d2e",
+    "models/arx.py": "08a986d7cd9be49c20a006241cb0cab35e2effe9a3be22a2b80cdec3b2931367",
+    "models/base.py": "83c8fd74bf52e1b9e8c8f65ffc09dd69ba818adf1f6a3d269ee50cc4b1e4aa75",
+    "models/boptest_dynamics.py": "796e38bb257a685bf9ec580316991f3ea5740fc2a68ee26cc85bda91c1a2f3db",
+    "models/dynamics_base.py": "bb3e36523b03bedacf40362bc9bf0f7a65f67351bc1777309f914aefc744df55",
+    "models/history_dynamics.py": "aa6d1d4a7966d779b93c1facca4085c90b796c3ed7c4b9e4c9726fb2cf99f869",
+    "models/learned_dynamics.py": "8909d68b58262f59c2d73066395c27b91333f2ccdb0fbea7b53273c7c9efda3a",
+    "models/patchtst.py": "9ea6348ae02af1e9e1615d89f6710cd7e06c4d02886bef5bf350b3941cb5de48",
+    "models/persistence.py": "46b040e3c8ef0418f9d91cf8419196fe3d98d8185cb6bb8f4c0ef81b56d8de66",
+    "models/physics_constraints.py": "41626007b297ecdaab272119434b841525f90f1374dabe26a71ebfbeb0661d24",
+    "models/system_identification.py": "a882e6fd90798e6284ab00ceb4d4f7593311ecef2201aa8230545d9e51d4bb49",
+    "reports/week6/results/assets/manifest.json": "68d47e8628ed24de43cf7546c9811989460631423bf8bf30b6e0a0e6592a0e5e",
+    "reports/week6/results/data/id_test_day160.csv": "82bf4d4b85cf1c5282157bddab598ff0b097605f2a6fdb216c33eb456e6fc45b",
+    "reports/week6/results/data/id_test_day172.csv": "828f715a9e93e0465c207a62a2b1efb64164834f2f6e959a2e38037f128d2093",
+    "reports/week6/results/data/id_test_day292.csv": "12f132c38ce21fbc14aaf6ce0c2f592625e95491e4f956390fc263845bbb9ba6",
+    "reports/week6/results/data/id_test_day340.csv": "a05a5be922861d7bde1a27090cdfeef7d9bb029d77c57cbf8c1be43ae206fea3",
+    "reports/week6/results/data/ood_cold_day012.csv": "049e00ba191f1f4696deab483f04cc3c55cedf52a0484f536724b886c6be7033",
+    "reports/week6/results/data/ood_cold_day024.csv": "97825f6f3abb62e3af5b5bf4bac222fcff294d6b9e58947936a00f9386f8cd4d",
+    "reports/week6/results/data/ood_warm_day196.csv": "36deeffc772657392af2ade96cc020e7241f9ef5985f8e5d0b0e7f234829ffe9",
+    "reports/week6/results/data/ood_warm_day208.csv": "ee5b392d083cd63908bba9c542e2062f0019ce4f99816c9b36e6920307dac9be",
+    "reports/week6/results/data/train_day040.csv": "5998ee08527761d560ef1cdb80ecf424397a8a6a0e1fa5317262ad680c408ad0",
+    "reports/week6/results/data/train_day052.csv": "8e4c75f2e451930f4a6f451e7f4d401dbd64cf700c7005235dd2ff53c1374359",
+    "reports/week6/results/data/train_day064.csv": "2f305fa75c3cddfd7d501b465d5a78f81b69e808351fd9f16cf051896f07e051",
+    "reports/week6/results/data/train_day076.csv": "e3369ca518f0d72c1c1f421233c4ef14c1688687a111a403e2b45db66c0db453",
+    "reports/week6/results/data/train_day088.csv": "7dd1d0aa68a2d660b0b1236ad610dbb277d6bc4673007eccb37ec9dae2b2d8c8",
+    "reports/week6/results/data/train_day100.csv": "c8cb0ff08ab8fa79520f705244c63add9564cf5d3978839ce538a885446d5326",
+    "reports/week6/results/data/train_day112.csv": "394a98b040a943ccdbe03e1eff7954b1578a82837bd63192a284b1be635296bc",
+    "reports/week6/results/data/train_day124.csv": "27aed694537befccf2b686b2aa51a9d5c6383b94e07b309ea103cb09dd547f9d",
+    "reports/week6/results/data/val_day136.csv": "1c76d8c43655421261eef9be435bb35e6a751e6fa0f10ce7d45aeaa7d7769524",
+    "reports/week6/results/data/val_day148.csv": "d9a3d09223cf81040e5d6940e117f87080332f5185671fd64881612c31dc19c8",
+    "reports/week6/results/training/arx.pt": "08dbf7ac2a67fb916050f472e1e7f1983bbd755c5d360808b06a060870a7b33e",
+    "reports/week6/results/training/persistence.pt": "e694c3a9a716860947c443151678800588e0f879f2022fbc2b2ecd207ef811f2",
+    "run_benchmark.py": "b43b7bb0538a264ec291c013d74bd92ae1a19acfb3250c3bb0efb1a9a4826734",
+    "simulators/base_env.py": "2796fbaaf4eb4f28e9f5305182e5ea8ecd783f15b84e047e3841f19b98400708",
+    "simulators/boptest_adapter.py": "a4f657e06f54400b6d60c385367f723f71f6e8b0dd07307c716b102db0cb4336",
+    "simulators/boptest_control.py": "8d8b83b9c3f08801e7a6b5c25ab2bda1472e84df766d7749f22c4791eb808b36",
+    "simulators/industrial_benchmark.py": "c8f8c40f43a80c0d0b350bb22390a28433f3cb4cf929183c9100698e478cffff",
+    "simulators/safety.py": "b3120036e0573253bd69f21da3dda23cfc8032dcfef9861f2c1db0205d92ae59",
+    "simulators/simple_thermal.py": "9c8d34cd55fefa209fecf9eb652f5c48bcfb6b94f96e5870624fdb3ba3787033"
+  }
+}

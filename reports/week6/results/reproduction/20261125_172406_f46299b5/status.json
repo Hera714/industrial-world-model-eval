@@ -1,0 +1,87 @@
+{
+  "status": "passed",
+  "config": "configs/experiments/week6_pipeline.yaml",
+  "stage": "report",
+  "steps": [
+    {
+      "command": [
+        "scripts/finish_week6_residual.py"
+      ],
+      "status": "passed",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "scripts/rank_week6_residual.py"
+      ],
+      "status": "passed",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "scripts/analyze_week6_consistency.py"
+      ],
+      "status": "passed",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "scripts/plot_week6.py",
+        "--all-models"
+      ],
+      "status": "passed",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "scripts/report_week6_complete.py"
+      ],
+      "status": "passed",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "scripts/check_week6_protocol.py"
+      ],
+      "status": "passed",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "scripts/check_week6_open.py"
+      ],
+      "status": "passed",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "scripts/check_week6_robustness.py",
+        "--include-residual"
+      ],
+      "status": "passed",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "scripts/check_week6_mpc.py"
+      ],
+      "status": "passed",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "scripts/check_week6_closed_loop.py"
+      ],
+      "status": "passed",
+      "returncode": 0
+    },
+    {
+      "command": [
+        "scripts/finish_week6_residual.py"
+      ],
+      "status": "passed",
+      "returncode": 0
+    }
+  ],
+  "configuration_sha256": "51a23fcb4189f2190107ee217e02dd04f921cf40d7d1428b1d893c0417cb9358"
+}

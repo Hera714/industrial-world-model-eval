@@ -1,0 +1,151 @@
+protocol_version: week6-evaluation-frozen-1
+scope: BOPTEST only; no IB/thermal scoring
+protocol_document: docs/week6_protocol.md
+execution_config: configs/experiments/week6_boptest.yaml
+extensions_config: configs/experiments/week6_boptest_extensions.yaml
+scenario_manifest: reports/week6/results/protocol/scenario_manifest.json
+lock_file: reports/week6/results/protocol/frozen_inputs.json
+provenance: Consolidated acceptance index after execution; original scenario config
+  and correction history are preserved, not claimed as a new preregistration.
+models:
+- name: persistence
+  kind: persistence
+  checkpoint: reports/week6/results/training/persistence.pt
+  sha256: e694c3a9a716860947c443151678800588e0f879f2022fbc2b2ecd207ef811f2
+- name: arx
+  kind: arx
+  checkpoint: reports/week6/results/training/arx.pt
+  sha256: 08dbf7ac2a67fb916050f472e1e7f1983bbd755c5d360808b06a060870a7b33e
+- name: mlp_seed42
+  kind: mlp
+  seed: 42
+  checkpoint: reports/week6/results/training/mlp_seed42.pt
+  sha256: 573d58752b13a3f06c3c518fcd5e949088962fa9c3311bba475cfc0001625714
+- name: mlp_seed43
+  kind: mlp
+  seed: 43
+  checkpoint: reports/week6/results/training/mlp_seed43.pt
+  sha256: f4247272550db4b5fd6e0bbfdd87e2047251318ecd5c2db7ec8503709fae2088
+- name: mlp_seed44
+  kind: mlp
+  seed: 44
+  checkpoint: reports/week6/results/training/mlp_seed44.pt
+  sha256: a1915c276fd006cebf39611fa94093a0ed36528d41db874013fc5da683588bd5
+- name: gru_seed42
+  kind: gru
+  seed: 42
+  checkpoint: reports/week6/results/training/gru_seed42.pt
+  sha256: 40b535beaa507ab2344ecd833deb699bca7ef2a98695abbd9e4af0c63fc5027a
+- name: gru_seed43
+  kind: gru
+  seed: 43
+  checkpoint: reports/week6/results/training/gru_seed43.pt
+  sha256: 6d7bfe1d3bcb2cd5aaa30773c62a231bae0ddb20dc14c016cd948d816f308c38
+- name: gru_seed44
+  kind: gru
+  seed: 44
+  checkpoint: reports/week6/results/training/gru_seed44.pt
+  sha256: 9fa693966c31547180d83bc1b6055d2fe84855ca9ed811835051284fb15e4e08
+baseline: embedded controller, engineering reference with internal sensors
+information_sets:
+  main: Current and historical public observations; future weather held at origin;
+    known calendar/comfort schedule
+  ideal_reference: API perfect weather forecast, separately labelled
+  history_steps: 16
+  history_token: observation before action, applied/current candidate action, weather/calendar
+  teacher_forcing: May observe next actual observation at each step
+  free_running: Own predicted observations only after origin
+horizons:
+- 1
+- 5
+- 10
+- 20
+sampling:
+  origin_stride_steps: 4
+  common_max_horizon: 20
+  control_step_seconds: 900
+  scored_episode_steps: 192
+  context_steps: 96
+  warmup_seconds: 604800
+seeds:
+  training:
+  - 42
+  - 43
+  - 44
+  observation_fault: 64042
+  open_fault_rng: default_rng(64042 + origin source_step)
+  closed_fault_rng: default_rng(64042 + start_day)
+  candidate_rng: default_rng(604200 + episode step), identical for all models
+  simulator: Calendar/warmup deterministic; client reset seed does not create independent
+    physical weather
+control_budget:
+  horizon: 12
+  candidates: 256
+  action_hold_steps: 4
+  seeds:
+  - 42
+  - 43
+  - 44
+  time_budget_s: 5.0
+  comfort_weight: 1.0
+  energy_weight: 1.0
+  action_change_weight: 0.02
+  planning_seed: 42
+action:
+  point: oveTSet_u
+  activation: oveTSet_activate
+  unit: K
+  experiment_bounds_c:
+  - 18.0
+  - 24.0
+  fallback: release_to_embedded
+robustness:
+  noise_std_c:
+  - 0.0
+  - 0.1
+  - 0.3
+  missing_burst_steps:
+  - 0
+  - 1
+  - 4
+  missing_sensor: supply_c
+  fill: last_valid
+  seed: 64042
+goal_shift:
+  condition: goal_plus1
+  comfort_bound_shift_c: 1.0
+  physical_weather: identical to reference
+  model_retrained: false
+score:
+  formula: outside_comfort_deviation^2 * 0.25h + step_energy_kwh + 0.02*(action_C-previous_action_C)^2
+  comfort_bounds: Independent published schedule; goal_plus1 adds 1C to both bounds
+  energy: native ener_tot delta times area192m2
+  terminal_cost: 0.0
+  fallback: Release override to embedded; all costs retained
+  time_budget_check: Between batch predictions and at plan end; not preemptive
+validity:
+  nonfinite: Stop, retain prefix, later predictions invalid
+  divergence: 'Any absolute output above1000: stop'
+  open_physical_warning: zone outside0..50C; water outside0..90C; negative power/energy;
+    preserve original output
+  mpc_filter: finite; zone0..50C; interval energy0..10kWh; no valid candidates ->
+    fallback
+aggregation:
+  order: window metrics within episode, then training-seed/date summaries as labelled
+  independent_unit: calendar block, not timestep or overlapping window
+  bootstrap_repeats: 2000
+  comparison: Same date/history/budget across models; different-weather dates are
+    distribution contrasts, not same-weather interventions
+  excluded_from_primary_reference:
+  - id_test_day172
+  primary_reference_episodes:
+  - id_test_day160
+  - id_test_day292
+  - id_test_day340
+expected:
+  data_blocks: 18
+  checkpoints: 8
+  clean_controls: 72
+  fault_controls: 54
+  goal_controls: 27
+  total_controls: 153

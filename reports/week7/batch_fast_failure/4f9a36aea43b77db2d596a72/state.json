@@ -1,0 +1,15 @@
+{
+  "identity": {
+    "task": "closed_loop",
+    "episode": "id_test_day160",
+    "condition": "noise_0p1",
+    "model": "arx"
+  },
+  "configuration_hash": "6e11834d98c92a5c82e2aadbeb53bfa1102ae710362d6767765a71ae90028b72",
+  "status": "failed",
+  "pid": 6880,
+  "attempt": 2,
+  "returncode": 1,
+  "result": "/home/hera/Projects/industrial-world-model-eval/reports/week7/batch_fast_failure/4f9a36aea43b77db2d596a72/runs/20261125T125311816798Z_boptest_smoke_84de606398b6",
+  "result_hashes": {}
+}

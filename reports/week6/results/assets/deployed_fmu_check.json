@@ -1,0 +1,12 @@
+{
+  "status": "passed",
+  "expected_sha256": "674b9500c1c89fdbec64f2c053af8ddcd06afebe63bd7c1b7fc708692a11863e",
+  "instances": [
+    {
+      "container": "project1-boptest-worker-1",
+      "testid": "5d8c94e7-dd5b-4c15-87bd-46b02a0de416",
+      "remote_path": "/simulate/5d8c94e7-dd5b-4c15-87bd-46b02a0de416/model.fmu",
+      "sha256": "674b9500c1c89fdbec64f2c053af8ddcd06afebe63bd7c1b7fc708692a11863e"
+    }
+  ]
+}

@@ -99,3 +99,17 @@ class PersistenceDynamics(DynamicsModel):
         import json
         from pathlib import Path
         return cls(*json.loads(Path(path).read_text()))
+
+
+def load_boptest_dynamics(spec, root='.'):
+    """加载BOPTEST历史观测/区间能耗模型，校验检查点SHA256并统一单样本和批量预测接口。"""
+    from pathlib import Path
+    import hashlib
+    from models.boptest_dynamics import BoptestHistoryModel
+    path = Path(root) / spec['checkpoint']
+    if hashlib.sha256(path.read_bytes()).hexdigest() != spec['sha256']:
+        raise ValueError('BOPTEST checkpoint SHA256 mismatch')
+    model = BoptestHistoryModel.load(path)
+    if model.kind != spec['kind']:
+        raise ValueError('BOPTEST model kind mismatch')
+    return model

@@ -1,0 +1,127 @@
+{
+  "status": "passed",
+  "checkpoints": 11,
+  "verified_episodes": 204,
+  "verified_scored_steps": 39168,
+  "models": [
+    {
+      "model": "persistence",
+      "output_shape": [
+        6
+      ],
+      "action": [
+        24.0
+      ],
+      "fallback": "",
+      "decision_time_s": 0.0013735130005443352
+    },
+    {
+      "model": "arx",
+      "output_shape": [
+        6
+      ],
+      "action": [
+        22.080492534259932
+      ],
+      "fallback": "",
+      "decision_time_s": 0.003385025999705249
+    },
+    {
+      "model": "mlp_seed42",
+      "output_shape": [
+        6
+      ],
+      "action": null,
+      "fallback": "no_valid_candidates",
+      "decision_time_s": 0.008414614999310288
+    },
+    {
+      "model": "mlp_seed43",
+      "output_shape": [
+        6
+      ],
+      "action": [
+        22.0
+      ],
+      "fallback": "",
+      "decision_time_s": 0.006885785999656946
+    },
+    {
+      "model": "mlp_seed44",
+      "output_shape": [
+        6
+      ],
+      "action": [
+        24.0
+      ],
+      "fallback": "",
+      "decision_time_s": 0.004514323999501357
+    },
+    {
+      "model": "gru_seed42",
+      "output_shape": [
+        6
+      ],
+      "action": [
+        21.93955324608149
+      ],
+      "fallback": "",
+      "decision_time_s": 0.04145787300058146
+    },
+    {
+      "model": "gru_seed43",
+      "output_shape": [
+        6
+      ],
+      "action": [
+        21.720654401670657
+      ],
+      "fallback": "",
+      "decision_time_s": 0.03501617300025828
+    },
+    {
+      "model": "gru_seed44",
+      "output_shape": [
+        6
+      ],
+      "action": [
+        21.40641077567875
+      ],
+      "fallback": "",
+      "decision_time_s": 0.03659290400082682
+    },
+    {
+      "model": "residual_mlp_seed42",
+      "output_shape": [
+        6
+      ],
+      "action": null,
+      "fallback": "no_valid_candidates",
+      "decision_time_s": 0.004548230999716907
+    },
+    {
+      "model": "residual_mlp_seed43",
+      "output_shape": [
+        6
+      ],
+      "action": [
+        22.548869087326622
+      ],
+      "fallback": "",
+      "decision_time_s": 0.005860604000190506
+    },
+    {
+      "model": "residual_mlp_seed44",
+      "output_shape": [
+        6
+      ],
+      "action": [
+        21.40863610187686
+      ],
+      "fallback": "",
+      "decision_time_s": 0.0052973950005252846
+    }
+  ],
+  "known_equation_mpc": "Not implemented for BOPTEST. Embedded controller is an engineering baseline, not an oracle dynamics MPC.",
+  "contract": "predict(history[N,16,12])->[N,6]; predict_transition separates next observation and interval energy"
+}

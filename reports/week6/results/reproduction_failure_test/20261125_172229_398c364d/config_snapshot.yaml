@@ -1,0 +1,8 @@
+run_directory: reports/week6/results/reproduction_failure_test
+verify:
+- command:
+  - -c
+  - raise SystemExit(7)
+- command:
+  - -c
+  - print("should not run")

@@ -1,0 +1,284 @@
+{
+  "time_intervals": "half-open [start,end)",
+  "reference_semantics": "Inside training outdoor range; does not prove joint-distribution equality",
+  "cold_semantics": "Seasonal holdout, not temperature-support extrapolation",
+  "scenes": [
+    {
+      "episode_id": "train_day040",
+      "split": "train",
+      "start_day": 40,
+      "seed": 6082,
+      "policy": "scheduled",
+      "analysis_domain": "train",
+      "warmup_start_s": 2851200,
+      "context_start_s": 3456000,
+      "target_start_s": 3542400,
+      "target_end_exclusive_s": 3715200,
+      "control_conditions": [],
+      "data_path": "reports/week6/results/data/train_day040.csv"
+    },
+    {
+      "episode_id": "train_day052",
+      "split": "train",
+      "start_day": 52,
+      "seed": 6094,
+      "policy": "random_hold",
+      "analysis_domain": "train",
+      "warmup_start_s": 3888000,
+      "context_start_s": 4492800,
+      "target_start_s": 4579200,
+      "target_end_exclusive_s": 4752000,
+      "control_conditions": [],
+      "data_path": "reports/week6/results/data/train_day052.csv"
+    },
+    {
+      "episode_id": "train_day064",
+      "split": "train",
+      "start_day": 64,
+      "seed": 6106,
+      "policy": "scheduled",
+      "analysis_domain": "train",
+      "warmup_start_s": 4924800,
+      "context_start_s": 5529600,
+      "target_start_s": 5616000,
+      "target_end_exclusive_s": 5788800,
+      "control_conditions": [],
+      "data_path": "reports/week6/results/data/train_day064.csv"
+    },
+    {
+      "episode_id": "train_day076",
+      "split": "train",
+      "start_day": 76,
+      "seed": 6118,
+      "policy": "random_hold",
+      "analysis_domain": "train",
+      "warmup_start_s": 5961600,
+      "context_start_s": 6566400,
+      "target_start_s": 6652800,
+      "target_end_exclusive_s": 6825600,
+      "control_conditions": [],
+      "data_path": "reports/week6/results/data/train_day076.csv"
+    },
+    {
+      "episode_id": "train_day088",
+      "split": "train",
+      "start_day": 88,
+      "seed": 6130,
+      "policy": "scheduled",
+      "analysis_domain": "train",
+      "warmup_start_s": 6998400,
+      "context_start_s": 7603200,
+      "target_start_s": 7689600,
+      "target_end_exclusive_s": 7862400,
+      "control_conditions": [],
+      "data_path": "reports/week6/results/data/train_day088.csv"
+    },
+    {
+      "episode_id": "train_day100",
+      "split": "train",
+      "start_day": 100,
+      "seed": 6142,
+      "policy": "random_hold",
+      "analysis_domain": "train",
+      "warmup_start_s": 8035200,
+      "context_start_s": 8640000,
+      "target_start_s": 8726400,
+      "target_end_exclusive_s": 8899200,
+      "control_conditions": [],
+      "data_path": "reports/week6/results/data/train_day100.csv"
+    },
+    {
+      "episode_id": "train_day112",
+      "split": "train",
+      "start_day": 112,
+      "seed": 6154,
+      "policy": "scheduled",
+      "analysis_domain": "train",
+      "warmup_start_s": 9072000,
+      "context_start_s": 9676800,
+      "target_start_s": 9763200,
+      "target_end_exclusive_s": 9936000,
+      "control_conditions": [],
+      "data_path": "reports/week6/results/data/train_day112.csv"
+    },
+    {
+      "episode_id": "train_day124",
+      "split": "train",
+      "start_day": 124,
+      "seed": 6166,
+      "policy": "random_hold",
+      "analysis_domain": "train",
+      "warmup_start_s": 10108800,
+      "context_start_s": 10713600,
+      "target_start_s": 10800000,
+      "target_end_exclusive_s": 10972800,
+      "control_conditions": [],
+      "data_path": "reports/week6/results/data/train_day124.csv"
+    },
+    {
+      "episode_id": "val_day136",
+      "split": "val",
+      "start_day": 136,
+      "seed": 6178,
+      "policy": "scheduled",
+      "analysis_domain": "val",
+      "warmup_start_s": 11145600,
+      "context_start_s": 11750400,
+      "target_start_s": 11836800,
+      "target_end_exclusive_s": 12009600,
+      "control_conditions": [],
+      "data_path": "reports/week6/results/data/val_day136.csv"
+    },
+    {
+      "episode_id": "val_day148",
+      "split": "val",
+      "start_day": 148,
+      "seed": 6190,
+      "policy": "random_hold",
+      "analysis_domain": "val",
+      "warmup_start_s": 12182400,
+      "context_start_s": 12787200,
+      "target_start_s": 12873600,
+      "target_end_exclusive_s": 13046400,
+      "control_conditions": [],
+      "data_path": "reports/week6/results/data/val_day148.csv"
+    },
+    {
+      "episode_id": "id_test_day160",
+      "split": "id_test",
+      "start_day": 160,
+      "seed": 6202,
+      "policy": "scheduled",
+      "analysis_domain": "reference_support_matched",
+      "warmup_start_s": 13219200,
+      "context_start_s": 13824000,
+      "target_start_s": 13910400,
+      "target_end_exclusive_s": 14083200,
+      "control_conditions": [
+        "clean",
+        "noise_0p3",
+        "missing_4",
+        "goal_plus1"
+      ],
+      "data_path": "reports/week6/results/data/id_test_day160.csv"
+    },
+    {
+      "episode_id": "id_test_day172",
+      "split": "id_test",
+      "start_day": 172,
+      "seed": 6214,
+      "policy": "random_hold",
+      "analysis_domain": "calendar_shift",
+      "warmup_start_s": 14256000,
+      "context_start_s": 14860800,
+      "target_start_s": 14947200,
+      "target_end_exclusive_s": 15120000,
+      "control_conditions": [
+        "clean"
+      ],
+      "data_path": "reports/week6/results/data/id_test_day172.csv"
+    },
+    {
+      "episode_id": "ood_cold_day012",
+      "split": "ood_cold",
+      "start_day": 12,
+      "seed": 6054,
+      "policy": "scheduled",
+      "analysis_domain": "seasonal_holdout",
+      "warmup_start_s": 432000,
+      "context_start_s": 1036800,
+      "target_start_s": 1123200,
+      "target_end_exclusive_s": 1296000,
+      "control_conditions": [
+        "clean"
+      ],
+      "data_path": "reports/week6/results/data/ood_cold_day012.csv"
+    },
+    {
+      "episode_id": "ood_cold_day024",
+      "split": "ood_cold",
+      "start_day": 24,
+      "seed": 6066,
+      "policy": "random_hold",
+      "analysis_domain": "seasonal_holdout",
+      "warmup_start_s": 1468800,
+      "context_start_s": 2073600,
+      "target_start_s": 2160000,
+      "target_end_exclusive_s": 2332800,
+      "control_conditions": [
+        "clean"
+      ],
+      "data_path": "reports/week6/results/data/ood_cold_day024.csv"
+    },
+    {
+      "episode_id": "ood_warm_day196",
+      "split": "ood_warm",
+      "start_day": 196,
+      "seed": 6238,
+      "policy": "scheduled",
+      "analysis_domain": "warm_weather_holdout",
+      "warmup_start_s": 16329600,
+      "context_start_s": 16934400,
+      "target_start_s": 17020800,
+      "target_end_exclusive_s": 17193600,
+      "control_conditions": [
+        "clean"
+      ],
+      "data_path": "reports/week6/results/data/ood_warm_day196.csv"
+    },
+    {
+      "episode_id": "ood_warm_day208",
+      "split": "ood_warm",
+      "start_day": 208,
+      "seed": 6250,
+      "policy": "random_hold",
+      "analysis_domain": "warm_weather_holdout",
+      "warmup_start_s": 17366400,
+      "context_start_s": 17971200,
+      "target_start_s": 18057600,
+      "target_end_exclusive_s": 18230400,
+      "control_conditions": [
+        "clean"
+      ],
+      "data_path": "reports/week6/results/data/ood_warm_day208.csv"
+    },
+    {
+      "episode_id": "id_test_day292",
+      "split": "id_test",
+      "start_day": 292,
+      "seed": 6334,
+      "policy": "scheduled",
+      "analysis_domain": "reference_support_matched",
+      "warmup_start_s": 24624000,
+      "context_start_s": 25228800,
+      "target_start_s": 25315200,
+      "target_end_exclusive_s": 25488000,
+      "control_conditions": [
+        "clean",
+        "noise_0p3",
+        "missing_4",
+        "goal_plus1"
+      ],
+      "data_path": "reports/week6/results/data/id_test_day292.csv"
+    },
+    {
+      "episode_id": "id_test_day340",
+      "split": "id_test",
+      "start_day": 340,
+      "seed": 6382,
+      "policy": "random_hold",
+      "analysis_domain": "reference_support_matched",
+      "warmup_start_s": 28771200,
+      "context_start_s": 29376000,
+      "target_start_s": 29462400,
+      "target_end_exclusive_s": 29635200,
+      "control_conditions": [
+        "clean",
+        "noise_0p3",
+        "missing_4",
+        "goal_plus1"
+      ],
+      "data_path": "reports/week6/results/data/id_test_day340.csv"
+    }
+  ]
+}

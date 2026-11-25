@@ -1,0 +1,1 @@
+{"status": "passed", "checkpoints": 11, "verified_episodes": 204, "verified_scored_steps": 39168, "known_equation_mpc": "Not implemented for BOPTEST. Embedded controller is an engineering baseline, not an oracle dynamics MPC.", "contract": "predict(history[N,16,12])->[N,6]; predict_transition separates next observation and interval energy"}

@@ -1,0 +1,8 @@
+{
+  "phase": "reset",
+  "task": "closed_loop",
+  "model": "arx",
+  "episode": "id_test_day160",
+  "condition": "clean",
+  "step": -1
+}

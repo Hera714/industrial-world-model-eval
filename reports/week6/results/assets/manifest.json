@@ -1,0 +1,61 @@
+{
+  "upstream": "https://github.com/ibpsa/project1-boptest",
+  "commit": "9b1610bf7a108826bb3d22c72bffd2d71d7bb0a9",
+  "version": "0.9.0",
+  "case": "bestest_hydronic_heat_pump",
+  "area_m2": 192.0,
+  "sha256": {
+    "external/project1-boptest/testcases/bestest_hydronic_heat_pump/models/wrapped.fmu": "674b9500c1c89fdbec64f2c053af8ddcd06afebe63bd7c1b7fc708692a11863e",
+    "external/project1-boptest/testcases/bestest_hydronic_heat_pump/models/config.json": "2c37eec6342fbb884ee1af544eaf4b1eba950a6b0fa200c7ae384f7801e38087",
+    "external/project1-boptest/testcases/bestest_hydronic_heat_pump/models/kpis.json": "c07e1dc6e2cf9930594355e26c361bb6f2ef24f9e5a6edb21f7b78b3390a7bca",
+    "external/project1-boptest/testcases/bestest_hydronic_heat_pump/models/days.json": "147c5b546d599d14c9d9f03710ff631793540de65004238cd4b053fcffa1ad2c",
+    "external/project1-boptest/version.txt": "9d8c94f1ad3ea96b1e2ac4914fda4cb93c76b4a3e0d8cc6dd8976d6c0b227d15",
+    "external/project1-boptest/testcases/bestest_hydronic_heat_pump/models/Resources/weather.csv": "3f3afbb90b5d1f890335271c47b856c2238f134493e4d375725e22a7dee55265",
+    "external/project1-boptest/testcases/bestest_hydronic_heat_pump/models/Resources/dataFromModel.csv": "c1414f6ba1549cfd10e829f66c5428eb245721d59b9fed169bed992386804b21",
+    "external/project1-boptest/testcases/bestest_hydronic_heat_pump/models/Resources/emissions.csv": "064be9c9f3c9bedfb9e6e4d2eac7df571ea85880edc6a58ef568e478cb63c4d8",
+    "external/project1-boptest/testcases/bestest_hydronic_heat_pump/models/Resources/prices.csv": "f5d0c517c44b28272b9c70dd2aac64980d6e166753d50db58a1c0575dddfc9df"
+  },
+  "build_patch_sha256": "d2686f9f8a21e928b848acb6376b781aef2cbca954b042259df9b856cf167e63",
+  "local_build_inputs": [
+    {
+      "path": "service/web/apt-seed/cpp_9.3.0-1ubuntu2_amd64.deb",
+      "bytes": 27588,
+      "sha256": "6a29410b6f9a6f1f6b3fe93d0b994e56293126962950bb1c9bbf0a8909044b03"
+    },
+    {
+      "path": "service/web/apt-seed/gcc_9.3.0-1ubuntu2_amd64.deb",
+      "bytes": 5208,
+      "sha256": "78ab6a8841c68300ba39992e8e33190371e133b3592c601ed3052d54e2ba59ea"
+    },
+    {
+      "path": "service/worker/apt-seed/iso-codes_4.4-1_all.deb",
+      "bytes": 2694644,
+      "sha256": "d23ceffbfc1608a3ecc7a65495a6355bd8993a72f485909ca202762967e87b64"
+    },
+    {
+      "path": "service/worker/apt-seed/libjpeg8_8c-2ubuntu8_amd64.deb",
+      "bytes": 2194,
+      "sha256": "baaecbc8e7ef55fc1887365721a7771f7d533fabca38fca878668b9c8f7ee13f"
+    },
+    {
+      "path": "service/worker/apt-seed/libllvm12_12.0.0-3ubuntu1~20.04.5_amd64.deb",
+      "bytes": 18798540,
+      "sha256": "4b9c00da8b0bc0513cc8afcfdc739d6ee2f75f46545f9b13419c4d0859318e06"
+    },
+    {
+      "path": "service/worker/apt-seed/python3-chardet_3.0.4-4build1_all.deb",
+      "bytes": 80440,
+      "sha256": "fd5f39c40884306937dd10fb43f63507d575509445d69515a97cdfe85e4ce97b"
+    },
+    {
+      "path": "service/worker/apt-seed/xauth_1.1-0ubuntu1_amd64.deb",
+      "bytes": 24996,
+      "sha256": "d35a2e55ae4ce9d74c5c83e993e3f4bee9cec8f9693398c641d633537207e9e9"
+    },
+    {
+      "path": "service/worker/installers/Miniconda3-py311_24.7.1-0-Linux-x86_64.sh",
+      "bytes": 146933743,
+      "sha256": "a098a5b1581d8fd078c430b82e27106602223e335efef708a124e723814d120c"
+    }
+  ]
+}

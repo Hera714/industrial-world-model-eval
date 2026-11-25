@@ -1,0 +1,14 @@
+2026-11-25T12:46:20.395808+00:00 INFO run_started {}
+Run directory: /home/hera/Projects/industrial-world-model-eval/reports/week7/batch_recovery/963b9cde3851028d1ce9778a/runs/20261125T124620336098Z_boptest_smoke_7aecf5f40b83
+2026-11-25T12:46:25.533213+00:00 INFO episode_progress {"phase": "advance", "model": "persistence", "episode": "id_test_day160", "condition": "clean", "step": 0}
+persistence id_test_day160 clean step=0
+2026-11-25T12:46:26.534637+00:00 INFO episode_progress {"phase": "advance", "model": "persistence", "episode": "id_test_day160", "condition": "clean", "step": 24}
+persistence id_test_day160 clean step=24
+2026-11-25T12:46:27.536479+00:00 INFO episode_progress {"phase": "advance", "model": "persistence", "episode": "id_test_day160", "condition": "clean", "step": 48}
+persistence id_test_day160 clean step=48
+2026-11-25T12:46:28.606990+00:00 INFO episode_progress {"phase": "advance", "model": "persistence", "episode": "id_test_day160", "condition": "clean", "step": 72}
+persistence id_test_day160 clean step=72
+2026-11-25T12:46:29.720463+00:00 INFO episode_progress {"phase": "advance", "model": "persistence", "episode": "id_test_day160", "condition": "clean", "step": 96}
+persistence id_test_day160 clean step=96
+2026-11-25T12:46:30.094137+00:00 INFO episode_completed {"task": "closed_loop", "model": "persistence", "episode": "id_test_day160", "condition": "clean", "metrics": {"steps": 8, "cost": 4.0771961953485185, "energy_kwh": 3.86660814017349, "comfort_violation_rate": 1.0, "comfort_degree_hours": 0.618314056507856, "center_tracking_mae_c": 1.809157028253928, "decision_mean_ms": 0.5470318737934576, "decision_p95_ms": 0.7832224475350812, "fallback_count": 0, "fallback_reasons": {}, "native_context_kpi": {"tdis_tot": 1.844415004341343, "idis_tot": 0, "ener_tot": 0.16634464851829014, "cost_tot": 0.04216836839938657, "emis_tot": 0.027779556302554468, "pele_tot": 0.021657057568547147, "pgas_tot": null, "pdih_tot": null, "time_rat": 3.869764428389699e-05}, "native_final_kpi": {"tdis_tot": 2.501535690186855, "idis_tot": 0, "ener_tot": 0.18648323258169375, "cost_tot": 0.04727349945945938, "emis_tot": 0.03114269984114287, "pele_tot": 0.021657057568547147, "pgas_tot": null, "pdih_tot": null, "time_rat": 3.876495001256915e-05}, "native_interval_note": "Only additive cumulative KPI differences are meaningful; do not subtract maxima or ratios."}}
+2026-11-25T12:46:30.104070+00:00 INFO run_completed {}

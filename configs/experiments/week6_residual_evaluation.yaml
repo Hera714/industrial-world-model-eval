@@ -1,0 +1,18 @@
+base_protocol: configs/experiments/week6_evaluation.yaml
+model_manifest: reports/week6/results/residual_mlp/models.json
+training_seeds:
+- 42
+- 43
+- 44
+additional_models: 3
+total_models: 11
+additional_controls: 51
+total_controls: 204
+architecture: 192 -> 128 ReLU -> 64 ReLU -> 6
+outputs: First5 physical observation increments plus direct interval energy
+unchanged_comparison: same split/history/features/optimizer/early stopping/origins/horizons/MPC
+  budget/cost/fallback
+sha256:
+  reports/week6/results/residual_mlp/residual_mlp_seed42.pt: 92cc13670060b9304d5d50bcfb8c584df8a8b7ee6cdd2a32f3b896cd7527d1c4
+  reports/week6/results/residual_mlp/residual_mlp_seed43.pt: 30e13b4f32f9a74e91cb188bc7fae8b5c2b28f525782c550723c3fb492e966e9
+  reports/week6/results/residual_mlp/residual_mlp_seed44.pt: b8f1776629c923c658b09f1bbc6a89798c06da59a822d55200da05e075b0d61f

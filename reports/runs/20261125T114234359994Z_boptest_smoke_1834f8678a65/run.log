@@ -1,0 +1,49 @@
+2026-11-25T11:42:34.430704+00:00 INFO run_started {}
+Run directory: /home/hera/Projects/industrial-world-model-eval/reports/runs/20261125T114234359994Z_boptest_smoke_1834f8678a65
+2026-11-25T11:42:39.483258+00:00 INFO episode_progress {"phase": "advance", "model": "replay", "episode": "id_test_day160", "condition": "clean", "step": 0}
+replay id_test_day160 clean step=0
+2026-11-25T11:42:40.368474+00:00 INFO episode_progress {"phase": "advance", "model": "replay", "episode": "id_test_day160", "condition": "clean", "step": 24}
+replay id_test_day160 clean step=24
+2026-11-25T11:42:41.248025+00:00 INFO episode_progress {"phase": "advance", "model": "replay", "episode": "id_test_day160", "condition": "clean", "step": 48}
+replay id_test_day160 clean step=48
+2026-11-25T11:42:42.129882+00:00 INFO episode_progress {"phase": "advance", "model": "replay", "episode": "id_test_day160", "condition": "clean", "step": 72}
+replay id_test_day160 clean step=72
+2026-11-25T11:42:43.063725+00:00 INFO episode_progress {"phase": "advance", "model": "replay", "episode": "id_test_day160", "condition": "clean", "step": 96}
+replay id_test_day160 clean step=96
+2026-11-25T11:42:47.603873+00:00 INFO episode_completed {"task": "collection", "model": "replay", "episode": "id_test_day160", "condition": "clean", "metrics": {"steps": 8, "cost": 0.43699894831458735, "energy_kwh": 0.008369615235714889, "comfort_violation_rate": 0.625, "comfort_degree_hours": 0.330298563988606, "center_tracking_mae_c": 1.6077227563792533, "decision_mean_ms": 0.0, "decision_p95_ms": 0.0, "fallback_count": 0, "fallback_reasons": {}, "native_context_kpi": {"tdis_tot": 1.844415004341343, "idis_tot": 0, "ener_tot": 0.16634464851829014, "cost_tot": 0.04216836839938657, "emis_tot": 0.027779556302554468, "pele_tot": 0.021657057568547147, "pgas_tot": null, "pdih_tot": null, "time_rat": 3.316042437190898e-05}, "native_final_kpi": {"tdis_tot": 2.23066695009668, "idis_tot": 0, "ener_tot": 0.1663882402643095, "cost_tot": 0.042179418907002476, "emis_tot": 0.027786836124139697, "pele_tot": 0.021657057568547147, "pgas_tot": null, "pdih_tot": null, "time_rat": 7.887587192374911e-05}, "native_interval_note": "Only additive cumulative KPI differences are meaningful; do not subtract maxima or ratios."}}
+2026-11-25T11:42:47.677021+00:00 INFO open_loop_episode_completed {"episode": "id_test_day160", "models": 2, "origins": 5}
+open_loop completed: id_test_day160 (2 models)
+2026-11-25T11:42:50.455557+00:00 INFO episode_progress {"phase": "advance", "model": "persistence", "episode": "id_test_day160", "condition": "clean", "step": 0}
+persistence id_test_day160 clean step=0
+2026-11-25T11:42:51.430419+00:00 INFO episode_progress {"phase": "advance", "model": "persistence", "episode": "id_test_day160", "condition": "clean", "step": 24}
+persistence id_test_day160 clean step=24
+2026-11-25T11:42:52.418109+00:00 INFO episode_progress {"phase": "advance", "model": "persistence", "episode": "id_test_day160", "condition": "clean", "step": 48}
+persistence id_test_day160 clean step=48
+2026-11-25T11:42:53.409176+00:00 INFO episode_progress {"phase": "advance", "model": "persistence", "episode": "id_test_day160", "condition": "clean", "step": 72}
+persistence id_test_day160 clean step=72
+2026-11-25T11:42:54.404528+00:00 INFO episode_progress {"phase": "advance", "model": "persistence", "episode": "id_test_day160", "condition": "clean", "step": 96}
+persistence id_test_day160 clean step=96
+2026-11-25T11:42:54.741733+00:00 INFO episode_completed {"task": "closed_loop", "model": "persistence", "episode": "id_test_day160", "condition": "clean", "metrics": {"steps": 8, "cost": 4.0771961953485185, "energy_kwh": 3.86660814017349, "comfort_violation_rate": 1.0, "comfort_degree_hours": 0.618314056507856, "center_tracking_mae_c": 1.809157028253928, "decision_mean_ms": 0.513966999733384, "decision_p95_ms": 0.9184014501443014, "fallback_count": 0, "fallback_reasons": {}, "native_context_kpi": {"tdis_tot": 1.844415004341343, "idis_tot": 0, "ener_tot": 0.16634464851829014, "cost_tot": 0.04216836839938657, "emis_tot": 0.027779556302554468, "pele_tot": 0.021657057568547147, "pgas_tot": null, "pdih_tot": null, "time_rat": 3.665736404775876e-05}, "native_final_kpi": {"tdis_tot": 2.501535690186855, "idis_tot": 0, "ener_tot": 0.18648323258169375, "cost_tot": 0.04727349945945938, "emis_tot": 0.03114269984114287, "pele_tot": 0.021657057568547147, "pgas_tot": null, "pdih_tot": null, "time_rat": 3.671145876377274e-05}, "native_interval_note": "Only additive cumulative KPI differences are meaningful; do not subtract maxima or ratios."}}
+2026-11-25T11:43:00.923327+00:00 INFO episode_progress {"phase": "advance", "model": "arx", "episode": "id_test_day160", "condition": "clean", "step": 0}
+arx id_test_day160 clean step=0
+2026-11-25T11:43:01.883754+00:00 INFO episode_progress {"phase": "advance", "model": "arx", "episode": "id_test_day160", "condition": "clean", "step": 24}
+arx id_test_day160 clean step=24
+2026-11-25T11:43:02.824315+00:00 INFO episode_progress {"phase": "advance", "model": "arx", "episode": "id_test_day160", "condition": "clean", "step": 48}
+arx id_test_day160 clean step=48
+2026-11-25T11:43:03.792651+00:00 INFO episode_progress {"phase": "advance", "model": "arx", "episode": "id_test_day160", "condition": "clean", "step": 72}
+arx id_test_day160 clean step=72
+2026-11-25T11:43:04.778564+00:00 INFO episode_progress {"phase": "advance", "model": "arx", "episode": "id_test_day160", "condition": "clean", "step": 96}
+arx id_test_day160 clean step=96
+2026-11-25T11:43:05.099691+00:00 INFO episode_completed {"task": "closed_loop", "model": "arx", "episode": "id_test_day160", "condition": "clean", "metrics": {"steps": 8, "cost": 0.1969993046880935, "energy_kwh": 0.008369615235714889, "comfort_violation_rate": 0.625, "comfort_degree_hours": 0.33029905620483646, "center_tracking_mae_c": 1.6077228086499957, "decision_mean_ms": 0.6403118752587034, "decision_p95_ms": 0.8276623003439453, "fallback_count": 0, "fallback_reasons": {}, "native_context_kpi": {"tdis_tot": 1.844415004341343, "idis_tot": 0, "ener_tot": 0.16634464851829014, "cost_tot": 0.04216836839938657, "emis_tot": 0.027779556302554468, "pele_tot": 0.021657057568547147, "pgas_tot": null, "pdih_tot": null, "time_rat": 3.5725744147049754e-05}, "native_final_kpi": {"tdis_tot": 2.2306676723176526, "idis_tot": 0, "ener_tot": 0.1663882402643095, "cost_tot": 0.042179418907002476, "emis_tot": 0.027786836124139697, "pele_tot": 0.021657057568547147, "pgas_tot": null, "pdih_tot": null, "time_rat": 3.579969416415678e-05}, "native_interval_note": "Only additive cumulative KPI differences are meaningful; do not subtract maxima or ratios."}}
+2026-11-25T11:43:11.231318+00:00 INFO episode_progress {"phase": "advance", "model": "embedded", "episode": "id_test_day160", "condition": "clean", "step": 0}
+embedded id_test_day160 clean step=0
+2026-11-25T11:43:12.331852+00:00 INFO episode_progress {"phase": "advance", "model": "embedded", "episode": "id_test_day160", "condition": "clean", "step": 24}
+embedded id_test_day160 clean step=24
+2026-11-25T11:43:13.292622+00:00 INFO episode_progress {"phase": "advance", "model": "embedded", "episode": "id_test_day160", "condition": "clean", "step": 48}
+embedded id_test_day160 clean step=48
+2026-11-25T11:43:17.496868+00:00 INFO episode_progress {"phase": "advance", "model": "embedded", "episode": "id_test_day160", "condition": "clean", "step": 72}
+embedded id_test_day160 clean step=72
+2026-11-25T11:43:15.006948+00:00 INFO episode_progress {"phase": "advance", "model": "embedded", "episode": "id_test_day160", "condition": "clean", "step": 96}
+embedded id_test_day160 clean step=96
+2026-11-25T11:43:15.328738+00:00 INFO episode_completed {"task": "closed_loop", "model": "embedded", "episode": "id_test_day160", "condition": "clean", "metrics": {"steps": 8, "cost": 0.2737996249905869, "energy_kwh": 0.008369615235714889, "comfort_violation_rate": 0.625, "comfort_degree_hours": 0.3302994714726566, "center_tracking_mae_c": 1.6077230363632609, "decision_mean_ms": 0.0, "decision_p95_ms": 0.0, "fallback_count": 0, "fallback_reasons": {}, "native_context_kpi": {"tdis_tot": 1.844415004341343, "idis_tot": 0, "ener_tot": 0.16634464851829014, "cost_tot": 0.04216836839938657, "emis_tot": 0.027779556302554468, "pele_tot": 0.021657057568547147, "pgas_tot": null, "pdih_tot": null, "time_rat": 3.4520090672007766e-05}, "native_final_kpi": {"tdis_tot": 2.230668175525223, "idis_tot": 0, "ener_tot": 0.1663882402643095, "cost_tot": 0.042179418907002476, "emis_tot": 0.027786836124139697, "pele_tot": 0.021657057568547147, "pgas_tot": null, "pdih_tot": null, "time_rat": 3.470559207624087e-05}, "native_interval_note": "Only additive cumulative KPI differences are meaningful; do not subtract maxima or ratios."}}
+2026-11-25T11:43:15.387559+00:00 INFO run_completed {}

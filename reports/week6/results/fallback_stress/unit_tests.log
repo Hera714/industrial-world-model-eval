@@ -1,0 +1,9 @@
+test_all_candidates_invalid_releases (tests.test_week6_control.Week6FallbackTest.test_all_candidates_invalid_releases) ... ok
+test_partial_invalid_candidates_keep_valid_action (tests.test_week6_control.Week6FallbackTest.test_partial_invalid_candidates_keep_valid_action) ... ok
+test_prediction_exception_releases_and_preserves_error (tests.test_week6_control.Week6FallbackTest.test_prediction_exception_releases_and_preserves_error) ... ok
+test_timeout_releases_prior_override (tests.test_week6_control.Week6FallbackTest.test_timeout_releases_prior_override) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.005s
+
+OK

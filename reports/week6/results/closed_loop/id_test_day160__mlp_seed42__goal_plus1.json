@@ -1,0 +1,48 @@
+{
+  "status": "complete",
+  "run_id": "id_test_day160__mlp_seed42__goal_plus1",
+  "episode_id": "id_test_day160",
+  "split": "id_test",
+  "model": "mlp_seed42",
+  "family": "mlp",
+  "condition": "goal_plus1",
+  "training_seed": 42,
+  "steps": 192,
+  "cost": 27.164947201615462,
+  "energy_kwh": 20.4643432959885,
+  "comfort_violation_rate": 0.0,
+  "comfort_degree_hours": 0.0,
+  "center_tracking_mae_c": 0.6294363010901369,
+  "decision_mean_ms": 7.008899723890257,
+  "decision_p95_ms": 9.184165303304319,
+  "fallback_count": 42,
+  "fallback_reasons": {
+    "no_valid_candidates": 42
+  },
+  "native_context_kpi": {
+    "tdis_tot": 1.844415004341343,
+    "idis_tot": 0,
+    "ener_tot": 0.16634464851829014,
+    "cost_tot": 0.04216836839938657,
+    "emis_tot": 0.027779556302554468,
+    "pele_tot": 0.021657057568547147,
+    "pgas_tot": null,
+    "pdih_tot": null,
+    "time_rat": 3.7772373846399845e-05
+  },
+  "native_final_kpi": {
+    "tdis_tot": 2.230668175525223,
+    "idis_tot": 0,
+    "ener_tot": 0.2729297698515636,
+    "cost_tot": 0.06918769665737139,
+    "emis_tot": 0.045579271565211105,
+    "pele_tot": 0.021657057568547147,
+    "pgas_tot": null,
+    "pdih_tot": null,
+    "time_rat": 4.5339302457306576e-05
+  },
+  "native_ener_delta_kwh_m2": 0.10658512133327344,
+  "warning": "Native final KPI covers context+evaluation; report differences only for additive cumulative quantities, never subtract maxima or ratios.",
+  "csv_sha256": "06036c2c71685dd85b923d51e73a23c682732fb7f1a4889de611272ec2fe00ce",
+  "checkpoint_sha256": "573d58752b13a3f06c3c518fcd5e949088962fa9c3311bba475cfc0001625714"
+}

@@ -1,0 +1,7 @@
+{
+  "status": "passed",
+  "verified_runs": 72,
+  "channel_records": 103680,
+  "check": "Exact replay of fixed RNG and causal fill equals every saved controller observation; missing masks equal saved flags",
+  "open_loop": "Existing severity0/.1/.3C and bursts0/1/4steps results remain in open_loop; this audit covers closed-loop original observation logs."
+}

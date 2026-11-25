@@ -1,0 +1,3 @@
+2026-11-25T12:53:09.824042+00:00 INFO run_started {}
+Run directory: /home/hera/Projects/industrial-world-model-eval/reports/week7/batch_fast_failure/963b9cde3851028d1ce9778a/runs/20261125T125309756115Z_boptest_smoke_5e9413fd14ba
+2026-11-25T12:53:09.988094+00:00 ERROR run_failed {"error_type": "RuntimeError", "message": "BOPTEST GET /version: <urlopen error timed out>"}

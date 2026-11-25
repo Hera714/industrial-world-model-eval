@@ -1,0 +1,16 @@
+{
+  "python": "3.11.18 (main, Nov 24 2026, 05:04:59) [GCC 12.2.0]",
+  "executable": "/usr/local/bin/python",
+  "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.36",
+  "packages": {
+    "numpy": "2.4.6",
+    "pandas": "3.1.1",
+    "torch": "2.8.0+cpu",
+    "PyYAML": "6.0.3",
+    "gymnasium": "1.4.0",
+    "fmpy": null
+  },
+  "commit": null,
+  "git_dirty": null,
+  "git_changes": null
+}

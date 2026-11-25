@@ -1,0 +1,81 @@
+diff --git a/service/provision/Dockerfile b/service/provision/Dockerfile
+index 4068052..f4333ad 100644
+--- a/service/provision/Dockerfile
++++ b/service/provision/Dockerfile
+@@ -1,7 +1,10 @@
+ FROM ubuntu:focal
+ 
+-RUN apt-get update && \
+-  apt-get -y install python3 python3-pip && \
++RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
++    sed -i 's|http://archive.ubuntu.com/ubuntu|http://mirrors.tuna.tsinghua.edu.cn/ubuntu|g; s|http://security.ubuntu.com/ubuntu|http://mirrors.tuna.tsinghua.edu.cn/ubuntu|g' /etc/apt/sources.list \
++    && rm -f /etc/apt/apt.conf.d/docker-clean \
++    && apt-get -o Acquire::Retries=2 -o Acquire::http::Timeout=30 update \
++    && apt-get -o Acquire::Retries=2 -o Acquire::http::Timeout=30 install -y python3 python3-pip && \
+   pip3 install requests requests_toolbelt && \
+   mkdir /usr/src/boptest
+ 
+diff --git a/service/web/Dockerfile b/service/web/Dockerfile
+index 351f57a..db72d47 100644
+--- a/service/web/Dockerfile
++++ b/service/web/Dockerfile
+@@ -1,6 +1,19 @@
+ FROM ubuntu:focal
+ 
+-RUN apt-get update && apt-get -y install ca-certificates curl build-essential
++# 将已下载的两个 Ubuntu 软件包放入 APT 缓存，由 APT 校验并安装。
++COPY service/web/apt-seed/*.deb /tmp/apt-seed/
++
++RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
++    sed -i \
++      -e 's|http://archive.ubuntu.com/ubuntu|http://mirrors.tuna.tsinghua.edu.cn/ubuntu|g' \
++      -e 's|http://security.ubuntu.com/ubuntu|http://mirrors.tuna.tsinghua.edu.cn/ubuntu|g' \
++      /etc/apt/sources.list \
++    && rm -f /etc/apt/apt.conf.d/docker-clean \
++    && apt-get -o Acquire::Retries=2 -o Acquire::http::Timeout=30 update \
++    && cp /tmp/apt-seed/*.deb /var/cache/apt/archives/ \
++    && rm -r /tmp/apt-seed \
++    && apt-get -o Acquire::Retries=2 -o Acquire::http::Timeout=30 \
++        -y install ca-certificates curl build-essential
+ RUN curl -sL https://deb.nodesource.com/setup_16.x | bash - \
+     && apt-get install -y nodejs
+ 
+diff --git a/service/worker/Dockerfile b/service/worker/Dockerfile
+index 533524e..1b0c33c 100644
+--- a/service/worker/Dockerfile
++++ b/service/worker/Dockerfile
+@@ -5,9 +5,21 @@ ENV HOME /home/boptest
+ 
+ WORKDIR /
+ 
+-RUN apt-get update -y && apt-get install -y \
++# 将已下载的依赖放入缓存，由 APT 按索引校验并安装。
++COPY service/worker/apt-seed/*.deb /tmp/apt-seed/
++
++RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
++    sed -i 's|http://archive.ubuntu.com/ubuntu|http://mirrors.tuna.tsinghua.edu.cn/ubuntu|g; s|http://security.ubuntu.com/ubuntu|http://mirrors.tuna.tsinghua.edu.cn/ubuntu|g' /etc/apt/sources.list \
++    && rm -f /etc/apt/apt.conf.d/docker-clean \
++    && apt-get -o Acquire::Retries=2 -o Acquire::http::Timeout=30 update \
++    && cp /tmp/apt-seed/*.deb /var/cache/apt/archives/ \
++    && cp '/tmp/apt-seed/libllvm12_12.0.0-3ubuntu1~20.04.5_amd64.deb' '/var/cache/apt/archives/libllvm12_1%3a12.0.0-3ubuntu1~20.04.5_amd64.deb' \
++    && cp '/tmp/apt-seed/xauth_1.1-0ubuntu1_amd64.deb' '/var/cache/apt/archives/xauth_1%3a1.1-0ubuntu1_amd64.deb' \
++    && rm -r /tmp/apt-seed \
++    && DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC \
++       apt-get -o Acquire::Retries=2 -o Acquire::http::Timeout=30 install -y \
+     ca-certificates wget curl libglu1 libgfortran4 libjpeg8 libfreetype6 libxi6 libdbus-glib-1-2 libfontconfig1 libsm6 gdebi-core \
+-    && apt-get install -y git
++    git
+ 
+ # Install commands for Spawn
+ ENV SPAWN_VERSION light-0.4.3-7048a72798
+@@ -19,7 +31,9 @@ ENV PATH ${PATH}:/Spawn-$SPAWN_VERSION-Linux/bin
+ COPY service/worker/requirements/production.txt /boptest/
+ 
+ # Download and install miniconda, pyfmi, and remaining python requirements
+-RUN wget https://repo.anaconda.com/miniconda/Miniconda3-py311_24.7.1-0-Linux-x86_64.sh -O /miniconda.sh \
++# 构建时读取并校验本地安装包，避免将安装包保留在镜像层中。
++RUN --mount=type=bind,source=service/worker/installers/Miniconda3-py311_24.7.1-0-Linux-x86_64.sh,target=/miniconda.sh \
++    echo 'a098a5b1581d8fd078c430b82e27106602223e335efef708a124e723814d120c  /miniconda.sh' | sha256sum -c - \
+ 	&& /bin/bash /miniconda.sh -b -p /miniconda \
+ 	&& . miniconda/bin/activate \
+ 	&& conda update -n base -c defaults conda \

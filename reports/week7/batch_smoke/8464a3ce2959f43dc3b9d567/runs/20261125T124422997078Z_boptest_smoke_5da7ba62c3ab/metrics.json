@@ -1,0 +1,69 @@
+{
+  "status": "available",
+  "metrics": {
+    "run_id": "20261125T124422997078Z_boptest_smoke_5da7ba62c3ab",
+    "variables": [
+      "zone_c",
+      "supply_c",
+      "return_c",
+      "floor_heat_kw",
+      "electric_kw",
+      "interval_energy_kwh"
+    ],
+    "units": [
+      "degC",
+      "degC",
+      "degC",
+      "kW",
+      "kW",
+      "kWh"
+    ],
+    "open_loop": [],
+    "closed_loop": [
+      {
+        "task": "closed_loop",
+        "model": "arx",
+        "episode_id": "id_test_day160",
+        "family": "arx",
+        "condition": "clean",
+        "training_seed": null,
+        "steps": 8,
+        "cost": 0.1969993046880935,
+        "energy_kwh": 0.008369615235714889,
+        "comfort_violation_rate": 0.625,
+        "comfort_degree_hours": 0.33029905620483646,
+        "center_tracking_mae_c": 1.6077228086499957,
+        "decision_mean_ms": 0.6438718760364281,
+        "decision_p95_ms": 0.9356536504128597,
+        "fallback_count": 0,
+        "fallback_reasons": {},
+        "native_context_kpi": {
+          "tdis_tot": 1.844415004341343,
+          "idis_tot": 0,
+          "ener_tot": 0.16634464851829014,
+          "cost_tot": 0.04216836839938657,
+          "emis_tot": 0.027779556302554468,
+          "pele_tot": 0.021657057568547147,
+          "pgas_tot": null,
+          "pdih_tot": null,
+          "time_rat": 7.483617046423126e-05
+        },
+        "native_final_kpi": {
+          "tdis_tot": 2.2306676723176526,
+          "idis_tot": 0,
+          "ener_tot": 0.1663882402643095,
+          "cost_tot": 0.042179418907002476,
+          "emis_tot": 0.027786836124139697,
+          "pele_tot": 0.021657057568547147,
+          "pgas_tot": null,
+          "pdih_tot": null,
+          "time_rat": 7.205129569916793e-05
+        },
+        "native_interval_note": "Only additive cumulative KPI differences are meaningful; do not subtract maxima or ratios."
+      }
+    ],
+    "policy_ranking": [],
+    "prediction_episode_summary": [],
+    "prediction_seed_summary": []
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "scripts/plot_week6.py": "1de5468dc4f33b6683ef6e8c11a996267e4bdd1dd049386f6789d3266fe9f214",
+  "scripts/train_week6.py": "b8d3b511907c4e46b42604449be8c2a2d154a4c31d44b7bef11b4908511d6385",
+  "scripts/check_week6_deployed.py": "5ace5eb9c00bee3c9422bb85cbf589bf614ec65633e147889d9ab8afc58afe21",
+  "scripts/report_week6.py": "0ef0a4fb78f17cdbd73346d61d1ed424c126ccd0ab67d45887721b5497bfdc93",
+  "scripts/run_week6_control.py": "5dde920ac453386e67ceba0fbf9eb39eb9654ca4b2b784d77d912915d8f85821",
+  "scripts/check_week6_service.py": "55e8c4e273398845b405aeaeea78bf0048de4c45d6e7be27ecd57eff7039960d",
+  "scripts/check_week6_energy.py": "736b697c45d143d63fcb1dfd8f4a3b2dade100373e41f2ac25c93524ea94544e",
+  "scripts/extend_week6_protocol.py": "4e2f0ae12d7958680deba2b6a2cdc10615d46f7ff0e2a32b14ade04b46f4274d",
+  "scripts/audit_week6.py": "66cf8026ac80485481b1974159578da8dfc7a65c8e23852f4afd7c71bd17db6c",
+  "scripts/rank_week6_policies.py": "db4ced06f1f97681d3e17344db27956ebebf8c003bae8275e9d600b4ea6bb90f",
+  "scripts/prepare_week6.py": "eb38c9ae857c4c5a67882890e53223ade5367f4c6d584cb588f21505efc069c7",
+  "scripts/evaluate_week6_open.py": "0c931e62325b2e50866359220350bdfc72745fd3c334857ce6866e1dbe75b9c0",
+  "scripts/collect_week6.py": "8aee0c1ebcb5c982ac871c4fe5837f9677a164e7be0984a8fbcb7ac681d72b9f",
+  "scripts/summarize_week6.py": "5b7a8fc96bac0f6f5a5fa1fdf42f024b0e00d58f501f0661f6e4d3b84f91c0b3",
+  "scripts/reproduce_week6.sh": "15c6a4206e481ff379d655629b21b4569f064681c90dac80bc2635b69e0de48f",
+  "simulators/boptest_control.py": "8d8b83b9c3f08801e7a6b5c25ab2bda1472e84df766d7749f22c4791eb808b36",
+  "models/boptest_dynamics.py": "bf0868c9016b014ce7284b56f233703fcef71e6e388b5821a960274ce2a9fe1b",
+  "controllers/boptest_mpc.py": "551e52f02530fa03016db3e2ae548d5cad5e48bc74994bc5df5aba1bbb1d7443",
+  "evaluators/robustness.py": "778948944adf0f421c34ceeea90b1c8444c28f5608ab1408db09addbce7ff84d",
+  "configs/experiments/week6_boptest_extensions.yaml": "0e03e79cc32d46904455ff8c3534b7ad5782f7c8c761f310ba55b8b0c1e0faa3",
+  "configs/experiments/week6_boptest.yaml": "073d0dcfa62d46a915c463c473eaefdff492cb59d884cb76fd4060027b8289c2"
+}

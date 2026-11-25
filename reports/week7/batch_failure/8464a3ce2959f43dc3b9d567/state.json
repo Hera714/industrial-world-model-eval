@@ -1,0 +1,12 @@
+{
+  "identity": {
+    "task": "closed_loop",
+    "episode": "id_test_day160",
+    "condition": "clean",
+    "model": "arx"
+  },
+  "configuration_hash": "88306b8047aee46e599e47d1eaa24c38ad91b0a7433f07b9ab779996b960c214",
+  "status": "running",
+  "pid": 6658,
+  "attempt": 1
+}

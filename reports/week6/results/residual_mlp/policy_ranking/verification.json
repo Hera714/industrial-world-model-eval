@@ -1,0 +1,12 @@
+{
+  "status": "passed",
+  "judge_checkpoints": 11,
+  "dates": 8,
+  "plans_per_date": 12,
+  "horizon_steps": 20,
+  "model_plan_costs": 1056,
+  "model_date_rankings": 88,
+  "comparison_pairs_per_model_date": 66,
+  "verified": "Common initial history/weather; true prefix cost from simulator logs; rankings/regret recomputed",
+  "caveat": "Fixed realized action plans, not counterfactual feedback-policy evaluation. Conditional agreement/regret must accompany validity."
+}

@@ -1,0 +1,19 @@
+skip train_day040
+skip train_day052
+skip train_day064
+skip train_day076
+skip train_day088
+skip train_day100
+skip train_day112
+skip train_day124
+skip val_day136
+skip val_day148
+skip id_test_day160
+skip id_test_day172
+skip ood_cold_day012
+skip ood_cold_day024
+skip ood_warm_day196
+skip ood_warm_day208
+skip id_test_day292
+skip id_test_day340
+All 18 time blocks collected

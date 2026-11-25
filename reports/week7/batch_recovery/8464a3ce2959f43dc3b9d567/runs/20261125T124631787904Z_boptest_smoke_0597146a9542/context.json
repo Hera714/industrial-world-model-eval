@@ -1,0 +1,9 @@
+{
+  "phase": "advance",
+  "task": "closed_loop",
+  "model": "arx",
+  "episode": "id_test_day160",
+  "condition": "clean",
+  "step": 103,
+  "testid": "94dd1682-ae82-4055-b91a-1c5af829af0b"
+}

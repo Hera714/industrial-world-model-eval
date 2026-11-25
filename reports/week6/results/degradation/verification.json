@@ -1,0 +1,18 @@
+{
+  "status": "passed",
+  "models": 11,
+  "reference_dates": 3,
+  "paired_prediction_rows": 6336,
+  "paired_control_rows": 99,
+  "weather_comparison": "same checkpoint, different date groups",
+  "severity_noise": [
+    0,
+    0.1,
+    0.3
+  ],
+  "severity_missing": [
+    0,
+    1,
+    4
+  ]
+}

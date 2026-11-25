@@ -1,0 +1,232 @@
+model,family,domain,condition,level,metric,requested_episodes,valid_episodes,episode_ids,seed,bootstrap_repeats,mean,lower95,upper95,status
+arx,arx,calendar_shift,clean,model,cost_minus_embedded,1,1,"[""id_test_day172""]",6042,2000,6.610556567344758,,,point_only_single_episode
+arx,arx,calendar_shift,clean,model,energy_kwh_minus_embedded,1,1,"[""id_test_day172""]",6042,2000,2.5015996101838596,,,point_only_single_episode
+arx,arx,calendar_shift,clean,model,comfort_degree_hours_minus_embedded,1,1,"[""id_test_day172""]",6042,2000,1.9940234959740337,,,point_only_single_episode
+arx,arx,ood_cold,clean,model,cost_minus_embedded,2,2,"[""ood_cold_day012"", ""ood_cold_day024""]",6042,2000,16.430516908177246,3.514900287513214,29.34613352884128,estimated
+arx,arx,ood_cold,clean,model,energy_kwh_minus_embedded,2,2,"[""ood_cold_day012"", ""ood_cold_day024""]",6042,2000,-35.988275864559576,-38.000413493062226,-33.976138236056926,estimated
+arx,arx,ood_cold,clean,model,comfort_degree_hours_minus_embedded,2,2,"[""ood_cold_day012"", ""ood_cold_day024""]",6042,2000,34.676032585635525,22.76401263150005,46.588052539771,estimated
+arx,arx,ood_warm,clean,model,cost_minus_embedded,2,2,"[""ood_warm_day196"", ""ood_warm_day208""]",6042,2000,1.5800884826427781,1.326010704833152,1.8341662604524045,estimated
+arx,arx,ood_warm,clean,model,energy_kwh_minus_embedded,2,2,"[""ood_warm_day196"", ""ood_warm_day208""]",6042,2000,0.6118023079594925,0.0,1.223604615918985,estimated
+arx,arx,ood_warm,clean,model,comfort_degree_hours_minus_embedded,2,2,"[""ood_warm_day196"", ""ood_warm_day208""]",6042,2000,0.007670512123368667,0.00012809867897090044,0.015212925567766433,estimated
+arx,arx,reference,clean,model,cost_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,6.761053786364852,-7.9357721640197205,35.187178162421034,estimated
+arx,arx,reference,clean,model,energy_kwh_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,-19.71850235347588,-36.44663791120894,-7.688320640438441,estimated
+arx,arx,reference,clean,model,comfort_degree_hours_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,16.959431441166583,0.1965352700225509,44.82288156550211,estimated
+arx,arx,reference,goal_plus1,model,cost_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,3.5488613345526328,-4.915060589115507,14.148647187602279,estimated
+arx,arx,reference,goal_plus1,model,energy_kwh_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,-14.33476036150566,-26.731331582459944,-6.950932439500072,estimated
+arx,arx,reference,goal_plus1,model,comfort_degree_hours_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,6.336934277843933,0.6970734290849379,15.77764877330246,estimated
+arx,arx,reference,missing_4,model,cost_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,5.831736578649012,-7.966469272842364,32.42523800161034,estimated
+arx,arx,reference,missing_4,model,energy_kwh_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,-20.525661476290278,-38.00298287891977,-7.688319974779219,estimated
+arx,arx,reference,missing_4,model,comfort_degree_hours_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,17.083290990692316,0.19653426474644675,44.3756716181866,estimated
+arx,arx,reference,noise_0p3,model,cost_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,8.389142479868047,-7.217379607149762,37.17631887488612,estimated
+arx,arx,reference,noise_0p3,model,energy_kwh_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,-18.22200877298828,-34.73498918965444,-7.751054460859791,estimated
+arx,arx,reference,noise_0p3,model,comfort_degree_hours_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,16.743922191448068,0.20183886057469635,45.07274826615918,estimated
+gru_seed42,gru,calendar_shift,clean,model,cost_minus_embedded,1,1,"[""id_test_day172""]",6042,2000,0.5409260391304169,,,point_only_single_episode
+gru_seed42,gru,calendar_shift,clean,model,energy_kwh_minus_embedded,1,1,"[""id_test_day172""]",6042,2000,0.0,,,point_only_single_episode
+gru_seed42,gru,calendar_shift,clean,model,comfort_degree_hours_minus_embedded,1,1,"[""id_test_day172""]",6042,2000,0.00010236760606119333,,,point_only_single_episode
+gru_seed42,gru,ood_cold,clean,model,cost_minus_embedded,2,2,"[""ood_cold_day012"", ""ood_cold_day024""]",6042,2000,94.67554817323551,31.71306757919028,157.63802876728076,estimated
+gru_seed42,gru,ood_cold,clean,model,energy_kwh_minus_embedded,2,2,"[""ood_cold_day012"", ""ood_cold_day024""]",6042,2000,-35.66050609664703,-38.00743759969782,-33.31357459359624,estimated
+gru_seed42,gru,ood_cold,clean,model,comfort_degree_hours_minus_embedded,2,2,"[""ood_cold_day012"", ""ood_cold_day024""]",6042,2000,58.71427257735009,29.596480675631128,87.83206447906905,estimated
+gru_seed42,gru,ood_warm,clean,model,cost_minus_embedded,2,2,"[""ood_warm_day196"", ""ood_warm_day208""]",6042,2000,1.0914781556447744,1.0814815058655445,1.1014748054240044,estimated
+gru_seed42,gru,ood_warm,clean,model,energy_kwh_minus_embedded,2,2,"[""ood_warm_day196"", ""ood_warm_day208""]",6042,2000,0.21673304803670934,0.0,0.4334660960734187,estimated
+gru_seed42,gru,ood_warm,clean,model,comfort_degree_hours_minus_embedded,2,2,"[""ood_warm_day196"", ""ood_warm_day208""]",6042,2000,0.00023514161630089347,2.1267941008318303e-06,0.0004681564385009551,estimated
+gru_seed42,gru,reference,clean,model,cost_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,18.306155392872167,-6.514907139160968,66.24612148447544,estimated
+gru_seed42,gru,reference,clean,model,energy_kwh_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,-12.069012997098186,-17.354019853331778,-6.997935437395704,estimated
+gru_seed42,gru,reference,clean,model,comfort_degree_hours_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,19.246746538421515,0.38376216011816666,51.1267643246458,estimated
+gru_seed42,gru,reference,goal_plus1,model,cost_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,64.2732671554459,-4.4936585794282955,186.12480060986164,estimated
+gru_seed42,gru,reference,goal_plus1,model,energy_kwh_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,-12.13335475852231,-17.62643827156566,-6.879640233479805,estimated
+gru_seed42,gru,reference,goal_plus1,model,comfort_degree_hours_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,23.00486110375367,1.0000263879798155,59.6669985730982,estimated
+gru_seed42,gru,reference,missing_4,model,cost_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,18.95236655553497,-6.426474744400814,68.09401979963052,estimated
+gru_seed42,gru,reference,missing_4,model,energy_kwh_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,-12.148146521109458,-17.59472056526721,-6.994488277027976,estimated
+gru_seed42,gru,reference,missing_4,model,comfort_degree_hours_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,19.452419027606354,0.38136445205060454,51.745348881556346,estimated
+gru_seed42,gru,reference,noise_0p3,model,cost_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,18.680794000785287,-5.8919912743508105,66.3579860697415,estimated
+gru_seed42,gru,reference,noise_0p3,model,energy_kwh_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,-11.812440581766628,-17.260120269097996,-6.534317877674496,estimated
+gru_seed42,gru,reference,noise_0p3,model,comfort_degree_hours_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,19.262523267902555,0.3227054453585936,51.16293905177858,estimated
+gru_seed43,gru,calendar_shift,clean,model,cost_minus_embedded,1,1,"[""id_test_day172""]",6042,2000,0.37329700376995145,,,point_only_single_episode
+gru_seed43,gru,calendar_shift,clean,model,energy_kwh_minus_embedded,1,1,"[""id_test_day172""]",6042,2000,0.0,,,point_only_single_episode
+gru_seed43,gru,calendar_shift,clean,model,comfort_degree_hours_minus_embedded,1,1,"[""id_test_day172""]",6042,2000,0.00030329747619362024,,,point_only_single_episode
+gru_seed43,gru,ood_cold,clean,model,cost_minus_embedded,2,2,"[""ood_cold_day012"", ""ood_cold_day024""]",6042,2000,124.11483305548113,57.036731992282625,191.19293411867963,estimated
+gru_seed43,gru,ood_cold,clean,model,energy_kwh_minus_embedded,2,2,"[""ood_cold_day012"", ""ood_cold_day024""]",6042,2000,-41.1113575110315,-45.771405407862886,-36.45130961420011,estimated
+gru_seed43,gru,ood_cold,clean,model,comfort_degree_hours_minus_embedded,2,2,"[""ood_cold_day012"", ""ood_cold_day024""]",6042,2000,65.93762750510462,35.71658034975877,96.15867466045047,estimated
+gru_seed43,gru,ood_warm,clean,model,cost_minus_embedded,2,2,"[""ood_warm_day196"", ""ood_warm_day208""]",6042,2000,2.038688457841107,0.38920734137824364,3.68816957430397,estimated
+gru_seed43,gru,ood_warm,clean,model,energy_kwh_minus_embedded,2,2,"[""ood_warm_day196"", ""ood_warm_day208""]",6042,2000,0.0,0.0,0.0,estimated
+gru_seed43,gru,ood_warm,clean,model,comfort_degree_hours_minus_embedded,2,2,"[""ood_warm_day196"", ""ood_warm_day208""]",6042,2000,0.00012654084190444337,-2.8591267380306817e-06,0.0002559408105469174,estimated
+gru_seed43,gru,reference,clean,model,cost_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,56.70067935455092,-11.00116287478084,187.70266445210845,estimated
+gru_seed43,gru,reference,clean,model,energy_kwh_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,-23.269530596129147,-36.76400711474983,-7.081408154921341,estimated
+gru_seed43,gru,reference,clean,model,comfort_degree_hours_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,32.41025969607237,0.23467022994182685,85.22993604479008,estimated
+gru_seed43,gru,reference,goal_plus1,model,cost_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,112.61056194360977,-4.5762037098160775,326.71360245527933,estimated
+gru_seed43,gru,reference,goal_plus1,model,energy_kwh_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,-23.719340048865543,-38.10848174068745,-7.087919637997864,estimated
+gru_seed43,gru,reference,goal_plus1,model,comfort_degree_hours_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,33.82934050070654,1.1926450717619446,86.37147217578583,estimated
+gru_seed43,gru,reference,missing_4,model,cost_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,57.16178932835688,-10.972998738175397,188.9897095408913,estimated
+gru_seed43,gru,reference,missing_4,model,energy_kwh_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,-23.147294126045804,-36.39730189179255,-7.0814087572823325,estimated
+gru_seed43,gru,reference,missing_4,model,comfort_degree_hours_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,32.46179164956665,0.23466777584380338,85.38450859279692,estimated
+gru_seed43,gru,reference,noise_0p3,model,cost_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,58.33969391279117,-10.919905758442985,191.6169223576261,estimated
+gru_seed43,gru,reference,noise_0p3,model,energy_kwh_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,-22.907018457595257,-36.47734429532761,-6.2785886637201855,estimated
+gru_seed43,gru,reference,noise_0p3,model,comfort_degree_hours_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,32.56870897080036,0.06100697534296273,85.8768489449228,estimated
+gru_seed44,gru,calendar_shift,clean,model,cost_minus_embedded,1,1,"[""id_test_day172""]",6042,2000,1.60048647443434,,,point_only_single_episode
+gru_seed44,gru,calendar_shift,clean,model,energy_kwh_minus_embedded,1,1,"[""id_test_day172""]",6042,2000,0.0,,,point_only_single_episode
+gru_seed44,gru,calendar_shift,clean,model,comfort_degree_hours_minus_embedded,1,1,"[""id_test_day172""]",6042,2000,0.00041971085593672797,,,point_only_single_episode
+gru_seed44,gru,ood_cold,clean,model,cost_minus_embedded,2,2,"[""ood_cold_day012"", ""ood_cold_day024""]",6042,2000,92.4966006294749,32.57214178349854,152.42105947545124,estimated
+gru_seed44,gru,ood_cold,clean,model,energy_kwh_minus_embedded,2,2,"[""ood_cold_day012"", ""ood_cold_day024""]",6042,2000,-39.250004071810736,-40.73430431969069,-37.76570382393078,estimated
+gru_seed44,gru,ood_cold,clean,model,comfort_degree_hours_minus_embedded,2,2,"[""ood_cold_day012"", ""ood_cold_day024""]",6042,2000,58.53723499837722,30.921488582019194,86.15298141473525,estimated
+gru_seed44,gru,ood_warm,clean,model,cost_minus_embedded,2,2,"[""ood_warm_day196"", ""ood_warm_day208""]",6042,2000,1.9130039842917865,0.8917760569609835,2.9342319116225895,estimated
+gru_seed44,gru,ood_warm,clean,model,energy_kwh_minus_embedded,2,2,"[""ood_warm_day196"", ""ood_warm_day208""]",6042,2000,0.0,0.0,0.0,estimated
+gru_seed44,gru,ood_warm,clean,model,comfort_degree_hours_minus_embedded,2,2,"[""ood_warm_day196"", ""ood_warm_day208""]",6042,2000,0.00012205737019854723,1.1595647180229207e-06,0.00024295517567907154,estimated
+gru_seed44,gru,reference,clean,model,cost_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,32.656403504308976,-7.266582851907643,112.31641537843025,estimated
+gru_seed44,gru,reference,clean,model,energy_kwh_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,-19.376311635675435,-32.46750793316494,-7.710282982626197,estimated
+gru_seed44,gru,reference,clean,model,comfort_degree_hours_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,25.01218872158195,0.24974918969580528,65.655243044212,estimated
+gru_seed44,gru,reference,goal_plus1,model,cost_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,82.79269402752931,-5.125649138394881,239.37250568564107,estimated
+gru_seed44,gru,reference,goal_plus1,model,energy_kwh_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,-19.191344524729217,-31.912606600326285,-7.710282982626197,estimated
+gru_seed44,gru,reference,goal_plus1,model,comfort_degree_hours_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,27.45318511784811,1.165272171638037,69.92780864225516,estimated
+gru_seed44,gru,reference,missing_4,model,cost_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,31.07268929745504,-7.461176292993553,107.74506215042346,estimated
+gru_seed44,gru,reference,missing_4,model,energy_kwh_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,-18.957638903685194,-31.040517695181535,-7.710283062058892,estimated
+gru_seed44,gru,reference,missing_4,model,comfort_degree_hours_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,24.53271533096844,0.24974656500288006,64.16767758465639,estimated
+gru_seed44,gru,reference,noise_0p3,model,cost_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,33.191686210870145,-7.337560762483501,114.23198069126757,estimated
+gru_seed44,gru,reference,noise_0p3,model,energy_kwh_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,-19.41477197375879,-32.166340498510294,-7.881902102660867,estimated
+gru_seed44,gru,reference,noise_0p3,model,comfort_degree_hours_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,25.291006565288214,0.39585420111488645,66.17122023000346,estimated
+mlp_seed42,mlp,calendar_shift,clean,model,cost_minus_embedded,1,1,"[""id_test_day172""]",6042,2000,44.33396724365843,,,point_only_single_episode
+mlp_seed42,mlp,calendar_shift,clean,model,energy_kwh_minus_embedded,1,1,"[""id_test_day172""]",6042,2000,13.061425285981421,,,point_only_single_episode
+mlp_seed42,mlp,calendar_shift,clean,model,comfort_degree_hours_minus_embedded,1,1,"[""id_test_day172""]",6042,2000,14.500599609215456,,,point_only_single_episode
+mlp_seed42,mlp,ood_cold,clean,model,cost_minus_embedded,2,2,"[""ood_cold_day012"", ""ood_cold_day024""]",6042,2000,13.879476547382176,1.4957731001163808,26.26317999464797,estimated
+mlp_seed42,mlp,ood_cold,clean,model,energy_kwh_minus_embedded,2,2,"[""ood_cold_day012"", ""ood_cold_day024""]",6042,2000,-20.179947995427,-32.23577104360345,-8.12412494725055,estimated
+mlp_seed42,mlp,ood_cold,clean,model,comfort_degree_hours_minus_embedded,2,2,"[""ood_cold_day012"", ""ood_cold_day024""]",6042,2000,23.327918048994285,19.83092801482401,26.82490808316456,estimated
+mlp_seed42,mlp,ood_warm,clean,model,cost_minus_embedded,2,2,"[""ood_warm_day196"", ""ood_warm_day208""]",6042,2000,3.8911148777264533,0.0,7.7822297554529065,estimated
+mlp_seed42,mlp,ood_warm,clean,model,energy_kwh_minus_embedded,2,2,"[""ood_warm_day196"", ""ood_warm_day208""]",6042,2000,2.9916868367290403,0.0,5.983373673458081,estimated
+mlp_seed42,mlp,ood_warm,clean,model,comfort_degree_hours_minus_embedded,2,2,"[""ood_warm_day196"", ""ood_warm_day208""]",6042,2000,0.013266179312324766,0.0,0.026532358624649532,estimated
+mlp_seed42,mlp,reference,clean,model,cost_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,13.037632509520051,4.8885328260039,18.654296544816383,estimated
+mlp_seed42,mlp,reference,clean,model,energy_kwh_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,4.672286016677115,0.519561342873601,12.149692639189425,estimated
+mlp_seed42,mlp,reference,clean,model,comfort_degree_hours_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,1.1767420812826828,-0.09512046901215854,3.625346712860207,estimated
+mlp_seed42,mlp,reference,goal_plus1,model,cost_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,9.48365864242909,0.06219493917019747,15.715985864308806,estimated
+mlp_seed42,mlp,reference,goal_plus1,model,energy_kwh_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,4.47215555557806,0.519561342873601,12.149692639189425,estimated
+mlp_seed42,mlp,reference,goal_plus1,model,comfort_degree_hours_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,-6.435205402606329,-8.562498269406476,-3.802879862936038,estimated
+mlp_seed42,mlp,reference,missing_4,model,cost_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,14.209243010798096,4.2685409272658354,21.589764334678037,estimated
+mlp_seed42,mlp,reference,missing_4,model,energy_kwh_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,4.252835899329535,-0.926893458736771,13.452631712589834,estimated
+mlp_seed42,mlp,reference,missing_4,model,comfort_degree_hours_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,2.190111610730161,-0.09512046901215854,6.665455301202641,estimated
+mlp_seed42,mlp,reference,noise_0p3,model,cost_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,23.048601555933384,5.801341141150221,45.00929785582568,estimated
+mlp_seed42,mlp,reference,noise_0p3,model,energy_kwh_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,11.96168355621765,1.1615896609030472,31.317077517952697,estimated
+mlp_seed42,mlp,reference,noise_0p3,model,comfort_degree_hours_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,1.2460386035723683,-0.09512046901215854,3.831313588952355,estimated
+mlp_seed43,mlp,calendar_shift,clean,model,cost_minus_embedded,1,1,"[""id_test_day172""]",6042,2000,0.7135941889859003,,,point_only_single_episode
+mlp_seed43,mlp,calendar_shift,clean,model,energy_kwh_minus_embedded,1,1,"[""id_test_day172""]",6042,2000,0.0,,,point_only_single_episode
+mlp_seed43,mlp,calendar_shift,clean,model,comfort_degree_hours_minus_embedded,1,1,"[""id_test_day172""]",6042,2000,-8.681465965310053e-05,,,point_only_single_episode
+mlp_seed43,mlp,ood_cold,clean,model,cost_minus_embedded,2,2,"[""ood_cold_day012"", ""ood_cold_day024""]",6042,2000,17.19509228643441,-8.744251247421076,43.134435820289895,estimated
+mlp_seed43,mlp,ood_cold,clean,model,energy_kwh_minus_embedded,2,2,"[""ood_cold_day012"", ""ood_cold_day024""]",6042,2000,-38.062786138753516,-38.49518737954007,-37.63038489796696,estimated
+mlp_seed43,mlp,ood_cold,clean,model,comfort_degree_hours_minus_embedded,2,2,"[""ood_cold_day012"", ""ood_cold_day024""]",6042,2000,33.84581298800781,16.992353122822507,50.69927285319311,estimated
+mlp_seed43,mlp,ood_warm,clean,model,cost_minus_embedded,2,2,"[""ood_warm_day196"", ""ood_warm_day208""]",6042,2000,0.6540915336417041,0.1555238010546697,1.1526592662287385,estimated
+mlp_seed43,mlp,ood_warm,clean,model,energy_kwh_minus_embedded,2,2,"[""ood_warm_day196"", ""ood_warm_day208""]",6042,2000,0.0,0.0,0.0,estimated
+mlp_seed43,mlp,ood_warm,clean,model,comfort_degree_hours_minus_embedded,2,2,"[""ood_warm_day196"", ""ood_warm_day208""]",6042,2000,-1.6327996249287935e-05,-3.120951350865653e-05,-1.446478989919342e-06,estimated
+mlp_seed43,mlp,reference,clean,model,cost_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,-7.451230868760571,-14.31712956396096,-0.1842466987836815,estimated
+mlp_seed43,mlp,reference,clean,model,energy_kwh_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,-25.0562228224735,-40.48493635253027,-8.30628104156336,estimated
+mlp_seed43,mlp,reference,clean,model,comfort_degree_hours_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,12.591293907794295,0.7432810900400142,26.375773060114426,estimated
+mlp_seed43,mlp,reference,goal_plus1,model,cost_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,-9.17817768237137,-16.05702556466892,-3.5310597356069966,estimated
+mlp_seed43,mlp,reference,goal_plus1,model,energy_kwh_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,-17.8384027509371,-27.238994241441873,-8.30628104156336,estimated
+mlp_seed43,mlp,reference,goal_plus1,model,comfort_degree_hours_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,1.4711518400066932,-2.2085949562580964,4.077054898702201,estimated
+mlp_seed43,mlp,reference,missing_4,model,cost_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,-7.423233853342335,-14.31524601774008,-0.1362220104127232,estimated
+mlp_seed43,mlp,reference,missing_4,model,energy_kwh_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,-25.00771324000769,-40.33940478079805,-8.30628104156336,estimated
+mlp_seed43,mlp,reference,missing_4,model,comfort_degree_hours_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,12.5679622425058,0.7432779177182738,26.30581088565856,estimated
+mlp_seed43,mlp,reference,noise_0p3,model,cost_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,-5.651760611151398,-14.158438487706453,5.127543256085104,estimated
+mlp_seed43,mlp,reference,noise_0p3,model,energy_kwh_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,-24.444304654541995,-38.64918215605758,-8.30628104156336,estimated
+mlp_seed43,mlp,reference,noise_0p3,model,comfort_degree_hours_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,13.22165522144004,0.7432842363187007,28.266854710912384,estimated
+mlp_seed44,mlp,calendar_shift,clean,model,cost_minus_embedded,1,1,"[""id_test_day172""]",6042,2000,70.45107335099871,,,point_only_single_episode
+mlp_seed44,mlp,calendar_shift,clean,model,energy_kwh_minus_embedded,1,1,"[""id_test_day172""]",6042,2000,22.55517273107464,,,point_only_single_episode
+mlp_seed44,mlp,calendar_shift,clean,model,comfort_degree_hours_minus_embedded,1,1,"[""id_test_day172""]",6042,2000,20.457971304599226,,,point_only_single_episode
+mlp_seed44,mlp,ood_cold,clean,model,cost_minus_embedded,2,2,"[""ood_cold_day012"", ""ood_cold_day024""]",6042,2000,20.954112616588596,-6.495700062658685,48.403925295835876,estimated
+mlp_seed44,mlp,ood_cold,clean,model,energy_kwh_minus_embedded,2,2,"[""ood_cold_day012"", ""ood_cold_day024""]",6042,2000,-34.44100617185516,-36.13591241359707,-32.746099930113246,estimated
+mlp_seed44,mlp,ood_cold,clean,model,comfort_degree_hours_minus_embedded,2,2,"[""ood_cold_day012"", ""ood_cold_day024""]",6042,2000,34.907347575983074,18.370310411995945,51.444384739970204,estimated
+mlp_seed44,mlp,ood_warm,clean,model,cost_minus_embedded,2,2,"[""ood_warm_day196"", ""ood_warm_day208""]",6042,2000,19.893437932136685,0.0,39.78687586427337,estimated
+mlp_seed44,mlp,ood_warm,clean,model,energy_kwh_minus_embedded,2,2,"[""ood_warm_day196"", ""ood_warm_day208""]",6042,2000,15.027349781841899,0.0,30.054699563683798,estimated
+mlp_seed44,mlp,ood_warm,clean,model,comfort_degree_hours_minus_embedded,2,2,"[""ood_warm_day196"", ""ood_warm_day208""]",6042,2000,1.4033608615422466,0.0,2.806721723084493,estimated
+mlp_seed44,mlp,reference,clean,model,cost_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,30.432057223749155,12.292632423424985,49.04610939424921,estimated
+mlp_seed44,mlp,reference,clean,model,energy_kwh_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,-2.2226132526396825,-36.85231762270226,20.530934742305163,estimated
+mlp_seed44,mlp,reference,clean,model,comfort_degree_hours_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,15.74991891647806,0.12509759151483024,46.83438037634744,estimated
+mlp_seed44,mlp,reference,goal_plus1,model,cost_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,14.919139659656558,6.290717474767017,19.243226799319643,estimated
+mlp_seed44,mlp,reference,goal_plus1,model,energy_kwh_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,14.104724145349293,9.653543122478048,20.44737952959632,estimated
+mlp_seed44,mlp,reference,goal_plus1,model,comfort_degree_hours_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,-9.913450620295512,-12.304208266138929,-8.188099904809178,estimated
+mlp_seed44,mlp,reference,missing_4,model,cost_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,32.28441030063195,16.68150085833326,46.47602832258102,estimated
+mlp_seed44,mlp,reference,missing_4,model,energy_kwh_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,2.190273883571976,-37.261959428053444,30.030883220118,estimated
+mlp_seed44,mlp,reference,missing_4,model,comfort_degree_hours_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,15.782352706773153,0.08563006109947935,46.97114927764807,estimated
+mlp_seed44,mlp,reference,noise_0p3,model,cost_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,24.64615564226604,-5.614516231773063,66.06366742086588,estimated
+mlp_seed44,mlp,reference,noise_0p3,model,energy_kwh_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,-10.426571170905284,-33.37935883973827,10.758765396695104,estimated
+mlp_seed44,mlp,reference,noise_0p3,model,comfort_degree_hours_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,17.673434065028744,0.23276586155088808,51.52928487051014,estimated
+persistence,persistence,calendar_shift,clean,model,cost_minus_embedded,1,1,"[""id_test_day172""]",6042,2000,-0.02040501526609617,,,point_only_single_episode
+persistence,persistence,calendar_shift,clean,model,energy_kwh_minus_embedded,1,1,"[""id_test_day172""]",6042,2000,0.0,,,point_only_single_episode
+persistence,persistence,calendar_shift,clean,model,comfort_degree_hours_minus_embedded,1,1,"[""id_test_day172""]",6042,2000,-2.243616449959518e-06,,,point_only_single_episode
+persistence,persistence,ood_cold,clean,model,cost_minus_embedded,2,2,"[""ood_cold_day012"", ""ood_cold_day024""]",6042,2000,157.7864123500404,46.73138899075977,268.841435709321,estimated
+persistence,persistence,ood_cold,clean,model,energy_kwh_minus_embedded,2,2,"[""ood_cold_day012"", ""ood_cold_day024""]",6042,2000,-0.6450729214120585,-48.386018344476796,47.09587250165268,estimated
+persistence,persistence,ood_cold,clean,model,comfort_degree_hours_minus_embedded,2,2,"[""ood_cold_day012"", ""ood_cold_day024""]",6042,2000,57.39154966020526,0.2555071456934144,114.5275921747171,estimated
+persistence,persistence,ood_warm,clean,model,cost_minus_embedded,2,2,"[""ood_warm_day196"", ""ood_warm_day208""]",6042,2000,25.263370791396362,-0.052259927455338584,50.57900151024806,estimated
+persistence,persistence,ood_warm,clean,model,energy_kwh_minus_embedded,2,2,"[""ood_warm_day196"", ""ood_warm_day208""]",6042,2000,24.34448091714262,0.0,48.68896183428524,estimated
+persistence,persistence,ood_warm,clean,model,comfort_degree_hours_minus_embedded,2,2,"[""ood_warm_day196"", ""ood_warm_day208""]",6042,2000,1.4917741842890635,-4.057893949038771e-05,2.9835889475176174,estimated
+persistence,persistence,reference,clean,model,cost_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,117.50455107768873,41.43172828010499,258.3496254578927,estimated
+persistence,persistence,reference,clean,model,energy_kwh_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,19.5544485945192,-34.82435551540232,52.81916357414301,estimated
+persistence,persistence,reference,clean,model,comfort_degree_hours_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,33.5797575258425,0.43252671500579254,98.11764816800404,estimated
+persistence,persistence,reference,goal_plus1,model,cost_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,181.34578253659683,29.89049790803439,467.5051875486212,estimated
+persistence,persistence,reference,goal_plus1,model,energy_kwh_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,19.5544485945192,-34.82435551540232,52.81916357414301,estimated
+persistence,persistence,reference,goal_plus1,model,comfort_degree_hours_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,28.2644157339479,-12.304208266138929,105.6599537373891,estimated
+persistence,persistence,reference,missing_4,model,cost_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,117.50455107768873,41.43172828010499,258.3496254578927,estimated
+persistence,persistence,reference,missing_4,model,energy_kwh_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,19.5544485945192,-34.82435551540232,52.81916357414301,estimated
+persistence,persistence,reference,missing_4,model,comfort_degree_hours_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,33.5797575258425,0.43252671500579254,98.11764816800404,estimated
+persistence,persistence,reference,noise_0p3,model,cost_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,117.50455107768873,41.43172828010499,258.3496254578927,estimated
+persistence,persistence,reference,noise_0p3,model,energy_kwh_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,19.5544485945192,-34.82435551540232,52.81916357414301,estimated
+persistence,persistence,reference,noise_0p3,model,comfort_degree_hours_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,33.5797575258425,0.43252671500579254,98.11764816800404,estimated
+residual_mlp_seed42,residual_mlp,calendar_shift,clean,model,cost_minus_embedded,1,1,"[""id_test_day172""]",6042,2000,1.7705169516541757,,,point_only_single_episode
+residual_mlp_seed42,residual_mlp,calendar_shift,clean,model,energy_kwh_minus_embedded,1,1,"[""id_test_day172""]",6042,2000,0.0,,,point_only_single_episode
+residual_mlp_seed42,residual_mlp,calendar_shift,clean,model,comfort_degree_hours_minus_embedded,1,1,"[""id_test_day172""]",6042,2000,0.0001547202038807427,,,point_only_single_episode
+residual_mlp_seed42,residual_mlp,ood_cold,clean,model,cost_minus_embedded,2,2,"[""ood_cold_day012"", ""ood_cold_day024""]",6042,2000,43.055364210761766,25.585919696126666,60.524808725396866,estimated
+residual_mlp_seed42,residual_mlp,ood_cold,clean,model,energy_kwh_minus_embedded,2,2,"[""ood_cold_day012"", ""ood_cold_day024""]",6042,2000,-30.550349266578074,-32.75720768647288,-28.343490846683267,estimated
+residual_mlp_seed42,residual_mlp,ood_cold,clean,model,comfort_degree_hours_minus_embedded,2,2,"[""ood_cold_day012"", ""ood_cold_day024""]",6042,2000,41.833863280295446,25.88762168274728,57.78010487784361,estimated
+residual_mlp_seed42,residual_mlp,ood_warm,clean,model,cost_minus_embedded,2,2,"[""ood_warm_day196"", ""ood_warm_day208""]",6042,2000,2.115469171922679,0.6044339121954749,3.626504431649883,estimated
+residual_mlp_seed42,residual_mlp,ood_warm,clean,model,energy_kwh_minus_embedded,2,2,"[""ood_warm_day196"", ""ood_warm_day208""]",6042,2000,0.947930775388957,0.0,1.895861550777914,estimated
+residual_mlp_seed42,residual_mlp,ood_warm,clean,model,comfort_degree_hours_minus_embedded,2,2,"[""ood_warm_day196"", ""ood_warm_day208""]",6042,2000,0.035642924162843315,0.0005402444561326547,0.07074560386955397,estimated
+residual_mlp_seed42,residual_mlp,reference,clean,model,cost_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,23.451572442977284,-10.313318420645398,84.78077874226345,estimated
+residual_mlp_seed42,residual_mlp,reference,clean,model,energy_kwh_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,-23.333939081832284,-37.507319403649305,-5.343611082347337,estimated
+residual_mlp_seed42,residual_mlp,reference,clean,model,comfort_degree_hours_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,23.97142336094276,0.07990178761943412,60.30699201920552,estimated
+residual_mlp_seed42,residual_mlp,reference,goal_plus1,model,cost_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,8.92627302613472,-3.797266404632129,15.507183688107382,estimated
+residual_mlp_seed42,residual_mlp,reference,goal_plus1,model,energy_kwh_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,-18.094731024182213,-26.369919355826312,-5.343611082347337,estimated
+residual_mlp_seed42,residual_mlp,reference,goal_plus1,model,comfort_degree_hours_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,8.473692132037518,-0.4401054678804712,14.33061111929102,estimated
+residual_mlp_seed42,residual_mlp,reference,missing_4,model,cost_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,23.86757011374749,-10.877612564105922,84.92971924095023,estimated
+residual_mlp_seed42,residual_mlp,reference,missing_4,model,energy_kwh_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,-23.151489178042457,-37.127722139879694,-4.478463201699384,estimated
+residual_mlp_seed42,residual_mlp,reference,missing_4,model,comfort_degree_hours_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,24.061105635083795,0.003359261378037104,60.107302865543524,estimated
+residual_mlp_seed42,residual_mlp,reference,noise_0p3,model,cost_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,20.069677466754225,-11.260094501530736,75.75081618679654,estimated
+residual_mlp_seed42,residual_mlp,reference,noise_0p3,model,energy_kwh_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,-23.442340291189208,-38.75238222540858,-5.682298683372515,estimated
+residual_mlp_seed42,residual_mlp,reference,noise_0p3,model,comfort_degree_hours_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,22.742398903708747,0.10270070628054384,57.66649401790173,estimated
+residual_mlp_seed43,residual_mlp,calendar_shift,clean,model,cost_minus_embedded,1,1,"[""id_test_day172""]",6042,2000,0.08313444559832384,,,point_only_single_episode
+residual_mlp_seed43,residual_mlp,calendar_shift,clean,model,energy_kwh_minus_embedded,1,1,"[""id_test_day172""]",6042,2000,0.0,,,point_only_single_episode
+residual_mlp_seed43,residual_mlp,calendar_shift,clean,model,comfort_degree_hours_minus_embedded,1,1,"[""id_test_day172""]",6042,2000,8.394542061296306e-05,,,point_only_single_episode
+residual_mlp_seed43,residual_mlp,ood_cold,clean,model,cost_minus_embedded,2,2,"[""ood_cold_day012"", ""ood_cold_day024""]",6042,2000,-1.8501438165439836,-19.055313203879408,15.35502557079144,estimated
+residual_mlp_seed43,residual_mlp,ood_cold,clean,model,energy_kwh_minus_embedded,2,2,"[""ood_cold_day012"", ""ood_cold_day024""]",6042,2000,-28.08937036876013,-31.217509264041198,-24.96123147347906,estimated
+residual_mlp_seed43,residual_mlp,ood_cold,clean,model,comfort_degree_hours_minus_embedded,2,2,"[""ood_cold_day012"", ""ood_cold_day024""]",6042,2000,22.896597960445973,9.065787716487563,36.727408204404384,estimated
+residual_mlp_seed43,residual_mlp,ood_warm,clean,model,cost_minus_embedded,2,2,"[""ood_warm_day196"", ""ood_warm_day208""]",6042,2000,0.0776347443937512,0.0004723487128959758,0.15479714007460643,estimated
+residual_mlp_seed43,residual_mlp,ood_warm,clean,model,energy_kwh_minus_embedded,2,2,"[""ood_warm_day196"", ""ood_warm_day208""]",6042,2000,0.0,0.0,0.0,estimated
+residual_mlp_seed43,residual_mlp,ood_warm,clean,model,comfort_degree_hours_minus_embedded,2,2,"[""ood_warm_day196"", ""ood_warm_day208""]",6042,2000,2.1199635789059812e-05,3.9834598624111095e-06,3.8415811715708514e-05,estimated
+residual_mlp_seed43,residual_mlp,reference,clean,model,cost_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,-10.300256543033194,-16.217314020234923,-6.5391903002586,estimated
+residual_mlp_seed43,residual_mlp,reference,clean,model,energy_kwh_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,-12.417799297965262,-22.092606215461615,-6.854510636870813,estimated
+residual_mlp_seed43,residual_mlp,reference,clean,model,comfort_degree_hours_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,2.2573317065647416,0.27484176377545566,5.753877969611622,estimated
+residual_mlp_seed43,residual_mlp,reference,goal_plus1,model,cost_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,-10.697854817050876,-24.027969536495647,-3.1939168826990016,estimated
+residual_mlp_seed43,residual_mlp,reference,goal_plus1,model,energy_kwh_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,-4.20243243290863,-10.205613476265825,5.347123226274931,estimated
+residual_mlp_seed43,residual_mlp,reference,goal_plus1,model,comfort_degree_hours_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,-9.254527520154204,-18.354216418644313,2.533918201338267,estimated
+residual_mlp_seed43,residual_mlp,reference,missing_4,model,cost_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,-10.611679235545585,-15.394792094173468,-8.144265308606059,estimated
+residual_mlp_seed43,residual_mlp,reference,missing_4,model,energy_kwh_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,-13.041933649105152,-22.064576999534722,-8.30628104156336,estimated
+residual_mlp_seed43,residual_mlp,reference,missing_4,model,comfort_degree_hours_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,2.708932636060529,0.6002105098432509,6.783312012031189,estimated
+residual_mlp_seed43,residual_mlp,reference,noise_0p3,model,cost_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,-11.508909033937991,-16.65929536302805,-8.144265308606059,estimated
+residual_mlp_seed43,residual_mlp,reference,noise_0p3,model,energy_kwh_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,-13.752182561239358,-22.658068446633507,-8.30628104156336,estimated
+residual_mlp_seed43,residual_mlp,reference,noise_0p3,model,comfort_degree_hours_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,2.1249153637370974,0.23575994377215181,5.395710761131994,estimated
+residual_mlp_seed44,residual_mlp,calendar_shift,clean,model,cost_minus_embedded,1,1,"[""id_test_day172""]",6042,2000,0.5646572670647627,,,point_only_single_episode
+residual_mlp_seed44,residual_mlp,calendar_shift,clean,model,energy_kwh_minus_embedded,1,1,"[""id_test_day172""]",6042,2000,0.0,,,point_only_single_episode
+residual_mlp_seed44,residual_mlp,calendar_shift,clean,model,comfort_degree_hours_minus_embedded,1,1,"[""id_test_day172""]",6042,2000,1.2547864969292277e-05,,,point_only_single_episode
+residual_mlp_seed44,residual_mlp,ood_cold,clean,model,cost_minus_embedded,2,2,"[""ood_cold_day012"", ""ood_cold_day024""]",6042,2000,-8.935733743696634,-15.748167386117537,-2.1233001012757313,estimated
+residual_mlp_seed44,residual_mlp,ood_cold,clean,model,energy_kwh_minus_embedded,2,2,"[""ood_cold_day012"", ""ood_cold_day024""]",6042,2000,-19.016032851389603,-22.819634998113045,-15.212430704666161,estimated
+residual_mlp_seed44,residual_mlp,ood_cold,clean,model,comfort_degree_hours_minus_embedded,2,2,"[""ood_cold_day012"", ""ood_cold_day024""]",6042,2000,11.605633915301055,6.231478047244877,16.979789783357234,estimated
+residual_mlp_seed44,residual_mlp,ood_warm,clean,model,cost_minus_embedded,2,2,"[""ood_warm_day196"", ""ood_warm_day208""]",6042,2000,0.8481941496961112,0.4887522189415249,1.2076360804506976,estimated
+residual_mlp_seed44,residual_mlp,ood_warm,clean,model,energy_kwh_minus_embedded,2,2,"[""ood_warm_day196"", ""ood_warm_day208""]",6042,2000,0.0,0.0,0.0,estimated
+residual_mlp_seed44,residual_mlp,ood_warm,clean,model,comfort_degree_hours_minus_embedded,2,2,"[""ood_warm_day196"", ""ood_warm_day208""]",6042,2000,4.1332245615421925e-05,-1.8929188883021197e-06,8.455741011914597e-05,estimated
+residual_mlp_seed44,residual_mlp,reference,clean,model,cost_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,-11.809498159162766,-15.642428574903207,-7.227701523291754,estimated
+residual_mlp_seed44,residual_mlp,reference,clean,model,energy_kwh_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,-14.929301458033644,-22.528287680014103,-7.829010963178703,estimated
+residual_mlp_seed44,residual_mlp,reference,clean,model,comfort_degree_hours_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,2.7654228252323114,0.6677093778401115,4.672750466951939,estimated
+residual_mlp_seed44,residual_mlp,reference,goal_plus1,model,cost_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,-10.784134092428403,-20.109416882419396,-3.848301083113963,estimated
+residual_mlp_seed44,residual_mlp,reference,goal_plus1,model,energy_kwh_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,-4.712680163300682,-8.97950954069276,1.3651745173080911,estimated
+residual_mlp_seed44,residual_mlp,reference,goal_plus1,model,comfort_degree_hours_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,-9.245786033120893,-17.206325785964438,1.1245006069901677,estimated
+residual_mlp_seed44,residual_mlp,reference,missing_4,model,cost_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,-12.0519031043683,-16.104564759403218,-8.00736157805171,estimated
+residual_mlp_seed44,residual_mlp,reference,missing_4,model,energy_kwh_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,-14.803323314257677,-22.541698699130734,-8.30628104156336,estimated
+residual_mlp_seed44,residual_mlp,reference,missing_4,model,comfort_degree_hours_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,2.242789877869631,0.743281620422465,3.9070860799711227,estimated
+residual_mlp_seed44,residual_mlp,reference,noise_0p3,model,cost_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,-12.446762241965027,-17.267326759528643,-7.369134443898207,estimated
+residual_mlp_seed44,residual_mlp,reference,noise_0p3,model,energy_kwh_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,-15.410414037769852,-24.079668996367303,-7.876524309434608,estimated
+residual_mlp_seed44,residual_mlp,reference,noise_0p3,model,comfort_degree_hours_minus_embedded,3,3,"[""id_test_day160"", ""id_test_day292"", ""id_test_day340""]",6042,2000,2.1401026741249325,0.6607249802899133,3.9204174754349594,estimated

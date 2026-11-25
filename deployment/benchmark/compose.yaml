@@ -1,0 +1,15 @@
+# 总说明：连接已经启动的 BOPTEST Compose 网络；数据和结果留在项目目录。
+services:
+  benchmark:
+    build:
+      context: ../..
+      dockerfile: Dockerfile
+    working_dir: /workspace
+    volumes:
+      - ../..:/workspace
+    networks:
+      - boptest
+networks:
+  boptest:
+    external: true
+    name: project1-boptest_default

@@ -1,0 +1,279 @@
+{
+  "status": "complete",
+  "rows": 288,
+  "episode": {
+    "episode_id": "val_day136",
+    "split": "val",
+    "start_day": 136,
+    "seed": 6178,
+    "policy": "scheduled"
+  },
+  "config": {
+    "protocol_version": "week6-boptest-v1",
+    "environment": "boptest",
+    "url": "http://127.0.0.1:80",
+    "upstream_commit": "9b1610bf7a108826bb3d22c72bffd2d71d7bb0a9",
+    "case": "bestest_hydronic_heat_pump",
+    "asset_manifest": "reports/week6/results/assets/manifest.json",
+    "step_seconds": 900,
+    "warmup_seconds": 604800,
+    "history_steps": 16,
+    "context_steps": 96,
+    "episode_steps": 288,
+    "action": {
+      "point": "oveTSet_u",
+      "activation": "oveTSet_activate",
+      "unit": "K",
+      "experiment_bounds_c": [
+        18.0,
+        24.0
+      ],
+      "fallback": "release_to_embedded"
+    },
+    "measurements": [
+      "reaTZon_y",
+      "reaTSup_y",
+      "reaTRet_y",
+      "reaQFloHea_y",
+      "reaPHeaPum_y",
+      "reaPFan_y",
+      "reaPPumEmi_y"
+    ],
+    "state_names": [
+      "zone_c",
+      "supply_c",
+      "return_c",
+      "floor_heat_kw",
+      "electric_kw"
+    ],
+    "exogenous": [
+      "TDryBul",
+      "HGloHor"
+    ],
+    "horizons": [
+      1,
+      5,
+      10,
+      20
+    ],
+    "training_seeds": [
+      42,
+      43,
+      44
+    ],
+    "episodes": [
+      {
+        "episode_id": "train_day040",
+        "split": "train",
+        "start_day": 40,
+        "seed": 6082,
+        "policy": "scheduled"
+      },
+      {
+        "episode_id": "train_day052",
+        "split": "train",
+        "start_day": 52,
+        "seed": 6094,
+        "policy": "random_hold"
+      },
+      {
+        "episode_id": "train_day064",
+        "split": "train",
+        "start_day": 64,
+        "seed": 6106,
+        "policy": "scheduled"
+      },
+      {
+        "episode_id": "train_day076",
+        "split": "train",
+        "start_day": 76,
+        "seed": 6118,
+        "policy": "random_hold"
+      },
+      {
+        "episode_id": "train_day088",
+        "split": "train",
+        "start_day": 88,
+        "seed": 6130,
+        "policy": "scheduled"
+      },
+      {
+        "episode_id": "train_day100",
+        "split": "train",
+        "start_day": 100,
+        "seed": 6142,
+        "policy": "random_hold"
+      },
+      {
+        "episode_id": "train_day112",
+        "split": "train",
+        "start_day": 112,
+        "seed": 6154,
+        "policy": "scheduled"
+      },
+      {
+        "episode_id": "train_day124",
+        "split": "train",
+        "start_day": 124,
+        "seed": 6166,
+        "policy": "random_hold"
+      },
+      {
+        "episode_id": "val_day136",
+        "split": "val",
+        "start_day": 136,
+        "seed": 6178,
+        "policy": "scheduled"
+      },
+      {
+        "episode_id": "val_day148",
+        "split": "val",
+        "start_day": 148,
+        "seed": 6190,
+        "policy": "random_hold"
+      },
+      {
+        "episode_id": "id_test_day160",
+        "split": "id_test",
+        "start_day": 160,
+        "seed": 6202,
+        "policy": "scheduled"
+      },
+      {
+        "episode_id": "id_test_day172",
+        "split": "id_test",
+        "start_day": 172,
+        "seed": 6214,
+        "policy": "random_hold"
+      },
+      {
+        "episode_id": "ood_cold_day012",
+        "split": "ood_cold",
+        "start_day": 12,
+        "seed": 6054,
+        "policy": "scheduled"
+      },
+      {
+        "episode_id": "ood_cold_day024",
+        "split": "ood_cold",
+        "start_day": 24,
+        "seed": 6066,
+        "policy": "random_hold"
+      },
+      {
+        "episode_id": "ood_warm_day196",
+        "split": "ood_warm",
+        "start_day": 196,
+        "seed": 6238,
+        "policy": "scheduled"
+      },
+      {
+        "episode_id": "ood_warm_day208",
+        "split": "ood_warm",
+        "start_day": 208,
+        "seed": 6250,
+        "policy": "random_hold"
+      }
+    ],
+    "split_rule": "Each block owns [start-7days,start+3days); disjoint incl warmup/context.",
+    "ood_definition": "Calendar/weather shifts reserved before training; quantify weather support after collection. Not guaranteed temperature extrapolation.",
+    "energy_label": "Interval integral of reaPHeaPum_y + reaPFan_y + reaPPumEmi_y; native KPI delta checked. No setpoint-as-power.",
+    "control": {
+      "horizon": 12,
+      "candidates": 256,
+      "action_hold_steps": 4,
+      "seeds": [
+        42,
+        43,
+        44
+      ],
+      "time_budget_s": 5.0,
+      "comfort_weight": 1.0,
+      "energy_weight": 1.0,
+      "action_change_weight": 0.02
+    },
+    "robustness": {
+      "noise_std_c": [
+        0.0,
+        0.1,
+        0.3
+      ],
+      "missing_burst_steps": [
+        0,
+        1,
+        4
+      ],
+      "missing_sensor": "supply_c",
+      "fill": "last_valid",
+      "seed": 64042
+    },
+    "output": "reports/week6/results",
+    "start_time": 11750400
+  },
+  "csv_sha256": "1c76d8c43655421261eef9be435bb35e6a751e6fa0f10ce7d45aeaa7d7769524",
+  "initial": {
+    "step": 0,
+    "timestamp": 11750400,
+    "measurements": {
+      "time": 11750400,
+      "reaCO2RooAir_y": 754.1576032494746,
+      "reaCOP_y": 1,
+      "reaPFan_y": 0,
+      "reaPHeaPum_y": 0,
+      "reaPPumEmi_y": 0,
+      "reaQFloHea_y": 0,
+      "reaQHeaPumCon_y": -3.1491579994989914e-12,
+      "reaQHeaPumEva_y": 0,
+      "reaTRet_y": 297.5447284752081,
+      "reaTSetCoo_y": 297.15,
+      "reaTSetHea_y": 294.15,
+      "reaTSup_y": 295.6729482997464,
+      "reaTZon_y": 296.3195544418112,
+      "weaSta_reaWeaCeiHei_y": 7500,
+      "weaSta_reaWeaCloTim_y": 11750400,
+      "weaSta_reaWeaHDifHor_y": 0,
+      "weaSta_reaWeaHDirNor_y": 0,
+      "weaSta_reaWeaHGloHor_y": 0,
+      "weaSta_reaWeaHHorIR_y": 363,
+      "weaSta_reaWeaLat_y": 0.8883725892651138,
+      "weaSta_reaWeaLon_y": 0.07906341511534314,
+      "weaSta_reaWeaNOpa_y": 0.5,
+      "weaSta_reaWeaNTot_y": 0.6000000000000001,
+      "weaSta_reaWeaPAtm_y": 101325,
+      "weaSta_reaWeaRelHum_y": 0.88,
+      "weaSta_reaWeaSolAlt_y": -0.3462680080735805,
+      "weaSta_reaWeaSolDec_y": 0.3273600001445449,
+      "weaSta_reaWeaSolHouAng_y": 851.205089907323,
+      "weaSta_reaWeaSolTim_y": 11748110.196418414,
+      "weaSta_reaWeaSolZen_y": 1.917064334868477,
+      "weaSta_reaWeaTBlaSky_y": 282.8198065146046,
+      "weaSta_reaWeaTDewPoi_y": 289.84999999999997,
+      "weaSta_reaWeaTDryBul_y": 291.84999999999997,
+      "weaSta_reaWeaTWetBul_y": 290.5264651044564,
+      "weaSta_reaWeaWinDir_y": 1.7453292519943295,
+      "weaSta_reaWeaWinSpe_y": 0.5,
+      "oveFan_activate": 0,
+      "oveFan_u": 0,
+      "oveHeaPumY_activate": 0,
+      "oveHeaPumY_u": 0,
+      "ovePum_activate": 0,
+      "ovePum_u": 0,
+      "oveTSet_activate": 0,
+      "oveTSet_u": 294.34999999999997
+    },
+    "seed_semantics": "client only; deterministic calendar/warmup physical initialization"
+  },
+  "initial_kpi": {
+    "tdis_tot": 0,
+    "idis_tot": 0,
+    "ener_tot": 0,
+    "cost_tot": 0,
+    "emis_tot": 0,
+    "pele_tot": 0,
+    "pgas_tot": null,
+    "pdih_tot": null,
+    "time_rat": null
+  },
+  "final_kpi": "{\"tdis_tot\": 38.59639080270913, \"idis_tot\": 0, \"ener_tot\": 0.03202604601889794, \"cost_tot\": 0.00811860266579063, \"emis_tot\": 0.005348349685155956, \"pele_tot\": 0.00985506591624396, \"pgas_tot\": null, \"pdih_tot\": null, \"time_rat\": 3.4684749061268425e-05}",
+  "exogenous_information": "Exact API weather forecast at reset, used for diagnostics; persistence-weather mode uses only origin weather."
+}

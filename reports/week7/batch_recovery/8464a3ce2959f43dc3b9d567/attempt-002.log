@@ -1,0 +1,7 @@
+Run directory: /home/hera/Projects/industrial-world-model-eval/reports/week7/batch_recovery/8464a3ce2959f43dc3b9d567/runs/20261125T124644097936Z_boptest_smoke_05d368a77838
+arx id_test_day160 clean step=0
+arx id_test_day160 clean step=24
+arx id_test_day160 clean step=48
+arx id_test_day160 clean step=72
+arx id_test_day160 clean step=96
+Benchmark completed: /home/hera/Projects/industrial-world-model-eval/reports/week7/batch_recovery/8464a3ce2959f43dc3b9d567/runs/20261125T124644097936Z_boptest_smoke_05d368a77838

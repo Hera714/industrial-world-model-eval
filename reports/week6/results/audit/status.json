@@ -1,0 +1,10 @@
+{
+  "status": "complete",
+  "data_blocks": 18,
+  "data_rows": 5184,
+  "models": 8,
+  "expected_controls": 153,
+  "completed_controls": 153,
+  "missing_controls": [],
+  "note": "18 deterministic calendar blocks; training seeds are not independent physical episodes; all fallback costs retained."
+}

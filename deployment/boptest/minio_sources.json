@@ -1,0 +1,10 @@
+[
+  {
+    "repository": "minio-source",
+    "commit": "0d7408fc9969caf07de6a8c3a84f9fbb10a6739e"
+  },
+  {
+    "repository": "minio-mc-source",
+    "commit": "b00526b153a31b36767991a4f5ce2cced435ee8e"
+  }
+]

@@ -1,0 +1,29 @@
+{
+  "identity": {
+    "task": "closed_loop",
+    "episode": "id_test_day160",
+    "condition": "clean",
+    "model": "arx"
+  },
+  "configuration_hash": "2afb71d2e4ff275bda2f23956ca5d88c5f7dc044d39a55d5fe65e491edfd7ae2",
+  "status": "completed",
+  "pid": 6392,
+  "attempt": 1,
+  "returncode": 0,
+  "result": "/home/hera/Projects/industrial-world-model-eval/reports/week7/batch_smoke/8464a3ce2959f43dc3b9d567/runs/20261125T124422997078Z_boptest_smoke_5da7ba62c3ab",
+  "result_hashes": {
+    "context.json": "7cd0f9c20ef4c347c79b321eee3e90cae72f67d53b79d54c3dbab0e03ce55d70",
+    "run.log": "8824816f8a7e6aa505d2e7db2e482f8035f1ac98de45c389d35af91e33a22218",
+    "config.yaml": "fd9d7075175599810cf62cd663e09a93dfe8ecfa48b84b2221f59128c140af64",
+    "status.json": "991a8b0b1ed05068d6714a972511aa36d3129c482ab385994ff025db37107d50",
+    "trajectories.csv": "a21923198d5ff005e7205d9e14c8acf21f3cf4f0d17c9904073f8b1356cbc623",
+    "versions.json": "eb075c081799135542b82bf29e77d79588d631515c7a641c16bffeb2f3783e2a",
+    "report.md": "6afc3a25bd3792f27173a5125f802d1ba2b5008c6506ac3ca049a26082fbe401",
+    "artifacts.json": "60c40f18d644358ba719825ad77acdf911633598d76be1fcd083095833949917",
+    "input_hashes.json": "1e085f7ebeef3eefeee525d8787c8d0c877c2883d32e9e19b3461936d0b5c779",
+    "metrics.json": "7698f4bcc78f8aaada2165ae978247fbccb129f985874cc7c6192fcb9ffdda23",
+    "events.jsonl": "271cdf3d9adad839fc822b118b6833582417d92ae6eb6783bf4dab77f3381578",
+    "episodes/8464a3ce2959f43dc3b9d5676a6461586577b34acc61f37e9b9f0fbec48f5915/episode.json": "3e920a1f5bb2436df7d656a3131656b9ef97100d32d17b6a7dd130baa491e57d",
+    "episodes/8464a3ce2959f43dc3b9d5676a6461586577b34acc61f37e9b9f0fbec48f5915/complete.json": "5891994704ae37a09db84a13a8c3600eebb7a08d7ec44d699608f7b65299ef5f"
+  }
+}

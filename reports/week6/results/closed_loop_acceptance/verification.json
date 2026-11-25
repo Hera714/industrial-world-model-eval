@@ -1,0 +1,10 @@
+{
+  "status": "passed",
+  "complete_runs": 204,
+  "model_checkpoints": 11,
+  "engineering_baseline": "embedded",
+  "date_blocks": 8,
+  "scored_steps": 39168,
+  "verified": "Identical context/initial observation and weather, native energy, actual override, timestamps, metrics, truncation",
+  "reference": "Native embedded controller has internal sensor information; noise comparisons use within-controller clean differences."
+}

@@ -1,0 +1,10 @@
+{
+  "status": "passed",
+  "models": 11,
+  "paired_model_dates": 88,
+  "reference_dates": 3,
+  "ranking_reversal_cases": 248,
+  "selected_cases": 2,
+  "distinct_case_dates": 2,
+  "caveat": "Offline fixed-action prediction and closed-loop decision outcomes are different estimands; no causal claim."
+}

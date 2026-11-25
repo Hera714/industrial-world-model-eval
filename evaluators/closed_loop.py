@@ -76,3 +76,95 @@ def run_standard_episode(env, policy, seed, episode_id, make_row=None):
         if terminated or truncated:
             break
     return rows
+
+
+"""总说明：BOPTEST 真实闭环对照，重放同一初始上下文；只改模型，保持规划预算和独立舒适标准。"""
+from pathlib import Path
+import sys,json,time,hashlib,os
+import numpy as np
+import pandas as pd
+import torch,yaml
+ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT))
+from simulators.boptest_control import BoptestControlEnv,measurement_state
+from controllers.boptest_mpc import stage_cost
+from controllers.mpc import create_boptest_mpc
+from models.boptest_dynamics import BoptestHistoryModel,exogenous_features
+
+
+from metrics.control import calculate_boptest_control_metrics
+
+def run_boptest_episode(cfg,episode,spec,condition='clean'):
+    """服务异常保存部分轨迹并报错；只有完整回合才写 complete 清单，便于可靠续跑。"""
+    base=ROOT/cfg['output'];output=base/'closed_loop';output.mkdir(parents=True,exist_ok=True)
+    name=spec['name'];runid=f'{episode["episode_id"]}__{name}__{condition}';path=output/(runid+'.csv');meta=path.with_suffix('.json')
+    if path.exists() and meta.exists() and json.loads(meta.read_text()).get('status')=='complete':
+        saved=json.loads(meta.read_text())
+        if saved.get('checkpoint_sha256')!=spec.get('sha256'):raise ValueError('Stale control checkpoint: '+runid)
+        if hashlib.sha256(path.read_bytes()).hexdigest()!=saved['csv_sha256']:raise ValueError('Control CSV changed: '+runid)
+        print('skip '+runid,flush=True);return
+    local=dict(cfg,start_time=episode['start_day']*86400,episode_steps=cfg['context_steps']+cfg['episode_steps'])
+    recorded=pd.read_csv(base/'data'/(episode['episode_id']+'.csv'))
+    controller=None if name=='embedded' else create_boptest_mpc(spec,cfg,ROOT)
+    env=BoptestControlEnv(local);rows=[];history=[];rng=np.random.default_rng(64042+episode['start_day']);last_supply=None
+    try:
+        _,initial=env.reset(seed=42);points=initial['measurements'];previous=float(recorded.action_applied_c.iloc[0])
+        forecast=env.request('PUT',f'/forecast/{env.testid}',dict(point_names=['TDryBul','HGloHor','LowerSetp[1]','UpperSetp[1]'],
+            horizon=(local['episode_steps']+cfg['control']['horizon'])*900,interval=900))
+        (output/(runid+'_forecast.json')).write_text(json.dumps(forecast))
+        for k in range(local['episode_steps']):
+            timestamp=local['start_time']+k*900;true=measurement_state(points);observed=true.copy()
+            if k>=cfg['context_steps'] and condition=='noise_0p3':observed[:3]+=rng.normal(0,.3,3)
+            missing=condition=='missing_4' and k>=cfg['context_steps'] and (k-cfg['context_steps'])%24<4
+            if missing and last_supply is not None:observed[1]=last_supply
+            else:last_supply=observed[1]
+            weather=np.array([np.interp(timestamp,forecast['time'],forecast['TDryBul'])-273.15,np.interp(timestamp,forecast['time'],forecast['HGloHor'])])
+            exo=exogenous_features(weather,np.asarray(timestamp))
+            history.append(np.r_[observed,previous,exo]);history=history[-cfg['history_steps']:]
+            detail=dict(decision_time_s=0.,fallback_reason='',valid_candidates=None)
+            if k<cfg['context_steps']:action=[float(recorded.action_applied_c.iloc[k])]
+            elif controller is None:action=None
+            else:
+                future=timestamp+np.arange(1,cfg['control']['horizon']+1)*900
+                shift=1. if condition=='goal_plus1' else 0.
+                lower=np.interp(future,forecast['time'],forecast['LowerSetp[1]'])-273.15+shift
+                upper=np.interp(future,forecast['time'],forecast['UpperSetp[1]'])-273.15+shift
+                action,detail=controller.act(np.asarray(history),timestamp,lower,upper,k,previous)
+            _,_,term,trunc,info=env.safe_step(action,detail['fallback_reason']) if controller is not None and k>=cfg['context_steps'] else env.step(action)
+            after=measurement_state(info['measurements']);actual_action=info['applied_action_c']
+            history[-1][5]=actual_action
+            shift=1. if condition=='goal_plus1' else 0.
+            tnext=timestamp+900;lower=float(np.interp(tnext,forecast['time'],forecast['LowerSetp[1]'])-273.15+shift)
+            upper=float(np.interp(tnext,forecast['time'],forecast['UpperSetp[1]'])-273.15+shift)
+            violation=max(lower-after[0],0)+max(after[0]-upper,0)
+            p=cfg['control'];cost=float(stage_cost(after[0],info['energy_kwh'],lower,upper,previous,actual_action,
+                comfort_weight=p['comfort_weight'],energy_weight=p['energy_weight'],change_weight=p['action_change_weight']))
+            rows.append(dict(run_id=runid,episode_id=episode['episode_id'],split=episode['split'],model=name,family=spec.get('kind',name),training_seed=spec.get('seed',-1),
+                condition=condition,step=k,timestamp=timestamp,context=k<cfg['context_steps'],true_before=json.dumps(true.tolist()),observed_before=json.dumps(observed.tolist()),
+                true_after=json.dumps(after.tolist()),weather=json.dumps(weather.tolist()),requested_action_c=action[0] if action else None,applied_action_c=actual_action,
+                override_active=info['override_active'],missing_supply=missing,lower_c=lower,upper_c=upper,zone_c=after[0],
+                energy_kwh=info['energy_kwh'],comfort_violation_c=violation,comfort_violation=violation>0,cost=cost,
+                tracking_error_c=abs(after[0]-(lower+upper)/2),decision_time_s=detail['decision_time_s'],fallback_reason=info['fallback_reason'],
+                valid_candidates=detail.get('valid_candidates'),native_kpi=json.dumps(info['native_kpi']),terminated=term,truncated=trunc))
+            if k==cfg['context_steps']-1:context_kpi=info['native_kpi'];context_energy=env.last_energy
+            previous=actual_action;points=info['measurements']
+        assert rows[-1]['truncated'] and not rows[-1]['terminated']
+        frame=pd.DataFrame(rows);frame.to_csv(path,index=False);scored=frame[~frame.context]
+        reasons=scored.fallback_reason.value_counts().to_dict();reasons.pop('',None)
+        energy=float(scored.energy_kwh.sum());np.testing.assert_allclose(energy,env.last_energy-context_energy,atol=1e-8)
+        metric=dict(status='complete',run_id=runid,episode_id=episode['episode_id'],split=episode['split'],model=name,family=spec.get('kind',name),condition=condition,
+            training_seed=spec.get('seed',-1),steps=len(scored),cost=float(scored.cost.sum()),energy_kwh=energy,
+            comfort_violation_rate=float(scored.comfort_violation.mean()),comfort_degree_hours=float(scored.comfort_violation_c.sum()*.25),
+            center_tracking_mae_c=float(scored.tracking_error_c.mean()),decision_mean_ms=float(scored.decision_time_s.mean()*1000),
+            decision_p95_ms=float(scored.decision_time_s.quantile(.95)*1000),fallback_count=int(scored.fallback_reason.ne('').sum()),fallback_reasons=reasons,
+            native_context_kpi=context_kpi,native_final_kpi=info['native_kpi'],
+            native_ener_delta_kwh_m2=(info['native_kpi']['ener_tot']-context_kpi['ener_tot']),
+            warning='Native final KPI covers context+evaluation; report differences only for additive cumulative quantities, never subtract maxima or ratios.',
+            csv_sha256=hashlib.sha256(path.read_bytes()).hexdigest(),checkpoint_sha256=spec.get('sha256'))
+        metric.update(calculate_boptest_control_metrics(scored))
+        meta.write_text(json.dumps(metric,indent=2));print('completed '+runid+f' cost={metric["cost"]:.3f}',flush=True)
+    except Exception as exc:
+        if rows:pd.DataFrame(rows).to_csv(path.with_suffix('.partial.csv'),index=False)
+        (output/(runid+'_failure.json')).write_text(json.dumps(dict(status='failed',error=repr(exc),completed_steps=len(rows),run_id=runid)))
+        raise
+    finally:env.close()
+

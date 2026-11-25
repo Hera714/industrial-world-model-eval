@@ -1,0 +1,28 @@
+protocol_version: week6-extension-v1
+reason: Day172 has 18.23% outside training outdoor range; preserve original result
+  and label calendar shift, not pure ID.
+selection_basis: Weather CSV only, no model-error/date optimization; day292/day340
+  have min/max inside training outdoor support.
+primary_reference_episodes:
+- id_test_day160
+- id_test_day292
+- id_test_day340
+supplemental_calendar_episode: id_test_day172
+ood_goal:
+  condition: goal_plus1
+  comfort_bound_shift_c: 1.0
+  physical_weather: identical to reference
+  model_retrained: false
+weather_definition: cold blocks are seasonal holdouts, not range extrapolation; report
+  support fractions for warm blocks
+closed_loop_robustness:
+  episodes:
+  - id_test_day160
+  - id_test_day292
+  - id_test_day340
+  models: all frozen models plus embedded
+  conditions:
+  - noise_0p3
+  - missing_4
+seed_semantics: 3 training seeds, deterministic physical date blocks; planning seed
+  fixed, not independent physical replication

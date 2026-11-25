@@ -1,0 +1,6 @@
+{
+  "electricity_price": "constant",
+  "temperature_uncertainty": null,
+  "solar_uncertainty": null,
+  "seed": null
+}

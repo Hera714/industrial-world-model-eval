@@ -1,0 +1,294 @@
+{
+  "schema_version": "1.0",
+  "time_interval": "[start,end)",
+  "episodes": [
+    {
+      "episode_id": "train_day040",
+      "split": "train",
+      "start_day": 40,
+      "warmup_start_s": 2851200,
+      "context_start_s": 3456000,
+      "target_start_s": 3542400,
+      "target_end_exclusive_s": 3715200,
+      "context_steps": 96,
+      "target_steps": 192,
+      "analysis_domain": "train",
+      "file": {
+        "path": "reports/week6/results/data/train_day040.csv",
+        "sha256": "5998ee08527761d560ef1cdb80ecf424397a8a6a0e1fa5317262ad680c408ad0"
+      }
+    },
+    {
+      "episode_id": "train_day052",
+      "split": "train",
+      "start_day": 52,
+      "warmup_start_s": 3888000,
+      "context_start_s": 4492800,
+      "target_start_s": 4579200,
+      "target_end_exclusive_s": 4752000,
+      "context_steps": 96,
+      "target_steps": 192,
+      "analysis_domain": "train",
+      "file": {
+        "path": "reports/week6/results/data/train_day052.csv",
+        "sha256": "8e4c75f2e451930f4a6f451e7f4d401dbd64cf700c7005235dd2ff53c1374359"
+      }
+    },
+    {
+      "episode_id": "train_day064",
+      "split": "train",
+      "start_day": 64,
+      "warmup_start_s": 4924800,
+      "context_start_s": 5529600,
+      "target_start_s": 5616000,
+      "target_end_exclusive_s": 5788800,
+      "context_steps": 96,
+      "target_steps": 192,
+      "analysis_domain": "train",
+      "file": {
+        "path": "reports/week6/results/data/train_day064.csv",
+        "sha256": "2f305fa75c3cddfd7d501b465d5a78f81b69e808351fd9f16cf051896f07e051"
+      }
+    },
+    {
+      "episode_id": "train_day076",
+      "split": "train",
+      "start_day": 76,
+      "warmup_start_s": 5961600,
+      "context_start_s": 6566400,
+      "target_start_s": 6652800,
+      "target_end_exclusive_s": 6825600,
+      "context_steps": 96,
+      "target_steps": 192,
+      "analysis_domain": "train",
+      "file": {
+        "path": "reports/week6/results/data/train_day076.csv",
+        "sha256": "e3369ca518f0d72c1c1f421233c4ef14c1688687a111a403e2b45db66c0db453"
+      }
+    },
+    {
+      "episode_id": "train_day088",
+      "split": "train",
+      "start_day": 88,
+      "warmup_start_s": 6998400,
+      "context_start_s": 7603200,
+      "target_start_s": 7689600,
+      "target_end_exclusive_s": 7862400,
+      "context_steps": 96,
+      "target_steps": 192,
+      "analysis_domain": "train",
+      "file": {
+        "path": "reports/week6/results/data/train_day088.csv",
+        "sha256": "7dd1d0aa68a2d660b0b1236ad610dbb277d6bc4673007eccb37ec9dae2b2d8c8"
+      }
+    },
+    {
+      "episode_id": "train_day100",
+      "split": "train",
+      "start_day": 100,
+      "warmup_start_s": 8035200,
+      "context_start_s": 8640000,
+      "target_start_s": 8726400,
+      "target_end_exclusive_s": 8899200,
+      "context_steps": 96,
+      "target_steps": 192,
+      "analysis_domain": "train",
+      "file": {
+        "path": "reports/week6/results/data/train_day100.csv",
+        "sha256": "c8cb0ff08ab8fa79520f705244c63add9564cf5d3978839ce538a885446d5326"
+      }
+    },
+    {
+      "episode_id": "train_day112",
+      "split": "train",
+      "start_day": 112,
+      "warmup_start_s": 9072000,
+      "context_start_s": 9676800,
+      "target_start_s": 9763200,
+      "target_end_exclusive_s": 9936000,
+      "context_steps": 96,
+      "target_steps": 192,
+      "analysis_domain": "train",
+      "file": {
+        "path": "reports/week6/results/data/train_day112.csv",
+        "sha256": "394a98b040a943ccdbe03e1eff7954b1578a82837bd63192a284b1be635296bc"
+      }
+    },
+    {
+      "episode_id": "train_day124",
+      "split": "train",
+      "start_day": 124,
+      "warmup_start_s": 10108800,
+      "context_start_s": 10713600,
+      "target_start_s": 10800000,
+      "target_end_exclusive_s": 10972800,
+      "context_steps": 96,
+      "target_steps": 192,
+      "analysis_domain": "train",
+      "file": {
+        "path": "reports/week6/results/data/train_day124.csv",
+        "sha256": "27aed694537befccf2b686b2aa51a9d5c6383b94e07b309ea103cb09dd547f9d"
+      }
+    },
+    {
+      "episode_id": "val_day136",
+      "split": "val",
+      "start_day": 136,
+      "warmup_start_s": 11145600,
+      "context_start_s": 11750400,
+      "target_start_s": 11836800,
+      "target_end_exclusive_s": 12009600,
+      "context_steps": 96,
+      "target_steps": 192,
+      "analysis_domain": "val",
+      "file": {
+        "path": "reports/week6/results/data/val_day136.csv",
+        "sha256": "1c76d8c43655421261eef9be435bb35e6a751e6fa0f10ce7d45aeaa7d7769524"
+      }
+    },
+    {
+      "episode_id": "val_day148",
+      "split": "val",
+      "start_day": 148,
+      "warmup_start_s": 12182400,
+      "context_start_s": 12787200,
+      "target_start_s": 12873600,
+      "target_end_exclusive_s": 13046400,
+      "context_steps": 96,
+      "target_steps": 192,
+      "analysis_domain": "val",
+      "file": {
+        "path": "reports/week6/results/data/val_day148.csv",
+        "sha256": "d9a3d09223cf81040e5d6940e117f87080332f5185671fd64881612c31dc19c8"
+      }
+    },
+    {
+      "episode_id": "id_test_day160",
+      "split": "id_test",
+      "start_day": 160,
+      "warmup_start_s": 13219200,
+      "context_start_s": 13824000,
+      "target_start_s": 13910400,
+      "target_end_exclusive_s": 14083200,
+      "context_steps": 96,
+      "target_steps": 192,
+      "analysis_domain": "reference_support_matched",
+      "file": {
+        "path": "reports/week6/results/data/id_test_day160.csv",
+        "sha256": "82bf4d4b85cf1c5282157bddab598ff0b097605f2a6fdb216c33eb456e6fc45b"
+      }
+    },
+    {
+      "episode_id": "id_test_day172",
+      "split": "id_test",
+      "start_day": 172,
+      "warmup_start_s": 14256000,
+      "context_start_s": 14860800,
+      "target_start_s": 14947200,
+      "target_end_exclusive_s": 15120000,
+      "context_steps": 96,
+      "target_steps": 192,
+      "analysis_domain": "calendar_shift",
+      "file": {
+        "path": "reports/week6/results/data/id_test_day172.csv",
+        "sha256": "828f715a9e93e0465c207a62a2b1efb64164834f2f6e959a2e38037f128d2093"
+      }
+    },
+    {
+      "episode_id": "ood_cold_day012",
+      "split": "ood_cold",
+      "start_day": 12,
+      "warmup_start_s": 432000,
+      "context_start_s": 1036800,
+      "target_start_s": 1123200,
+      "target_end_exclusive_s": 1296000,
+      "context_steps": 96,
+      "target_steps": 192,
+      "analysis_domain": "seasonal_holdout",
+      "file": {
+        "path": "reports/week6/results/data/ood_cold_day012.csv",
+        "sha256": "049e00ba191f1f4696deab483f04cc3c55cedf52a0484f536724b886c6be7033"
+      }
+    },
+    {
+      "episode_id": "ood_cold_day024",
+      "split": "ood_cold",
+      "start_day": 24,
+      "warmup_start_s": 1468800,
+      "context_start_s": 2073600,
+      "target_start_s": 2160000,
+      "target_end_exclusive_s": 2332800,
+      "context_steps": 96,
+      "target_steps": 192,
+      "analysis_domain": "seasonal_holdout",
+      "file": {
+        "path": "reports/week6/results/data/ood_cold_day024.csv",
+        "sha256": "97825f6f3abb62e3af5b5bf4bac222fcff294d6b9e58947936a00f9386f8cd4d"
+      }
+    },
+    {
+      "episode_id": "ood_warm_day196",
+      "split": "ood_warm",
+      "start_day": 196,
+      "warmup_start_s": 16329600,
+      "context_start_s": 16934400,
+      "target_start_s": 17020800,
+      "target_end_exclusive_s": 17193600,
+      "context_steps": 96,
+      "target_steps": 192,
+      "analysis_domain": "warm_weather_holdout",
+      "file": {
+        "path": "reports/week6/results/data/ood_warm_day196.csv",
+        "sha256": "36deeffc772657392af2ade96cc020e7241f9ef5985f8e5d0b0e7f234829ffe9"
+      }
+    },
+    {
+      "episode_id": "ood_warm_day208",
+      "split": "ood_warm",
+      "start_day": 208,
+      "warmup_start_s": 17366400,
+      "context_start_s": 17971200,
+      "target_start_s": 18057600,
+      "target_end_exclusive_s": 18230400,
+      "context_steps": 96,
+      "target_steps": 192,
+      "analysis_domain": "warm_weather_holdout",
+      "file": {
+        "path": "reports/week6/results/data/ood_warm_day208.csv",
+        "sha256": "ee5b392d083cd63908bba9c542e2062f0019ce4f99816c9b36e6920307dac9be"
+      }
+    },
+    {
+      "episode_id": "id_test_day292",
+      "split": "id_test",
+      "start_day": 292,
+      "warmup_start_s": 24624000,
+      "context_start_s": 25228800,
+      "target_start_s": 25315200,
+      "target_end_exclusive_s": 25488000,
+      "context_steps": 96,
+      "target_steps": 192,
+      "analysis_domain": "reference_support_matched",
+      "file": {
+        "path": "reports/week6/results/data/id_test_day292.csv",
+        "sha256": "12f132c38ce21fbc14aaf6ce0c2f592625e95491e4f956390fc263845bbb9ba6"
+      }
+    },
+    {
+      "episode_id": "id_test_day340",
+      "split": "id_test",
+      "start_day": 340,
+      "warmup_start_s": 28771200,
+      "context_start_s": 29376000,
+      "target_start_s": 29462400,
+      "target_end_exclusive_s": 29635200,
+      "context_steps": 96,
+      "target_steps": 192,
+      "analysis_domain": "reference_support_matched",
+      "file": {
+        "path": "reports/week6/results/data/id_test_day340.csv",
+        "sha256": "a05a5be922861d7bde1a27090cdfeef7d9bb029d77c57cbf8c1be43ae206fea3"
+      }
+    }
+  ]
+}
