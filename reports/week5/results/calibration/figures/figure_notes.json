@@ -1,0 +1,11 @@
+{
+  "origin": {
+    "episode_id": "thermal_0283a1bf6ba5de66_air21.70470569_wall18.20171101_seed4086_episode86",
+    "source_step": 0
+  },
+  "scope": "free-running; both conditions and both state variables; teacher-forcing metrics remain in CSV",
+  "nominal": 0.9,
+  "coverage": "episode-equal mean; invalid intervals count as not covered",
+  "width": "episode mean over finite valid intervals; see validity counts in tables",
+  "calibration": "validation-only normalized residual quantiles; not a strict finite-sample guarantee"
+}

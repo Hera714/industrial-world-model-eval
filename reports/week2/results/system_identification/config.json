@@ -1,0 +1,148 @@
+{
+  "episode_split": {
+    "train": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29
+    ],
+    "val": [
+      30,
+      31,
+      32,
+      33,
+      34,
+      35
+    ],
+    "test": [
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44
+    ]
+  },
+  "data_seed_start": 1000,
+  "control_cases": [
+    {
+      "name": "air18_seed42",
+      "seed": 42,
+      "initial_air_c": 18.0,
+      "initial_wall_c": 19.0
+    },
+    {
+      "name": "air18_seed43",
+      "seed": 43,
+      "initial_air_c": 18.0,
+      "initial_wall_c": 19.0
+    },
+    {
+      "name": "air18_seed44",
+      "seed": 44,
+      "initial_air_c": 18.0,
+      "initial_wall_c": 19.0
+    },
+    {
+      "name": "air20_seed42",
+      "seed": 42,
+      "initial_air_c": 20.0,
+      "initial_wall_c": 20.0
+    },
+    {
+      "name": "air20_seed43",
+      "seed": 43,
+      "initial_air_c": 20.0,
+      "initial_wall_c": 20.0
+    },
+    {
+      "name": "air20_seed44",
+      "seed": 44,
+      "initial_air_c": 20.0,
+      "initial_wall_c": 20.0
+    },
+    {
+      "name": "air22_seed42",
+      "seed": 42,
+      "initial_air_c": 22.0,
+      "initial_wall_c": 21.0
+    },
+    {
+      "name": "air22_seed43",
+      "seed": 43,
+      "initial_air_c": 22.0,
+      "initial_wall_c": 21.0
+    },
+    {
+      "name": "air22_seed44",
+      "seed": 44,
+      "initial_air_c": 22.0,
+      "initial_wall_c": 21.0
+    }
+  ],
+  "thermal_config": {
+    "dt_hours": 0.16666666666666666,
+    "episode_steps": 144,
+    "max_power_kw": 5.0,
+    "target_c": 21.0,
+    "initial_air_c": 18.0,
+    "initial_wall_c": 19.0,
+    "outdoor_mean_c": 6.0,
+    "outdoor_amplitude_c": 4.0,
+    "internal_load_kw": 0.3,
+    "air_capacity": 2.0,
+    "wall_capacity": 12.0,
+    "air_wall_conductance": 0.3,
+    "air_out_conductance": 0.15,
+    "wall_out_conductance": 0.1,
+    "weather_noise_std": 0.3,
+    "process_noise_std": 0.01,
+    "measurement_noise_std": 0.05,
+    "comfort_low_c": 20.0,
+    "comfort_high_c": 23.0
+  },
+  "mpc_config": {
+    "horizon": 12,
+    "candidates": 256,
+    "tracking_weight": 1.0,
+    "energy_weight": 1.0,
+    "action_change_weight": 0.02,
+    "comfort_penalty_weight": 2.0,
+    "terminal_weight": 0.0,
+    "time_budget_s": 1.0,
+    "seed": 123
+  },
+  "training": "真实状态、真实当前室外温度、实际动作及真实下一状态；内部热负荷恒定并吸收到截距",
+  "offline_rollout": "测试 episode 真值初始化，使用记录的未来动作和真实天气做理想化开环评估；未来状态不作为输入",
+  "control": "带噪状态与天气观测；每次重新规划，未来天气保持当前观测值；已知内部负荷；规划器候选种子固定",
+  "caveat": "训练使用模拟器真实状态标签，实际场景未必可观测；成本是模拟评分非货币"
+}

@@ -1,0 +1,10 @@
+model,information,mae_c,rmse_c
+timesfm3_t1,T1 history only,0.16660295783567244,0.25440742434689284
+persistence,T1 history only,0.18315205945702456,0.26880564479531943
+linear,five historical features,0.14715193168299043,0.21431775778541792
+mlp_42,five historical features,0.5234961436940127,0.6177536148022766
+mlp_43,five historical features,0.23085792104700728,0.31520203489993853
+mlp_44,five historical features,0.3719217978774595,0.4716063848431389
+linear_t1,T1 history only,0.15295467180665945,0.2263638793344934
+patchtst_t1,T1 history only; simplified old model,0.725418281008766,0.8659118006497812
+official_patchtst_t1,five-channel shared pretraining; T1 independent inference,0.24524824679344182,0.34277043709998867

@@ -1,0 +1,9 @@
+{
+  "calibration_snapshot_sha256": "e39cf20d70c367109d6dca7266ba5fc68bb1a91e01365395422c5ff2f987f6f6",
+  "applied_calibration_sha256": "93d3c44609ca6dc0c502cc2fc424eb0e2c40654fa60cf1dff89fbe28cc54201a",
+  "test_episodes": 18,
+  "test_origins": 1170,
+  "interval": "pointwise by horizon and variable; not simultaneous trajectory coverage",
+  "independent_unit": "episode; fixed three-seed ensemble is one predictor, not three independent tests",
+  "widths": "valid finite intervals only; coverage_all counts invalid intervals as not covered"
+}

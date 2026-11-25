@@ -1,0 +1,15 @@
+{
+  "data/split.py": "29b09885bb2f10ab9a692c0b239224ea46d2a8075eb8d8a5e8310509db402ba7",
+  "data/preprocess.py": "b1d0493362ddc815c7864a0a10b46b8e30c48269ba1d13f14b1da3619ace50f3",
+  "models/base.py": "83c8fd74bf52e1b9e8c8f65ffc09dd69ba818adf1f6a3d269ee50cc4b1e4aa75",
+  "models/persistence.py": "46b040e3c8ef0418f9d91cf8419196fe3d98d8185cb6bb8f4c0ef81b56d8de66",
+  "models/arx.py": "08a986d7cd9be49c20a006241cb0cab35e2effe9a3be22a2b80cdec3b2931367",
+  "models/learned_dynamics.py": "8909d68b58262f59c2d73066395c27b91333f2ccdb0fbea7b53273c7c9efda3a",
+  "metrics/prediction.py": "749c8d895d0c682a3f20e3d7ec7b60c68dfd6198b9799af77fb3fe2e83540106",
+  "evaluators/prediction.py": "d844253bc2c64b4102bb3ca4807393d107835d7f507555aa4bbd61106737d241",
+  "run_week1_baselines.py": "3fab37c8af23a02877efca2ad4d8cc205ac7c1afef54e77f0cf45483756db135",
+  "tests/test_split.py": "0283d82725a4f414539ef0780828024114af2138eab726c82b133c55b592a645",
+  "tests/test_preprocess.py": "32a4a4e9b85d0d8d0d7321dde0fd42acffadf1f838c1a11ed461ae1241317835",
+  "tests/test_model_api.py": "67e43c1a68f82be12775bf51d8d3601debdcf02e60021c13a513321edc8a5545",
+  "tests/test_metrics.py": "51ad51ff908b78f07f341017e502bd20511484c1c710fbe078211feacda6deca"
+}

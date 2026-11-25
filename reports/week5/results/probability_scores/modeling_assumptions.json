@@ -1,0 +1,75 @@
+{
+  "config": {
+    "protocol_version": "1.0-empirical-probability-scoring",
+    "source_calibration_config": "configs/experiments/week5_calibration.yaml",
+    "input_directory": "reports/week5/results/calibration/test",
+    "families": [
+      "mlp",
+      "residual"
+    ],
+    "member_seeds": [
+      42,
+      43,
+      44
+    ],
+    "member_weights": [
+      0.3333333333333333,
+      0.3333333333333333,
+      0.3333333333333333
+    ],
+    "distribution": "equal-weight discrete empirical measure at the three original member predictions",
+    "score": "exact positive-loss CRPS of empirical distribution, denominator M^2, lower is better",
+    "fair_iid_correction": false,
+    "calibration_transform": "none: interval calibration does not define a full CDF",
+    "nll": {
+      "status": "not_computed",
+      "reason": "No continuous predictive density has been declared; the empirical measure is atomic."
+    },
+    "max_horizon": 80,
+    "horizons": [
+      1,
+      5,
+      10,
+      20,
+      40,
+      80
+    ],
+    "modes": [
+      "teacher_forcing",
+      "free_running"
+    ],
+    "conditions": [
+      "recorded_observation",
+      "persistence_forecast"
+    ],
+    "variables": [
+      "air",
+      "wall"
+    ],
+    "unit": "Celsius",
+    "invalid_members": "any nonfinite member invalidates the fixed three-member score; retain denominator",
+    "aggregation": "origins within episode, equal-weight episodes; ensemble is one predictor, no pseudo seed replicates",
+    "input_sha256": {
+      "configs/experiments/week5_calibration.yaml": "2c0eb32bea475ff49cb44e44d7cc5cd7118ee7d6c720b8198b7b89d73906834b",
+      "reports/week5/results/calibration/audit.json": "7dbcc470b16d05bbc77051fcbc21ca0783e430a7173e0dda36addb1e607cd8ab",
+      "reports/week5/results/calibration/test/origins.csv": "153e8d4b30c9e4ada4e8d6c2b756cd00c5b1b0f8a5efe26f7feb7456620c9718",
+      "reports/week5/results/calibration/test/failures.csv": "2d9d2e39985c363d1fc2437338b55c82451467ac626ee9a9c73e0982a2d5fcbf",
+      "reports/week5/results/calibration/test/mlp_members.npz": "650da1c080777c37f7161d6cdb4e47279833964ff60ded8fdb325b20e58795ce",
+      "reports/week5/results/calibration/test/residual_members.npz": "29fa995d04b4fe2240cac976ac42a5a487dd8466794c26712838f884fd4a6390"
+    },
+    "output": "reports/week5/results/probability_scores"
+  },
+  "crps": "CRPS of original finite empirical distribution, not of validation-calibrated intervals",
+  "nll": {
+    "status": "not_computed",
+    "reason": "No continuous predictive density has been declared; the empirical measure is atomic."
+  },
+  "member_dependence": "Different training seeds on shared data, not IID posterior draws",
+  "units": "CRPS uses temperature units Celsius, not Celsius squared",
+  "interpretation": "marginal one-variable scores, not joint multivariate or trajectory distribution scores",
+  "source_sha256": {
+    "metrics/probabilistic.py": "b691a695e006e5be193b45e8ce206344fc533da101c62bc468dbe9b7f20063d0",
+    "scripts/score_week5_probability.py": "1cf4383aea2a7114d34055081bad9cc4b6b1d5bf775fd08b8d98f4528c75b1f8",
+    "evaluators/summary.py": "ae399d21607af4291ded3e6c3feb8996db2fe0cb0127df91d2d4f1b5d2f0e335"
+  }
+}

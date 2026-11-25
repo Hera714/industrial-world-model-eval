@@ -1,0 +1,74 @@
+{
+  "history": 144,
+  "horizon": 24,
+  "features": [
+    "T1",
+    "T2",
+    "T3",
+    "RH_1",
+    "T_out"
+  ],
+  "target": "T1",
+  "diagnostics": {
+    "frequency": "10min",
+    "inserted_timestamps": 0,
+    "missing_before_fill": {
+      "T1": 0,
+      "T2": 0,
+      "T3": 0,
+      "RH_1": 0,
+      "T_out": 0
+    },
+    "missing_after_fill": {
+      "T1": 0,
+      "T2": 0,
+      "T3": 0,
+      "RH_1": 0,
+      "T_out": 0
+    },
+    "forward_fill_limit_steps": 6
+  },
+  "scaler": {
+    "fit_partition": "train",
+    "mean": {
+      "T1": 21.069756441590194,
+      "T2": 19.584244478614597,
+      "T3": 21.418165897151628,
+      "RH_1": 40.403838655458806,
+      "T_out": 5.717090150089281
+    },
+    "scale": {
+      "T1": 1.242059767171306,
+      "T2": 1.4850689040456957,
+      "T3": 1.4656729737910874,
+      "RH_1": 3.5550139680678843,
+      "T_out": 4.148062020399154
+    }
+  },
+  "splits": {
+    "train": {
+      "start": "2016-01-11T17:00:00",
+      "end": "2016-04-16T15:10:00",
+      "rows": 13814,
+      "candidate_windows": 13647,
+      "windows": 13647,
+      "discarded_windows": 0
+    },
+    "val": {
+      "start": "2016-04-16T15:20:00",
+      "end": "2016-05-07T04:30:00",
+      "rows": 2960,
+      "candidate_windows": 2937,
+      "windows": 2937,
+      "discarded_windows": 0
+    },
+    "test": {
+      "start": "2016-05-07T04:40:00",
+      "end": "2016-05-27T18:00:00",
+      "rows": 2961,
+      "candidate_windows": 2938,
+      "windows": 2938,
+      "discarded_windows": 0
+    }
+  }
+}

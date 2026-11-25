@@ -1,0 +1,7 @@
+            cumulative_cost  tracking_mae_c  energy_kwh  fallback_count
+model                                                                  
+known             79.178754        0.160001   61.946186             0.0
+linear            79.480049        0.161182   61.964999             0.0
+mlp_seed42        78.488066        0.157841   61.984682             0.0
+mlp_seed43        78.961898        0.158162   62.053442             0.0
+mlp_seed44        79.437816        0.162704   62.061618             0.0

@@ -1,0 +1,84 @@
+ M controllers/mpc.py
+ M controllers/rule_based.py
+ M data/collect_trajectories.py
+ M data/preprocess.py
+ M data/split.py
+ M evaluators/closed_loop.py
+ M evaluators/prediction.py
+ M evaluators/rollout.py
+ M metrics/control.py
+ M metrics/prediction.py
+ M models/arx.py
+ M models/base.py
+ M models/learned_dynamics.py
+ M models/persistence.py
+ M simulators/base_env.py
+ M simulators/boptest_adapter.py
+ M simulators/industrial_benchmark.py
+ M simulators/simple_thermal.py
+ M tests/test_env_contract.py
+ M tests/test_metrics.py
+ M tests/test_model_api.py
+?? configs/environments/boptest.yaml
+?? configs/environments/industrial_benchmark.yaml
+?? configs/experiments/week4_thermal.yaml
+?? controllers/lqr.py
+?? controllers/safety.py
+?? data/processed/
+?? data/raw/
+?? docs/
+?? external/
+?? models/action_mlp.py
+?? models/dynamics_base.py
+?? models/patchtst.py
+?? models/system_identification.py
+?? plot_official_patchtst.py
+?? plot_week1_timesfm.py
+?? plot_week2_heating.py
+?? plot_week2_lqr_safety.py
+?? plot_week2_mean.py
+?? reports/week1/
+?? reports/week2/
+?? reports/week3/
+?? reports/week4/
+?? run_official_patchtst.py
+?? run_patchtst_intervals.py
+?? run_week1_baselines.py
+?? run_week1_diagnostics.py
+?? run_week1_intervals.py
+?? run_week1_patchtst.py
+?? run_week1_timesfm.py
+?? run_week2_comparison.py
+?? run_week2_env_demo.py
+?? run_week2_identification.py
+?? run_week2_lqr_safety.py
+?? run_week2_mpc.py
+?? run_week2_rule.py
+?? run_week2_three_seeds.py
+?? scripts/check_boptest_fmu.py
+?? scripts/collect_week4.py
+?? scripts/evaluate_week4.py
+?? scripts/plot_week3_seed42.py
+?? scripts/plot_week4.py
+?? scripts/reproduce_week4.sh
+?? scripts/run_ib_upstream.py
+?? scripts/run_week3.py
+?? scripts/run_week4_control.py
+?? scripts/train_week4.py
+?? simulators/safety.py
+?? tests/test_control_metrics.py
+?? tests/test_controllers.py
+?? tests/test_dynamics_api.py
+?? tests/test_dynamics_schema.py
+?? tests/test_industrial_benchmark.py
+?? tests/test_intervals.py
+?? tests/test_lqr_safety.py
+?? tests/test_mpc.py
+?? tests/test_official_patchtst.py
+?? tests/test_patchtst.py
+?? tests/test_preprocess.py
+?? tests/test_safety_wrapper.py
+?? tests/test_split.py
+?? tests/test_system_identification.py
+?? tests/test_week2_comparison.py
+?? week1_mvp.py

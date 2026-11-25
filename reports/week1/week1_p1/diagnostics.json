@@ -1,0 +1,34 @@
+{
+  "t1_split_stats": {
+    "train": {
+      "count": 13814,
+      "mean": 21.069756441590194,
+      "std": 1.2421047261696436,
+      "median": 21.2,
+      "iqr_outlier_count_train_threshold": 169
+    },
+    "val": {
+      "count": 2960,
+      "mean": 22.01374324324324,
+      "std": 0.9629165894119217,
+      "median": 21.9266666666667,
+      "iqr_outlier_count_train_threshold": 39
+    },
+    "test": {
+      "count": 2961,
+      "mean": 24.237146515816733,
+      "std": 0.8246722849944712,
+      "median": 24.29,
+      "iqr_outlier_count_train_threshold": 1182
+    }
+  },
+  "train_iqr_bounds": [
+    17.724999999999998,
+    24.565
+  ],
+  "sampling_interval_counts": {
+    "0 days 00:10:00": 19734
+  },
+  "acf_lag_1": 0.999073626963388,
+  "acf_lag_144": 0.7205166101983833
+}

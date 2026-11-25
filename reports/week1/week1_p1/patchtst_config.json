@@ -1,0 +1,21 @@
+{
+  "information_set": "T1 history only",
+  "history": 144,
+  "horizon": 24,
+  "patch_length": 16,
+  "stride": 8,
+  "d_model": 32,
+  "heads": 4,
+  "layers": 2,
+  "seed": 42,
+  "max_epochs": 30,
+  "patience": 5,
+  "batch_size": 128,
+  "learning_rate": 0.001,
+  "best_epoch": 9,
+  "validation_mse": 0.04672131687402725,
+  "device": "cuda",
+  "test_windows": 2938,
+  "linear_selected_alpha": 10.0,
+  "torch_version": "2.8.0+cu128"
+}

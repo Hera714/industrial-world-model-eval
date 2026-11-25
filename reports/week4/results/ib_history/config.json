@@ -1,0 +1,153 @@
+{
+  "splits": {
+    "train": [
+      3,
+      16,
+      26,
+      20,
+      21,
+      23,
+      9,
+      12,
+      17,
+      18,
+      24,
+      28,
+      25,
+      6,
+      1,
+      11,
+      0,
+      13,
+      2,
+      15,
+      14
+    ],
+    "val": [
+      22,
+      8,
+      27,
+      19
+    ],
+    "test": [
+      5,
+      29,
+      7,
+      4,
+      10
+    ]
+  },
+  "environment_seeds": [
+    7000,
+    7001,
+    7002,
+    7003,
+    7004,
+    7005,
+    7006,
+    7007,
+    7008,
+    7009,
+    7010,
+    7011,
+    7012,
+    7013,
+    7014,
+    7015,
+    7016,
+    7017,
+    7018,
+    7019,
+    7020,
+    7021,
+    7022,
+    7023,
+    7024,
+    7025,
+    7026,
+    7027,
+    7028,
+    7029
+  ],
+  "action_seeds": [
+    17000,
+    17001,
+    17002,
+    17003,
+    17004,
+    17005,
+    17006,
+    17007,
+    17008,
+    17009,
+    17010,
+    17011,
+    17012,
+    17013,
+    17014,
+    17015,
+    17016,
+    17017,
+    17018,
+    17019,
+    17020,
+    17021,
+    17022,
+    17023,
+    17024,
+    17025,
+    17026,
+    17027,
+    17028,
+    17029
+  ],
+  "history": 20,
+  "episode_steps": 300,
+  "setpoint": 50,
+  "device": "cuda",
+  "runs": [
+    {
+      "model": "mlp",
+      "seed": 42,
+      "best_epoch": 87,
+      "val_standardized_mse": 0.248026505112648
+    },
+    {
+      "model": "mlp",
+      "seed": 43,
+      "best_epoch": 86,
+      "val_standardized_mse": 0.2515350580215454
+    },
+    {
+      "model": "mlp",
+      "seed": 44,
+      "best_epoch": 70,
+      "val_standardized_mse": 0.2664549648761749
+    },
+    {
+      "model": "gru",
+      "seed": 42,
+      "best_epoch": 95,
+      "val_standardized_mse": 0.12118582427501678
+    },
+    {
+      "model": "gru",
+      "seed": 43,
+      "best_epoch": 54,
+      "val_standardized_mse": 0.14759434759616852
+    },
+    {
+      "model": "gru",
+      "seed": 44,
+      "best_epoch": 78,
+      "val_standardized_mse": 0.14086055755615234
+    }
+  ],
+  "objective": "next public observation delta; standardized MSE",
+  "input": "20 observed states each paired with its outgoing action, including current candidate action",
+  "split_seed": 2026,
+  "units": "IB benchmark scales",
+  "learning_rate": 0.001,
+  "max_epochs": 100,
+  "patience": 12
+}

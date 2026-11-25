@@ -1,0 +1,81 @@
+
+[Week5] single-step
+          model       family  seed variable grouping group    unit  mae_c_mean  rmse_c_mean  mae_c_episode_sd  rmse_c_episode_sd  episodes  episodes_with_valid_error  requested  valid  complete_origins  valid_points  failed  unavailable_origins  valid_fraction  failure_fraction
+         linear       linear    -1      air      all   all Celsius    0.007985     0.010068          0.000861           0.000908        18                         18       1170   1170              1170          1170       0                    0             1.0               0.0
+         linear       linear    -1     wall      all   all Celsius    0.008342     0.010377          0.000820           0.000925        18                         18       1170   1170              1170          1170       0                    0             1.0               0.0
+     mlp_seed42   action_mlp    42      air      all   all Celsius    0.008412     0.010587          0.000690           0.000732        18                         18       1170   1170              1170          1170       0                    0             1.0               0.0
+     mlp_seed42   action_mlp    42     wall      all   all Celsius    0.009344     0.011652          0.001324           0.001556        18                         18       1170   1170              1170          1170       0                    0             1.0               0.0
+     mlp_seed43   action_mlp    43      air      all   all Celsius    0.009697     0.012411          0.003472           0.005074        18                         18       1170   1170              1170          1170       0                    0             1.0               0.0
+     mlp_seed43   action_mlp    43     wall      all   all Celsius    0.010175     0.012782          0.002856           0.004037        18                         18       1170   1170              1170          1170       0                    0             1.0               0.0
+     mlp_seed44   action_mlp    44      air      all   all Celsius    0.009405     0.012016          0.002699           0.003842        18                         18       1170   1170              1170          1170       0                    0             1.0               0.0
+     mlp_seed44   action_mlp    44     wall      all   all Celsius    0.009358     0.011694          0.000906           0.000982        18                         18       1170   1170              1170          1170       0                    0             1.0               0.0
+    persistence  persistence    -1      air      all   all Celsius    0.130761     0.146759          0.055601           0.048234        18                         18       1170   1170              1170          1170       0                    0             1.0               0.0
+    persistence  persistence    -1     wall      all   all Celsius    0.016650     0.019392          0.005152           0.005217        18                         18       1170   1170              1170          1170       0                    0             1.0               0.0
+residual_seed42 residual_mlp    42      air      all   all Celsius    0.008493     0.010622          0.000938           0.001068        18                         18       1170   1170              1170          1170       0                    0             1.0               0.0
+residual_seed42 residual_mlp    42     wall      all   all Celsius    0.008381     0.010425          0.000818           0.000948        18                         18       1170   1170              1170          1170       0                    0             1.0               0.0
+residual_seed43 residual_mlp    43      air      all   all Celsius    0.008354     0.010625          0.000914           0.000945        18                         18       1170   1170              1170          1170       0                    0             1.0               0.0
+residual_seed43 residual_mlp    43     wall      all   all Celsius    0.008358     0.010392          0.000818           0.000943        18                         18       1170   1170              1170          1170       0                    0             1.0               0.0
+residual_seed44 residual_mlp    44      air      all   all Celsius    0.008386     0.010623          0.000879           0.000962        18                         18       1170   1170              1170          1170       0                    0             1.0               0.0
+residual_seed44 residual_mlp    44     wall      all   all Celsius    0.008373     0.010419          0.000823           0.000951        18                         18       1170   1170              1170          1170       0                    0             1.0               0.0
+Saved 1170 origins x 8 models: /home/hera/Projects/industrial-world-model-eval/reports/week5/results/one_step
+
+[Week5] rollout + episode/seed summary + paired differences
+Completed persistence
+Completed linear
+Completed mlp_seed42
+Completed mlp_seed43
+Completed mlp_seed44
+Completed residual_seed42
+Completed residual_seed43
+Completed residual_seed44
+Saved rollout results: /home/hera/Projects/industrial-world-model-eval/reports/week5/results/rollout
+/home/hera/Projects/industrial-world-model-eval/reports/week5/results/rollout: 138240 episode/family rows; 207360 paired episode rows; error aggregates unchanged
+
+[Week5] tables and figures
+      family variable  horizon  mae_c_mean  rmse_c_mean
+  action_mlp      air        1    0.009172     0.011672
+  action_mlp     wall        1    0.009626     0.012042
+  action_mlp      air        5    0.022679     0.029056
+  action_mlp     wall        5    0.025688     0.031940
+  action_mlp      air       10    0.032252     0.040883
+  action_mlp     wall       10    0.038280     0.047013
+  action_mlp      air       20    0.044083     0.053088
+  action_mlp     wall       20    0.055766     0.066035
+  action_mlp      air       80    0.075331     0.084034
+  action_mlp     wall       80    0.112133     0.125148
+      linear      air        1    0.007985     0.010068
+      linear     wall        1    0.008342     0.010377
+      linear      air        5    0.016957     0.020825
+      linear     wall        5    0.018207     0.022263
+      linear      air       10    0.022034     0.027044
+      linear     wall       10    0.024494     0.029641
+      linear      air       20    0.028895     0.034518
+      linear     wall       20    0.031425     0.037593
+      linear      air       80    0.045654     0.051294
+      linear     wall       80    0.067606     0.074836
+ persistence      air        1    0.130761     0.146759
+ persistence     wall        1    0.016650     0.019392
+ persistence      air        5    0.437031     0.529817
+ persistence     wall        5    0.074241     0.081091
+ persistence      air       10    0.495453     0.644913
+ persistence     wall       10    0.141335     0.152686
+ persistence      air       20    0.684682     0.863315
+ persistence     wall       20    0.258613     0.279886
+ persistence      air       80    0.848507     1.064952
+ persistence     wall       80    0.630770     0.669350
+residual_mlp      air        1    0.008411     0.010623
+residual_mlp     wall        1    0.008371     0.010412
+residual_mlp      air        5    0.018947     0.023489
+residual_mlp     wall        5    0.018341     0.022507
+residual_mlp      air       10    0.026138     0.032003
+residual_mlp     wall       10    0.024822     0.029949
+residual_mlp      air       20    0.035825     0.042085
+residual_mlp     wall       20    0.032273     0.038686
+residual_mlp      air       80    0.050674     0.056719
+residual_mlp     wall       80    0.073035     0.079701
+
+[Week5] traceability and acceptance
+
+[Week5] regression checks
+
+[Week5] report

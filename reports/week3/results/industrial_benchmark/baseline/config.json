@@ -1,0 +1,20 @@
+{
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "setpoint": 50,
+  "max_episode_steps": 1000,
+  "policy": "uniform_random",
+  "action_seed": "same as episode seed",
+  "time_unit": "step",
+  "versions": {
+    "industrial-benchmark-python": "2.0",
+    "gym": "0.26.2",
+    "gymnasium": "1.4.0",
+    "numpy": "2.4.6",
+    "scipy": "1.17.1"
+  },
+  "upstream_commit": "afeed6933ed1aff760a350f6300ae963bfc7bc04"
+}

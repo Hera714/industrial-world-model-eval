@@ -1,0 +1,21 @@
+{
+  "seed": 42,
+  "steps": 144,
+  "duration_hours": 24.0,
+  "initial_true_state_c": [
+    18.0,
+    19.0
+  ],
+  "target_c": 21.0,
+  "lower_threshold_c": 20.5,
+  "upper_threshold_c": 21.5,
+  "initial_heating_on": false,
+  "heating_power_kw": 5.0,
+  "energy_kwh": 71.6666666666667,
+  "cumulative_cost": 121.17379061447518,
+  "tracking_mae_c": 0.40169012620369327,
+  "comfort_violation_rate": 0.05555555555555555,
+  "terminated": false,
+  "truncated": true,
+  "cost_definition": "(next true air - target)^2 + power * dt; illustrative unit-weighted score"
+}

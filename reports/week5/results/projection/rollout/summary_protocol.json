@@ -1,0 +1,18 @@
+{
+  "independent_unit": "episode; overlapping windows aggregated before this module",
+  "main_estimand": "equal-weight episode mean per model run, then fixed training-seed mean and sample SD",
+  "pairing": "family seed means within identical episode/context; delta=A-B; negative favours A",
+  "failed_pairs": "retain outer-joined rows; delta missing unless all runs have complete finite support and no failure",
+  "information_groups": {
+    "persistence": "thermal_full_state",
+    "linear": "thermal_full_state",
+    "action_mlp": "thermal_full_state",
+    "residual_mlp": "thermal_full_state",
+    "projected_mlp": "thermal_full_state"
+  },
+  "seed_sd": "sample SD; undefined for one run",
+  "units": [
+    "Celsius"
+  ],
+  "confidence_intervals": "existing supplementary episode bootstrap not recalculated here"
+}

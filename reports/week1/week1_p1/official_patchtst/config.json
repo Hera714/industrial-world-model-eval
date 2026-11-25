@@ -1,0 +1,40 @@
+{
+  "official_commit": "204c21efe0b39603ad6e2ca640ef5896646ab1a9",
+  "features": [
+    "T1",
+    "T2",
+    "T3",
+    "RH_1",
+    "T_out"
+  ],
+  "target": "T1",
+  "channel_independence": true,
+  "pretrain_mask_ratio": 0.4,
+  "patch_length": 16,
+  "stride": 16,
+  "model": {
+    "c_in": 5,
+    "target_dim": 24,
+    "patch_len": 16,
+    "stride": 16,
+    "num_patch": 9,
+    "n_layers": 2,
+    "n_heads": 4,
+    "d_model": 32,
+    "d_ff": 128,
+    "shared_embedding": true,
+    "dropout": 0.1,
+    "head_dropout": 0.1,
+    "act": "relu",
+    "res_attention": false
+  },
+  "seed": 42,
+  "pretrain_best_epoch": 6,
+  "finetune_best_epoch": 8,
+  "pretrain_epochs": 6,
+  "finetune_max_epochs": 15,
+  "device": "cuda",
+  "overall_mae_c": 0.24524824679344182,
+  "overall_rmse_c": 0.34277043709998867,
+  "note": "Only T1 forecast loss; channel-independent backbone does not mix other feature values into T1 prediction."
+}

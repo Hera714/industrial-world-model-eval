@@ -1,0 +1,185 @@
+{
+  "protocol_version": "1.0-ib-independent",
+  "environment": "industrial_benchmark",
+  "data": "reports/week4/results/ib_history/episodes.npz",
+  "splits": {
+    "train": [
+      3,
+      16,
+      26,
+      20,
+      21,
+      23,
+      9,
+      12,
+      17,
+      18,
+      24,
+      28,
+      25,
+      6,
+      1,
+      11,
+      0,
+      13,
+      2,
+      15,
+      14
+    ],
+    "val": [
+      22,
+      8,
+      27,
+      19
+    ],
+    "test": [
+      5,
+      29,
+      7,
+      4,
+      10
+    ]
+  },
+  "models": [
+    {
+      "name": "ib_persistence",
+      "kind": "ib_persistence"
+    },
+    {
+      "name": "ib_mlp_42",
+      "kind": "ib_mlp",
+      "checkpoint": "reports/week4/results/ib_history/mlp_42.pt",
+      "family": "ib_mlp",
+      "seed": 42,
+      "information_group": "current"
+    },
+    {
+      "name": "ib_mlp_43",
+      "kind": "ib_mlp",
+      "checkpoint": "reports/week4/results/ib_history/mlp_43.pt",
+      "family": "ib_mlp",
+      "seed": 43,
+      "information_group": "current"
+    },
+    {
+      "name": "ib_mlp_44",
+      "kind": "ib_mlp",
+      "checkpoint": "reports/week4/results/ib_history/mlp_44.pt",
+      "family": "ib_mlp",
+      "seed": 44,
+      "information_group": "current"
+    },
+    {
+      "name": "ib_history_mlp_42",
+      "kind": "ib_history_mlp",
+      "checkpoint": "reports/week4/results/ib_history/history_mlp_42.pt",
+      "family": "ib_history_mlp",
+      "seed": 42,
+      "information_group": "history20"
+    },
+    {
+      "name": "ib_history_mlp_43",
+      "kind": "ib_history_mlp",
+      "checkpoint": "reports/week4/results/ib_history/history_mlp_43.pt",
+      "family": "ib_history_mlp",
+      "seed": 43,
+      "information_group": "history20"
+    },
+    {
+      "name": "ib_history_mlp_44",
+      "kind": "ib_history_mlp",
+      "checkpoint": "reports/week4/results/ib_history/history_mlp_44.pt",
+      "family": "ib_history_mlp",
+      "seed": 44,
+      "information_group": "history20"
+    },
+    {
+      "name": "ib_gru_42",
+      "kind": "ib_gru",
+      "checkpoint": "reports/week4/results/ib_history/gru_42.pt",
+      "family": "ib_gru",
+      "seed": 42,
+      "information_group": "history20"
+    },
+    {
+      "name": "ib_gru_43",
+      "kind": "ib_gru",
+      "checkpoint": "reports/week4/results/ib_history/gru_43.pt",
+      "family": "ib_gru",
+      "seed": 43,
+      "information_group": "history20"
+    },
+    {
+      "name": "ib_gru_44",
+      "kind": "ib_gru",
+      "checkpoint": "reports/week4/results/ib_history/gru_44.pt",
+      "family": "ib_gru",
+      "seed": 44,
+      "information_group": "history20"
+    }
+  ],
+  "sha256": {
+    "reports/week4/results/ib_history/episodes.npz": "5ccdcf5a7a26577ea6acef2df011e5c9934044bf4fa877651def9bac1d1be3d3",
+    "reports/week4/results/ib_history/config.json": "222edb1cb9c7bf023b32339abaa7379d5fbe2dc78b883597a972c2d01bce4838",
+    "reports/week4/results/ib_history/mlp_42.pt": "b92f8b1e84642e35673d9efe2ce79c0b2e418866e5af58fadce7164f8a60331a",
+    "reports/week4/results/ib_history/mlp_43.pt": "c1b033670a8dd2fe91669c2d5cf4d62d2f0aa3b52d3714c770f3042079b0e086",
+    "reports/week4/results/ib_history/mlp_44.pt": "e387d3170e5b663325709e18627fd95260431528d342e579c3e78c8de1f9c392",
+    "reports/week4/results/ib_history/history_mlp_42.pt": "9e9bd8fde82d1906dea695df16935f45d7312eec5d52e19c8ac8c601e21efee4",
+    "reports/week4/results/ib_history/history_mlp_43.pt": "b15036627a635a509205f1d677a1dc698564165f7c1dc5971cc66657713b7905",
+    "reports/week4/results/ib_history/history_mlp_44.pt": "0ac50e45202bbbe2bf736d07987a168d55a69ed188d90f888524043f2e087610",
+    "reports/week4/results/ib_history/gru_42.pt": "cd79887dc6a0262233a4afd3b3c932a0ac93139f0cad2043931ae087b1f3d8c7",
+    "reports/week4/results/ib_history/gru_43.pt": "c0e408dabc25709d7e9c07b4cb789828aae5cce7f0756c92ade03abc9f4e4e18",
+    "reports/week4/results/ib_history/gru_44.pt": "4e0ee47ac74f5816348ff9378f4746b602dd829257d10af412bd6e2b3a14b870"
+  },
+  "horizons": [
+    1,
+    5,
+    10,
+    20,
+    40,
+    80
+  ],
+  "max_horizon": 80,
+  "modes": [
+    "teacher_forcing",
+    "free_running"
+  ],
+  "units": "IB native benchmark scale",
+  "history": 20,
+  "origins": "all steps 19..220 in each held-out 300-step episode; same origins for every model",
+  "condition": "recorded actions; no future true observations in free running; no extra exogenous input",
+  "variables": [
+    "setpoint",
+    "velocity",
+    "gain",
+    "shift",
+    "fatigue",
+    "consumption"
+  ],
+  "validity": {
+    "low": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "high": [
+      100,
+      100,
+      100,
+      100,
+      1000,
+      1000
+    ],
+    "extreme_abs": 1000000.0,
+    "observation_action": "flag and continue",
+    "extreme_action": "stop after retaining finite triggering point",
+    "rate": "not applicable: no independently established physical rate bounds",
+    "extreme_note": "heuristic numerical threshold; frozen for this extension, not a physical safety limit"
+  },
+  "output": "reports/week5/results/ib_history",
+  "aggregation": "episode equal weight, then training-seed mean and sample SD; units never pooled",
+  "selection": "use all prior checkpoints; no test-based tuning; new independent extension after thermal main experiment"
+}

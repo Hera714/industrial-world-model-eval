@@ -1,0 +1,11 @@
+{
+  "outdoor_bounds_c": [
+    -5,
+    17
+  ],
+  "noise_margin_c": 0.03,
+  "method": "output delta projection",
+  "horizon": 20,
+  "evaluation": "raw and projected outputs share the constrained rollout input state at every step",
+  "uncertainty": "3-sigma margin is a heuristic; Gaussian noise has unbounded support"
+}

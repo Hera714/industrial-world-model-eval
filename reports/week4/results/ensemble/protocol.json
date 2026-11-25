@@ -1,0 +1,15 @@
+{
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "sd": "sample standard deviation across 3 models, ddof=1",
+  "rollout": "each member recursively rolls out its own state, then aggregate",
+  "example": {
+    "episode_id": "thermal_0283a1bf6ba5de66_air17.18839956_wall19.22174058_seed4034_episode34",
+    "source_step": 0
+  },
+  "correlation": "descriptive Spearman across overlapping origins at fixed horizon",
+  "interval": "mean \u00b1 model SD, uncalibrated disagreement band"
+}

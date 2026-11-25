@@ -1,0 +1,51 @@
+[
+  {
+    "case": "high",
+    "executed_action_kw": 0.0,
+    "safety_reason": "high_temperature",
+    "environment_safety_reason": "true_high_boundary",
+    "terminated": true
+  },
+  {
+    "case": "low",
+    "executed_action_kw": 5.0,
+    "safety_reason": "low_temperature",
+    "environment_safety_reason": "true_low_boundary",
+    "terminated": true
+  },
+  {
+    "case": "invalid",
+    "executed_action_kw": 0.0,
+    "safety_reason": "invalid_action",
+    "environment_safety_reason": "",
+    "terminated": false
+  },
+  {
+    "case": "clip",
+    "executed_action_kw": 5.0,
+    "safety_reason": "action_clipped",
+    "environment_safety_reason": "",
+    "terminated": false
+  },
+  {
+    "case": "no_valid_candidates",
+    "executed_action_kw": 5.0,
+    "safety_reason": "no_valid_candidates",
+    "environment_safety_reason": "",
+    "terminated": false
+  },
+  {
+    "case": "timeout",
+    "executed_action_kw": 5.0,
+    "safety_reason": "timeout",
+    "environment_safety_reason": "",
+    "terminated": false
+  },
+  {
+    "case": "model_exception",
+    "executed_action_kw": 5.0,
+    "safety_reason": "planning_error:RuntimeError",
+    "environment_safety_reason": "",
+    "terminated": false
+  }
+]

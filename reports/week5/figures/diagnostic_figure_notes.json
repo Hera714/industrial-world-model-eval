@@ -1,0 +1,16 @@
+{
+  "scope": "Frozen simple_thermal main evaluation; IB and projected models remain separate extensions",
+  "requested_episodes": 18,
+  "policy_episode_counts": {
+    "mpc": 6,
+    "random": 6,
+    "rule": 6
+  },
+  "condition_horizon": 80,
+  "distribution_unit": "episode; fixed training seeds averaged within episode",
+  "distribution_box": "Q1/median/Q3, min/max whiskers, every episode shown as a point",
+  "ranking": "terminal RMSE seed mean; min-rank exact ties; no ranking of incomplete/failed supports",
+  "availability": "finite available prediction / all requested origins; not physical compliance",
+  "uncertainty": "error curve shading is training-seed sample SD; box spread is episode variation",
+  "exports": "300 dpi PNG, editable PDF/SVG, alignment reports and source CSV tables"
+}

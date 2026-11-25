@@ -1,0 +1,65 @@
+{
+  "prediction_mode": "direct multi-step",
+  "history": 144,
+  "horizon": 24,
+  "features": [
+    "T1",
+    "T2",
+    "T3",
+    "RH_1",
+    "T_out"
+  ],
+  "target": "T1",
+  "test_windows": 2938,
+  "linear": {
+    "candidate_alphas": [
+      0.1,
+      1.0,
+      10.0,
+      100.0
+    ],
+    "selected_alpha": 1.0,
+    "validation_mse": {
+      "0.1": 0.044023345662944746,
+      "1.0": 0.04387074730883225,
+      "10.0": 0.044159554153533176,
+      "100.0": 0.048487422591945724
+    }
+  },
+  "mlp": {
+    "mlp_42": {
+      "seed": 42,
+      "hidden": 64,
+      "lr": 0.001,
+      "max_epochs": 40,
+      "patience": 5,
+      "batch_size": 128,
+      "best_epoch": 3,
+      "validation_mse": 0.08257069438695908,
+      "device": "cuda"
+    },
+    "mlp_43": {
+      "seed": 43,
+      "hidden": 64,
+      "lr": 0.001,
+      "max_epochs": 40,
+      "patience": 5,
+      "batch_size": 128,
+      "best_epoch": 9,
+      "validation_mse": 0.07784950733184814,
+      "device": "cuda"
+    },
+    "mlp_44": {
+      "seed": 44,
+      "hidden": 64,
+      "lr": 0.001,
+      "max_epochs": 40,
+      "patience": 5,
+      "batch_size": 128,
+      "best_epoch": 2,
+      "validation_mse": 0.09416463226079941,
+      "device": "cuda"
+    }
+  },
+  "torch_version": "2.8.0+cu128"
+}

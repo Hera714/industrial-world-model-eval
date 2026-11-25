@@ -1,0 +1,13 @@
+model,mode,condition,requested_origin_steps,corrected_steps,corrected_components,max_correction_c,max_replay_difference_c
+projected_mlp_seed42,teacher_forcing,recorded_observation,93600,0,0,0.0,4.1192561184288934e-07
+projected_mlp_seed42,free_running,recorded_observation,93600,0,0,0.0,4.1192561184288934e-07
+projected_mlp_seed42,teacher_forcing,persistence_forecast,93600,0,0,0.0,4.1192561184288934e-07
+projected_mlp_seed42,free_running,persistence_forecast,93600,0,0,0.0,4.1192561184288934e-07
+projected_mlp_seed43,teacher_forcing,recorded_observation,93600,72,72,0.03176444871769846,4.1192560829017566e-07
+projected_mlp_seed43,free_running,recorded_observation,93600,59,59,0.03176444871769846,4.1192561184288934e-07
+projected_mlp_seed43,teacher_forcing,persistence_forecast,93600,82,82,0.03176444871769846,4.1192560829017566e-07
+projected_mlp_seed43,free_running,persistence_forecast,93600,64,64,0.03176444871769846,4.1192560829017566e-07
+projected_mlp_seed44,teacher_forcing,recorded_observation,93600,0,0,0.0,4.035015201964143e-07
+projected_mlp_seed44,free_running,recorded_observation,93600,0,0,0.0,5.380020269285524e-07
+projected_mlp_seed44,teacher_forcing,persistence_forecast,93600,0,0,0.0,4.1192561184288934e-07
+projected_mlp_seed44,free_running,persistence_forecast,93600,0,0,0.0,4.1192561184288934e-07

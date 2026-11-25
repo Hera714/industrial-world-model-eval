@@ -1,0 +1,445 @@
+{
+  "config": {
+    "protocol_version": "1.0-projection-extension",
+    "environment": "simple_thermal",
+    "models": [
+      {
+        "name": "persistence",
+        "kind": "persistence",
+        "checkpoint": null
+      },
+      {
+        "name": "linear",
+        "kind": "linear",
+        "checkpoint": "reports/week4/results/rollout/linear.npz"
+      },
+      {
+        "name": "mlp_seed42",
+        "kind": "action_mlp",
+        "checkpoint": "reports/week4/results/training/mlp_hidden64_seed42.pt",
+        "seed": 42
+      },
+      {
+        "name": "mlp_seed43",
+        "kind": "action_mlp",
+        "checkpoint": "reports/week4/results/training/mlp_hidden64_seed43.pt",
+        "seed": 43
+      },
+      {
+        "name": "mlp_seed44",
+        "kind": "action_mlp",
+        "checkpoint": "reports/week4/results/training/mlp_hidden64_seed44.pt",
+        "seed": 44
+      },
+      {
+        "name": "residual_seed42",
+        "kind": "action_mlp",
+        "checkpoint": "reports/week4/results/training_residual/mlp_hidden64_seed42.pt",
+        "seed": 42
+      },
+      {
+        "name": "residual_seed43",
+        "kind": "action_mlp",
+        "checkpoint": "reports/week4/results/training_residual/mlp_hidden64_seed43.pt",
+        "seed": 43
+      },
+      {
+        "name": "residual_seed44",
+        "kind": "action_mlp",
+        "checkpoint": "reports/week4/results/training_residual/mlp_hidden64_seed44.pt",
+        "seed": 44
+      },
+      {
+        "name": "projected_mlp_seed42",
+        "kind": "rate_projection",
+        "family": "projected_mlp",
+        "seed": 42,
+        "base_model": {
+          "name": "mlp_seed42",
+          "kind": "action_mlp",
+          "checkpoint": "reports/week4/results/training/mlp_hidden64_seed42.pt",
+          "seed": 42
+        },
+        "outdoor_bounds_c": [
+          -5.0,
+          17.0
+        ],
+        "noise_margin_c": 0.03
+      },
+      {
+        "name": "projected_mlp_seed43",
+        "kind": "rate_projection",
+        "family": "projected_mlp",
+        "seed": 43,
+        "base_model": {
+          "name": "mlp_seed43",
+          "kind": "action_mlp",
+          "checkpoint": "reports/week4/results/training/mlp_hidden64_seed43.pt",
+          "seed": 43
+        },
+        "outdoor_bounds_c": [
+          -5.0,
+          17.0
+        ],
+        "noise_margin_c": 0.03
+      },
+      {
+        "name": "projected_mlp_seed44",
+        "kind": "rate_projection",
+        "family": "projected_mlp",
+        "seed": 44,
+        "base_model": {
+          "name": "mlp_seed44",
+          "kind": "action_mlp",
+          "checkpoint": "reports/week4/results/training/mlp_hidden64_seed44.pt",
+          "seed": 44
+        },
+        "outdoor_bounds_c": [
+          -5.0,
+          17.0
+        ],
+        "noise_margin_c": 0.03
+      }
+    ],
+    "data": {
+      "directory": "data/processed/week4_thermal",
+      "split_ids": {
+        "train": [
+          "thermal_0283a1bf6ba5de66_air20.94438252_wall19.44844300_seed4056_episode56",
+          "thermal_0283a1bf6ba5de66_air18.56029296_wall21.68229085_seed4104_episode104",
+          "thermal_0283a1bf6ba5de66_air20.40462539_wall19.61919637_seed4116_episode116",
+          "thermal_0283a1bf6ba5de66_air22.85471521_wall19.17926507_seed4095_episode95",
+          "thermal_0283a1bf6ba5de66_air22.03623147_wall19.75415657_seed4077_episode77",
+          "thermal_0283a1bf6ba5de66_air18.98266911_wall18.49196038_seed4023_episode23",
+          "thermal_0283a1bf6ba5de66_air19.14586142_wall21.00202474_seed4020_episode20",
+          "thermal_0283a1bf6ba5de66_air20.86110850_wall20.40904661_seed4026_episode26",
+          "thermal_0283a1bf6ba5de66_air17.46958964_wall20.26024092_seed4059_episode59",
+          "thermal_0283a1bf6ba5de66_air20.24125462_wall19.17563887_seed4029_episode29",
+          "thermal_0283a1bf6ba5de66_air18.54235083_wall18.41310002_seed4092_episode92",
+          "thermal_0283a1bf6ba5de66_air17.93138690_wall21.19539668_seed4080_episode80",
+          "thermal_0283a1bf6ba5de66_air21.65846225_wall21.90756317_seed4062_episode62",
+          "thermal_0283a1bf6ba5de66_air19.81228337_wall21.97764767_seed4050_episode50",
+          "thermal_0283a1bf6ba5de66_air17.85217861_wall19.50470998_seed4002_episode2",
+          "thermal_0283a1bf6ba5de66_air22.73773804_wall20.33688024_seed4113_episode113",
+          "thermal_0283a1bf6ba5de66_air18.82577778_wall19.29098476_seed4068_episode68",
+          "thermal_0283a1bf6ba5de66_air22.51422287_wall18.35556588_seed4047_episode47",
+          "thermal_0283a1bf6ba5de66_air21.90066160_wall21.78772658_seed4098_episode98",
+          "thermal_0283a1bf6ba5de66_air22.91117020_wall21.22823816_seed4017_episode17",
+          "thermal_0283a1bf6ba5de66_air17.39760064_wall19.27033777_seed4008_episode8",
+          "thermal_0283a1bf6ba5de66_air17.31719191_wall18.73245285_seed4041_episode41",
+          "thermal_0283a1bf6ba5de66_air22.14492097_wall17.33017195_seed4101_episode101",
+          "thermal_0283a1bf6ba5de66_air20.38101502_wall18.02105179_seed4071_episode71",
+          "thermal_0283a1bf6ba5de66_air22.84169062_wall17.36299472_seed4107_episode107",
+          "thermal_0283a1bf6ba5de66_air20.20001952_wall17.90303660_seed4053_episode53",
+          "thermal_0283a1bf6ba5de66_air19.89732281_wall18.91539156_seed4035_episode35",
+          "thermal_0283a1bf6ba5de66_air20.66558451_wall20.05612641_seed4083_episode83",
+          "thermal_0283a1bf6ba5de66_air21.92350373_wall21.98685219_seed4063_episode63",
+          "thermal_0283a1bf6ba5de66_air17.89500475_wall21.97950392_seed4030_episode30",
+          "thermal_0283a1bf6ba5de66_air21.44333230_wall18.31420136_seed4021_episode21",
+          "thermal_0283a1bf6ba5de66_air22.39698230_wall17.63475518_seed4033_episode33",
+          "thermal_0283a1bf6ba5de66_air22.74627633_wall20.00775907_seed4048_episode48",
+          "thermal_0283a1bf6ba5de66_air19.89140833_wall20.66625898_seed4093_episode93",
+          "thermal_0283a1bf6ba5de66_air20.34603394_wall21.82328400_seed4012_episode12",
+          "thermal_0283a1bf6ba5de66_air21.20435489_wall20.98922432_seed4090_episode90",
+          "thermal_0283a1bf6ba5de66_air19.97413470_wall18.17416060_seed4057_episode57",
+          "thermal_0283a1bf6ba5de66_air18.96106589_wall19.65077100_seed4105_episode105",
+          "thermal_0283a1bf6ba5de66_air21.82487472_wall19.60052962_seed4099_episode99",
+          "thermal_0283a1bf6ba5de66_air21.13962677_wall19.84319362_seed4000_episode0",
+          "thermal_0283a1bf6ba5de66_air17.89194646_wall21.62664204_seed4027_episode27",
+          "thermal_0283a1bf6ba5de66_air19.59671340_wall18.19556073_seed4072_episode72",
+          "thermal_0283a1bf6ba5de66_air22.44743566_wall21.70805039_seed4102_episode102",
+          "thermal_0283a1bf6ba5de66_air21.68791324_wall18.49771751_seed4066_episode66",
+          "thermal_0283a1bf6ba5de66_air22.01110741_wall21.06547910_seed4069_episode69",
+          "thermal_0283a1bf6ba5de66_air19.41367847_wall17.36601308_seed4054_episode54",
+          "thermal_0283a1bf6ba5de66_air22.65753300_wall20.06574411_seed4075_episode75",
+          "thermal_0283a1bf6ba5de66_air22.44372225_wall20.53251961_seed4114_episode114",
+          "thermal_0283a1bf6ba5de66_air19.56520113_wall20.75273476_seed4117_episode117",
+          "thermal_0283a1bf6ba5de66_air22.41604908_wall19.46334114_seed4084_episode84",
+          "thermal_0283a1bf6ba5de66_air22.42985782_wall20.38912015_seed4036_episode36",
+          "thermal_0283a1bf6ba5de66_air19.39881280_wall21.46032435_seed4096_episode96",
+          "thermal_0283a1bf6ba5de66_air21.45525470_wall18.94439603_seed4024_episode24",
+          "thermal_0283a1bf6ba5de66_air22.84823426_wall17.81708799_seed4006_episode6",
+          "thermal_0283a1bf6ba5de66_air22.82767750_wall17.25976993_seed4111_episode111",
+          "thermal_0283a1bf6ba5de66_air18.35252206_wall21.82221361_seed4003_episode3",
+          "thermal_0283a1bf6ba5de66_air21.70513256_wall21.75980017_seed4028_episode28",
+          "thermal_0283a1bf6ba5de66_air19.04822149_wall19.63664733_seed4091_episode91",
+          "thermal_0283a1bf6ba5de66_air22.86757785_wall20.09137081_seed4070_episode70",
+          "thermal_0283a1bf6ba5de66_air21.44866986_wall20.56537059_seed4073_episode73",
+          "thermal_0283a1bf6ba5de66_air20.41850398_wall20.32999314_seed4112_episode112",
+          "thermal_0283a1bf6ba5de66_air20.86261408_wall18.25273127_seed4010_episode10",
+          "thermal_0283a1bf6ba5de66_air22.17158712_wall19.26581343_seed4052_episode52",
+          "thermal_0283a1bf6ba5de66_air19.70820059_wall17.16616825_seed4007_episode7",
+          "thermal_0283a1bf6ba5de66_air20.82788706_wall20.08022928_seed4049_episode49",
+          "thermal_0283a1bf6ba5de66_air18.78177585_wall21.96547541_seed4022_episode22",
+          "thermal_0283a1bf6ba5de66_air18.07663727_wall18.84940792_seed4046_episode46",
+          "thermal_0283a1bf6ba5de66_air20.02903954_wall18.46106055_seed4076_episode76",
+          "thermal_0283a1bf6ba5de66_air19.11122297_wall17.78824261_seed4109_episode109",
+          "thermal_0283a1bf6ba5de66_air20.60452841_wall17.11320661_seed4064_episode64",
+          "thermal_0283a1bf6ba5de66_air18.51854864_wall19.99334145_seed4043_episode43",
+          "thermal_0283a1bf6ba5de66_air20.05525485_wall18.44370507_seed4082_episode82",
+          "thermal_0283a1bf6ba5de66_air19.99850986_wall19.51055379_seed4088_episode88",
+          "thermal_0283a1bf6ba5de66_air21.31707451_wall21.72728279_seed4100_episode100",
+          "thermal_0283a1bf6ba5de66_air18.22647227_wall18.44893247_seed4085_episode85",
+          "thermal_0283a1bf6ba5de66_air17.16896276_wall20.96431075_seed4115_episode115",
+          "thermal_0283a1bf6ba5de66_air17.01832228_wall20.75520541_seed4079_episode79",
+          "thermal_0283a1bf6ba5de66_air22.98622330_wall21.73004287_seed4019_episode19",
+          "thermal_0283a1bf6ba5de66_air22.62661848_wall20.59837439_seed4058_episode58",
+          "thermal_0283a1bf6ba5de66_air22.15682684_wall21.04344938_seed4001_episode1",
+          "thermal_0283a1bf6ba5de66_air19.40233320_wall21.89105603_seed4016_episode16",
+          "thermal_0283a1bf6ba5de66_air22.66348548_wall17.26300533_seed4097_episode97",
+          "thermal_0283a1bf6ba5de66_air20.61107603_wall17.03026009_seed4055_episode55",
+          "thermal_0283a1bf6ba5de66_air17.97992667_wall19.46320114_seed4094_episode94"
+        ],
+        "val": [
+          "thermal_0283a1bf6ba5de66_air19.57518156_wall17.10103195_seed4032_episode32",
+          "thermal_0283a1bf6ba5de66_air17.40334796_wall19.51147713_seed4119_episode119",
+          "thermal_0283a1bf6ba5de66_air19.79801889_wall20.75060075_seed4005_episode5",
+          "thermal_0283a1bf6ba5de66_air19.75591251_wall19.18880833_seed4038_episode38",
+          "thermal_0283a1bf6ba5de66_air20.68528747_wall19.61641595_seed4065_episode65",
+          "thermal_0283a1bf6ba5de66_air22.52610784_wall21.06112155_seed4014_episode14",
+          "thermal_0283a1bf6ba5de66_air22.98923754_wall18.62950483_seed4045_episode45",
+          "thermal_0283a1bf6ba5de66_air21.36712996_wall19.34790240_seed4060_episode60",
+          "thermal_0283a1bf6ba5de66_air17.04430201_wall21.67585915_seed4087_episode87",
+          "thermal_0283a1bf6ba5de66_air19.55513777_wall20.59308608_seed4009_episode9",
+          "thermal_0283a1bf6ba5de66_air18.62225883_wall19.09720636_seed4078_episode78",
+          "thermal_0283a1bf6ba5de66_air17.90590506_wall18.28576228_seed4051_episode51",
+          "thermal_0283a1bf6ba5de66_air21.13605322_wall19.42690228_seed4031_episode31",
+          "thermal_0283a1bf6ba5de66_air18.21993145_wall18.25691007_seed4118_episode118",
+          "thermal_0283a1bf6ba5de66_air20.09676356_wall18.52960682_seed4061_episode61",
+          "thermal_0283a1bf6ba5de66_air21.20554799_wall21.05275818_seed4025_episode25",
+          "thermal_0283a1bf6ba5de66_air18.30027243_wall21.48681809_seed4004_episode4",
+          "thermal_0283a1bf6ba5de66_air17.88339079_wall18.53757296_seed4040_episode40"
+        ],
+        "test": [
+          "thermal_0283a1bf6ba5de66_air21.70470569_wall18.20171101_seed4086_episode86",
+          "thermal_0283a1bf6ba5de66_air18.34203452_wall21.58719403_seed4110_episode110",
+          "thermal_0283a1bf6ba5de66_air21.03950114_wall19.20407018_seed4011_episode11",
+          "thermal_0283a1bf6ba5de66_air22.12352907_wall19.48196754_seed4089_episode89",
+          "thermal_0283a1bf6ba5de66_air22.84764902_wall19.37127679_seed4044_episode44",
+          "thermal_0283a1bf6ba5de66_air17.59642016_wall20.78437796_seed4074_episode74",
+          "thermal_0283a1bf6ba5de66_air22.08762592_wall19.38048578_seed4015_episode15",
+          "thermal_0283a1bf6ba5de66_air22.23494012_wall17.54711036_seed4018_episode18",
+          "thermal_0283a1bf6ba5de66_air17.60786533_wall20.49379505_seed4042_episode42",
+          "thermal_0283a1bf6ba5de66_air18.37801491_wall19.32959583_seed4108_episode108",
+          "thermal_0283a1bf6ba5de66_air21.89953833_wall21.87224332_seed4081_episode81",
+          "thermal_0283a1bf6ba5de66_air22.51862835_wall19.74758717_seed4039_episode39",
+          "thermal_0283a1bf6ba5de66_air21.61674498_wall21.36609760_seed4037_episode37",
+          "thermal_0283a1bf6ba5de66_air22.14732992_wall17.95412466_seed4106_episode106",
+          "thermal_0283a1bf6ba5de66_air22.52236389_wall19.60261428_seed4013_episode13",
+          "thermal_0283a1bf6ba5de66_air18.93685843_wall20.77237909_seed4103_episode103",
+          "thermal_0283a1bf6ba5de66_air19.54238991_wall17.15168583_seed4067_episode67",
+          "thermal_0283a1bf6ba5de66_air17.18839956_wall19.22174058_seed4034_episode34"
+        ]
+      }
+    },
+    "sha256": {
+      "data/processed/week4_thermal/manifest.json": "b1e4f55c9fbcdbb3b22b417d932e06879b9f566aae089efe995b12f98fb2df54",
+      "data/processed/week4_thermal/trajectories.csv": "790e8650ed4098e43c9dfd1e972679afec21c1456e6fbd0543975c46531e3535",
+      "data/processed/week4_thermal/train.csv": "10ba53f9a85f9128cf09da044054c5a2815c35f3d68320b12fb5805d6ef24ba7",
+      "data/processed/week4_thermal/val.csv": "78c63cd79243f890fbdea6a7a00b4fffe73b0b7bf0e71a694ac288f791cc59ec",
+      "data/processed/week4_thermal/test.csv": "d583a152bf6b1e5e71428072a25db27b16622f391dcbc9795ba46d7cd281824b",
+      "reports/week4/results/rollout/linear.npz": "65d9825dc2041a6791f180865ed4c0c751314db36c9b2cb10f56d03bdbebc54a",
+      "reports/week4/results/training/config.json": "3f60219372939cf24492e498bb68f74a1f9da2fbad77f3fd5f12a0b590120471",
+      "reports/week4/results/training/mlp_hidden64_seed42.pt": "00ec25455dc5875095d6e73c6a78027829753498b0b7d27bf1a56952ac8ea398",
+      "reports/week4/results/training/mlp_hidden64_seed43.pt": "7e0d7ac382c76b3eb3fcab8f2c2e6ed371fe22b897d06f5e09117f0d030de36a",
+      "reports/week4/results/training/mlp_hidden64_seed44.pt": "6eaf60aa3685bab3eb5208bc50a2b54b6b299dd62a7428dc990c17389be39196",
+      "reports/week4/results/training_residual/config.json": "fb485c83fbf7159e1f5782070b96bb40f5d9a840cadf3765b09842a4f9d4c7b7",
+      "reports/week4/results/training_residual/mlp_hidden64_seed42.pt": "86111b6a9107e7a1baacf0a87a72d3fb4fbc6ae92e25138fb57a1e25c92c33a7",
+      "reports/week4/results/training_residual/mlp_hidden64_seed43.pt": "944afbfb3e08cb363ef7b61a779881f3e360516c9381db47cf94f9e403f1c492",
+      "reports/week4/results/training_residual/mlp_hidden64_seed44.pt": "b966fc19973c0fbf986b4d1bb9e7796871339bca4940da03e8e6fd7637ef2a10"
+    },
+    "training_seeds": [
+      42,
+      43,
+      44
+    ],
+    "evaluation_seed": 2026,
+    "horizons": [
+      1,
+      5,
+      10,
+      20,
+      40,
+      80
+    ],
+    "max_horizon": 80,
+    "dt_hours": 0.16666666666666666,
+    "origins": {
+      "rule": "all contiguous origins supporting full max_horizon in each episode",
+      "expected_test_episodes": 18,
+      "expected_origins_per_episode": 65
+    },
+    "information": {
+      "state": "true air and wall at origin; true current state every step only for teacher forcing",
+      "action": "recorded applied action sequence",
+      "exogenous_order": [
+        "outdoor_c",
+        "load_kw"
+      ],
+      "conditions": {
+        "recorded_observation": "future recorded contemporaneous outdoor observations plus known load",
+        "persistence_forecast": "outdoor observation at origin held constant plus known load"
+      }
+    },
+    "modes": [
+      "teacher_forcing",
+      "free_running"
+    ],
+    "units": "Celsius",
+    "validity": {
+      "nonfinite": "stop at first NaN/Inf",
+      "inference_error": "stop and log exception",
+      "observation_bounds_c": [
+        null,
+        null
+      ],
+      "plausibility_bounds_c": [
+        -10,
+        50
+      ],
+      "divergence_bounds_c": [
+        -100,
+        100
+      ],
+      "rate_check": {
+        "outdoor_bounds_c": [
+          -5,
+          17
+        ],
+        "power_bounds_kw": [
+          0,
+          5
+        ],
+        "load_kw": 0.3,
+        "noise_margin_c": 0.03
+      },
+      "plausibility_action": "flag and continue",
+      "rate_action": "flag and continue",
+      "divergence_action": "stop",
+      "automatic_projection": false
+    },
+    "aggregation": {
+      "primary": "equal-weight mean of per-episode metrics",
+      "dispersion": "sample SD across episodes",
+      "model_seeds": "report each seed then mean and sample SD; do not pool seeds with episodes",
+      "endpoints": [
+        "terminal",
+        "prefix"
+      ],
+      "failure_denominator": "all requested origins",
+      "valid_error": "finite available predictions only, report count and validity fraction alongside",
+      "confidence_intervals": "none in protocol v1",
+      "selection": "no checkpoint or threshold tuning on test"
+    },
+    "output": "reports/week5/results/projection"
+  },
+  "device": "cpu",
+  "units": "Celsius",
+  "array_axes": [
+    "origin (see origins.csv)",
+    "horizon 1..80",
+    "air / wall"
+  ],
+  "model_manifest": [
+    {
+      "name": "persistence",
+      "kind": "persistence",
+      "checkpoint": null
+    },
+    {
+      "name": "linear",
+      "kind": "linear",
+      "checkpoint": "reports/week4/results/rollout/linear.npz"
+    },
+    {
+      "name": "mlp_seed42",
+      "kind": "action_mlp",
+      "checkpoint": "reports/week4/results/training/mlp_hidden64_seed42.pt",
+      "seed": 42
+    },
+    {
+      "name": "mlp_seed43",
+      "kind": "action_mlp",
+      "checkpoint": "reports/week4/results/training/mlp_hidden64_seed43.pt",
+      "seed": 43
+    },
+    {
+      "name": "mlp_seed44",
+      "kind": "action_mlp",
+      "checkpoint": "reports/week4/results/training/mlp_hidden64_seed44.pt",
+      "seed": 44
+    },
+    {
+      "name": "residual_seed42",
+      "kind": "action_mlp",
+      "checkpoint": "reports/week4/results/training_residual/mlp_hidden64_seed42.pt",
+      "seed": 42
+    },
+    {
+      "name": "residual_seed43",
+      "kind": "action_mlp",
+      "checkpoint": "reports/week4/results/training_residual/mlp_hidden64_seed43.pt",
+      "seed": 43
+    },
+    {
+      "name": "residual_seed44",
+      "kind": "action_mlp",
+      "checkpoint": "reports/week4/results/training_residual/mlp_hidden64_seed44.pt",
+      "seed": 44
+    },
+    {
+      "name": "projected_mlp_seed42",
+      "kind": "rate_projection",
+      "family": "projected_mlp",
+      "seed": 42,
+      "base_model": {
+        "name": "mlp_seed42",
+        "kind": "action_mlp",
+        "checkpoint": "reports/week4/results/training/mlp_hidden64_seed42.pt",
+        "seed": 42
+      },
+      "outdoor_bounds_c": [
+        -5.0,
+        17.0
+      ],
+      "noise_margin_c": 0.03
+    },
+    {
+      "name": "projected_mlp_seed43",
+      "kind": "rate_projection",
+      "family": "projected_mlp",
+      "seed": 43,
+      "base_model": {
+        "name": "mlp_seed43",
+        "kind": "action_mlp",
+        "checkpoint": "reports/week4/results/training/mlp_hidden64_seed43.pt",
+        "seed": 43
+      },
+      "outdoor_bounds_c": [
+        -5.0,
+        17.0
+      ],
+      "noise_margin_c": 0.03
+    },
+    {
+      "name": "projected_mlp_seed44",
+      "kind": "rate_projection",
+      "family": "projected_mlp",
+      "seed": 44,
+      "base_model": {
+        "name": "mlp_seed44",
+        "kind": "action_mlp",
+        "checkpoint": "reports/week4/results/training/mlp_hidden64_seed44.pt",
+        "seed": 44
+      },
+      "outdoor_bounds_c": [
+        -5.0,
+        17.0
+      ],
+      "noise_margin_c": 0.03
+    }
+  ],
+  "prefix": "MAE and sqrt(mean squared error) over steps 1..H, then episode equal weighting",
+  "divergence": "Keep finite threshold-crossing prediction; stop subsequent steps",
+  "future_inputs": "Recorded applied actions; known load; outdoor according to separately named condition"
+}

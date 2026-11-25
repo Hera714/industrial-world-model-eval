@@ -1,0 +1,16 @@
+{
+  "horizons": [
+    1,
+    5,
+    10,
+    20
+  ],
+  "origins": 2250,
+  "units": "Celsius",
+  "action": "recorded future applied actions",
+  "exogenous": "recorded contemporaneous observed outdoor and known load at each future step",
+  "interpretation": "offline conditional dynamics evaluation; future exogenous sequence supplied externally",
+  "free": "true state only at origin; recursive model predictions thereafter",
+  "teacher": "actual state supplied at each step",
+  "overlapping_windows": true
+}

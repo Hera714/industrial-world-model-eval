@@ -1,0 +1,68 @@
+{
+  "scenarios": [
+    {
+      "name": "cold_seed42",
+      "seed": 42,
+      "initial_air_c": 18.0,
+      "initial_wall_c": 19.0
+    },
+    {
+      "name": "mild_seed43",
+      "seed": 43,
+      "initial_air_c": 20.0,
+      "initial_wall_c": 20.0
+    },
+    {
+      "name": "warm_seed44",
+      "seed": 44,
+      "initial_air_c": 22.0,
+      "initial_wall_c": 21.0
+    }
+  ],
+  "thermal_config": {
+    "dt_hours": 0.16666666666666666,
+    "episode_steps": 144,
+    "max_power_kw": 5.0,
+    "target_c": 21.0,
+    "initial_air_c": 18.0,
+    "initial_wall_c": 19.0,
+    "outdoor_mean_c": 6.0,
+    "outdoor_amplitude_c": 4.0,
+    "internal_load_kw": 0.3,
+    "air_capacity": 2.0,
+    "wall_capacity": 12.0,
+    "air_wall_conductance": 0.3,
+    "air_out_conductance": 0.15,
+    "wall_out_conductance": 0.1,
+    "weather_noise_std": 0.3,
+    "process_noise_std": 0.01,
+    "measurement_noise_std": 0.05,
+    "comfort_low_c": 20.0,
+    "comfort_high_c": 23.0
+  },
+  "mpc_config": {
+    "horizon": 12,
+    "candidates": 256,
+    "tracking_weight": 1.0,
+    "energy_weight": 1.0,
+    "action_change_weight": 0.02,
+    "comfort_penalty_weight": 2.0,
+    "terminal_weight": 0.0,
+    "time_budget_s": 1.0,
+    "seed": 123
+  },
+  "rule": {
+    "target_c": 21.0,
+    "deadband_c": 0.5,
+    "heating_power_kw": 5.0
+  },
+  "scoring": {
+    "tracking_weight": 1.0,
+    "energy_weight": 1.0,
+    "definition": "sum((next_true_air-target)^2 + action_kw*dt_hours)"
+  },
+  "weather_information": "MPC holds current observed outdoor temperature constant over horizon",
+  "timing": "wall time around each controller act call; measured separately for each controller",
+  "model_note": "MPC uses true deterministic thermal equations with noisy observations and constant observed weather; environment adds process noise",
+  "timeout_note": "checked between horizon steps, cannot preempt individual NumPy operation"
+}

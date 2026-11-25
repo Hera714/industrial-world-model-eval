@@ -1,0 +1,13 @@
+{
+  "origin": {
+    "episode_id": "thermal_0283a1bf6ba5de66_air21.70470569_wall18.20171101_seed4086_episode86",
+    "source_step": 0,
+    "policy": "mpc",
+    "initial_air_c": 21.704705694232565
+  },
+  "aggregation": "episode equal-weight mean, then seed mean",
+  "spread": "sample SD across 3 training seeds; not CI",
+  "curve_scale": "RMSE figures use logarithmic y axes; no observations removed",
+  "source": "/home/hera/Projects/industrial-world-model-eval/reports/week5/results/rollout",
+  "conclusion": "Quantify error accumulation and distinguish provided-weather from origin-only forecasting"
+}

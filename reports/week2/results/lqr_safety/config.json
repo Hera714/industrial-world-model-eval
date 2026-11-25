@@ -1,0 +1,94 @@
+{
+  "thermal": {
+    "dt_hours": 0.16666666666666666,
+    "episode_steps": 144,
+    "max_power_kw": 5.0,
+    "target_c": 21.0,
+    "initial_air_c": 18.0,
+    "initial_wall_c": 19.0,
+    "outdoor_mean_c": 6.0,
+    "outdoor_amplitude_c": 4.0,
+    "internal_load_kw": 0.3,
+    "air_capacity": 2.0,
+    "wall_capacity": 12.0,
+    "air_wall_conductance": 0.3,
+    "air_out_conductance": 0.15,
+    "wall_out_conductance": 0.1,
+    "weather_noise_std": 0.3,
+    "process_noise_std": 0.01,
+    "measurement_noise_std": 0.05,
+    "comfort_low_c": 20.0,
+    "comfort_high_c": 23.0
+  },
+  "lqr": {
+    "A": [
+      [
+        0.9625,
+        0.024999999999999998
+      ],
+      [
+        0.004166666666666667,
+        0.9944444444444445
+      ]
+    ],
+    "B": [
+      [
+        0.08333333333333333
+      ],
+      [
+        0.0
+      ]
+    ],
+    "Q": [
+      [
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.1
+      ]
+    ],
+    "R": [
+      [
+        0.1
+      ]
+    ],
+    "K": [
+      [
+        2.398970406785657,
+        0.3680218809995192
+      ]
+    ],
+    "outdoor_equilibrium_c": 6.0,
+    "state_equilibrium_c": [
+      21.0,
+      17.25
+    ],
+    "action_equilibrium_kw": 3.075,
+    "equilibrium_action_feasible": true,
+    "note": "动作限幅后不是无约束 LQR 最优解；固定室外温度工作点，无天气前馈"
+  },
+  "safety": {
+    "observed_low_c": 12,
+    "observed_high_c": 30,
+    "true_termination_low_c": 12,
+    "true_termination_high_c": 30
+  },
+  "mpc": {
+    "horizon": 12,
+    "candidates": 256,
+    "tracking_weight": 1.0,
+    "energy_weight": 1.0,
+    "action_change_weight": 0.02,
+    "comfort_penalty_weight": 2.0,
+    "terminal_weight": 0.0,
+    "time_budget_s": 1.0,
+    "seed": 123
+  },
+  "seeds": [
+    42,
+    43,
+    44
+  ]
+}

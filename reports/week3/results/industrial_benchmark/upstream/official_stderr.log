@@ -1,0 +1,28 @@
+Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.
+Users of this version of Gym should be able to simply replace 'import gym' with 'import gymnasium as gym' in the vast majority of cases.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+/home/hera/anaconda3/envs/mvp/lib/python3.11/site-packages/gym/spaces/box.py:127: UserWarning: [33mWARN: Box bound precision lowered by casting to float32[0m
+  logger.warn(f"Box bound precision lowered by casting to {self.dtype}")
+Traceback (most recent call last):
+  File "/home/hera/Projects/industrial-world-model-eval/external/industrialbenchmark/industrial_benchmark_python/test_gym_wrapper.py", line 6, in <module>
+    env = IBGym(70)
+          ^^^^^^^^^
+  File "/home/hera/anaconda3/envs/mvp/lib/python3.11/site-packages/industrial_benchmark_python/IBGym.py", line 113, in __init__
+    self.reset()
+  File "/home/hera/anaconda3/envs/mvp/lib/python3.11/site-packages/industrial_benchmark_python/IBGym.py", line 172, in reset
+    self.IB = IDS(self.setpoint, inital_seed=self.init_seed)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hera/anaconda3/envs/mvp/lib/python3.11/site-packages/industrial_benchmark_python/IDS.py", line 98, in __init__
+    self.step(np.zeros(3))
+  File "/home/hera/anaconda3/envs/mvp/lib/python3.11/site-packages/industrial_benchmark_python/IDS.py", line 109, in step
+    self.updateFatigue()
+  File "/home/hera/anaconda3/envs/mvp/lib/python3.11/site-packages/industrial_benchmark_python/IDS.py", line 170, in updateFatigue
+    noise_b_g = np.float(np.random.binomial(1, np.clip(effAct_gain,0.001, 0.999)))
+                ^^^^^^^^
+  File "/home/hera/anaconda3/envs/mvp/lib/python3.11/site-packages/numpy/__init__.py", line 775, in __getattr__
+    raise AttributeError(__former_attrs__[attr], name=None)
+AttributeError: module 'numpy' has no attribute 'float'.
+`np.float` was a deprecated alias for the builtin `float`. To avoid this error in existing code, use `float` by itself. Doing this will not modify any behavior and is safe. If you specifically wanted the numpy scalar type, use `np.float64` here.
+The aliases was originally deprecated in NumPy 1.20; for more details and guidance see the original release note at:
+    https://numpy.org/devdocs/release/1.20.0-notes.html#deprecations

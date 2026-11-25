@@ -1,0 +1,31 @@
+{
+  "status": "passed",
+  "calibration_split": "val",
+  "validation_origins": 1170,
+  "test_origins": 1170,
+  "per_horizon_variable_calibrators": 1280,
+  "files_sha256": {
+    "reports/week5/results/calibration/calibration_parameters.csv": "93d3c44609ca6dc0c502cc2fc424eb0e2c40654fa60cf1dff89fbe28cc54201a",
+    "reports/week5/results/calibration/calibration_snapshot.json": "e39cf20d70c367109d6dca7266ba5fc68bb1a91e01365395422c5ff2f987f6f6",
+    "reports/week5/results/calibration/test_snapshot.json": "c38954c3e0aef2f9785ec769c8cb8c579e0e573b8c02a701098471b6e8a3d6b2",
+    "reports/week5/results/calibration/interval_metrics_by_episode.csv": "8c3b6cbac2e9e66b3d870c695721ff465ff46138fad63e742bf485748e73b51c",
+    "reports/week5/results/calibration/interval_metrics_by_horizon.csv": "4be306d235f40e784a0e08d2e76ce14e3c8c234524d0dfba36b503a3aef5bfd1",
+    "reports/week5/results/calibration/val/failures.csv": "6155b49e087766611d46e7290e5fad200ca07bf5847bcdf8b51ae465d8688977",
+    "reports/week5/results/calibration/val/mlp_members.npz": "230164395cdc349e4903bf8a53396a3c60f25be8402ce88c7de1b61fac281aa8",
+    "reports/week5/results/calibration/val/residual_members.npz": "7d17b11dd537551f21491e37a1a37973df134647b2c7feb4dc06abc6b77f721a",
+    "reports/week5/results/calibration/val/origins.csv": "a11366333ac04fe15561082edf40efbeccf3e9e811e40c7d0ddd55cf51a77eac",
+    "reports/week5/results/calibration/test/failures.csv": "2d9d2e39985c363d1fc2437338b55c82451467ac626ee9a9c73e0982a2d5fcbf",
+    "reports/week5/results/calibration/test/mlp_members.npz": "650da1c080777c37f7161d6cdb4e47279833964ff60ded8fdb325b20e58795ce",
+    "reports/week5/results/calibration/test/residual_members.npz": "29fa995d04b4fe2240cac976ac42a5a487dd8466794c26712838f884fd4a6390",
+    "reports/week5/results/calibration/test/residual_intervals.npz": "01a23b1e4e5ef2b19bb6281c12302067ed833c745a856bd832acf3ebcf7001fd",
+    "reports/week5/results/calibration/test/origins.csv": "153e8d4b30c9e4ada4e8d6c2b756cd00c5b1b0f8a5efe26f7feb7456620c9718",
+    "reports/week5/results/calibration/test/mlp_intervals.npz": "c16f15d9f268be2acda426b5dd05d8deda2d891b9f0f57b49304dc12f9f8eae7"
+  },
+  "checks": [
+    "episode isolation",
+    "validation-only q reconstruction",
+    "test fixed-q reconstruction",
+    "main point prediction consistency",
+    "failure denominator"
+  ]
+}

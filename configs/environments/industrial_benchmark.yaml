@@ -1,0 +1,21 @@
+# Week 3 主环境配置。时间以抽象仿真步计。
+environment: industrial_benchmark
+upstream:
+  repository: https://github.com/siemens/industrialbenchmark
+  package: industrial-benchmark-python
+  version: "2.0"
+  commit: null
+  wheel_sha256: null
+  dependencies: [gym, numpy, scipy]
+setpoint: 50
+action_type: continuous
+action_order: [velocity, gain, shift]
+action_low: [-1, -1, -1]
+action_high: [1, 1, 1]
+observation_type: classic
+observation_order: [setpoint, velocity, gain, shift, fatigue, consumption]
+reward_type: classic
+max_episode_steps: 1000
+time_unit: step
+physical_step_seconds: null
+action_repeat: 1

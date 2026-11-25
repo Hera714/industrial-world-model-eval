@@ -1,0 +1,25 @@
+{
+  "status": "passed",
+  "reference_formula": "mean absolute target distance - all ordered pair distances/(2M^2)",
+  "empirical_member_count": 3,
+  "model_families": [
+    "mlp",
+    "residual"
+  ],
+  "episodes": 18,
+  "origins": 1170,
+  "config_sha256": "90847082574c236374a271dce64c3d39b626b4d7e6f4da8dc2628da02f863dca",
+  "nll": "not computed: no continuous density declared",
+  "artifact_sha256": {
+    "reports/week5/results/probability_scores/modeling_assumptions.json": "55a4a8be7838ee929e6aa455d87ff26dc4a89bc7a060a4ad6d13618de18186af",
+    "reports/week5/results/probability_scores/scores_by_horizon.csv": "8d6c4b84913e6f75322669247372b366972b9c083233564531db1da1be61da19",
+    "reports/week5/results/probability_scores/scores_by_episode.csv": "db5d3755309bce76025babf3a9eda2feedfa7a7f34cc0ea2483ae1562b2071f3",
+    "reports/week5/results/probability_scores/ensemble_run_summary.csv": "188dad5854f96d2019ac68fc8a532873bbc48746b43500223298a6c5df24db2f",
+    "reports/week5/results/probability_scores/paired_score_summary.csv": "6fd18331db25c4b43ea6e0cfbb883d710aef2046d320265373ab3622656271e6",
+    "reports/week5/results/probability_scores/residual_scores.npz": "efbaf86cc115c51be89dade63ac80a8ca8621ad015863e5def4ff023b3705cf2",
+    "reports/week5/results/probability_scores/paired_episode_scores.csv.gz": "06f48e7c8256d7e197bb06e234061992b5ea3bf77d33aab24dd27d675ca59a7b",
+    "reports/week5/results/probability_scores/scores_key_horizons.csv": "46611357fa174275eaa84fc66d011333e733bf4dab747b69c0a659092533b8f3",
+    "reports/week5/results/probability_scores/origins.csv": "153e8d4b30c9e4ada4e8d6c2b756cd00c5b1b0f8a5efe26f7feb7456620c9718",
+    "reports/week5/results/probability_scores/mlp_scores.npz": "b128576d589cc99d0751aea84e9da1196d9a3909a3fc6bc7c138561fbaaf57c8"
+  }
+}

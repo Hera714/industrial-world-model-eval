@@ -1,0 +1,29 @@
+{
+  "train": {
+    "episodes": 84,
+    "rows": 12096,
+    "policies": {
+      "mpc": 28,
+      "random": 28,
+      "rule": 28
+    }
+  },
+  "val": {
+    "episodes": 18,
+    "rows": 2592,
+    "policies": {
+      "mpc": 6,
+      "random": 6,
+      "rule": 6
+    }
+  },
+  "test": {
+    "episodes": 18,
+    "rows": 2592,
+    "policies": {
+      "mpc": 6,
+      "random": 6,
+      "rule": 6
+    }
+  }
+}

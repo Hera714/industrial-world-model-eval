@@ -1,0 +1,1176 @@
+diff --git a/controllers/mpc.py b/controllers/mpc.py
+index e69de29..d08e357 100644
+--- a/controllers/mpc.py
++++ b/controllers/mpc.py
+@@ -0,0 +1,88 @@
++# 总说明：随机 shooting MPC，使用带噪观测和无噪声热工模型规划，并提供可记录的规则回退。
++from dataclasses import dataclass
++import time
++import numpy as np
++from controllers.rule_based import HysteresisController
++from simulators.simple_thermal import ThermalConfig
++
++@dataclass(frozen=True)
++class MPCConfig:
++    horizon: int = 12
++    candidates: int = 256
++    tracking_weight: float = 1.0
++    energy_weight: float = 1.0
++    action_change_weight: float = 0.02
++    comfort_penalty_weight: float = 2.0
++    terminal_weight: float = 0.0
++    time_budget_s: float = 1.0
++    seed: int = 123
++    def __post_init__(self):
++        if not isinstance(self.horizon,int) or isinstance(self.horizon,bool) or self.horizon<1 or not isinstance(self.candidates,int) or isinstance(self.candidates,bool) or self.candidates<1: raise ValueError('时域和候选数必须是正整数')
++        values=[self.tracking_weight,self.energy_weight,self.action_change_weight,self.comfort_penalty_weight,self.terminal_weight,self.time_budget_s]
++        if not np.isfinite(values).all() or min(values)<0 or self.time_budget_s<=0: raise ValueError('权重应非负且时间预算应为正')
++
++class RandomShootingMPC:
++    def __init__(self, thermal=None, config=None, clock=None, dynamics=None):
++        self.thermal=thermal or ThermalConfig(); self.config=config or MPCConfig()
++        self.dynamics=dynamics  # 可注入学习模型；None 表示环境已知无噪声方程。
++        self.clock=clock or time.perf_counter
++        self.fallback=HysteresisController(self.thermal.target_c,.5,self.thermal.max_power_kw)
++        self.reset()
++    def reset(self):
++        # 每回合重置规划随机数和上一次实际输出动作。
++        self.rng=np.random.default_rng(self.config.seed); self.previous_action=0.0; self.fallback.reset()
++    def _plan(self, obs, start):
++        c=self.thermal; p=self.config
++        # 候选动作独立均匀采样，并固定当前观测室外温度为整个时域的天气预测。
++        actions=self.rng.uniform(0,c.max_power_kw,size=(p.candidates,p.horizon))
++        air=np.full(p.candidates,obs[0],dtype=float); wall=np.full(p.candidates,obs[1],dtype=float)
++        outside=float(obs[2]); prev=np.full(p.candidates,self.previous_action); costs=np.zeros(p.candidates)
++        for step in range(p.horizon):
++            # 时间预算在每个向量化预测步前检查，不能抢占正在执行的 NumPy 调用。
++            if self.clock()-start >= p.time_budget_s: return None,'timeout'
++            u=actions[:,step]; exchange=c.air_wall_conductance*(wall-air)
++            if self.dynamics is None:
++                next_air=air+c.dt_hours/c.air_capacity*(exchange+c.air_out_conductance*(outside-air)+u+c.internal_load_kw)
++                next_wall=wall+c.dt_hours/c.wall_capacity*(-exchange+c.wall_out_conductance*(outside-wall))
++            else:
++                predicted=self.dynamics.predict_next(np.column_stack([air,wall]),u,outside)
++                if np.shape(predicted)!=(p.candidates,2): raise ValueError('动力学输出形状无效')
++                next_air,next_wall=predicted[:,0],predicted[:,1]
++            violation=np.maximum(c.comfort_low_c-next_air,0)+np.maximum(next_air-c.comfort_high_c,0)
++            costs+=p.tracking_weight*(next_air-c.target_c)**2+p.energy_weight*u*c.dt_hours+p.action_change_weight*(u-prev)**2+p.comfort_penalty_weight*violation**2
++            air,wall,prev=next_air,next_wall,u
++        costs+=p.terminal_weight*(air-c.target_c)**2
++        if self.clock()-start >= p.time_budget_s: return None,'timeout'
++        valid=np.isfinite(costs)&np.isfinite(actions).all(axis=1)
++        if not valid.any(): return None,'no_valid_candidates'
++        costs[~valid]=np.inf
++        return float(actions[np.argmin(costs),0]),None
++    def act(self, observation):
++        start=self.clock(); reason=None; error_message=None
++        try:
++            obs=np.asarray(observation,dtype=float)
++            if obs.shape!=(3,) or not np.isfinite(obs).all():
++                # 输入非法时无法让规则控制器安全判断，使用明确的零功率后备。
++                action=0.0; reason='invalid_observation'
++            else:
++                with np.errstate(over='ignore',invalid='ignore'):
++                    action,reason=self._plan(obs,start)
++                if reason:
++                    # 依据上一步实际动作初始化滞回记忆，再读取当前观测。
++                    self.fallback.reset(heating_on=self.previous_action>0)
++                    action=float(self.fallback.act(obs)[0])
++                elif not np.isfinite(action) or not 0<=action<=self.thermal.max_power_kw:
++                    reason='invalid_planned_action'
++                    self.fallback.reset(heating_on=self.previous_action>0)
++                    action=float(self.fallback.act(obs)[0])
++        except Exception as exc:
++            # 规划数值异常优先使用规则控制，观测非法时退到零功率。
++            reason='planning_error:'+type(exc).__name__; error_message=str(exc)
++            try:
++                self.fallback.reset(heating_on=self.previous_action>0)
++                action=float(self.fallback.act(observation)[0])
++            except (ValueError,TypeError):
++                action=0.0; reason='invalid_observation'
++        elapsed=max(0.0,self.clock()-start)
++        self.previous_action=action
++        return np.array([action],dtype=np.float32),{'planning_time_s':elapsed,'fallback_reason':reason,'error_message':error_message}
+diff --git a/controllers/rule_based.py b/controllers/rule_based.py
+index e69de29..c2f94f9 100644
+--- a/controllers/rule_based.py
++++ b/controllers/rule_based.py
+@@ -0,0 +1,21 @@
++# 总说明：基于观测室温实现带滞回的开关控制；只输出加热功率，不读取真实状态。
++import numpy as np
++
++class HysteresisController:
++    """低于下限开启，高于上限关闭，等于阈值或位于区间内保持状态。"""
++    def __init__(self, target_c=21.0, deadband_c=0.5, heating_power_kw=5.0):
++        if not np.isfinite([target_c,deadband_c,heating_power_kw]).all() or deadband_c<=0 or heating_power_kw<0:
++            raise ValueError('控制参数必须有限，死区大于零，加热功率非负')
++        self.target_c=float(target_c); self.deadband_c=float(deadband_c); self.heating_power_kw=float(heating_power_kw)
++        self.reset()
++    def reset(self, heating_on=False):
++        # 每个新回合显式重置控制器的开关记忆。
++        if not isinstance(heating_on, (bool, np.bool_)): raise ValueError('开关初始状态必须为布尔值')
++        self.heating_on=bool(heating_on)
++    def act(self, observation):
++        # 观测顺序由热工环境定义：室温、墙温、室外温度。
++        obs=np.asarray(observation,dtype=float)
++        if obs.shape!=(3,) or not np.isfinite(obs).all(): raise ValueError('观测必须是三个有限数值')
++        if obs[0] < self.target_c-self.deadband_c: self.heating_on=True
++        elif obs[0] > self.target_c+self.deadband_c: self.heating_on=False
++        return np.array([self.heating_power_kw if self.heating_on else 0.0],dtype=np.float32)
+diff --git a/data/collect_trajectories.py b/data/collect_trajectories.py
+index e69de29..eef7a7a 100644
+--- a/data/collect_trajectories.py
++++ b/data/collect_trajectories.py
+@@ -0,0 +1,62 @@
++# 总说明：用随机分段动作和滞回控制采集完整回合，保留真实状态、带噪观测及动作时间。
++import numpy as np
++import pandas as pd
++from dataclasses import asdict
++import hashlib
++import json
++from simulators.simple_thermal import SimpleThermalEnv, ThermalConfig
++from controllers.rule_based import HysteresisController
++
++def collect_episodes(n_episodes=45, base_seed=1000, config=None, policies=('random', 'rule')):
++    cfg=config or ThermalConfig(); rows=[]
++    # 配置指纹区分不同物理参数；每条记录携带完整配置便于独立追溯。
++    config_json = json.dumps(asdict(cfg), sort_keys=True)
++    config_id = hashlib.sha256(config_json.encode()).hexdigest()[:16]
++    for ep in range(n_episodes):
++        env=SimpleThermalEnv(cfg); rng=np.random.default_rng(base_seed+10000+ep)
++        init_air=float(rng.uniform(17,23)); init_wall=float(rng.uniform(17,22))
++        obs,info=env.reset(seed=base_seed+ep,options={'initial_air_c':init_air,'initial_wall_c':init_wall})
++        ctrl=HysteresisController(cfg.target_c,.5,cfg.max_power_kw); ctrl.reset()
++        policy=policies[ep % len(policies)]; action=0.
++        if policy == 'mpc':
++            from controllers.mpc import RandomShootingMPC, MPCConfig
++            ctrl = RandomShootingMPC(cfg, MPCConfig(seed=base_seed+10000+ep))
++        elif policy not in ('random', 'rule'):
++            raise ValueError('Unknown collection policy')
++        for step in range(cfg.episode_steps):
++            before=obs.copy()
++            if policy=='random':
++                if step%6==0: action=float(rng.uniform(0,cfg.max_power_kw))
++                u=np.array([action],dtype=np.float32)
++            elif policy == 'mpc': u, _ = ctrl.act(before)
++            else: u=ctrl.act(before)
++            obs,_,term,trunc,info=env.step(u)
++            scenario_id = f'thermal_{config_id}_air{init_air:.8f}_wall{init_wall:.8f}'
++            # 规范数组用 JSON 字符串存入 DataFrame，CSV 导出后可用 json.loads 恢复。
++            transition = {
++                'schema_version': '1.0',
++                'episode_id': f'{scenario_id}_seed{base_seed+ep}_episode{ep}',
++                'scenario_id': scenario_id, 'seed': base_seed+ep,
++                'policy_seed': base_seed+10000+ep, 'source_step': step,
++                'time': step*cfg.dt_hours, 'next_time': (step+1)*cfg.dt_hours,
++                'dt': cfg.dt_hours, 'time_unit': 'hour', 'action_hold_steps': 1,
++                'state': json.dumps(info['state_before_c'].tolist()),
++                'observation': json.dumps(before.tolist()),
++                'action_requested': json.dumps(u.tolist()),
++                'action_applied': json.dumps([info['action_kw']]),
++                'exogenous': json.dumps([info['outdoor_used_c'], info['internal_load_kw']]),
++                'exogenous_available_at_decision': json.dumps([float(before[2]), info['internal_load_kw']]),
++                'next_state': json.dumps(info['true_state_c'].tolist()),
++                'next_observation': json.dumps(obs.tolist()),
++                'process_noise': json.dumps(info['process_noise_c'].tolist()),
++                'cost': info['cost'], 'energy_kwh': info['energy_kwh'],
++                'config_id': config_id, 'environment_config': config_json,
++                'end_reason': 'time_limit' if trunc else ('environment_terminal' if term else ''),
++            }
++            rows.append({**transition,'episode':ep,'step':step,'policy':policy,'environment_seed':base_seed+ep,
++              'air':info['state_before_c'][0],'wall':info['state_before_c'][1],'outdoor':info['outdoor_used_c'],
++              'observed_air':before[0],'observed_wall':before[1],'observed_outdoor':before[2],
++              'action':info['action_kw'],'next_air':info['true_state_c'][0],'next_wall':info['true_state_c'][1],
++              'terminated':term,'truncated':trunc})
++            if term or trunc: break
++    return pd.DataFrame(rows)
+diff --git a/data/preprocess.py b/data/preprocess.py
+index e69de29..de65f74 100644
+--- a/data/preprocess.py
++++ b/data/preprocess.py
+@@ -0,0 +1,116 @@
++"""Week 1：时间对齐、无未来泄漏的预处理及直接多步预测窗口。"""
++from __future__ import annotations
++
++import argparse
++import json
++from pathlib import Path
++import numpy as np
++import pandas as pd
++
++try:
++    from .split import split_by_time, target_windows
++except ImportError:
++    from split import split_by_time, target_windows
++
++FEATURES = ["T1", "T2", "T3", "RH_1", "T_out"]
++TARGET = "T1"
++NAMES = ("train", "val", "test")
++
++
++def prepare_frame(df, features=FEATURES, frequency="10min", fill_limit=6):
++    """检查时间网格并标记缺失；仅以前向填充使用过去观测。"""
++    if fill_limit < 1:
++        raise ValueError("fill_limit 必须为正数")
++    required = ["date", *features]
++    missing_cols = set(required) - set(df.columns)
++    if missing_cols:
++        raise ValueError(f"缺少字段: {sorted(missing_cols)}")
++    frame = df[required].copy()
++    frame["date"] = pd.to_datetime(frame["date"], errors="raise")
++    if frame.date.isna().any() or frame.date.duplicated().any() or frame.empty:
++        raise ValueError("时间戳不能为空、重复，数据不能为空")
++    frame = frame.sort_values("date").set_index("date")
++    grid = pd.date_range(frame.index[0], frame.index[-1], freq=frequency)
++    if not frame.index.isin(grid).all():
++        raise ValueError("存在不在固定时间网格上的记录；请先检查采样时间")
++    for col in features:
++        frame[col] = pd.to_numeric(frame[col], errors="raise")
++        if np.isinf(frame[col].to_numpy()).any():
++            raise ValueError(f"{col} 含无穷值")
++    missing_timestamps = len(grid) - len(frame)
++    aligned = frame.reindex(grid)
++    aligned.index.name = "date"
++    flags = aligned[features].isna().astype(np.uint8)
++    flags.columns = [f"{c}_missing" for c in features]
++    # 真实目标不填补；缺失目标的窗口将被丢弃。
++    target_observed = aligned[TARGET].notna().to_numpy()
++    filled = aligned[features].ffill(limit=fill_limit)
++    return filled.reset_index(), flags.reset_index(drop=True), target_observed, {
++        "frequency": frequency, "inserted_timestamps": missing_timestamps,
++        "missing_before_fill": {c: int(aligned[c].isna().sum()) for c in features},
++        "missing_after_fill": {c: int(filled[c].isna().sum()) for c in features},
++        "forward_fill_limit_steps": fill_limit,
++    }
++
++
++def build_dataset(df, history=144, horizon=24, features=FEATURES, fill_limit=6):
++    """仅在训练时段拟合标准化，返回各集合窗口、缺失标记和元数据。"""
++    if TARGET not in features:
++        raise ValueError("特征必须包含目标 T1")
++    frame, flags, observed, diagnostics = prepare_frame(df, features, fill_limit=fill_limit)
++    splits = split_by_time(frame)
++    # 重用切分模块检查所有候选目标窗口均属于对应区间。
++    candidates = target_windows(splits, history, horizon)
++    train_n = len(splits["train"])
++    train = frame.loc[:train_n - 1, features]
++    means = train.mean()
++    scales = train.std(ddof=0).replace(0, 1.0)
++    if means.isna().any() or scales.isna().any():
++        raise ValueError("训练集存在无法计算标准化参数的特征")
++    values = ((frame[features] - means) / scales).to_numpy(dtype=np.float32)
++    missing_flags = flags.to_numpy(dtype=np.uint8)
++    times = pd.DatetimeIndex(frame.date)
++    target_idx = features.index(TARGET)
++    result = {}
++    summary = {"history": history, "horizon": horizon, "features": features, "target": TARGET,
++               "diagnostics": diagnostics, "scaler": {"fit_partition": "train", "mean": means.to_dict(), "scale": scales.to_dict()}, "splits": {}}
++    for name in NAMES:
++        X, Y, masks, starts = [], [], [], []
++        rejected = 0
++        for target_times in candidates[name]:
++            start = times.get_loc(target_times[0])
++            x = values[start-history:start]
++            y = values[start:start+horizon, target_idx]
++            # 目标必须是真实观测，输入必须在有限前向填充后可用。
++            if not np.isfinite(x).all() or not observed[start:start+horizon].all():
++                rejected += 1
++                continue
++            X.append(x); Y.append(y); masks.append(missing_flags[start-history:start]); starts.append(start)
++        if not X:
++            raise ValueError(f"{name} 没有可用窗口")
++        result[name] = {"X": np.stack(X), "y": np.stack(Y), "missing_mask": np.stack(masks),
++                        "target_start": times[np.array(starts)].to_numpy(dtype="datetime64[ns]")}
++        part = splits[name]
++        summary["splits"][name] = {"start": part.date.iloc[0].isoformat(), "end": part.date.iloc[-1].isoformat(),
++            "rows": len(part), "candidate_windows": len(candidates[name]), "windows": len(X), "discarded_windows": rejected}
++    return result, summary
++
++
++def main():
++    parser = argparse.ArgumentParser(description="构造无未来泄漏的时序预测窗口")
++    parser.add_argument("--data", default="data/raw/energydata_complete.csv")
++    parser.add_argument("--output", default="data/processed/week1")
++    parser.add_argument("--history", type=int, default=144)
++    parser.add_argument("--horizon", type=int, default=24)
++    args = parser.parse_args()
++    datasets, summary = build_dataset(pd.read_csv(args.data), args.history, args.horizon)
++    out = Path(args.output); out.mkdir(parents=True, exist_ok=True)
++    for name, arrays in datasets.items():
++        np.savez_compressed(out / f"{name}.npz", **arrays)
++    (out / "metadata.json").write_text(json.dumps(summary, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
++    print(json.dumps(summary, ensure_ascii=False, indent=2))
++    print(f"已保存至 {out}")
++
++
++if __name__ == "__main__":
++    main()
+diff --git a/data/split.py b/data/split.py
+index e69de29..35f6f04 100644
+--- a/data/split.py
++++ b/data/split.py
+@@ -0,0 +1,110 @@
++"""按时间划分数据，并检查滑动窗口的预测目标是否跨界。"""
++from __future__ import annotations
++
++import argparse
++import json
++from pathlib import Path
++
++import numpy as np
++import pandas as pd
++
++
++def split_by_time(df: pd.DataFrame) -> dict[str, pd.DataFrame]:
++    """排序后按 70%/15%/15% 划分；切分边界只由行数决定。"""
++    if "date" not in df:
++        raise ValueError("缺少 date 列")
++    data = df.copy()
++    data["date"] = pd.to_datetime(data["date"], errors="raise")
++    if data["date"].isna().any() or data["date"].duplicated().any():
++        raise ValueError("时间戳不能缺失或重复")
++    data = data.sort_values("date", kind="stable").reset_index(drop=True)
++    n = len(data)
++    a, b = int(n * 0.70), int(n * 0.85)
++    if a == 0 or a == b or b == n:
++        raise ValueError("数据不足以分成三个非空集合")
++    return {"train": data.iloc[:a].copy(), "val": data.iloc[a:b].copy(), "test": data.iloc[b:].copy()}
++
++
++def target_windows(splits: dict[str, pd.DataFrame], history: int, horizon: int) -> dict[str, list[pd.DatetimeIndex]]:
++    """生成目标时间窗口。验证/测试可使用切分边界之前的历史观测。"""
++    if history < 1 or horizon < 1:
++        raise ValueError("history 和 horizon 必须为正整数")
++    dates = pd.DatetimeIndex(pd.concat([splits[k]["date"] for k in ("train", "val", "test")], ignore_index=True))
++    if dates.has_duplicates or not dates.is_monotonic_increasing:
++        raise ValueError("切分必须按 train、val、test 时间顺序排列，且时间戳唯一")
++    result = {}
++    offset = 0
++    for name in ("train", "val", "test"):
++        end = offset + len(splits[name])
++        # start 是目标第一个时间点；必须有足够历史，且完整目标留在本集合内。
++        starts = range(max(offset, history), end - horizon + 1)
++        result[name] = [dates[start:start + horizon] for start in starts]
++        if not result[name]:
++            raise ValueError(f"{name} 没有完整窗口，请调整历史长度或预测长度")
++        offset = end
++    validate_target_windows(splits, result)
++    return result
++
++
++def validate_target_windows(splits: dict[str, pd.DataFrame], windows: dict[str, list[pd.DatetimeIndex]]) -> None:
++    """验证目标属于各自切分，并检查不同集合的目标时间不重叠。"""
++    targets = {}
++    for name in ("train", "val", "test"):
++        allowed = set(pd.to_datetime(splits[name]["date"]))
++        targets[name] = {t for window in windows[name] for t in window}
++        if not targets[name] or not targets[name].issubset(allowed):
++            raise ValueError(f"{name} 的目标为空或越过切分边界")
++    for left, right in (("train", "val"), ("train", "test"), ("val", "test")):
++        if targets[left] & targets[right]:
++            raise ValueError(f"{left} 和 {right} 的目标时间重叠")
++
++
++def split_by_episode(frame, seed=2026):
++    """按策略分层打乱完整回合，70/15/15 分配，返回数据及 ID 清单。"""
++    if frame.duplicated(['episode_id', 'source_step']).any():
++        raise ValueError('Duplicate transition')
++    counts = frame.groupby('episode_id').policy.nunique()
++    if (counts != 1).any():
++        raise ValueError('Episode policy must be unique')
++    rng = np.random.default_rng(seed)
++    manifest = {name: [] for name in ('train', 'val', 'test')}
++    episodes = frame[['episode_id', 'policy']].drop_duplicates()
++    for _, group in episodes.groupby('policy', sort=True):
++        ids = rng.permutation(sorted(group.episode_id))
++        first, second = int(len(ids)*.7), int(len(ids)*.85)
++        if first == 0 or first == second or second == len(ids):
++            raise ValueError('Insufficient episodes per policy')
++        for name, values in zip(manifest, (ids[:first], ids[first:second], ids[second:])):
++            manifest[name].extend(values.tolist())
++    parts = {name: frame[frame.episode_id.isin(ids)].copy() for name, ids in manifest.items()}
++    if sum(map(len, parts.values())) != len(frame):
++        raise AssertionError('Split lost transitions')
++    for left, right in (('train','val'),('train','test'),('val','test')):
++        if set(manifest[left]) & set(manifest[right]):
++            raise AssertionError('Episode overlap')
++        if set(parts[left].scenario_id) & set(parts[right].scenario_id):
++            raise ValueError('Scenario overlap; use grouped scenario assignment')
++    return parts, manifest
++
++
++def main() -> None:
++    parser = argparse.ArgumentParser(description="按时间切分数据并验证目标窗口")
++    parser.add_argument("--data", default="data/raw/energydata_complete.csv")
++    parser.add_argument("--history", type=int, default=144)
++    parser.add_argument("--horizon", type=int, default=24)
++    parser.add_argument("--output", default="reports/week1_split.json")
++    args = parser.parse_args()
++    splits = split_by_time(pd.read_csv(args.data))
++    windows = target_windows(splits, args.history, args.horizon)
++    summary = {"history": args.history, "horizon": args.horizon, "target_overlap_check": "passed", "splits": {}}
++    for name, part in splits.items():
++        summary["splits"][name] = {"start": part.date.iloc[0].isoformat(), "end": part.date.iloc[-1].isoformat(), "rows": len(part), "windows": len(windows[name]), "first_target": windows[name][0][0].isoformat(), "last_target": windows[name][-1][-1].isoformat()}
++    output = Path(args.output)
++    output.parent.mkdir(parents=True, exist_ok=True)
++    output.write_text(json.dumps(summary, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
++    print(json.dumps(summary, ensure_ascii=False, indent=2))
++    print(f"切分记录已保存：{output}")
++
++
++if __name__ == "__main__":
++    main()
+diff --git a/evaluators/closed_loop.py b/evaluators/closed_loop.py
+index e69de29..f7a71f0 100644
+--- a/evaluators/closed_loop.py
++++ b/evaluators/closed_loop.py
+@@ -0,0 +1,78 @@
++# 总说明：统一执行规则控制或 MPC 的真实模拟环境闭环并记录逐步观测、状态、扰动与代价。
++import time
++import numpy as np
++from simulators.simple_thermal import SimpleThermalEnv, ThermalConfig
++from controllers.rule_based import HysteresisController
++from controllers.mpc import RandomShootingMPC, MPCConfig
++from metrics.control import calculate_control_metrics
++
++def run_episode(controller_name, scenario, env_config=None, mpc_config=None, dynamics=None):
++    config=env_config or ThermalConfig(); env=SimpleThermalEnv(config)
++    if controller_name=='rule':
++        controller=HysteresisController(config.target_c,.5,config.max_power_kw)
++    elif controller_name=='mpc':
++        controller=RandomShootingMPC(config,mpc_config or MPCConfig(),dynamics=dynamics)
++    else: raise ValueError('未知控制器')
++    # 两个控制器只读带噪观测；每个场景使用相同种子和初始状态。
++    obs,initial=env.reset(seed=scenario['seed'],options={'initial_air_c':scenario['initial_air_c'],'initial_wall_c':scenario['initial_wall_c']})
++    controller.reset(); rows=[]; cumulative=0.
++    for i in range(config.episode_steps):
++        before=obs.copy(); start=time.perf_counter()
++        decision=controller.act(before)
++        elapsed=time.perf_counter()-start
++        if controller_name=='mpc': action,detail=decision; reason=detail['fallback_reason'] or ''
++        else: action=decision; reason=''
++        if not env.action_space.contains(action): raise ValueError('控制器输出不合法')
++        obs,reward,terminated,truncated,info=env.step(action)
++        # 评测评分与环境一致：权重均为 1；与 MPC 内部规划目标区分。
++        cumulative+=info['cost']
++        rows.append({'step':i+1,'hour':(i+1)*config.dt_hours,'action_start_hour':i*config.dt_hours,
++          'true_air_before_c':info['state_before_c'][0],'true_wall_before_c':info['state_before_c'][1],
++          'observed_air_before_c':float(before[0]),'observed_wall_before_c':float(before[1]),'observed_outdoor_before_c':float(before[2]),
++          'true_air_after_c':info['true_state_c'][0],'true_wall_after_c':info['true_state_c'][1],
++          'observed_air_after_c':float(obs[0]),'observed_wall_after_c':float(obs[1]),'observed_outdoor_after_c':float(obs[2]),
++          'outdoor_used_c':info['outdoor_used_c'],'outdoor_next_c':info['next_outdoor_c'],'internal_load_kw':info['internal_load_kw'],
++          'action_kw':info['action_kw'],'target_c':info['target_c'],'energy_kwh':info['energy_kwh'],
++          'tracking_cost':info['tracking_cost'],'energy_cost':info['energy_kwh'],'cost':info['cost'],'cumulative_cost':cumulative,
++          'comfort_violation':info['comfort_violation'],'decision_time_s':elapsed,'fallback_reason':reason,
++          'process_air_c':info['process_noise_c'][0],'process_wall_c':info['process_noise_c'][1],
++          'measurement_air_c':info['measurement_noise_c'][0],'measurement_wall_c':info['measurement_noise_c'][1],
++          'measurement_outdoor_c':info['measurement_noise_c'][2],'terminated':terminated,'truncated':truncated})
++        if terminated or truncated: break
++    if len(rows)!=config.episode_steps or not rows[-1]['truncated'] or rows[-1]['terminated']:
++        raise RuntimeError(f'{controller_name} 未完成完整回合，已执行 {len(rows)} 步')
++    summary=calculate_control_metrics(rows,config.dt_hours)
++    if not np.isclose(summary['cumulative_cost'],cumulative): raise AssertionError('统一成本与环境成本不一致')
++    return rows,summary,initial
++
++
++def run_standard_episode(env, policy, seed, episode_id, make_row=None):
++    """通用 Gymnasium 闭环采集，保留公开观测、原生奖励和诊断信息。"""
++    obs, info = env.reset(seed=seed)
++    rows = []
++    names = ['setpoint', 'velocity', 'gain', 'shift', 'fatigue', 'consumption']
++    while True:
++        before = obs.copy()
++        start = time.perf_counter()
++        action = policy(before)
++        if make_row is None:
++            action = np.asarray(action, dtype=np.float32)
++        elapsed = time.perf_counter() - start
++        obs, reward, terminated, truncated, info = env.step(action)
++        if make_row is not None:
++            rows.append(make_row(obs, action, terminated, truncated, info))
++        else:
++            rows.append(dict(schema_version='1.0', episode_id=episode_id, seed=seed,
++            step=info['step'], timestamp=None, time_unit='step',
++            state=dict(zip(names, map(float, obs))), observation=obs.tolist(),
++            observation_before=before.tolist(), action=action.tolist(),
++            disturbance=dict(setpoint=float(obs[0]), noise=None),
++            cost=float(info['cost']), reward=float(reward),
++            constraints=dict(action_valid=bool(env.action_space.contains(action)),
++                observation_in_declared_space=bool(env.observation_space.contains(obs))),
++            terminated=terminated, truncated=truncated, done=terminated or truncated,
++            end_reason=info.get('end_reason'), upstream_info=info['upstream_info'],
++            decision_time_s=elapsed))
++        if terminated or truncated:
++            break
++    return rows
+diff --git a/evaluators/prediction.py b/evaluators/prediction.py
+index e69de29..8bfcc35 100644
+--- a/evaluators/prediction.py
++++ b/evaluators/prediction.py
+@@ -0,0 +1,68 @@
++"""读取以摄氏度保存的预测，输出误差表、逐窗口轨迹和图。"""
++import argparse
++import json
++from pathlib import Path
++import numpy as np
++import pandas as pd
++import matplotlib
++matplotlib.use("Agg")
++import matplotlib.pyplot as plt
++from metrics.prediction import mae, rmse, error_by_horizon
++
++
++def evaluate(input_dir, output_dir, window_index=0):
++    input_dir = Path(input_dir); output_dir = Path(output_dir)
++    config = json.loads((input_dir / "config.json").read_text(encoding="utf-8"))
++    with np.load(input_dir / "test_predictions.npz", allow_pickle=False) as f:
++        arrays = {k: f[k] for k in f.files}
++    actual = arrays.pop("actual"); starts = arrays.pop("target_start")
++    if actual.ndim != 2 or len(starts) != len(actual) or not 0 <= window_index < len(actual):
++        raise ValueError("真实值、时间戳或窗口索引不合法")
++    if config["horizon"] != actual.shape[1]:
++        raise ValueError("预测长度与配置不一致")
++    output_dir.mkdir(parents=True, exist_ok=True)
++    horizons = []; overall = []; traces = []
++    for name, prediction in arrays.items():
++        errors_mae, errors_rmse = error_by_horizon(actual, prediction)
++        overall.append({"model": name, "mae_c": mae(actual, prediction), "rmse_c": rmse(actual, prediction)})
++        for index in range(actual.shape[1]):
++            horizons.append({"model": name, "horizon": index+1, "minutes": (index+1)*10,
++                             "mae_c": errors_mae[index], "rmse_c": errors_rmse[index]})
++        # 每行保留起始时间、目标时间、真实值及预测值，便于复核。
++        rows, cols = np.indices(actual.shape)
++        target_times = starts[rows.ravel()] + cols.ravel().astype("timedelta64[m]") * 10
++        traces.append(pd.DataFrame({"model": name, "window_index": rows.ravel(), "target_start": starts[rows.ravel()],
++                                   "target_time": target_times, "horizon": cols.ravel()+1,
++                                   "actual_c": actual.ravel(), "predicted_c": prediction.ravel()}))
++    per_h = pd.DataFrame(horizons); totals = pd.DataFrame(overall)
++    per_h.to_csv(output_dir / "metrics_by_horizon.csv", index=False)
++    per_h[per_h.horizon.isin([1, 6, 12, 24])].to_csv(output_dir / "metrics_key_horizons.csv", index=False)
++    totals.to_csv(output_dir / "metrics_overall.csv", index=False)
++    pd.concat(traces, ignore_index=True).to_csv(output_dir / "predictions.csv.gz", index=False, compression="gzip")
++    fig, axes = plt.subplots(1, 2, figsize=(12, 4))
++    for name, group in per_h.groupby("model", sort=False):
++        axes[0].plot(group.horizon, group.mae_c, label=name)
++        axes[1].plot(group.horizon, group.rmse_c, label=name)
++    for ax, metric in zip(axes, ("MAE", "RMSE")):
++        ax.set(xlabel="Forecast horizon (10-min steps)", ylabel=f"{metric} (°C)")
++        ax.grid(alpha=0.3); ax.legend()
++    fig.tight_layout(); fig.savefig(output_dir / "error_by_horizon.png", dpi=160); plt.close(fig)
++    fig, ax = plt.subplots(figsize=(9, 4))
++    steps = np.arange(1, actual.shape[1] + 1)
++    ax.plot(steps, actual[window_index], label="actual", color="black", linewidth=2)
++    for name, prediction in arrays.items(): ax.plot(steps, prediction[window_index], label=name)
++    ax.set(xlabel="Forecast horizon (10-min steps)", ylabel="T1 (°C)",
++           title=f"Test window {window_index}, first target {starts[window_index]}")
++    ax.grid(alpha=0.3); ax.legend(); fig.tight_layout()
++    fig.savefig(output_dir / "forecast_example.png", dpi=160); plt.close(fig)
++    print(totals.to_string(index=False)); print(f"结果已保存至 {output_dir}")
++
++
++def main():
++    p = argparse.ArgumentParser(description="评测并绘制 Week 1 测试集预测")
++    p.add_argument("--input", default="reports/week1_baselines")
++    p.add_argument("--output", default="reports/week1_evaluation")
++    p.add_argument("--window-index", type=int, default=0)
++    args = p.parse_args(); evaluate(args.input, args.output, args.window_index)
++
++if __name__ == "__main__": main()
+diff --git a/evaluators/rollout.py b/evaluators/rollout.py
+index e69de29..81a1857 100644
+--- a/evaluators/rollout.py
++++ b/evaluators/rollout.py
+@@ -0,0 +1,33 @@
++"""在完整 episode 内选共同起点，比较真实状态输入与模型自由递推。"""
++import json
++import numpy as np
++
++
++def evaluate_rollouts(model, frame, horizon=20):
++    """动作采用记录序列，扰动采用各步当前可见值；返回可追溯的三维预测。"""
++    predictions, teachers, truths, origins = [], [], [], []
++    for episode_id, episode in frame.groupby('episode_id', sort=True):
++        episode = episode.sort_values('source_step')
++        if np.any(np.diff(episode.source_step.to_numpy()) != 1):
++            raise ValueError('Non-contiguous episode')
++        x = np.stack(episode.state.map(json.loads))
++        u = np.stack(episode.action_applied.map(json.loads))
++        d = np.stack(episode.exogenous_available_at_decision.map(json.loads))
++        y = np.stack(episode.next_state.map(json.loads))
++        # 全部 horizon 使用能支持完整 20 步的同一批起点。
++        starts = np.arange(len(episode)-horizon+1)
++        if not len(starts):
++            raise ValueError('Episode shorter than rollout')
++        predicted = x[starts].copy()
++        free, teacher = [], []
++        for step in range(horizon):
++            indices = starts+step
++            predicted = model.predict_next(predicted, u[indices], d[indices])
++            free.append(predicted.copy())
++            teacher.append(model.predict_next(x[indices],u[indices],d[indices]))
++        predictions.append(np.stack(free,axis=1))
++        teachers.append(np.stack(teacher,axis=1))
++        truths.append(np.stack([y[starts+k] for k in range(horizon)],axis=1))
++        origins.extend((episode_id,int(episode.iloc[start].source_step)) for start in starts)
++    return dict(free=np.concatenate(predictions), teacher=np.concatenate(teachers),
++                actual=np.concatenate(truths), origins=origins)
+diff --git a/metrics/control.py b/metrics/control.py
+index e69de29..4b7179d 100644
+--- a/metrics/control.py
++++ b/metrics/control.py
+@@ -0,0 +1,23 @@
++# 总说明：对完整控制轨迹统一计算环境成本、跟踪、能耗、舒适性和决策耗时。
++from collections import Counter
++import numpy as np
++
++def calculate_control_metrics(rows, dt_hours, tracking_weight=1.0, energy_weight=1.0):
++    """统一评分：真实下一室温跟踪误差平方 + 实际功率乘步长。"""
++    if not rows or not np.isfinite([dt_hours,tracking_weight,energy_weight]).all() or dt_hours<=0 or min(tracking_weight,energy_weight)<0:
++        raise ValueError('轨迹或成本配置无效')
++    temp=np.array([r['true_air_after_c'] for r in rows],float)
++    target=np.array([r['target_c'] for r in rows],float)
++    power=np.array([r['action_kw'] for r in rows],float)
++    durations=np.array([r['decision_time_s'] for r in rows],float)
++    if not all(np.isfinite(x).all() for x in (temp,target,power,durations)) or (power<0).any() or (durations<0).any():
++        raise ValueError('轨迹包含无效温度、动作或耗时')
++    energy=power*dt_hours; tracking=(temp-target)**2
++    reasons=Counter(r['fallback_reason'] for r in rows if r['fallback_reason'])
++    return {'steps':len(rows),'tracking_mae_c':float(np.abs(temp-target).mean()),
++      'energy_kwh':float(energy.sum()),'tracking_cost':float(tracking.sum()),
++      'energy_cost':float(energy.sum()*energy_weight),
++      'cumulative_cost':float((tracking_weight*tracking+energy_weight*energy).sum()),
++      'comfort_violation_rate':float(np.mean([r['comfort_violation'] for r in rows])),
++      'decision_mean_ms':float(durations.mean()*1000),'decision_p95_ms':float(np.quantile(durations,.95)*1000),
++      'fallback_count':sum(reasons.values()),'fallback_reasons':dict(reasons)}
+diff --git a/metrics/prediction.py b/metrics/prediction.py
+index e69de29..26a0a11 100644
+--- a/metrics/prediction.py
++++ b/metrics/prediction.py
+@@ -0,0 +1,29 @@
++"""预测误差计算；调用者负责先将数值还原为物理单位。"""
++import numpy as np
++
++
++def _validate(actual, predicted):
++    actual = np.asarray(actual, dtype=np.float64)
++    predicted = np.asarray(predicted, dtype=np.float64)
++    if actual.shape != predicted.shape or actual.ndim != 2 or not actual.size:
++        raise ValueError("真实值和预测值必须是形状相同且非空的二维数组")
++    if not np.isfinite(actual).all() or not np.isfinite(predicted).all():
++        raise ValueError("真实值或预测值包含 NaN/Inf")
++    return actual, predicted
++
++
++def mae(actual, predicted):
++    actual, predicted = _validate(actual, predicted)
++    return float(np.abs(predicted - actual).mean())
++
++
++def rmse(actual, predicted):
++    actual, predicted = _validate(actual, predicted)
++    return float(np.sqrt(np.square(predicted - actual).mean()))
++
++
++def error_by_horizon(actual, predicted):
++    """沿样本维度计算每个预测步长的 MAE 和 RMSE。"""
++    actual, predicted = _validate(actual, predicted)
++    error = predicted - actual
++    return np.abs(error).mean(axis=0), np.sqrt(np.square(error).mean(axis=0))
+diff --git a/models/arx.py b/models/arx.py
+index e69de29..bb44e7e 100644
+--- a/models/arx.py
++++ b/models/arx.py
+@@ -0,0 +1,23 @@
++"""历史状态与外部观测的多输出 Ridge 预测，不含控制动作。"""
++import numpy as np
++from sklearn.linear_model import Ridge
++from .base import ForecastModel
++
++class LinearAutoregression(ForecastModel):
++    def __init__(self, alphas=(0.1, 1.0, 10.0, 100.0)):
++        self.alphas = alphas
++
++    def fit(self, X, y, X_val=None, y_val=None):
++        X = self.check_X(X).astype(np.float64); X_val = self.check_X(X_val).astype(np.float64)
++        self.validation_mse = {}
++        for alpha in self.alphas:
++            candidate = Ridge(alpha=alpha).fit(X.reshape(len(X), -1), y)
++            err = candidate.predict(X_val.reshape(len(X_val), -1)) - y_val
++            self.validation_mse[str(alpha)] = float(np.mean(err ** 2))
++        self.alpha = min(self.alphas, key=lambda a: self.validation_mse[str(a)])
++        self.model = Ridge(alpha=self.alpha).fit(X.reshape(len(X), -1), y)
++        return self
++
++    def predict(self, X):
++        X = self.check_X(X)
++        return self.model.predict(X.reshape(len(X), -1))
+diff --git a/models/base.py b/models/base.py
+index e69de29..0ceb79f 100644
+--- a/models/base.py
++++ b/models/base.py
+@@ -0,0 +1,19 @@
++"""统一直接多步预测接口；输入为 (样本, 历史步数, 特征数)。"""
++from abc import ABC, abstractmethod
++import numpy as np
++
++class ForecastModel(ABC):
++    @abstractmethod
++    def fit(self, X, y, X_val=None, y_val=None):
++        """只用训练集拟合，验证集可用于选择超参数。"""
++
++    @abstractmethod
++    def predict(self, X) -> np.ndarray:
++        """返回形状为 (样本, 预测步数) 的标准化预测。"""
++
++    @staticmethod
++    def check_X(X):
++        X = np.asarray(X, dtype=np.float32)
++        if X.ndim != 3 or not np.isfinite(X).all():
++            raise ValueError("X 必须是有限数值的三维数组")
++        return X
+diff --git a/models/learned_dynamics.py b/models/learned_dynamics.py
+index e69de29..8871da3 100644
+--- a/models/learned_dynamics.py
++++ b/models/learned_dynamics.py
+@@ -0,0 +1,49 @@
++"""轻量 MLP：直接输出完整预测时域，按验证误差早停。"""
++import random
++import numpy as np
++import torch
++from torch import nn
++from torch.utils.data import DataLoader, TensorDataset
++from .base import ForecastModel
++
++class MLPForecast(ForecastModel):
++    def __init__(self, horizon=24, seed=42, hidden=64, lr=0.001, epochs=40, patience=5, batch_size=128, device=None):
++        self.horizon, self.seed, self.hidden = horizon, seed, hidden
++        self.lr, self.epochs, self.patience, self.batch_size = lr, epochs, patience, batch_size
++        self.device = device or ("cuda" if torch.cuda.is_available() else "cpu")
++
++    def fit(self, X, y, X_val=None, y_val=None):
++        X = self.check_X(X); X_val = self.check_X(X_val)
++        y = np.asarray(y, dtype=np.float32); y_val = np.asarray(y_val, dtype=np.float32)
++        random.seed(self.seed); np.random.seed(self.seed); torch.manual_seed(self.seed)
++        if torch.cuda.is_available(): torch.cuda.manual_seed_all(self.seed)
++        self.model = nn.Sequential(nn.Flatten(), nn.Linear(X.shape[1] * X.shape[2], self.hidden), nn.ReLU(),
++                                   nn.Linear(self.hidden, self.hidden), nn.ReLU(), nn.Linear(self.hidden, self.horizon)).to(self.device)
++        loader = DataLoader(TensorDataset(torch.from_numpy(X), torch.from_numpy(y)), batch_size=self.batch_size, shuffle=True,
++                            generator=torch.Generator().manual_seed(self.seed))
++        optim = torch.optim.Adam(self.model.parameters(), lr=self.lr)
++        xv = torch.from_numpy(X_val).to(self.device); yv = torch.from_numpy(y_val).to(self.device)
++        best = float("inf"); remaining = self.patience
++        for epoch in range(self.epochs):
++            self.model.train()
++            for xb, yb in loader:
++                xb, yb = xb.to(self.device), yb.to(self.device)
++                optim.zero_grad(); loss = ((self.model(xb) - yb) ** 2).mean(); loss.backward(); optim.step()
++            self.model.eval()
++            with torch.no_grad(): score = ((self.model(xv) - yv) ** 2).mean().item()
++            if score < best - 1e-5:
++                best = score; self.best_epoch = epoch + 1
++                state = {k: v.detach().cpu().clone() for k, v in self.model.state_dict().items()}
++                remaining = self.patience
++            else:
++                remaining -= 1
++                if not remaining: break
++        self.validation_mse = best
++        self.model.load_state_dict(state); self.model.eval()
++        return self
++
++    def predict(self, X):
++        X = self.check_X(X)
++        self.model.eval()
++        with torch.no_grad():
++            return self.model(torch.from_numpy(X).to(self.device)).cpu().numpy()
+diff --git a/models/persistence.py b/models/persistence.py
+index e69de29..c81168f 100644
+--- a/models/persistence.py
++++ b/models/persistence.py
+@@ -0,0 +1,15 @@
++"""保持最后一个目标观测值的直接多步基线。"""
++import numpy as np
++from .base import ForecastModel
++
++class Persistence(ForecastModel):
++    def __init__(self, horizon=24, target_index=0):
++        self.horizon, self.target_index = horizon, target_index
++
++    def fit(self, X, y, X_val=None, y_val=None):
++        self.check_X(X)
++        return self
++
++    def predict(self, X):
++        X = self.check_X(X)
++        return np.repeat(X[:, -1, self.target_index, None], self.horizon, axis=1)
+diff --git a/simulators/base_env.py b/simulators/base_env.py
+index e69de29..c9e222b 100644
+--- a/simulators/base_env.py
++++ b/simulators/base_env.py
+@@ -0,0 +1,6 @@
++"""统一模拟环境契约，使用 Gymnasium 的 reset/step 与空间定义。"""
++import gymnasium as gym
++
++
++class BaseEnv(gym.Env):
++    """reset 返回 (observation, info)，step 返回五元组。"""
+diff --git a/simulators/boptest_adapter.py b/simulators/boptest_adapter.py
+index e69de29..06cc820 100644
+--- a/simulators/boptest_adapter.py
++++ b/simulators/boptest_adapter.py
+@@ -0,0 +1,77 @@
++"""用 Gymnasium 接口运行 BOPTEST 案例内置控制器。"""
++import json
++from urllib.request import Request, urlopen
++
++import numpy as np
++from gymnasium import spaces
++from simulators.base_env import BaseEnv
++
++
++class BoptestEnv(BaseEnv):
++    """唯一动作 0 表示保持案例内置控制，不发送覆盖命令。"""
++
++    def __init__(self, config):
++        super().__init__()
++        self.config = config
++        self.action_space = spaces.Discrete(1)
++        self.observation_space = spaces.Box(-np.inf, np.inf, (len(config["measurements"]),), dtype=np.float64)
++        self.testid = None
++        self.done = True
++
++    def request(self, method, path, data=None):
++        """检查 HTTP 状态及服务响应状态。推进请求失败时由调用方结束回合。"""
++        request = Request(self.config["url"].rstrip("/") + path,
++                          None if data is None else json.dumps(data).encode(),
++                          {"Content-Type": "application/json"}, method=method)
++        with urlopen(request, timeout=120) as response:
++            # 本地服务的 stop 成功响应是文本，不是 JSON。
++            if method == "PUT" and path.startswith("/stop/"):
++                return None
++            result = json.load(response)
++        if result.get("status", 200) != 200:
++            raise RuntimeError(result.get("message", path))
++        return result.get("payload", result)
++
++    def _sample(self, points):
++        obs = np.array([points[name] for name in self.config["measurements"]], dtype=np.float64)
++        if not np.isfinite(obs).all():
++            raise RuntimeError("BOPTEST returned nonfinite measurements")
++        return obs, {"step": self.steps, "timestamp": points["time"], "measurements": points}
++
++    def reset(self, *, seed=None, options=None):
++        if options:
++            raise ValueError("Configure the test window in the environment configuration")
++        super().reset(seed=seed)
++        self.close()
++        cfg = self.config
++        # 服务端按 JSON 解析请求，案例选择也要发送空对象。
++        self.testid = self.request("POST", "/testcases/" + cfg["case"] + "/select", {})["testid"]
++        self.request("PUT", f"/step/{self.testid}", {"step": cfg["step_seconds"]})
++        points = self.request("PUT", f"/initialize/{self.testid}",
++                              {"start_time": cfg["start_time"], "warmup_period": cfg["warmup_seconds"]})
++        self.steps = 0
++        sample = self._sample(points)
++        self.done = False
++        return sample
++
++    def step(self, action):
++        if self.done:
++            raise RuntimeError("Call reset before step")
++        if not self.action_space.contains(action):
++            raise ValueError("Action 0 selects embedded control")
++        # 失败后需要重新初始化，避免重试推进同一个时间步。
++        self.done = True
++        points = self.request("POST", f"/advance/{self.testid}", {})
++        self.steps += 1
++        obs, info = self._sample(points)
++        expected = self.config["start_time"] + self.steps * self.config["step_seconds"]
++        if info["timestamp"] != expected:
++            raise RuntimeError(f"Unexpected BOPTEST time: {info['timestamp']} != {expected}")
++        self.done = self.steps >= self.config["episode_steps"]
++        return obs, 0.0, False, self.done, info
++
++    def close(self):
++        self.done = True
++        if self.testid is not None:
++            self.request("PUT", f"/stop/{self.testid}", {})
++            self.testid = None
+diff --git a/simulators/industrial_benchmark.py b/simulators/industrial_benchmark.py
+index e69de29..3b91830 100644
+--- a/simulators/industrial_benchmark.py
++++ b/simulators/industrial_benchmark.py
+@@ -0,0 +1,87 @@
++"""把 Siemens IB 的旧 Gym 接口转换成可复现的 Gymnasium 环境。"""
++from contextlib import contextmanager
++from copy import deepcopy
++from threading import RLock
++import numpy as np
++from gymnasium import spaces
++from simulators.base_env import BaseEnv
++
++_RNG_LOCK = RLock()
++
++
++class IndustrialBenchmarkEnv(BaseEnv):
++    """三维增量动作，六维公开观测，时间单位为 step。"""
++    metadata = {'render_modes': []}
++
++    def __init__(self, setpoint=50, max_episode_steps=1000):
++        super().__init__()
++        if not np.isfinite(setpoint) or not 0 <= setpoint <= 100:
++            raise ValueError('setpoint must be finite and in [0, 100]')
++        if isinstance(max_episode_steps, bool) or not isinstance(max_episode_steps, int) or max_episode_steps < 1:
++            raise ValueError('max_episode_steps must be a positive integer')
++        self.setpoint = float(setpoint)
++        self.max_episode_steps = max_episode_steps
++        self.action_space = spaces.Box(-1, 1, (3,), dtype=np.float32)
++        self.observation_space = spaces.Box(np.zeros(6, dtype=np.float32), np.array([100, 100, 100, 100, 1000, 1000], dtype=np.float32))
++        self._done = True
++        self._upstream = None
++
++    @contextmanager
++    def _random_context(self):
++        """上游使用全局 NumPy 随机源，逐实例保存并恢复以支持交错运行。"""
++        with _RNG_LOCK:
++            outside = np.random.get_state()
++            np.random.set_state(self._rng_state)
++            try:
++                yield
++            finally:
++                self._rng_state = np.random.get_state()
++                np.random.set_state(outside)
++
++    def _info(self):
++        """内部隐藏状态只放诊断字段，公开观测保持六维。"""
++        return {'step': self.step_count, 'time_unit': 'step', 'cost': float(self._upstream.IB.state['cost']), 'upstream_info': deepcopy(self._upstream.info)}
++
++    def reset(self, *, seed=None, options=None):
++        """显式种子重建上游；无种子重置从 Gymnasium 随机源派生新种子。"""
++        options = options or {}
++        if set(options) - {'setpoint'}:
++            raise ValueError('Unknown reset option')
++        setpoint = options.get('setpoint', self.setpoint)
++        if not np.isfinite(setpoint) or not 0 <= setpoint <= 100:
++            raise ValueError('setpoint must be finite and in [0, 100]')
++        super().reset(seed=seed)
++        upstream_seed = int(self.np_random.integers(0, 2**31))
++        self._rng_state = np.random.RandomState(upstream_seed).get_state()
++        # 上游旧版别名的等价兼容，导入后执行原始动力学。
++        with self._random_context():
++            np.float = float
++            np.int = int
++            from industrial_benchmark_python.IBGym import IBGym
++            self._upstream = IBGym(setpoint, init_seed=upstream_seed, reset_after_timesteps=self.max_episode_steps)
++        self.step_count = 0
++        self._done = False
++        return np.asarray(self._upstream.observation, dtype=np.float32).copy(), self._info()
++
++    def step(self, action):
++        """先校验动作，推进一次上游；时间上限映射为 truncated。"""
++        if self._done:
++            raise RuntimeError('Call reset before step or after episode end')
++        try:
++            action = np.asarray(action, dtype=np.float64)
++        except (TypeError, ValueError) as error:
++            raise ValueError('Action must be three finite values in [-1, 1]') from error
++        if action.shape != (3,) or not np.isfinite(action).all() or np.any(np.abs(action) > 1):
++            raise ValueError('Action must be three finite values in [-1, 1]')
++        try:
++            with self._random_context():
++                observation, reward, done, _ = self._upstream.step(action)
++        except Exception:
++            self._done = True
++            raise
++        self.step_count += 1
++        self._done = bool(done)
++        info = self._info()
++        if done:
++            info['end_reason'] = 'time_limit'
++        return np.asarray(observation, dtype=np.float32).copy(), float(reward), False, bool(done), info
+diff --git a/simulators/simple_thermal.py b/simulators/simple_thermal.py
+index e69de29..b817488 100644
+--- a/simulators/simple_thermal.py
++++ b/simulators/simple_thermal.py
+@@ -0,0 +1,80 @@
++# 总说明：实现 Gymnasium 二阶热工环境，模拟加热动作、天气扰动、状态转移和噪声。
++import numpy as np
++import gymnasium as gym
++from gymnasium import spaces
++from dataclasses import dataclass, asdict
++
++# 参数使用小时、kW、kWh/°C 和 kW/°C；配置创建后保持不变。
++@dataclass(frozen=True)
++class ThermalConfig:
++    dt_hours: float = 1/6
++    episode_steps: int = 144
++    max_power_kw: float = 5.0
++    target_c: float = 21.0
++    initial_air_c: float = 18.0
++    initial_wall_c: float = 19.0
++    outdoor_mean_c: float = 6.0
++    outdoor_amplitude_c: float = 4.0
++    internal_load_kw: float = 0.3
++    air_capacity: float = 2.0
++    wall_capacity: float = 12.0
++    air_wall_conductance: float = 0.3
++    air_out_conductance: float = 0.15
++    wall_out_conductance: float = 0.1
++    weather_noise_std: float = 0.3
++    process_noise_std: float = 0.01
++    measurement_noise_std: float = 0.05
++    comfort_low_c: float = 20.0
++    comfort_high_c: float = 23.0
++    # 校验参数范围和显式离散更新的稳定性条件。
++    def __post_init__(self):
++        if not all(np.isfinite(v) for v in asdict(self).values()): raise ValueError('Nonfinite configuration')
++        if self.dt_hours<=0 or not isinstance(self.episode_steps,int) or self.episode_steps<1 or self.max_power_kw<=0 or min(self.air_capacity,self.wall_capacity)<=0: raise ValueError('Invalid positive parameter')
++        if min(self.air_wall_conductance,self.air_out_conductance,self.wall_out_conductance,self.weather_noise_std,self.process_noise_std,self.measurement_noise_std)<0 or self.comfort_low_c>=self.comfort_high_c: raise ValueError('Invalid bounds or noise')
++        if self.dt_hours*(self.air_wall_conductance+self.air_out_conductance)/self.air_capacity>1 or self.dt_hours*(self.air_wall_conductance+self.wall_out_conductance)/self.wall_capacity>1: raise ValueError('Unstable time step')
++
++# 环境通过 reset 初始化，通过 step 执行一个控制时段。
++class SimpleThermalEnv(gym.Env):
++    """Action applies over [t,t+1). Comfort is soft; time limit truncates."""
++    metadata={'render_modes':[]}
++    def __init__(self,config=None):
++        super().__init__(); self.config=config or ThermalConfig()
++        self.action_space=spaces.Box(0,self.config.max_power_kw,(1,),dtype=np.float32)
++        self.observation_space=spaces.Box(-np.inf,np.inf,(3,),dtype=np.float32); self._done=True
++    # 生成具有日周期的室外温度，并加入天气扰动。
++    def _outdoor(self,step):
++        c=self.config
++        return float(c.outdoor_mean_c+c.outdoor_amplitude_c*np.sin(2*np.pi*(step*c.dt_hours-8)/24)+self.weather_rng.normal(0,c.weather_noise_std))
++    # 测量噪声仅叠加到观测，不改变真实状态。
++    def _observe(self):
++        noise=self.measurement_rng.normal(0,self.config.measurement_noise_std,3)
++        return (np.array([*self.state,self.outdoor])+noise).astype(np.float32),noise
++    # 从环境随机源派生天气、过程噪声和测量噪声的独立随机流。
++    def reset(self,*,seed=None,options=None):
++        super().reset(seed=seed)
++        seeds=self.np_random.integers(0,np.iinfo(np.uint64).max,3,dtype=np.uint64)
++        self.weather_rng,self.process_rng,self.measurement_rng=(np.random.default_rng(int(x)) for x in seeds)
++        options=options or {}; c=self.config
++        if set(options)-{'initial_air_c','initial_wall_c'}: raise ValueError('Unknown reset option')
++        self.state=np.array([options.get('initial_air_c',c.initial_air_c),options.get('initial_wall_c',c.initial_wall_c)],dtype=np.float64)
++        if not np.isfinite(self.state).all(): raise ValueError('Nonfinite initial state')
++        self.step_count=0; self._done=False; self.outdoor=self._outdoor(0); obs,noise=self._observe()
++        return obs,{'true_state_c':self.state.copy(),'outdoor_c':self.outdoor,'measurement_noise_c':noise.copy(),'target_c':c.target_c,'step':0}
++    # 动作作用于当前时刻到下一时刻；无效动作在状态更新前拒绝。
++    def step(self,action):
++        if self._done: raise RuntimeError('Call reset before step or after episode end')
++        a=np.asarray(action,dtype=np.float64); c=self.config
++        if a.shape!=(1,) or not np.isfinite(a).all() or not 0<=a[0]<=c.max_power_kw: raise ValueError('Action must be one finite value in range')
++        power=float(a[0]); air,wall=self.state; outdoor=self.outdoor
++        # 根据室内、墙体和室外之间的热交换更新真实状态。
++        process=self.process_rng.normal(0,c.process_noise_std,2); exchange=c.air_wall_conductance*(wall-air)
++        na=air+c.dt_hours/c.air_capacity*(exchange+c.air_out_conductance*(outdoor-air)+power+c.internal_load_kw)+process[0]
++        nw=wall+c.dt_hours/c.wall_capacity*(-exchange+c.wall_out_conductance*(outdoor-wall))+process[1]
++        self.state=np.array([na,nw]); self.step_count+=1; self.outdoor=self._outdoor(self.step_count)
++        # 更新观测并记录示例成本；能耗按功率乘步长计算。
++        obs,measurement=self._observe(); energy=power*c.dt_hours; tracking=(na-c.target_c)**2; cost=tracking+energy
++        # 舒适区不触发终止；到达回合长度时仅触发截断。
++        truncated=self.step_count>=c.episode_steps; self._done=truncated
++        # 返回真实状态、噪声和扰动，供实验日志与评测使用。
++        info={'step':self.step_count,'state_before_c':np.array([air,wall]),'true_state_c':self.state.copy(),'action_kw':power,'outdoor_used_c':outdoor,'next_outdoor_c':self.outdoor,'internal_load_kw':c.internal_load_kw,'process_noise_c':process.copy(),'measurement_noise_c':measurement.copy(),'target_c':c.target_c,'energy_kwh':energy,'tracking_cost':tracking,'cost':cost,'comfort_violation':bool(na<c.comfort_low_c or na>c.comfort_high_c)}
++        return obs,-float(cost),False,truncated,info
+diff --git a/tests/test_env_contract.py b/tests/test_env_contract.py
+index e69de29..7e3530b 100644
+--- a/tests/test_env_contract.py
++++ b/tests/test_env_contract.py
+@@ -0,0 +1,44 @@
++# 总说明：检验环境接口、随机种子复现、动作响应和回合边界。
++import unittest
++import numpy as np
++from gymnasium.utils.env_checker import check_env
++from simulators.simple_thermal import SimpleThermalEnv, ThermalConfig
++
++class ThermalTest(unittest.TestCase):
++    # 使用 Gymnasium 官方检查器验证接口约定。
++    def test_gym_contract(self):
++        check_env(SimpleThermalEnv(),skip_render_check=True)
++    # 相同种子轨迹相同；改变测量噪声不应改变真实状态。
++    def test_repeatable_and_noise_streams(self):
++        a=SimpleThermalEnv(); b=SimpleThermalEnv()
++        oa,ia=a.reset(seed=42); ob,ib=b.reset(seed=42)
++        np.testing.assert_array_equal(oa,ob)
++        for _ in range(10):
++            x=a.step(np.array([2.0],dtype=np.float32)); y=b.step(np.array([2.0],dtype=np.float32))
++            np.testing.assert_array_equal(x[0],y[0])
++            for k in ('true_state_c','process_noise_c','measurement_noise_c'): np.testing.assert_array_equal(x[4][k],y[4][k])
++        c=SimpleThermalEnv(ThermalConfig(measurement_noise_std=0))
++        c.reset(seed=42); d=SimpleThermalEnv(); d.reset(seed=42)
++        for _ in range(10):
++            ci=c.step([2])[4]; di=d.step([2])[4]
++            np.testing.assert_array_equal(ci['true_state_c'],di['true_state_c'])
++            self.assertEqual(ci['outdoor_used_c'],di['outdoor_used_c'])
++    # 相同状态和扰动下，较大加热功率应提高下一步室温。
++    def test_heating_effect(self):
++        a=SimpleThermalEnv(); b=SimpleThermalEnv(); a.reset(seed=1); b.reset(seed=1)
++        low=a.step([0])[4]; high=b.step([5])[4]
++        self.assertGreater(high['true_state_c'][0],low['true_state_c'][0])
++        self.assertEqual(low['outdoor_used_c'],high['outdoor_used_c'])
++        np.testing.assert_array_equal(low['process_noise_c'],high['process_noise_c'])
++    # 非法动作不得推进环境；时间上限应返回截断而非自然终止。
++    def test_invalid_actions_and_end(self):
++        env=SimpleThermalEnv(ThermalConfig(episode_steps=2))
++        with self.assertRaises(RuntimeError): env.step([1])
++        env.reset(seed=2)
++        for a in ([-1],[6],[float('nan')],[float('inf')],[],[1,2]):
++            with self.assertRaises(ValueError): env.step(a)
++        self.assertEqual(env.step_count,0)
++        _,_,term,trunc,_=env.step([1]); self.assertFalse(term or trunc)
++        _,_,term,trunc,_=env.step([1]); self.assertFalse(term); self.assertTrue(trunc)
++        with self.assertRaises(RuntimeError): env.step([1])
++if __name__=='__main__': unittest.main()
+diff --git a/tests/test_metrics.py b/tests/test_metrics.py
+index e69de29..af69a6f 100644
+--- a/tests/test_metrics.py
++++ b/tests/test_metrics.py
+@@ -0,0 +1,21 @@
++import unittest
++import numpy as np
++from metrics.prediction import mae, rmse, error_by_horizon
++
++class MetricsTest(unittest.TestCase):
++    def test_known_values(self):
++        actual = np.array([[1, 2], [3, 4]])
++        predicted = np.array([[2, 4], [2, 4]])
++        self.assertAlmostEqual(mae(actual, predicted), 1.0)
++        self.assertAlmostEqual(rmse(actual, predicted), np.sqrt(1.5))
++        a, r = error_by_horizon(actual, predicted)
++        np.testing.assert_allclose(a, [1, 1])
++        np.testing.assert_allclose(r, [1, np.sqrt(2)])
++
++    def test_bad_values_rejected(self):
++        for a, b in [(np.ones((2, 2)), np.ones((2, 1))),
++                     (np.ones((1, 2)), np.array([[1, np.nan]])),
++                     (np.array([]), np.array([]))]:
++            with self.assertRaises(ValueError): mae(a, b)
++
++if __name__ == "__main__": unittest.main()
+diff --git a/tests/test_model_api.py b/tests/test_model_api.py
+index e69de29..83c646f 100644
+--- a/tests/test_model_api.py
++++ b/tests/test_model_api.py
+@@ -0,0 +1,22 @@
++import unittest
++import numpy as np
++from models.persistence import Persistence
++from models.arx import LinearAutoregression
++from models.learned_dynamics import MLPForecast
++
++class ModelAPITest(unittest.TestCase):
++    def test_all_models_share_shape_and_finite_output(self):
++        rng = np.random.default_rng(7)
++        X = rng.normal(size=(40, 5, 2)).astype("float32")
++        y = np.repeat(X[:, -1, :1], 3, axis=1)
++        models = [Persistence(3), LinearAutoregression((0.1, 1.0)), MLPForecast(horizon=3, epochs=2, patience=2, device="cpu")]
++        for model in models:
++            model.fit(X[:24], y[:24], X[24:32], y[24:32])
++            p = model.predict(X[32:])
++            self.assertEqual(p.shape, (8, 3))
++            self.assertTrue(np.isfinite(p).all())
++        np.testing.assert_allclose(models[0].predict(X[32:]), y[32:])
++    def test_bad_input_rejected(self):
++        with self.assertRaises(ValueError): Persistence().predict(np.array([[1.0]]))
++
++if __name__ == "__main__": unittest.main()

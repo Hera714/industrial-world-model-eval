@@ -1,0 +1,9 @@
+# 内置控制基线，预热一天，评测一天，时间均为模拟秒。
+environment: boptest
+url: http://127.0.0.1:80
+case: bestest_hydronic_heat_pump
+start_time: 86400
+warmup_seconds: 86400
+step_seconds: 900
+episode_steps: 96
+measurements: [reaTZon_y]

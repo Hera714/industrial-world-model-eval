@@ -1,0 +1,27 @@
+{
+  "device": "cuda",
+  "selected_hidden": 64,
+  "runs": [
+    {
+      "hidden": 64,
+      "seed": 42,
+      "best_epoch": 174,
+      "val_mse_c2": 0.00011724206976516535,
+      "checkpoint": "reports/week4/results/training/mlp_hidden64_seed42.pt"
+    },
+    {
+      "hidden": 64,
+      "seed": 43,
+      "best_epoch": 177,
+      "val_mse_c2": 0.0001245670277860364,
+      "checkpoint": "reports/week4/results/training/mlp_hidden64_seed43.pt"
+    },
+    {
+      "hidden": 64,
+      "seed": 44,
+      "best_epoch": 201,
+      "val_mse_c2": 0.00011814469132719562,
+      "checkpoint": "reports/week4/results/training/mlp_hidden64_seed44.pt"
+    }
+  ]
+}

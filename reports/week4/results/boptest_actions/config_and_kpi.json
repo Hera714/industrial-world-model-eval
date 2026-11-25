@@ -1,0 +1,39 @@
+{
+  "config": {
+    "environment": "boptest",
+    "url": "http://127.0.0.1:80",
+    "case": "bestest_hydronic_heat_pump",
+    "start_time": 86400,
+    "warmup_seconds": 86400,
+    "step_seconds": 900,
+    "episode_steps": 96,
+    "measurements": [
+      "reaTZon_y"
+    ]
+  },
+  "kpis": {
+    "embedded": {
+      "tdis_tot": 0.5439467735621287,
+      "idis_tot": 0,
+      "ener_tot": 0.2555181493413201,
+      "cost_tot": 0.06477385085802465,
+      "emis_tot": 0.04267153094000047,
+      "pele_tot": 0.017055295030698237,
+      "pgas_tot": null,
+      "pdih_tot": null,
+      "time_rat": 9.77307871768349e-06
+    },
+    "setpoint_step": {
+      "tdis_tot": 5.221054172437678,
+      "idis_tot": 0,
+      "ener_tot": 0.28326330740599337,
+      "cost_tot": 0.07180724842741931,
+      "emis_tot": 0.04730497233680089,
+      "pele_tot": 0.02009031026020873,
+      "pgas_tot": null,
+      "pdih_tot": null,
+      "time_rat": 1.0200034805208619e-05
+    }
+  },
+  "protocol": "paired deterministic weather/calendar and warmup; 20C to 22C setpoint at 12h"
+}

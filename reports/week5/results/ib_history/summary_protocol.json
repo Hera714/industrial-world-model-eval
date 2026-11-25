@@ -1,0 +1,17 @@
+{
+  "independent_unit": "episode; overlapping windows aggregated before this module",
+  "main_estimand": "equal-weight episode mean per model run, then fixed training-seed mean and sample SD",
+  "pairing": "family seed means within identical episode/context; delta=A-B; negative favours A",
+  "failed_pairs": "retain outer-joined rows; delta missing unless all runs have complete finite support and no failure",
+  "information_groups": {
+    "ib_persistence": "current",
+    "ib_mlp": "current",
+    "ib_history_mlp": "history20",
+    "ib_gru": "history20"
+  },
+  "seed_sd": "sample SD; undefined for one run",
+  "units": [
+    "IB native benchmark scale"
+  ],
+  "confidence_intervals": "existing supplementary episode bootstrap not recalculated here"
+}

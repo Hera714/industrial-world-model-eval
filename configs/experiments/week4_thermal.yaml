@@ -1,0 +1,8 @@
+# 固定采集与切分配置，完整 episode 是最小分组单元。
+n_episodes: 120
+base_seed: 4000
+split_seed: 2026
+policies: [random, rule, mpc]
+episode_steps: 144
+output: data/processed/week4_thermal
+reports: reports/week4/results/data

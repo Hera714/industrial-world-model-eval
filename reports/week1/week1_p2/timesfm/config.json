@@ -1,0 +1,20 @@
+{
+  "model": "google/timesfm-3.0-pytorch",
+  "cached_revision": "43046b85ec22d584a13f8098c2ed39c889e129c2",
+  "timesfm_package": "3.0.2",
+  "torch": "2.8.0+cu128",
+  "device": "cuda",
+  "history": 144,
+  "horizon": 24,
+  "test_windows": 2938,
+  "batch_size": 32,
+  "inputs": "T1 history in degrees Celsius",
+  "covariates": "none",
+  "use_znorm": false,
+  "use_symmetric_averaging": false,
+  "load_seconds": 4.4962455540007795,
+  "inference_seconds": 53.57079057100054,
+  "timing_scope": "entire predict_batch loop including first-call warmup and output conversion; CUDA synchronized",
+  "overall_mae_c": 0.16660295783567244,
+  "overall_rmse_c": 0.25440742434689284
+}

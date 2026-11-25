@@ -3,3 +3,6 @@ __pycache__/
 .venv/
 .env
 .pytest_cache/
+
+# 本地外部依赖与构建源码
+/external/

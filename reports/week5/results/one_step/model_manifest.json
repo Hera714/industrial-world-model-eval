@@ -1,0 +1,64 @@
+[
+  {
+    "name": "persistence",
+    "kind": "persistence",
+    "checkpoint": null,
+    "checkpoint_sha256": null,
+    "requested_device": "cpu"
+  },
+  {
+    "name": "linear",
+    "kind": "linear",
+    "checkpoint": "reports/week4/results/rollout/linear.npz",
+    "checkpoint_sha256": "65d9825dc2041a6791f180865ed4c0c751314db36c9b2cb10f56d03bdbebc54a",
+    "requested_device": "cpu"
+  },
+  {
+    "name": "mlp_seed42",
+    "kind": "action_mlp",
+    "checkpoint": "reports/week4/results/training/mlp_hidden64_seed42.pt",
+    "seed": 42,
+    "checkpoint_sha256": "00ec25455dc5875095d6e73c6a78027829753498b0b7d27bf1a56952ac8ea398",
+    "requested_device": "cpu"
+  },
+  {
+    "name": "mlp_seed43",
+    "kind": "action_mlp",
+    "checkpoint": "reports/week4/results/training/mlp_hidden64_seed43.pt",
+    "seed": 43,
+    "checkpoint_sha256": "7e0d7ac382c76b3eb3fcab8f2c2e6ed371fe22b897d06f5e09117f0d030de36a",
+    "requested_device": "cpu"
+  },
+  {
+    "name": "mlp_seed44",
+    "kind": "action_mlp",
+    "checkpoint": "reports/week4/results/training/mlp_hidden64_seed44.pt",
+    "seed": 44,
+    "checkpoint_sha256": "6eaf60aa3685bab3eb5208bc50a2b54b6b299dd62a7428dc990c17389be39196",
+    "requested_device": "cpu"
+  },
+  {
+    "name": "residual_seed42",
+    "kind": "action_mlp",
+    "checkpoint": "reports/week4/results/training_residual/mlp_hidden64_seed42.pt",
+    "seed": 42,
+    "checkpoint_sha256": "86111b6a9107e7a1baacf0a87a72d3fb4fbc6ae92e25138fb57a1e25c92c33a7",
+    "requested_device": "cpu"
+  },
+  {
+    "name": "residual_seed43",
+    "kind": "action_mlp",
+    "checkpoint": "reports/week4/results/training_residual/mlp_hidden64_seed43.pt",
+    "seed": 43,
+    "checkpoint_sha256": "944afbfb3e08cb363ef7b61a779881f3e360516c9381db47cf94f9e403f1c492",
+    "requested_device": "cpu"
+  },
+  {
+    "name": "residual_seed44",
+    "kind": "action_mlp",
+    "checkpoint": "reports/week4/results/training_residual/mlp_hidden64_seed44.pt",
+    "seed": 44,
+    "checkpoint_sha256": "b966fc19973c0fbf986b4d1bb9e7796871339bca4940da03e8e6fd7637ef2a10",
+    "requested_device": "cpu"
+  }
+]

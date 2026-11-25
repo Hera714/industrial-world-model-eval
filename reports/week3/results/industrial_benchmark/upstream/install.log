@@ -1,0 +1,35 @@
+Processing ./external/industrialbenchmark
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Getting requirements to build wheel: started
+  Getting requirements to build wheel: finished with status 'done'
+  Preparing metadata (pyproject.toml): started
+  Preparing metadata (pyproject.toml): finished with status 'done'
+Collecting gym==0.26.2
+  Downloading gym-0.26.2.tar.gz (721 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 721.7/721.7 kB 280.6 kB/s  0:00:03
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Getting requirements to build wheel: started
+  Getting requirements to build wheel: finished with status 'done'
+  Preparing metadata (pyproject.toml): started
+  Preparing metadata (pyproject.toml): finished with status 'done'
+Requirement already satisfied: numpy in /home/hera/anaconda3/envs/mvp/lib/python3.11/site-packages (from industrial_benchmark_python==2.0) (2.4.6)
+Requirement already satisfied: scipy in /home/hera/anaconda3/envs/mvp/lib/python3.11/site-packages (from industrial_benchmark_python==2.0) (1.17.1)
+Requirement already satisfied: cloudpickle>=1.2.0 in /home/hera/anaconda3/envs/mvp/lib/python3.11/site-packages (from gym==0.26.2) (3.1.3)
+Collecting gym_notices>=0.0.4 (from gym==0.26.2)
+  Downloading gym_notices-0.1.0-py3-none-any.whl.metadata (1.2 kB)
+Downloading gym_notices-0.1.0-py3-none-any.whl (3.3 kB)
+Building wheels for collected packages: industrial_benchmark_python, gym
+  Building wheel for industrial_benchmark_python (pyproject.toml): started
+  Building wheel for industrial_benchmark_python (pyproject.toml): finished with status 'done'
+  Created wheel for industrial_benchmark_python: filename=industrial_benchmark_python-2.0-py3-none-any.whl size=29669 sha256=25818137687fd520708bdd52f370668408fd6b1b8a520fe6d765fa557782eb23
+  Stored in directory: /tmp/pip-ephem-wheel-cache-dgh75cul/wheels/0f/93/a8/51fbdf84f2d4f948c0ed0bb4e88464dd0e9c886d37f52fa1b0
+  Building wheel for gym (pyproject.toml): started
+  Building wheel for gym (pyproject.toml): finished with status 'done'
+  Created wheel for gym: filename=gym-0.26.2-py3-none-any.whl size=827728 sha256=9b01b4d25db0a2325cd3996a9483dc021cf4ba52e0383089b34e39642162ff5f
+  Stored in directory: /home/hera/.cache/pip/wheels/1c/77/9e/9af5470201a0b0543937933ee99ba884cd237d2faefe8f4d37
+Successfully built industrial_benchmark_python gym
+Installing collected packages: gym_notices, gym, industrial_benchmark_python
+
+Successfully installed gym-0.26.2 gym_notices-0.1.0 industrial_benchmark_python-2.0

@@ -1,0 +1,32 @@
+{
+  "config": {
+    "setpoint": 50,
+    "reward_type": "classic",
+    "action_type": "continuous",
+    "observation_type": "classic",
+    "reset_after_timesteps": 1000,
+    "init_seed": 42
+  },
+  "steps": 1000,
+  "done": true,
+  "end_reason": "reset_after_timesteps",
+  "reset_api": "observation",
+  "step_api": [
+    "observation",
+    "reward",
+    "done",
+    "info"
+  ],
+  "python": "3.11.18 (main, Oct 26 2026, 18:19:35) [GCC 14.3.0]",
+  "compatibility_aliases": [
+    "np.float=float",
+    "np.int=int"
+  ],
+  "versions": {
+    "industrial-benchmark-python": "2.0",
+    "gym": "0.26.2",
+    "numpy": "2.4.6",
+    "scipy": "1.17.1"
+  },
+  "commit": "afeed6933ed1aff760a350f6300ae963bfc7bc04"
+}

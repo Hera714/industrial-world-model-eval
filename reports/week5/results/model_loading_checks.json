@@ -1,0 +1,88 @@
+[
+  {
+    "model": "persistence",
+    "shape_and_finite_checks": "passed"
+  },
+  {
+    "model": "linear",
+    "shape_and_finite_checks": "passed"
+  },
+  {
+    "model": "mlp_seed42",
+    "shape_and_finite_checks": "passed"
+  },
+  {
+    "model": "mlp_seed43",
+    "shape_and_finite_checks": "passed"
+  },
+  {
+    "model": "mlp_seed44",
+    "shape_and_finite_checks": "passed"
+  },
+  {
+    "model": "residual_seed42",
+    "shape_and_finite_checks": "passed"
+  },
+  {
+    "model": "residual_seed43",
+    "shape_and_finite_checks": "passed"
+  },
+  {
+    "model": "residual_seed44",
+    "shape_and_finite_checks": "passed"
+  },
+  {
+    "model": "ib_mlp_42",
+    "windows": 1405,
+    "max_saved_prediction_difference": 2.2192709366208874e-05,
+    "independent_windows": "passed"
+  },
+  {
+    "model": "ib_mlp_43",
+    "windows": 1405,
+    "max_saved_prediction_difference": 2.72618353847065e-05,
+    "independent_windows": "passed"
+  },
+  {
+    "model": "ib_mlp_44",
+    "windows": 1405,
+    "max_saved_prediction_difference": 2.3857797714299522e-05,
+    "independent_windows": "passed"
+  },
+  {
+    "model": "ib_history_mlp_42",
+    "windows": 1405,
+    "max_saved_prediction_difference": 2.6591036657919176e-05,
+    "independent_windows": "passed"
+  },
+  {
+    "model": "ib_history_mlp_43",
+    "windows": 1405,
+    "max_saved_prediction_difference": 1.992790657823207e-05,
+    "independent_windows": "passed"
+  },
+  {
+    "model": "ib_history_mlp_44",
+    "windows": 1405,
+    "max_saved_prediction_difference": 2.1943448700767476e-05,
+    "independent_windows": "passed"
+  },
+  {
+    "model": "ib_gru_42",
+    "windows": 1405,
+    "max_saved_prediction_difference": 0.04548419144646232,
+    "independent_windows": "passed"
+  },
+  {
+    "model": "ib_gru_43",
+    "windows": 1405,
+    "max_saved_prediction_difference": 0.036343260607367256,
+    "independent_windows": "passed"
+  },
+  {
+    "model": "ib_gru_44",
+    "windows": 1405,
+    "max_saved_prediction_difference": 0.03809193981356884,
+    "independent_windows": "passed"
+  }
+]

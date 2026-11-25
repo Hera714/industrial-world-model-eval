@@ -1,0 +1,66 @@
+{
+  "scenarios": [
+    {
+      "name": "cold",
+      "initial_air_c": 18.0,
+      "initial_wall_c": 19.0
+    },
+    {
+      "name": "mild",
+      "initial_air_c": 20.0,
+      "initial_wall_c": 20.0
+    },
+    {
+      "name": "warm",
+      "initial_air_c": 22.0,
+      "initial_wall_c": 21.0
+    }
+  ],
+  "environment_seeds": [
+    42,
+    43,
+    44
+  ],
+  "mpc_planner_seed_fixed": 123,
+  "thermal_config": {
+    "dt_hours": 0.16666666666666666,
+    "episode_steps": 144,
+    "max_power_kw": 5.0,
+    "target_c": 21.0,
+    "initial_air_c": 18.0,
+    "initial_wall_c": 19.0,
+    "outdoor_mean_c": 6.0,
+    "outdoor_amplitude_c": 4.0,
+    "internal_load_kw": 0.3,
+    "air_capacity": 2.0,
+    "wall_capacity": 12.0,
+    "air_wall_conductance": 0.3,
+    "air_out_conductance": 0.15,
+    "wall_out_conductance": 0.1,
+    "weather_noise_std": 0.3,
+    "process_noise_std": 0.01,
+    "measurement_noise_std": 0.05,
+    "comfort_low_c": 20.0,
+    "comfort_high_c": 23.0
+  },
+  "mpc_config": {
+    "horizon": 12,
+    "candidates": 256,
+    "tracking_weight": 1.0,
+    "energy_weight": 1.0,
+    "action_change_weight": 0.02,
+    "comfort_penalty_weight": 2.0,
+    "terminal_weight": 0.0,
+    "time_budget_s": 1.0,
+    "seed": 123
+  },
+  "rule": {
+    "target_c": 21.0,
+    "deadband_c": 0.5,
+    "heating_power_kw": 5.0,
+    "initial_heating_on": false
+  },
+  "metric": "sum((next true air - target)^2 + action * dt); both weights=1",
+  "band": "mean +/- one population standard deviation (ddof=0), not confidence interval",
+  "weather": "paired controllers receive same exogenous noise; MPC assumes current observed outdoor temperature persists"
+}

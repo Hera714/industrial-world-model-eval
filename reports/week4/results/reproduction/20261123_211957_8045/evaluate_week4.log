@@ -1,0 +1,21 @@
+      model  horizon   rmse_c
+persistence        1 0.151313
+persistence        5 0.533963
+persistence       10 0.617566
+persistence       20 0.883081
+     linear        1 0.009802
+     linear        5 0.021120
+     linear       10 0.028475
+     linear       20 0.036643
+ mlp_seed42        1 0.010285
+ mlp_seed42        5 0.024011
+ mlp_seed42       10 0.033722
+ mlp_seed42       20 0.046782
+ mlp_seed43        1 0.011976
+ mlp_seed43        5 0.033991
+ mlp_seed43       10 0.048640
+ mlp_seed43       20 0.059216
+ mlp_seed44        1 0.011335
+ mlp_seed44        5 0.030834
+ mlp_seed44       10 0.044601
+ mlp_seed44       20 0.052883

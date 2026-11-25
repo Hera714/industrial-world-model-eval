@@ -1,0 +1,17 @@
+{
+  "status": "passed",
+  "origins": 1170,
+  "episodes": 18,
+  "model_configurations": 8,
+  "model_families": 4,
+  "horizons": [
+    1,
+    5,
+    10,
+    20,
+    40,
+    80
+  ],
+  "full_horizon_count": 80,
+  "first_step_consistent": true
+}
