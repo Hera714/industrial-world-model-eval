@@ -1,145 +1,87 @@
 # Industrial World Model Evaluation
 
-BOPTEST 世界模型预测与控制评测项目。
+**一个面向楼宇控制的动作条件世界模型评测项目。** 项目以 [BOPTEST](https://github.com/ibpsa/project1-boptest) 楼宇与 HVAC 仿真为主要平台，比较模型的状态预测、长时序误差和模型预测控制（MPC）表现，并提供可追溯的评测流程。
 
-本项目研究一个问题：模型能否根据当前观测、控制动作和天气预测楼宇未来状态，以及预测误差是否能反映闭环控制表现。主要平台是 BOPTEST 的 `bestest_hydronic_heat_pump` 仿真案例；结果不是实际建筑部署结果。
+核心问题是：**预测误差更低的模型，是否也能带来更好的控制效果？** 项目同时进行固定动作计划下的开环评测与真实模拟器中的闭环评测；控制器输出的动作由 BOPTEST 执行，指标由确定性代码计算。
 
-| 想看什么 | 位置 |
-| --- | --- |
-| 架构和模块职责 | [架构图](docs/architecture.md) |
-| Week 5–7 代表性实验表、失败案例和局限 | [Week 8 报告](reports/week8/week8.md) |
-| 5 分钟介绍、10 分钟深挖、10 个问答 | [面试材料](docs/interview/) |
-| Agent 工作边界和人工审批 | [Agent 协议](docs/agent_protocol.md) |
-| 数据、第三方代码来源 | [第三方来源与许可线索](docs/third_party.md) |
-| 实验文件如何保存 | [产物保存策略](docs/artifact_policy.md) |
+> BOPTEST 是仿真平台。本仓库的结果用于研究与评测，不构成真实楼宇部署或工业安全保证。
 
-3 分钟体验的前提是：已准备好 BOPTEST 服务、冻结数据和检查点、Qwen 模型及镜像；首次安装、构建和下载不计入。CPU 容器中一次已准备资产后的实测为 92.96 秒，命令见下文“在 CPU 容器中复现”；运行时间因设备和服务负载而异。[从零准备与故障排查](docs/setup_reproduction.md)列出了前置步骤。
+## 功能概览
 
-## 环境准备
+- **动作条件建模**：比较 Persistence、ARX、历史 MLP、残差 MLP 和 GRU，使用公开观测、动作、天气与日历特征预测下一步观测及区间能耗。
+- **预测评测**：统一评估单步、teacher forcing 与自由递推，统计逐变量及不同预测时域的误差、有效比例和失败事件。
+- **闭环控制**：将不同模型接入相同预算的随机 shooting MPC，记录温度跟踪、舒适度、能耗、成本、决策时间和后备动作。
+- **鲁棒性**：在季节变化、目标变化、观测噪声和传感器缺失条件下评估；分别报告预测和控制结果。
+- **可追溯运行**：通过统一配置和 Runner 保存版本、哈希、轨迹、指标、日志和失败上下文，支持容器执行及受限续跑。
+- **Agent 编排**：将自然语言转换为受限实验配置；工具白名单、结果审核和人工审批由程序执行，指标不由大模型生成。
 
-使用 Python 3.11。现有 `mvp` 环境如已安装项目依赖及可用的 PyTorch，可在项目根目录执行 `conda activate mvp`；依赖版本见 `pyproject.toml`，CPU 评测容器的依赖清单见 `deployment/benchmark/requirements.lock`。本地 Agent 还需 `transformers==4.57.3` 和 `accelerate==1.12.0`；LangGraph 审批另需 `langgraph==0.6.11` 和 `langgraph-checkpoint-sqlite==3.1.3`。如已有 CUDA 版 PyTorch，安装其他依赖时请核对 pip 的安装计划，避免无意替换。
+## 系统架构
 
-BOPTEST 需作为独立服务启动，案例、步长和版本见 `configs/environments/boptest.yaml`、[Week 6 协议](docs/week6_protocol.md)。历史本机部署使用 BOPTEST v0.9.0；模型文件和冻结数据不随镜像自动生成，需按配置清单准备并通过哈希校验。Agent 本地模型的版本与文件哈希见 `configs/agent/local_model_manifest.json`。已有服务可先检查 `http://127.0.0.1/testcases` 是否响应，再运行下方命令。
+```mermaid
+flowchart LR
+    U["任务 / YAML 配置"] --> A["Agent 或命令行"]
+    A --> V["配置、资产与白名单校验"]
+    V --> R["Benchmark Runner"]
+    R --> M["世界模型 + MPC"]
+    M --> B["BOPTEST API / FMU"]
+    B --> E["轨迹与确定性指标"]
+    E --> O["独立 run 产物"]
+    O --> Q["结果审核与报告"]
+```
 
-启动本地 BOPTEST 服务后，在项目根目录运行：
+模型预测只用于评价动作或生成规划；模拟环境的实际状态由 BOPTEST 推进。各层职责见[架构说明](docs/architecture.md)，实验配置和信息边界见[评测协议](docs/week6_protocol.md)。
+
+## 代表性结果
+
+下表来自 Week 6 的 BOPTEST 实验，展示三个主要参考日期的平均结果。温度 RMSE 是 **20 步（5 小时）末端预测误差**；闭环成本来自另一个滚动 MPC 实验，是舒适度、能耗和动作变化的加权评分，并非电费。
+
+| 模型 | 温度 RMSE ↓ | 闭环成本 ↓ | 能耗 ↓ | 舒适偏差 ↓ |
+| --- | ---: | ---: | ---: | ---: |
+| ARX | 0.716 °C | 61.00 | 33.67 kWh | 18.03 °C·h |
+| Persistence | 1.014 °C | 171.74 | 72.94 kWh | 34.65 °C·h |
+| MLP，seed 43 | 1.170 °C | 46.79 | 28.33 kWh | 13.66 °C·h |
+| 残差 MLP，seed 44 | 1.518 °C | 42.43 | 38.46 kWh | 3.84 °C·h |
+
+这些数值展示预测排序和控制排序可能不同，不能仅凭跨日期均值推断原因。[完整实验表、条件和原始结果](reports/week6/week6.md#预测控制一致性)包括全部 11 个检查点及配对案例；[Week 8 报告](reports/week8/week8.md)汇总了 Week 5–7 的结果与来源。
+
+![预测误差与闭环成本的对照](reports/week6/results/consistency/prediction_vs_control.png)
+
+## 快速开始
+
+### 前置条件
+
+- Linux 或 WSL 2、Python 3.11；容器方案需要 Docker 和 Docker Compose。
+- 已运行 BOPTEST v0.9.0 的 `bestest_hydronic_heat_pump` 案例服务，默认地址为 `http://127.0.0.1`。
+- 已准备并校验配置要求的 BOPTEST FMU、冻结数据和模型检查点；本地 Qwen Agent 还需单独下载模型权重。
+
+从零下载 BOPTEST、准备资产、核对 SHA256 和处理已知构建问题，见[环境准备与复现指南](docs/setup_reproduction.md)。首次安装、镜像构建及资产下载可能耗时，**不计入**下方短评测时间。
+
+### 运行短评测
+
+在项目根目录，使用已安装依赖的 Python 3.11 环境：
 
 ```bash
-conda activate mvp
+# 确认 BOPTEST 服务可访问
+curl --noproxy '*' -fsS http://127.0.0.1/testcases
+
+# 校验配置和冻结资产；此步骤不推进仿真
+python -c 'from pathlib import Path; import yaml; from benchmark.config import validate_config; c=yaml.safe_load(Path("configs/benchmark/boptest_smoke.yaml").read_text()); validate_config(c, Path.cwd()); print("配置和文件校验通过")'
+
+# 运行 Persistence、ARX 和 embedded 基线的短评测
 python run_benchmark.py --config configs/benchmark/boptest_smoke.yaml
 ```
 
-每次运行的配置、轨迹、指标和报告保存在终端显示的 `reports/runs/` 独立目录。配置和使用说明见 [benchmark 协议](docs/benchmark_protocol.md)。
-
-## 评测容器
-
-先按现有 BOPTEST 部署启动 v0.9.0 的 web、worker 和依赖服务，保持 `project1-boptest_default` 网络可用。然后在项目根目录执行：
+每次运行的结果写入独立的 `reports/runs/<run-id>/`，包括 `config.yaml`、`versions.json`、`input_hashes.json`、`metrics.json`、`trajectories.csv`、日志及状态。异常时保留失败上下文。查看某次运行：
 
 ```bash
-docker compose -f deployment/benchmark/compose.yaml build
-docker compose -f deployment/benchmark/compose.yaml run --rm benchmark
+python scripts/check_week7.py --run reports/runs/<run-id>
 ```
 
-项目目录挂载到容器 `/workspace`：配置、检查点、数据、FMU 校验文件必须已在宿主机准备好，结果写入宿主机 `reports/runs/`。容器使用 CPU 版 PyTorch，BOPTEST 服务单独运行。
-
-## 回归和 Week 7 验收
-
-将路径替换为本次实际 smoke run：
-
-```bash
-python -m benchmark.regression --run reports/runs/你的运行目录
-python scripts/check_week7.py --run reports/runs/你的运行目录
-```
-
-加 `--integration` 会另行连接 BOPTEST 运行真实短回合。新环境需先准备清单中冻结的数据、模型和 FMU；文件缺失或哈希不符时离线检查会报错。详情见 [Week 7 报告](reports/week7/week7.md)。
-
-## 失败后续跑
-
-从本功能启用后产生的 run 续跑：
-
-```bash
-python run_benchmark.py --config configs/benchmark/boptest_smoke.yaml --resume-from reports/runs/原运行目录
-```
-
-续跑会创建新的 run，原 run 的失败上下文和部分轨迹保留。启动前核对完整配置、配置哈希及所有输入文件哈希；只复用带完整标记且哈希正确的 episode。中断时未完成的 episode 从初始化重新运行，避免重复推进可能已执行的 BOPTEST 请求。开环和排序重新计算；完成的在线采集及闭环 episode 可以复用。
-
-旧版 run 没有 episode 检查点，不能跳过其中已完成的回合。当前不比较代码或依赖版本哈希，变更代码或运行环境后不应混合复用结果；强制中止的服务实例可能需要手动清理。
-
-## GitHub Actions
-
-提交并推送后，`.github/workflows/ci.yml` 在 push、pull request 或手动触发时运行 Python 静态检查和不依赖实验资产的短单元测试。真实 BOPTEST 测试需先部署服务与冻结数据，在 WSL 中执行：
-
-```bash
-BOPTEST_INTEGRATION=1 python -m unittest tests.test_benchmark_integration
-```
-
-CI 工作流和所需源码必须提交到 GitHub 后，才能在仓库的 Actions 页面查看结果。
-
-## P2 批量执行
-
-```bash
-python scripts/batch_benchmark.py --config configs/benchmark/boptest_batch_smoke.yaml --output reports/week7/my_batch --workers 2
-```
-
-当前入口展开闭环/鲁棒性模型×日期×条件矩阵，支持 1～16 个独立进程；每个进程独立选择 BOPTEST testid，且写入独立任务目录。开环和策略排序使用原统一 Runner。批量模式不重复运行 embedded 基线。
-
-同一命令再次运行会校验完整配置、实际数据/模型/模拟资产及源码指纹，再校验完成结果的所有文件哈希，仅执行尚未完成或失败的任务。配置或输入变化须使用新输出目录；损坏完成结果会报错，不能静默复用。每次尝试保留 attempt 日志、state.json、配置和独立 run；失败可按 identity 定位。
-
-独占锁由协调器及已启动子进程继承；协调器被中断后须等待这些子进程结束才能重启，防止重复推进。尚未写 completed 状态的任务视为未完成，重启时重新初始化执行；不会接续一个未知的服务时间步。
-
-真实验收：2 worker/4任务的实际峰值并发为2，testid全部独立；SIGTERM协调器后恢复保留已完成任务，全部4项完成。证据见 reports/week7/batch_verification.json。离线完整性测试：python -m unittest tests.test_batch_benchmark。
-
-## MLflow 本地追踪
-
-安装可选客户端（不属于默认 CPU 容器依赖）：
-
-```bash
-python -m pip install mlflow-skinny==2.22.5
-python run_benchmark.py --config configs/benchmark/boptest_smoke.yaml --tracking-config configs/tracking/local.yaml
-```
-
-`reports/mlruns/` 保存本地 MLflow 记录，每个 benchmark 对应一个 MLflow run。参数包含模型检查点哈希和种子；逐变量误差、控制指标存为可查询 metric，完整指标和配置另作 artifact。`tracking.json` 提供 MLflow run ID 和 tracking URI；MLflow 标签 `benchmark.directory` 指向原始轨迹目录。大型原始轨迹留在原 run 目录，不重复复制，哈希清单用于核验。
-
-查询最近记录：
-
-```python
-from pathlib import Path
-from mlflow.tracking import MlflowClient
-client = MlflowClient(tracking_uri=Path('reports/mlruns').resolve().as_uri())
-experiment = client.get_experiment_by_name('industrial-world-model-eval')
-for run in client.search_runs([experiment.experiment_id], order_by=['start_time DESC']):
-    print(run.info.run_id, run.info.status, run.data.tags.get('benchmark.directory'))
-```
-
-成功为 FINISHED，异常为 FAILED；失败上下文也上传为 artifact。追踪同步失败不会覆盖原 benchmark 异常，会留下 `tracking_error.json` 并发出警告；强制杀进程仍可能留下 RUNNING，不能视为完成。需要网页 UI 时可另外安装相同版本完整 `mlflow` 并运行 `mlflow ui --backend-store-uri ./reports/mlruns`。
-
-## Week 8 Agent（开发中）
-
-预备：本地 BOPTEST、冻结资产和可用的 OpenAI 兼容模型服务。模型地址及模型名由用户明确配置，密钥可放在 `AGENT_LLM_API_KEY` 环境变量，不写入配置或日志。安装状态机可选依赖：
-
-```bash
-python -m pip install 'langgraph==0.6.11' 'langgraph-checkpoint-sqlite==3.1.3'
-python -m unittest tests.test_agent_tools tests.test_agent_pipeline tests.test_agent_errors tests.test_agent_graph tests.test_agent_graph_sqlite
-```
-
-当已有可用模型服务时，使用 `scripts/run_agent.py --request <任务> --endpoint <chat_completions地址> --model <模型名>`。当前 Agent 工具仅允许选择冻结 smoke 模板的模型；其他配置会被拒绝。本地 Qwen 已完成真实端到端和 CPU 容器复现；外部模型服务入口尚未做同等真实验收。详见 `docs/agent_protocol.md`。
-
-### 本地 LLM 快速体验（模型和 BOPTEST 已准备）
-
-下面命令需要完成约 2.9 GiB 模型权重下载，准备冻结 tokenizer 文件并启动 BOPTEST；首次准备和下载不计入三分钟。安装 `transformers==4.57.3`、`accelerate==1.12.0` 后：
-
-```bash
-python scripts/run_local_agent.py \
-  --model-dir external/qwen-agent \
-  --revision 989aa7980e4cf806f80c7fef2b1adb7bc71aa306 \
-  --expected-sha256 dd924a11b4c220f385b51ffa522daea7c9f3d850e31b162bb5661df483c6d3ee \
-  --request '运行 BOPTEST，比较 persistence 和 arx'
-```
-
-模型及元数据需符合 `configs/agent/local_model_manifest.json`，入口会先验证哈希。一次真实成功案例见 `reports/week8/sessions/20261125T161119997809Z_c54402617b/`。已准备资产后，隔离 CPU 容器中的一次计时运行用时 92.96 秒；不含镜像构建与资产下载，其他硬件或服务负载下时间可能不同。遇到服务超时请检查服务状态，勿反复请求造成实例积压。
+将 `<run-id>` 替换为实际目录名；[统一配置与产物协议](docs/benchmark_protocol.md)说明完整字段、单位和失败策略。更多容器、续跑与追踪用法见 [Week 7 报告](reports/week7/week7.md)。
 
 ### 在 CPU 容器中复现
 
-前提：已准备冻结数据、检查点和 `external/qwen-agent` 模型，BOPTEST 已启动并可从主机网络访问 `127.0.0.1`。Docker Desktop 应开启 host networking 支持；首次构建及下载不计入运行时间。以下在 WSL 项目根目录执行：
+前提是冻结资产、`external/qwen-agent` 和 BOPTEST 服务均已准备，且 Docker Desktop 支持 host networking。以下命令从自然语言运行本地 Agent；项目目录会挂载到容器并保存结果。
 
 ```bash
 docker compose -f deployment/benchmark/compose.yaml build
@@ -153,4 +95,52 @@ docker run --rm --network host --user "$(id -u):$(id -g)" \
   --request '运行 BOPTEST，比较 persistence 和 arx'
 ```
 
-运行输出包含 session 路径。回到宿主机后将路径中的 `/workspace/` 替换为项目根目录，执行 `python scripts/check_agent_session.py --session <session目录>` 核对。此容器使用 CPU，速度随硬件而变；本机真实通过案例及复核记录见 `reports/week8/container_timed_verification.json`。Agent 镜像以先构建的 `benchmark-benchmark:latest` 为基础，新增依赖版本见 `deployment/agent/requirements.lock`。
+已准备好资产后的单次 CPU 容器实测为 **92.96 秒**，不包括镜像构建和下载；不同设备及服务负载下时间会变化。会话与复核证据见[容器验收记录](reports/week8/container_timed_verification.json)。
+
+## Agent 与安全边界
+
+Agent 将请求转换为结构化意图和冻结模板配置，再调用 `validate_config`、`run_benchmark` 和 `summarize_results`；程序限制可用环境、模型与执行预算。LangGraph 对超过阈值的模型组合请求人工批准，并将批准绑定到配置摘要。失败、超时和审核不通过会记录在案，不视为成功。详见 [Agent 协议](docs/agent_protocol.md)。
+
+在 20 条**参与开发的用例**上，规则流程和本地 LLM 配合固定编排各完成 6/6 条合法请求的真实仿真与审核；另一次自主选择首个工具的严格评分为 **7/20**。这不是独立泛化测试，不能据此认为 LLM 能可靠自主处理任意实验。[评测方法与逐条结果](reports/week8/agent_eval.md)。
+
+## 测试
+
+以下离线测试不要求运行 BOPTEST 服务：
+
+```bash
+python -m unittest tests.test_metrics tests.test_boptest_control \
+  tests.test_week6_control tests.test_agent_errors tests.test_agent_eval \
+  tests.test_agent_schemas tests.test_agent_react_guard
+```
+
+GitHub Actions 运行静态检查和短单元测试；真实服务集成测试需单独部署 BOPTEST 和冻结资产：
+
+```bash
+BOPTEST_INTEGRATION=1 python -m unittest tests.test_benchmark_integration
+```
+
+## 项目结构
+
+```text
+configs/       模型、环境、实验和 benchmark 配置
+data/          轨迹采集、预处理、切分与数据
+models/        预测基线及动作条件动力学模型
+simulators/    热工、Industrial Benchmark 和 BOPTEST 适配器
+controllers/   规则控制、LQR 与 MPC
+evaluators/    预测、rollout、鲁棒性和闭环评测
+metrics/       预测、控制与有效性指标
+agents/        工具、配置生成、审核和状态机
+benchmark/     配置校验、运行、产物及追踪
+deployment/    BOPTEST 与评测容器配置
+reports/       分周报告、图表及实验结果
+tests/         单元、集成与回归测试
+```
+
+## 局限与资料
+
+- Week 6 使用单个 BOPTEST 案例和有限日期；公开观测不涵盖全部建筑内部状态，季节测试也不等同于对所有外部分布的覆盖。
+- 模型可能预测无效能耗或触发 fallback；软约束和释放控制只是实验机制，不能替代真实系统安全设计。
+- 不同环境、信息集和成本定义下的结果不能直接比较；具体样本数和聚合方式见各实验报告。
+- 项目自身尚未声明代码许可证；数据和第三方资产来源及许可线索见[第三方说明](docs/third_party.md)。实验文件取舍见[产物保存策略](docs/artifact_policy.md)。
+
+更多资料：[Week 5 预测评测](reports/week5/week5.md) · [Week 6 BOPTEST 实验](reports/week6/week6.md) · [Week 7 评测流水线](reports/week7/week7.md) · [Week 8 Agent](reports/week8/week8.md) · [面试材料](docs/interview/)。
