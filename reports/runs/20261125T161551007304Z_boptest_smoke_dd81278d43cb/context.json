@@ -1,0 +1,8 @@
+{
+  "phase": "reset",
+  "task": "collection",
+  "model": "replay",
+  "episode": "id_test_day160",
+  "condition": "clean",
+  "step": -1
+}

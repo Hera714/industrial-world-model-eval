@@ -177,7 +177,7 @@ def _report(metrics):
     return '\n'.join(lines)
 
 
-def run_benchmark(config, root=None, env_factory=ConfiguredBoptestEnv, resume_from=None):
+def run_benchmark(config, root=None, env_factory=ConfiguredBoptestEnv, resume_from=None, tracking_config=None):
     """入口只编排，真实回合、动力学预测和指标分别复用各模块；异常交给产物上下文保存。"""
     root = Path(root or Path(__file__).resolve().parents[1]).resolve()
     cfg = load_config(config, root) if isinstance(config, (str, Path)) else validate_config(config, root)
@@ -215,7 +215,7 @@ def run_benchmark(config, root=None, env_factory=ConfiguredBoptestEnv, resume_fr
             file = (root / relative).resolve()
             if not file.is_relative_to(root) or hashlib.sha256(file.read_bytes()).hexdigest() != expected:
                 raise ValueError('Resume input hash mismatch: '+relative)
-    with RunArtifacts(cfg, root) as run, capture_console(run):
+    with RunArtifacts(cfg, root, tracking_config=tracking_config) as run, capture_console(run):
         print('Run directory: ' + str(run.path), flush=True)
         run.set_context(phase='load_models')
         models = load_models(cfg, root)

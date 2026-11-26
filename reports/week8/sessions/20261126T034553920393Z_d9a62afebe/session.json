@@ -1,0 +1,11 @@
+{
+  "status": "failed",
+  "request": "test",
+  "events": [],
+  "error": {
+    "code": "TIMEOUT",
+    "type": "TimeoutError",
+    "message": "model timeout",
+    "suggestion": "检查模型服务或 BOPTEST 是否可用和超时预算；推进失败后重新初始化回合。"
+  }
+}

@@ -12,7 +12,7 @@
 
 ## 限制
 
-新机器需自行准备 BOPTEST 服务、FMU、数据和检查点并通过哈希检查；尚未在完全新机器重建全部资产。Python 依赖固定版本但未固定包哈希，补充 tzdata 和 Git 后已重新构建并运行真实 smoke。运行时若 `git_dirty` 为 true，commit 不能唯一代表未提交代码，需保存代码快照或提交后重跑。MLflow 与 CI 留待 P1。
+新机器需自行准备 BOPTEST 服务、FMU、数据和检查点并通过哈希检查；尚未在完全新机器重建全部资产。Python 依赖固定版本但未固定包哈希，补充 tzdata 和 Git 后已重新构建并运行真实 smoke。运行时若 `git_dirty` 为 true，commit 不能唯一代表未提交代码，需保存代码快照或提交后重跑。MLflow 本地追踪和 CI 工作流已实现；追踪验收见 mlflow_verification.json。
 
 已验收的早期容器 run 因镜像未安装 Git，commit 为空，不能通过版本追溯验收；Dockerfile 已补装 Git，修复后的新镜像已重新构建，新的容器 smoke 已记录 commit 并通过 `check_week7.py`。宿主机历史 run 记录了 commit，但工作区有未提交改动。
 
@@ -43,3 +43,29 @@ python scripts/batch_benchmark.py --config configs/benchmark/boptest_batch_smoke
 真实验收：2 worker/4任务的实际峰值并发为2，testid全部独立；SIGTERM协调器后恢复保留已完成任务，全部4项完成。证据见 reports/week7/batch_verification.json。离线完整性测试：python -m unittest tests.test_batch_benchmark。
 
 批量最终验收补充：不可达服务的4个子任务均保存失败身份和上下文；重试后每项保留2份尝试日志。配置变化被拒绝复用。14项批量完整性、episode恢复和Runner回归测试通过。完整证据位于 `reports/week7/batch_verification.json`。
+
+## MLflow 本地追踪
+
+安装可选客户端（不属于默认 CPU 容器依赖）：
+
+```bash
+python -m pip install mlflow-skinny==2.22.5
+python run_benchmark.py --config configs/benchmark/boptest_smoke.yaml --tracking-config configs/tracking/local.yaml
+```
+
+`reports/mlruns/` 保存本地 MLflow 记录，每个 benchmark 对应一个 MLflow run。参数包含模型检查点哈希和种子；逐变量误差、控制指标存为可查询 metric，完整指标和配置另作 artifact。`tracking.json` 提供 MLflow run ID 和 tracking URI；MLflow 标签 `benchmark.directory` 指向原始轨迹目录。大型原始轨迹留在原 run 目录，不重复复制，哈希清单用于核验。
+
+查询最近记录：
+
+```python
+from pathlib import Path
+from mlflow.tracking import MlflowClient
+client = MlflowClient(tracking_uri=Path('reports/mlruns').resolve().as_uri())
+experiment = client.get_experiment_by_name('industrial-world-model-eval')
+for run in client.search_runs([experiment.experiment_id], order_by=['start_time DESC']):
+    print(run.info.run_id, run.info.status, run.data.tags.get('benchmark.directory'))
+```
+
+成功为 FINISHED，异常为 FAILED；失败上下文也上传为 artifact。追踪同步失败不会覆盖原 benchmark 异常，会留下 `tracking_error.json` 并发出警告；强制杀进程仍可能留下 RUNNING，不能视为完成。需要网页 UI 时可另外安装相同版本完整 `mlflow` 并运行 `mlflow ui --backend-store-uri ./reports/mlruns`。
+
+MLflow 最终验收：真实 BOPTEST smoke FINISHED 和短超时失败 FAILED 均可查询，参数含检查点哈希，成功含控制和预测指标，失败含 failure.json；13项相关测试通过。追踪在隔离环境验证，mvp 和默认容器需按 README 安装可选客户端后启用。

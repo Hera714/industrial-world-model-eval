@@ -1,0 +1,2 @@
+{"time": "2026-11-25T16:15:51.085767+00:00", "level": "INFO", "event": "run_started", "context": {}}
+{"time": "2026-11-25T16:18:37.393506+00:00", "level": "ERROR", "event": "run_failed", "context": {"phase": "reset", "task": "collection", "model": "replay", "episode": "id_test_day160", "condition": "clean", "step": -1}, "error_type": "RuntimeError", "message": "BOPTEST POST /testcases/bestest_hydronic_heat_pump/select: timed out"}

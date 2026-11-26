@@ -2,6 +2,23 @@
 
 BOPTEST 世界模型预测与控制评测项目。
 
+本项目研究一个问题：模型能否根据当前观测、控制动作和天气预测楼宇未来状态，以及预测误差是否能反映闭环控制表现。主要平台是 BOPTEST 的 `bestest_hydronic_heat_pump` 仿真案例；结果不是实际建筑部署结果。
+
+| 想看什么 | 位置 |
+| --- | --- |
+| 架构和模块职责 | [架构图](docs/architecture.md) |
+| Week 5–7 代表性实验表、失败案例和局限 | [Week 8 报告](reports/week8/week8.md) |
+| 5 分钟介绍、10 分钟深挖、10 个问答 | [面试材料](docs/interview/) |
+| Agent 工作边界和人工审批 | [Agent 协议](docs/agent_protocol.md) |
+
+3 分钟体验的前提是：已准备好 BOPTEST 服务、冻结数据和检查点、Qwen 模型及镜像；首次安装、构建和下载不计入。CPU 容器中一次已准备资产后的实测为 92.96 秒，命令见下文“在 CPU 容器中复现”；运行时间因设备和服务负载而异。
+
+## 环境准备
+
+使用 Python 3.11。现有 `mvp` 环境如已安装项目依赖及可用的 PyTorch，可在项目根目录执行 `conda activate mvp`；依赖版本见 `pyproject.toml`，CPU 评测容器的依赖清单见 `deployment/benchmark/requirements.lock`。本地 Agent 还需 `transformers==4.57.3` 和 `accelerate==1.12.0`；LangGraph 审批另需 `langgraph==0.6.11` 和 `langgraph-checkpoint-sqlite==3.1.3`。如已有 CUDA 版 PyTorch，安装其他依赖时请核对 pip 的安装计划，避免无意替换。
+
+BOPTEST 需作为独立服务启动，案例、步长和版本见 `configs/environments/boptest.yaml`、[Week 6 协议](docs/week6_protocol.md)。历史本机部署使用 BOPTEST v0.9.0；模型文件和冻结数据不随镜像自动生成，需按配置清单准备并通过哈希校验。Agent 本地模型的版本与文件哈希见 `configs/agent/local_model_manifest.json`。已有服务可先检查 `http://127.0.0.1/testcases` 是否响应，再运行下方命令。
+
 启动本地 BOPTEST 服务后，在项目根目录运行：
 
 ```bash
@@ -68,3 +85,70 @@ python scripts/batch_benchmark.py --config configs/benchmark/boptest_batch_smoke
 独占锁由协调器及已启动子进程继承；协调器被中断后须等待这些子进程结束才能重启，防止重复推进。尚未写 completed 状态的任务视为未完成，重启时重新初始化执行；不会接续一个未知的服务时间步。
 
 真实验收：2 worker/4任务的实际峰值并发为2，testid全部独立；SIGTERM协调器后恢复保留已完成任务，全部4项完成。证据见 reports/week7/batch_verification.json。离线完整性测试：python -m unittest tests.test_batch_benchmark。
+
+## MLflow 本地追踪
+
+安装可选客户端（不属于默认 CPU 容器依赖）：
+
+```bash
+python -m pip install mlflow-skinny==2.22.5
+python run_benchmark.py --config configs/benchmark/boptest_smoke.yaml --tracking-config configs/tracking/local.yaml
+```
+
+`reports/mlruns/` 保存本地 MLflow 记录，每个 benchmark 对应一个 MLflow run。参数包含模型检查点哈希和种子；逐变量误差、控制指标存为可查询 metric，完整指标和配置另作 artifact。`tracking.json` 提供 MLflow run ID 和 tracking URI；MLflow 标签 `benchmark.directory` 指向原始轨迹目录。大型原始轨迹留在原 run 目录，不重复复制，哈希清单用于核验。
+
+查询最近记录：
+
+```python
+from pathlib import Path
+from mlflow.tracking import MlflowClient
+client = MlflowClient(tracking_uri=Path('reports/mlruns').resolve().as_uri())
+experiment = client.get_experiment_by_name('industrial-world-model-eval')
+for run in client.search_runs([experiment.experiment_id], order_by=['start_time DESC']):
+    print(run.info.run_id, run.info.status, run.data.tags.get('benchmark.directory'))
+```
+
+成功为 FINISHED，异常为 FAILED；失败上下文也上传为 artifact。追踪同步失败不会覆盖原 benchmark 异常，会留下 `tracking_error.json` 并发出警告；强制杀进程仍可能留下 RUNNING，不能视为完成。需要网页 UI 时可另外安装相同版本完整 `mlflow` 并运行 `mlflow ui --backend-store-uri ./reports/mlruns`。
+
+## Week 8 Agent（开发中）
+
+预备：本地 BOPTEST、冻结资产和可用的 OpenAI 兼容模型服务。模型地址及模型名由用户明确配置，密钥可放在 `AGENT_LLM_API_KEY` 环境变量，不写入配置或日志。安装状态机可选依赖：
+
+```bash
+python -m pip install 'langgraph==0.6.11' 'langgraph-checkpoint-sqlite==3.1.3'
+python -m unittest tests.test_agent_tools tests.test_agent_pipeline tests.test_agent_errors tests.test_agent_graph tests.test_agent_graph_sqlite
+```
+
+当已有可用模型服务时，使用 `scripts/run_agent.py --request <任务> --endpoint <chat_completions地址> --model <模型名>`。当前 Agent 工具仅允许选择冻结 smoke 模板的模型；其他配置会被拒绝。本地 Qwen 已完成一次真实端到端演示；外部模型服务入口和跨环境三分钟体验尚未验收。详见 `docs/agent_protocol.md`。
+
+### 本地 LLM 快速体验（模型和 BOPTEST 已准备）
+
+下面命令需要完成约 2.9 GiB 模型权重下载，准备冻结 tokenizer 文件并启动 BOPTEST；首次准备和下载不计入三分钟。安装 `transformers==4.57.3`、`accelerate==1.12.0` 后：
+
+```bash
+python scripts/run_local_agent.py \
+  --model-dir external/qwen-agent \
+  --revision 989aa7980e4cf806f80c7fef2b1adb7bc71aa306 \
+  --expected-sha256 dd924a11b4c220f385b51ffa522daea7c9f3d850e31b162bb5661df483c6d3ee \
+  --request '运行 BOPTEST，比较 persistence 和 arx'
+```
+
+模型及元数据需符合 `configs/agent/local_model_manifest.json`，入口会先验证哈希。一次真实成功案例见 `reports/week8/sessions/20261125T161119997809Z_c54402617b/`。已准备资产后，隔离 CPU 容器中的一次计时运行用时 92.96 秒；不含镜像构建与资产下载，其他硬件或服务负载下时间可能不同。遇到服务超时请检查服务状态，勿反复请求造成实例积压。
+
+### 在 CPU 容器中复现
+
+前提：已准备冻结数据、检查点和 `external/qwen-agent` 模型，BOPTEST 已启动并可从主机网络访问 `127.0.0.1`。Docker Desktop 应开启 host networking 支持；首次构建及下载不计入运行时间。以下在 WSL 项目根目录执行：
+
+```bash
+docker compose -f deployment/benchmark/compose.yaml build
+docker build -f deployment/agent/Dockerfile -t industrial-agent-week8:local .
+docker run --rm --network host --user "$(id -u):$(id -g)" \
+  -e OMP_NUM_THREADS=4 -e HF_HUB_OFFLINE=1 \
+  -v "$PWD:/workspace" -w /workspace industrial-agent-week8:local \
+  python scripts/run_local_agent.py --device cpu --model-dir external/qwen-agent \
+  --revision 989aa7980e4cf806f80c7fef2b1adb7bc71aa306 \
+  --expected-sha256 dd924a11b4c220f385b51ffa522daea7c9f3d850e31b162bb5661df483c6d3ee \
+  --request '运行 BOPTEST，比较 persistence 和 arx'
+```
+
+运行输出包含 session 路径。回到宿主机后将路径中的 `/workspace/` 替换为项目根目录，执行 `python scripts/check_agent_session.py --session <session目录>` 核对。此容器使用 CPU，速度随硬件而变；本机真实通过案例及复核记录见 `reports/week8/container_timed_verification.json`。Agent 镜像以先构建的 `benchmark-benchmark:latest` 为基础，新增依赖版本见 `deployment/agent/requirements.lock`。

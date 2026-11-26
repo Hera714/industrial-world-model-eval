@@ -1,0 +1,183 @@
+schema_version: '1.0'
+model:
+  instances:
+  - name: arx
+    kind: arx
+    checkpoint:
+      path: reports/week6/results/training/arx.pt
+      sha256: 08dbf7ac2a67fb916050f472e1e7f1983bbd755c5d360808b06a060870a7b33e
+  - name: persistence
+    kind: persistence
+    checkpoint:
+      path: reports/week6/results/training/persistence.pt
+      sha256: e694c3a9a716860947c443151678800588e0f879f2022fbc2b2ecd207ef811f2
+  - name: mlp_seed42
+    kind: mlp
+    checkpoint:
+      path: reports/week6/results/training/mlp_seed42.pt
+      sha256: 573d58752b13a3f06c3c518fcd5e949088962fa9c3311bba475cfc0001625714
+  history_steps: 16
+  device: cpu
+  observation_names:
+  - zone_c
+  - supply_c
+  - return_c
+  - floor_heat_kw
+  - electric_kw
+  observation_units:
+  - degC
+  - degC
+  - degC
+  - kW
+  - kW
+  exogenous_names:
+  - outdoor_c
+  - solar_w_m2
+  - sin_day
+  - cos_day
+  - sin_year
+  - cos_year
+  exogenous_units:
+  - degC
+  - W/m2
+  - '1'
+  - '1'
+  - '1'
+  - '1'
+  input_features: 12
+  output_features: 6
+env:
+  type: boptest
+  url: http://127.0.0.1:80
+  version: 0.9.0
+  upstream_commit: 9b1610bf7a108826bb3d22c72bffd2d71d7bb0a9
+  case: bestest_hydronic_heat_pump
+  step_seconds: 900
+  warmup_seconds: 604800
+  context_steps: 96
+  episode_steps: 8
+  area_m2: 192.0
+  assets:
+    path: reports/week6/results/assets/manifest.json
+    sha256: 68d47e8628ed24de43cf7546c9811989460631423bf8bf30b6e0a0e6592a0e5e
+  action:
+    point: oveTSet_u
+    activation: oveTSet_activate
+    unit: degC
+    api_unit: K
+    bounds:
+    - 18.0
+    - 24.0
+dataset:
+  mode: online
+  manifest:
+    path: configs/benchmark/manifests/boptest_week6.json
+    sha256: be36a387b8cd1c55a442f84b6b71bd945e1dc9a2c31635196686db16745b05a5
+  train_split: train
+  validation_split: val
+  evaluation_episodes:
+  - id_test_day160
+  weather_information: persistence_at_origin
+  context_policy: replay_recorded_actions
+  action_plan: recorded_applied_actions
+seed:
+  model:
+    arx: null
+    persistence: null
+    mlp_seed42: 42
+  candidate:
+    base: 604200
+    offset: source_step
+  observation_fault:
+    base: 64042
+    offset_by_evaluator:
+      open_loop: source_step
+      closed_loop: start_day
+evaluator:
+  tasks:
+  - open_loop
+  - closed_loop
+  prediction_modes:
+  - teacher_forcing
+  - free_running
+  origin_stride_steps: 1
+  fault_conditions:
+  - clean
+  baseline: embedded
+  condition_matrix:
+    open_loop:
+      episodes:
+      - id_test_day160
+      conditions:
+      - clean
+    closed_loop:
+      episodes:
+      - id_test_day160
+      conditions:
+      - clean
+  faults: {}
+horizon:
+  prediction_steps:
+  - 1
+  - 4
+  mpc_steps: 4
+  candidates: 32
+  action_hold_steps: 1
+metrics:
+  prediction:
+  - mae
+  - rmse
+  - valid_fraction
+  - physical_warning_fraction
+  control:
+  - cost
+  - energy_kwh
+  - comfort_degree_hours
+  - comfort_violation_rate
+  - center_tracking_mae_c
+  - decision_mean_ms
+  - decision_p95_ms
+  - fallback_count
+  units:
+    temperature: degC
+    power: kW
+    energy: kWh
+    time: s
+    comfort_integral: degC*h
+  cost_weights:
+    comfort: 1.0
+    energy: 1.0
+    action_change: 0.02
+  validity:
+    zone_degC:
+    - 0.0
+    - 50.0
+    water_degC:
+    - 0.0
+    - 90.0
+    interval_energy_kwh:
+    - 0.0
+    - 10.0
+    absolute_divergence: 1000.0
+    nonfinite: stop_keep_prefix
+  aggregation: episode_then_fixed_training_seeds
+output:
+  directory: reports/runs
+  run_name: boptest_smoke
+  formats:
+    trajectory: csv
+    prediction: npz
+    metrics: json
+    events: jsonl
+    report: md
+  existing_run: new_unique_run
+failure_policy:
+  invalid_prediction: stop_rollout_keep_prefix
+  planning_failure: release_to_embedded
+  advance_failure: stop_episode_no_retry
+  retries:
+    read_requests: 2
+    advance_requests: 0
+  timeouts:
+    http_seconds: 180.0
+    planning_seconds: 5.0

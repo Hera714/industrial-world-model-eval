@@ -1,0 +1,1679 @@
+{
+  "status": "available",
+  "metrics": {
+    "run_id": "20261125T170800701697Z_boptest_smoke_b461069fac1e",
+    "variables": [
+      "zone_c",
+      "supply_c",
+      "return_c",
+      "floor_heat_kw",
+      "electric_kw",
+      "interval_energy_kwh"
+    ],
+    "units": [
+      "degC",
+      "degC",
+      "degC",
+      "kW",
+      "kW",
+      "kWh"
+    ],
+    "open_loop": [
+      {
+        "model": "mlp_seed42",
+        "family": "mlp",
+        "training_seed": 42,
+        "episode_id": "id_test_day160",
+        "split": "id_test",
+        "condition": "clean",
+        "mode": "teacher_forcing",
+        "horizon": 1,
+        "physical_warning_fraction": 1.0,
+        "requested": 5,
+        "valid": 5,
+        "failed": 0,
+        "valid_fraction": 1.0,
+        "mae": [
+          0.12475437194551801,
+          1.0548906922152284,
+          0.9744460538971801,
+          1.856663007523828,
+          0.8306895132310818,
+          0.1981790786970466
+        ],
+        "rmse": [
+          0.12748698415769041,
+          1.064286692892247,
+          1.2179223190550672,
+          1.8889790770279316,
+          0.8398655289025184,
+          0.20088412951890527
+        ]
+      },
+      {
+        "model": "mlp_seed42",
+        "family": "mlp",
+        "training_seed": 42,
+        "episode_id": "id_test_day160",
+        "split": "id_test",
+        "condition": "clean",
+        "mode": "teacher_forcing",
+        "horizon": 4,
+        "physical_warning_fraction": 1.0,
+        "requested": 5,
+        "valid": 5,
+        "failed": 0,
+        "valid_fraction": 1.0,
+        "mae": [
+          0.05291229622109554,
+          1.0121865282449272,
+          0.25280898299260174,
+          1.2907375324124264,
+          0.6597360310452182,
+          0.16074333471754917
+        ],
+        "rmse": [
+          0.06322408979968935,
+          1.0249496933787225,
+          0.2746100864971887,
+          1.3070895295357785,
+          0.6621756890864616,
+          0.1611929882562025
+        ]
+      },
+      {
+        "model": "mlp_seed42",
+        "family": "mlp",
+        "training_seed": 42,
+        "episode_id": "id_test_day160",
+        "split": "id_test",
+        "condition": "clean",
+        "mode": "free_running",
+        "horizon": 1,
+        "physical_warning_fraction": 1.0,
+        "requested": 5,
+        "valid": 5,
+        "failed": 0,
+        "valid_fraction": 1.0,
+        "mae": [
+          0.12475437194551801,
+          1.0548906922152284,
+          0.9744460538971801,
+          1.856663007523828,
+          0.8306895132310818,
+          0.1981790786970466
+        ],
+        "rmse": [
+          0.12748698415769041,
+          1.064286692892247,
+          1.2179223190550672,
+          1.8889790770279316,
+          0.8398655289025184,
+          0.20088412951890527
+        ]
+      },
+      {
+        "model": "mlp_seed42",
+        "family": "mlp",
+        "training_seed": 42,
+        "episode_id": "id_test_day160",
+        "split": "id_test",
+        "condition": "clean",
+        "mode": "free_running",
+        "horizon": 4,
+        "physical_warning_fraction": 1.0,
+        "requested": 5,
+        "valid": 5,
+        "failed": 0,
+        "valid_fraction": 1.0,
+        "mae": [
+          0.09426967863567626,
+          0.9654079274905634,
+          0.5712471098124766,
+          1.4405073842396958,
+          0.7234014919961718,
+          0.18311379983605466
+        ],
+        "rmse": [
+          0.10164321791860932,
+          0.9881700123925579,
+          0.778308797710089,
+          1.4560936035841339,
+          0.7249854295122716,
+          0.1835873379716696
+        ]
+      }
+    ],
+    "closed_loop": [
+      {
+        "task": "closed_loop",
+        "model": "mlp_seed42",
+        "episode_id": "id_test_day160",
+        "family": "mlp",
+        "condition": "clean",
+        "training_seed": 42,
+        "steps": 8,
+        "cost": 0.2737996249905869,
+        "energy_kwh": 0.008369615235714889,
+        "comfort_violation_rate": 0.625,
+        "comfort_degree_hours": 0.3302994714726566,
+        "center_tracking_mae_c": 1.6077230363632609,
+        "decision_mean_ms": 1.470965499720478,
+        "decision_p95_ms": 1.963078699191101,
+        "fallback_count": 8,
+        "fallback_reasons": {
+          "no_valid_candidates": 8
+        },
+        "native_context_kpi": {
+          "tdis_tot": 1.844415004341343,
+          "idis_tot": 0,
+          "ener_tot": 0.16634464851829014,
+          "cost_tot": 0.04216836839938657,
+          "emis_tot": 0.027779556302554468,
+          "pele_tot": 0.021657057568547147,
+          "pgas_tot": null,
+          "pdih_tot": null,
+          "time_rat": 3.772285807202434e-05
+        },
+        "native_final_kpi": {
+          "tdis_tot": 2.230668175525223,
+          "idis_tot": 0,
+          "ener_tot": 0.1663882402643095,
+          "cost_tot": 0.042179418907002476,
+          "emis_tot": 0.027786836124139697,
+          "pele_tot": 0.021657057568547147,
+          "pgas_tot": null,
+          "pdih_tot": null,
+          "time_rat": 3.790213452187942e-05
+        },
+        "native_interval_note": "Only additive cumulative KPI differences are meaningful; do not subtract maxima or ratios."
+      },
+      {
+        "task": "closed_loop",
+        "model": "embedded",
+        "episode_id": "id_test_day160",
+        "family": "embedded",
+        "condition": "clean",
+        "training_seed": null,
+        "steps": 8,
+        "cost": 0.2737996249905869,
+        "energy_kwh": 0.008369615235714889,
+        "comfort_violation_rate": 0.625,
+        "comfort_degree_hours": 0.3302994714726566,
+        "center_tracking_mae_c": 1.6077230363632609,
+        "decision_mean_ms": 0.0,
+        "decision_p95_ms": 0.0,
+        "fallback_count": 0,
+        "fallback_reasons": {},
+        "native_context_kpi": {
+          "tdis_tot": 1.844415004341343,
+          "idis_tot": 0,
+          "ener_tot": 0.16634464851829014,
+          "cost_tot": 0.04216836839938657,
+          "emis_tot": 0.027779556302554468,
+          "pele_tot": 0.021657057568547147,
+          "pgas_tot": null,
+          "pdih_tot": null,
+          "time_rat": 3.8021135051348055e-05
+        },
+        "native_final_kpi": {
+          "tdis_tot": 2.230668175525223,
+          "idis_tot": 0,
+          "ener_tot": 0.1663882402643095,
+          "cost_tot": 0.042179418907002476,
+          "emis_tot": 0.027786836124139697,
+          "pele_tot": 0.021657057568547147,
+          "pgas_tot": null,
+          "pdih_tot": null,
+          "time_rat": 3.800987554342358e-05
+        },
+        "native_interval_note": "Only additive cumulative KPI differences are meaningful; do not subtract maxima or ratios."
+      }
+    ],
+    "policy_ranking": [],
+    "prediction_episode_summary": [
+      {
+        "model": "mlp_seed42",
+        "family": "mlp",
+        "seed": 42,
+        "mode": "free_running",
+        "condition": "clean",
+        "horizon": 1,
+        "definition": "endpoint",
+        "variable": "electric_kw",
+        "unit": "kW",
+        "mae_native_mean": 0.8306895132310818,
+        "rmse_native_mean": 0.8398655289025184,
+        "mae_native_episode_sd": {
+          "nonfinite": "nan"
+        },
+        "rmse_native_episode_sd": {
+          "nonfinite": "nan"
+        },
+        "episodes": 1,
+        "episodes_with_valid_error": 1,
+        "requested": 5,
+        "valid_origins": 5,
+        "complete_origins": 5,
+        "valid_points": 5,
+        "failed_origins": 0,
+        "unavailable_origins": 0,
+        "valid_fraction": 1.0,
+        "failure_fraction": 0.0
+      },
+      {
+        "model": "mlp_seed42",
+        "family": "mlp",
+        "seed": 42,
+        "mode": "free_running",
+        "condition": "clean",
+        "horizon": 1,
+        "definition": "endpoint",
+        "variable": "floor_heat_kw",
+        "unit": "kW",
+        "mae_native_mean": 1.856663007523828,
+        "rmse_native_mean": 1.8889790770279316,
+        "mae_native_episode_sd": {
+          "nonfinite": "nan"
+        },
+        "rmse_native_episode_sd": {
+          "nonfinite": "nan"
+        },
+        "episodes": 1,
+        "episodes_with_valid_error": 1,
+        "requested": 5,
+        "valid_origins": 5,
+        "complete_origins": 5,
+        "valid_points": 5,
+        "failed_origins": 0,
+        "unavailable_origins": 0,
+        "valid_fraction": 1.0,
+        "failure_fraction": 0.0
+      },
+      {
+        "model": "mlp_seed42",
+        "family": "mlp",
+        "seed": 42,
+        "mode": "free_running",
+        "condition": "clean",
+        "horizon": 1,
+        "definition": "endpoint",
+        "variable": "interval_energy_kwh",
+        "unit": "kWh",
+        "mae_native_mean": 0.1981790786970466,
+        "rmse_native_mean": 0.20088412951890527,
+        "mae_native_episode_sd": {
+          "nonfinite": "nan"
+        },
+        "rmse_native_episode_sd": {
+          "nonfinite": "nan"
+        },
+        "episodes": 1,
+        "episodes_with_valid_error": 1,
+        "requested": 5,
+        "valid_origins": 5,
+        "complete_origins": 5,
+        "valid_points": 5,
+        "failed_origins": 0,
+        "unavailable_origins": 0,
+        "valid_fraction": 1.0,
+        "failure_fraction": 0.0
+      },
+      {
+        "model": "mlp_seed42",
+        "family": "mlp",
+        "seed": 42,
+        "mode": "free_running",
+        "condition": "clean",
+        "horizon": 1,
+        "definition": "endpoint",
+        "variable": "return_c",
+        "unit": "degC",
+        "mae_native_mean": 0.9744460538971801,
+        "rmse_native_mean": 1.2179223190550672,
+        "mae_native_episode_sd": {
+          "nonfinite": "nan"
+        },
+        "rmse_native_episode_sd": {
+          "nonfinite": "nan"
+        },
+        "episodes": 1,
+        "episodes_with_valid_error": 1,
+        "requested": 5,
+        "valid_origins": 5,
+        "complete_origins": 5,
+        "valid_points": 5,
+        "failed_origins": 0,
+        "unavailable_origins": 0,
+        "valid_fraction": 1.0,
+        "failure_fraction": 0.0
+      },
+      {
+        "model": "mlp_seed42",
+        "family": "mlp",
+        "seed": 42,
+        "mode": "free_running",
+        "condition": "clean",
+        "horizon": 1,
+        "definition": "endpoint",
+        "variable": "supply_c",
+        "unit": "degC",
+        "mae_native_mean": 1.0548906922152284,
+        "rmse_native_mean": 1.064286692892247,
+        "mae_native_episode_sd": {
+          "nonfinite": "nan"
+        },
+        "rmse_native_episode_sd": {
+          "nonfinite": "nan"
+        },
+        "episodes": 1,
+        "episodes_with_valid_error": 1,
+        "requested": 5,
+        "valid_origins": 5,
+        "complete_origins": 5,
+        "valid_points": 5,
+        "failed_origins": 0,
+        "unavailable_origins": 0,
+        "valid_fraction": 1.0,
+        "failure_fraction": 0.0
+      },
+      {
+        "model": "mlp_seed42",
+        "family": "mlp",
+        "seed": 42,
+        "mode": "free_running",
+        "condition": "clean",
+        "horizon": 1,
+        "definition": "endpoint",
+        "variable": "zone_c",
+        "unit": "degC",
+        "mae_native_mean": 0.12475437194551801,
+        "rmse_native_mean": 0.12748698415769041,
+        "mae_native_episode_sd": {
+          "nonfinite": "nan"
+        },
+        "rmse_native_episode_sd": {
+          "nonfinite": "nan"
+        },
+        "episodes": 1,
+        "episodes_with_valid_error": 1,
+        "requested": 5,
+        "valid_origins": 5,
+        "complete_origins": 5,
+        "valid_points": 5,
+        "failed_origins": 0,
+        "unavailable_origins": 0,
+        "valid_fraction": 1.0,
+        "failure_fraction": 0.0
+      },
+      {
+        "model": "mlp_seed42",
+        "family": "mlp",
+        "seed": 42,
+        "mode": "free_running",
+        "condition": "clean",
+        "horizon": 4,
+        "definition": "endpoint",
+        "variable": "electric_kw",
+        "unit": "kW",
+        "mae_native_mean": 0.7234014919961718,
+        "rmse_native_mean": 0.7249854295122716,
+        "mae_native_episode_sd": {
+          "nonfinite": "nan"
+        },
+        "rmse_native_episode_sd": {
+          "nonfinite": "nan"
+        },
+        "episodes": 1,
+        "episodes_with_valid_error": 1,
+        "requested": 5,
+        "valid_origins": 5,
+        "complete_origins": 5,
+        "valid_points": 5,
+        "failed_origins": 0,
+        "unavailable_origins": 0,
+        "valid_fraction": 1.0,
+        "failure_fraction": 0.0
+      },
+      {
+        "model": "mlp_seed42",
+        "family": "mlp",
+        "seed": 42,
+        "mode": "free_running",
+        "condition": "clean",
+        "horizon": 4,
+        "definition": "endpoint",
+        "variable": "floor_heat_kw",
+        "unit": "kW",
+        "mae_native_mean": 1.4405073842396958,
+        "rmse_native_mean": 1.4560936035841339,
+        "mae_native_episode_sd": {
+          "nonfinite": "nan"
+        },
+        "rmse_native_episode_sd": {
+          "nonfinite": "nan"
+        },
+        "episodes": 1,
+        "episodes_with_valid_error": 1,
+        "requested": 5,
+        "valid_origins": 5,
+        "complete_origins": 5,
+        "valid_points": 5,
+        "failed_origins": 0,
+        "unavailable_origins": 0,
+        "valid_fraction": 1.0,
+        "failure_fraction": 0.0
+      },
+      {
+        "model": "mlp_seed42",
+        "family": "mlp",
+        "seed": 42,
+        "mode": "free_running",
+        "condition": "clean",
+        "horizon": 4,
+        "definition": "endpoint",
+        "variable": "interval_energy_kwh",
+        "unit": "kWh",
+        "mae_native_mean": 0.18311379983605466,
+        "rmse_native_mean": 0.1835873379716696,
+        "mae_native_episode_sd": {
+          "nonfinite": "nan"
+        },
+        "rmse_native_episode_sd": {
+          "nonfinite": "nan"
+        },
+        "episodes": 1,
+        "episodes_with_valid_error": 1,
+        "requested": 5,
+        "valid_origins": 5,
+        "complete_origins": 5,
+        "valid_points": 5,
+        "failed_origins": 0,
+        "unavailable_origins": 0,
+        "valid_fraction": 1.0,
+        "failure_fraction": 0.0
+      },
+      {
+        "model": "mlp_seed42",
+        "family": "mlp",
+        "seed": 42,
+        "mode": "free_running",
+        "condition": "clean",
+        "horizon": 4,
+        "definition": "endpoint",
+        "variable": "return_c",
+        "unit": "degC",
+        "mae_native_mean": 0.5712471098124766,
+        "rmse_native_mean": 0.778308797710089,
+        "mae_native_episode_sd": {
+          "nonfinite": "nan"
+        },
+        "rmse_native_episode_sd": {
+          "nonfinite": "nan"
+        },
+        "episodes": 1,
+        "episodes_with_valid_error": 1,
+        "requested": 5,
+        "valid_origins": 5,
+        "complete_origins": 5,
+        "valid_points": 5,
+        "failed_origins": 0,
+        "unavailable_origins": 0,
+        "valid_fraction": 1.0,
+        "failure_fraction": 0.0
+      },
+      {
+        "model": "mlp_seed42",
+        "family": "mlp",
+        "seed": 42,
+        "mode": "free_running",
+        "condition": "clean",
+        "horizon": 4,
+        "definition": "endpoint",
+        "variable": "supply_c",
+        "unit": "degC",
+        "mae_native_mean": 0.9654079274905634,
+        "rmse_native_mean": 0.9881700123925579,
+        "mae_native_episode_sd": {
+          "nonfinite": "nan"
+        },
+        "rmse_native_episode_sd": {
+          "nonfinite": "nan"
+        },
+        "episodes": 1,
+        "episodes_with_valid_error": 1,
+        "requested": 5,
+        "valid_origins": 5,
+        "complete_origins": 5,
+        "valid_points": 5,
+        "failed_origins": 0,
+        "unavailable_origins": 0,
+        "valid_fraction": 1.0,
+        "failure_fraction": 0.0
+      },
+      {
+        "model": "mlp_seed42",
+        "family": "mlp",
+        "seed": 42,
+        "mode": "free_running",
+        "condition": "clean",
+        "horizon": 4,
+        "definition": "endpoint",
+        "variable": "zone_c",
+        "unit": "degC",
+        "mae_native_mean": 0.09426967863567626,
+        "rmse_native_mean": 0.10164321791860932,
+        "mae_native_episode_sd": {
+          "nonfinite": "nan"
+        },
+        "rmse_native_episode_sd": {
+          "nonfinite": "nan"
+        },
+        "episodes": 1,
+        "episodes_with_valid_error": 1,
+        "requested": 5,
+        "valid_origins": 5,
+        "complete_origins": 5,
+        "valid_points": 5,
+        "failed_origins": 0,
+        "unavailable_origins": 0,
+        "valid_fraction": 1.0,
+        "failure_fraction": 0.0
+      },
+      {
+        "model": "mlp_seed42",
+        "family": "mlp",
+        "seed": 42,
+        "mode": "teacher_forcing",
+        "condition": "clean",
+        "horizon": 1,
+        "definition": "endpoint",
+        "variable": "electric_kw",
+        "unit": "kW",
+        "mae_native_mean": 0.8306895132310818,
+        "rmse_native_mean": 0.8398655289025184,
+        "mae_native_episode_sd": {
+          "nonfinite": "nan"
+        },
+        "rmse_native_episode_sd": {
+          "nonfinite": "nan"
+        },
+        "episodes": 1,
+        "episodes_with_valid_error": 1,
+        "requested": 5,
+        "valid_origins": 5,
+        "complete_origins": 5,
+        "valid_points": 5,
+        "failed_origins": 0,
+        "unavailable_origins": 0,
+        "valid_fraction": 1.0,
+        "failure_fraction": 0.0
+      },
+      {
+        "model": "mlp_seed42",
+        "family": "mlp",
+        "seed": 42,
+        "mode": "teacher_forcing",
+        "condition": "clean",
+        "horizon": 1,
+        "definition": "endpoint",
+        "variable": "floor_heat_kw",
+        "unit": "kW",
+        "mae_native_mean": 1.856663007523828,
+        "rmse_native_mean": 1.8889790770279316,
+        "mae_native_episode_sd": {
+          "nonfinite": "nan"
+        },
+        "rmse_native_episode_sd": {
+          "nonfinite": "nan"
+        },
+        "episodes": 1,
+        "episodes_with_valid_error": 1,
+        "requested": 5,
+        "valid_origins": 5,
+        "complete_origins": 5,
+        "valid_points": 5,
+        "failed_origins": 0,
+        "unavailable_origins": 0,
+        "valid_fraction": 1.0,
+        "failure_fraction": 0.0
+      },
+      {
+        "model": "mlp_seed42",
+        "family": "mlp",
+        "seed": 42,
+        "mode": "teacher_forcing",
+        "condition": "clean",
+        "horizon": 1,
+        "definition": "endpoint",
+        "variable": "interval_energy_kwh",
+        "unit": "kWh",
+        "mae_native_mean": 0.1981790786970466,
+        "rmse_native_mean": 0.20088412951890527,
+        "mae_native_episode_sd": {
+          "nonfinite": "nan"
+        },
+        "rmse_native_episode_sd": {
+          "nonfinite": "nan"
+        },
+        "episodes": 1,
+        "episodes_with_valid_error": 1,
+        "requested": 5,
+        "valid_origins": 5,
+        "complete_origins": 5,
+        "valid_points": 5,
+        "failed_origins": 0,
+        "unavailable_origins": 0,
+        "valid_fraction": 1.0,
+        "failure_fraction": 0.0
+      },
+      {
+        "model": "mlp_seed42",
+        "family": "mlp",
+        "seed": 42,
+        "mode": "teacher_forcing",
+        "condition": "clean",
+        "horizon": 1,
+        "definition": "endpoint",
+        "variable": "return_c",
+        "unit": "degC",
+        "mae_native_mean": 0.9744460538971801,
+        "rmse_native_mean": 1.2179223190550672,
+        "mae_native_episode_sd": {
+          "nonfinite": "nan"
+        },
+        "rmse_native_episode_sd": {
+          "nonfinite": "nan"
+        },
+        "episodes": 1,
+        "episodes_with_valid_error": 1,
+        "requested": 5,
+        "valid_origins": 5,
+        "complete_origins": 5,
+        "valid_points": 5,
+        "failed_origins": 0,
+        "unavailable_origins": 0,
+        "valid_fraction": 1.0,
+        "failure_fraction": 0.0
+      },
+      {
+        "model": "mlp_seed42",
+        "family": "mlp",
+        "seed": 42,
+        "mode": "teacher_forcing",
+        "condition": "clean",
+        "horizon": 1,
+        "definition": "endpoint",
+        "variable": "supply_c",
+        "unit": "degC",
+        "mae_native_mean": 1.0548906922152284,
+        "rmse_native_mean": 1.064286692892247,
+        "mae_native_episode_sd": {
+          "nonfinite": "nan"
+        },
+        "rmse_native_episode_sd": {
+          "nonfinite": "nan"
+        },
+        "episodes": 1,
+        "episodes_with_valid_error": 1,
+        "requested": 5,
+        "valid_origins": 5,
+        "complete_origins": 5,
+        "valid_points": 5,
+        "failed_origins": 0,
+        "unavailable_origins": 0,
+        "valid_fraction": 1.0,
+        "failure_fraction": 0.0
+      },
+      {
+        "model": "mlp_seed42",
+        "family": "mlp",
+        "seed": 42,
+        "mode": "teacher_forcing",
+        "condition": "clean",
+        "horizon": 1,
+        "definition": "endpoint",
+        "variable": "zone_c",
+        "unit": "degC",
+        "mae_native_mean": 0.12475437194551801,
+        "rmse_native_mean": 0.12748698415769041,
+        "mae_native_episode_sd": {
+          "nonfinite": "nan"
+        },
+        "rmse_native_episode_sd": {
+          "nonfinite": "nan"
+        },
+        "episodes": 1,
+        "episodes_with_valid_error": 1,
+        "requested": 5,
+        "valid_origins": 5,
+        "complete_origins": 5,
+        "valid_points": 5,
+        "failed_origins": 0,
+        "unavailable_origins": 0,
+        "valid_fraction": 1.0,
+        "failure_fraction": 0.0
+      },
+      {
+        "model": "mlp_seed42",
+        "family": "mlp",
+        "seed": 42,
+        "mode": "teacher_forcing",
+        "condition": "clean",
+        "horizon": 4,
+        "definition": "endpoint",
+        "variable": "electric_kw",
+        "unit": "kW",
+        "mae_native_mean": 0.6597360310452182,
+        "rmse_native_mean": 0.6621756890864616,
+        "mae_native_episode_sd": {
+          "nonfinite": "nan"
+        },
+        "rmse_native_episode_sd": {
+          "nonfinite": "nan"
+        },
+        "episodes": 1,
+        "episodes_with_valid_error": 1,
+        "requested": 5,
+        "valid_origins": 5,
+        "complete_origins": 5,
+        "valid_points": 5,
+        "failed_origins": 0,
+        "unavailable_origins": 0,
+        "valid_fraction": 1.0,
+        "failure_fraction": 0.0
+      },
+      {
+        "model": "mlp_seed42",
+        "family": "mlp",
+        "seed": 42,
+        "mode": "teacher_forcing",
+        "condition": "clean",
+        "horizon": 4,
+        "definition": "endpoint",
+        "variable": "floor_heat_kw",
+        "unit": "kW",
+        "mae_native_mean": 1.2907375324124264,
+        "rmse_native_mean": 1.3070895295357785,
+        "mae_native_episode_sd": {
+          "nonfinite": "nan"
+        },
+        "rmse_native_episode_sd": {
+          "nonfinite": "nan"
+        },
+        "episodes": 1,
+        "episodes_with_valid_error": 1,
+        "requested": 5,
+        "valid_origins": 5,
+        "complete_origins": 5,
+        "valid_points": 5,
+        "failed_origins": 0,
+        "unavailable_origins": 0,
+        "valid_fraction": 1.0,
+        "failure_fraction": 0.0
+      },
+      {
+        "model": "mlp_seed42",
+        "family": "mlp",
+        "seed": 42,
+        "mode": "teacher_forcing",
+        "condition": "clean",
+        "horizon": 4,
+        "definition": "endpoint",
+        "variable": "interval_energy_kwh",
+        "unit": "kWh",
+        "mae_native_mean": 0.16074333471754917,
+        "rmse_native_mean": 0.1611929882562025,
+        "mae_native_episode_sd": {
+          "nonfinite": "nan"
+        },
+        "rmse_native_episode_sd": {
+          "nonfinite": "nan"
+        },
+        "episodes": 1,
+        "episodes_with_valid_error": 1,
+        "requested": 5,
+        "valid_origins": 5,
+        "complete_origins": 5,
+        "valid_points": 5,
+        "failed_origins": 0,
+        "unavailable_origins": 0,
+        "valid_fraction": 1.0,
+        "failure_fraction": 0.0
+      },
+      {
+        "model": "mlp_seed42",
+        "family": "mlp",
+        "seed": 42,
+        "mode": "teacher_forcing",
+        "condition": "clean",
+        "horizon": 4,
+        "definition": "endpoint",
+        "variable": "return_c",
+        "unit": "degC",
+        "mae_native_mean": 0.25280898299260174,
+        "rmse_native_mean": 0.2746100864971887,
+        "mae_native_episode_sd": {
+          "nonfinite": "nan"
+        },
+        "rmse_native_episode_sd": {
+          "nonfinite": "nan"
+        },
+        "episodes": 1,
+        "episodes_with_valid_error": 1,
+        "requested": 5,
+        "valid_origins": 5,
+        "complete_origins": 5,
+        "valid_points": 5,
+        "failed_origins": 0,
+        "unavailable_origins": 0,
+        "valid_fraction": 1.0,
+        "failure_fraction": 0.0
+      },
+      {
+        "model": "mlp_seed42",
+        "family": "mlp",
+        "seed": 42,
+        "mode": "teacher_forcing",
+        "condition": "clean",
+        "horizon": 4,
+        "definition": "endpoint",
+        "variable": "supply_c",
+        "unit": "degC",
+        "mae_native_mean": 1.0121865282449272,
+        "rmse_native_mean": 1.0249496933787225,
+        "mae_native_episode_sd": {
+          "nonfinite": "nan"
+        },
+        "rmse_native_episode_sd": {
+          "nonfinite": "nan"
+        },
+        "episodes": 1,
+        "episodes_with_valid_error": 1,
+        "requested": 5,
+        "valid_origins": 5,
+        "complete_origins": 5,
+        "valid_points": 5,
+        "failed_origins": 0,
+        "unavailable_origins": 0,
+        "valid_fraction": 1.0,
+        "failure_fraction": 0.0
+      },
+      {
+        "model": "mlp_seed42",
+        "family": "mlp",
+        "seed": 42,
+        "mode": "teacher_forcing",
+        "condition": "clean",
+        "horizon": 4,
+        "definition": "endpoint",
+        "variable": "zone_c",
+        "unit": "degC",
+        "mae_native_mean": 0.05291229622109554,
+        "rmse_native_mean": 0.06322408979968935,
+        "mae_native_episode_sd": {
+          "nonfinite": "nan"
+        },
+        "rmse_native_episode_sd": {
+          "nonfinite": "nan"
+        },
+        "episodes": 1,
+        "episodes_with_valid_error": 1,
+        "requested": 5,
+        "valid_origins": 5,
+        "complete_origins": 5,
+        "valid_points": 5,
+        "failed_origins": 0,
+        "unavailable_origins": 0,
+        "valid_fraction": 1.0,
+        "failure_fraction": 0.0
+      }
+    ],
+    "prediction_seed_summary": [
+      {
+        "family": "mlp",
+        "mode": "free_running",
+        "condition": "clean",
+        "horizon": 1,
+        "definition": "endpoint",
+        "variable": "electric_kw",
+        "unit": "kW",
+        "mae_native_mean": 0.8306895132310818,
+        "rmse_native_mean": 0.8398655289025184,
+        "mae_native_seed_sd": {
+          "nonfinite": "nan"
+        },
+        "rmse_native_seed_sd": {
+          "nonfinite": "nan"
+        },
+        "runs": 1,
+        "runs_with_valid_error": 1,
+        "requested_per_run": 5,
+        "requested_model_origins": 5,
+        "failed_model_origins": 0,
+        "unavailable_model_origins": 0,
+        "valid_fraction_mean": 1.0,
+        "valid_fraction_seed_sd": {
+          "nonfinite": "nan"
+        },
+        "failure_fraction_mean": 0.0,
+        "failure_fraction_seed_sd": {
+          "nonfinite": "nan"
+        }
+      },
+      {
+        "family": "mlp",
+        "mode": "free_running",
+        "condition": "clean",
+        "horizon": 1,
+        "definition": "endpoint",
+        "variable": "floor_heat_kw",
+        "unit": "kW",
+        "mae_native_mean": 1.856663007523828,
+        "rmse_native_mean": 1.8889790770279316,
+        "mae_native_seed_sd": {
+          "nonfinite": "nan"
+        },
+        "rmse_native_seed_sd": {
+          "nonfinite": "nan"
+        },
+        "runs": 1,
+        "runs_with_valid_error": 1,
+        "requested_per_run": 5,
+        "requested_model_origins": 5,
+        "failed_model_origins": 0,
+        "unavailable_model_origins": 0,
+        "valid_fraction_mean": 1.0,
+        "valid_fraction_seed_sd": {
+          "nonfinite": "nan"
+        },
+        "failure_fraction_mean": 0.0,
+        "failure_fraction_seed_sd": {
+          "nonfinite": "nan"
+        }
+      },
+      {
+        "family": "mlp",
+        "mode": "free_running",
+        "condition": "clean",
+        "horizon": 1,
+        "definition": "endpoint",
+        "variable": "interval_energy_kwh",
+        "unit": "kWh",
+        "mae_native_mean": 0.1981790786970466,
+        "rmse_native_mean": 0.20088412951890527,
+        "mae_native_seed_sd": {
+          "nonfinite": "nan"
+        },
+        "rmse_native_seed_sd": {
+          "nonfinite": "nan"
+        },
+        "runs": 1,
+        "runs_with_valid_error": 1,
+        "requested_per_run": 5,
+        "requested_model_origins": 5,
+        "failed_model_origins": 0,
+        "unavailable_model_origins": 0,
+        "valid_fraction_mean": 1.0,
+        "valid_fraction_seed_sd": {
+          "nonfinite": "nan"
+        },
+        "failure_fraction_mean": 0.0,
+        "failure_fraction_seed_sd": {
+          "nonfinite": "nan"
+        }
+      },
+      {
+        "family": "mlp",
+        "mode": "free_running",
+        "condition": "clean",
+        "horizon": 1,
+        "definition": "endpoint",
+        "variable": "return_c",
+        "unit": "degC",
+        "mae_native_mean": 0.9744460538971801,
+        "rmse_native_mean": 1.2179223190550672,
+        "mae_native_seed_sd": {
+          "nonfinite": "nan"
+        },
+        "rmse_native_seed_sd": {
+          "nonfinite": "nan"
+        },
+        "runs": 1,
+        "runs_with_valid_error": 1,
+        "requested_per_run": 5,
+        "requested_model_origins": 5,
+        "failed_model_origins": 0,
+        "unavailable_model_origins": 0,
+        "valid_fraction_mean": 1.0,
+        "valid_fraction_seed_sd": {
+          "nonfinite": "nan"
+        },
+        "failure_fraction_mean": 0.0,
+        "failure_fraction_seed_sd": {
+          "nonfinite": "nan"
+        }
+      },
+      {
+        "family": "mlp",
+        "mode": "free_running",
+        "condition": "clean",
+        "horizon": 1,
+        "definition": "endpoint",
+        "variable": "supply_c",
+        "unit": "degC",
+        "mae_native_mean": 1.0548906922152284,
+        "rmse_native_mean": 1.064286692892247,
+        "mae_native_seed_sd": {
+          "nonfinite": "nan"
+        },
+        "rmse_native_seed_sd": {
+          "nonfinite": "nan"
+        },
+        "runs": 1,
+        "runs_with_valid_error": 1,
+        "requested_per_run": 5,
+        "requested_model_origins": 5,
+        "failed_model_origins": 0,
+        "unavailable_model_origins": 0,
+        "valid_fraction_mean": 1.0,
+        "valid_fraction_seed_sd": {
+          "nonfinite": "nan"
+        },
+        "failure_fraction_mean": 0.0,
+        "failure_fraction_seed_sd": {
+          "nonfinite": "nan"
+        }
+      },
+      {
+        "family": "mlp",
+        "mode": "free_running",
+        "condition": "clean",
+        "horizon": 1,
+        "definition": "endpoint",
+        "variable": "zone_c",
+        "unit": "degC",
+        "mae_native_mean": 0.12475437194551801,
+        "rmse_native_mean": 0.12748698415769041,
+        "mae_native_seed_sd": {
+          "nonfinite": "nan"
+        },
+        "rmse_native_seed_sd": {
+          "nonfinite": "nan"
+        },
+        "runs": 1,
+        "runs_with_valid_error": 1,
+        "requested_per_run": 5,
+        "requested_model_origins": 5,
+        "failed_model_origins": 0,
+        "unavailable_model_origins": 0,
+        "valid_fraction_mean": 1.0,
+        "valid_fraction_seed_sd": {
+          "nonfinite": "nan"
+        },
+        "failure_fraction_mean": 0.0,
+        "failure_fraction_seed_sd": {
+          "nonfinite": "nan"
+        }
+      },
+      {
+        "family": "mlp",
+        "mode": "free_running",
+        "condition": "clean",
+        "horizon": 4,
+        "definition": "endpoint",
+        "variable": "electric_kw",
+        "unit": "kW",
+        "mae_native_mean": 0.7234014919961718,
+        "rmse_native_mean": 0.7249854295122716,
+        "mae_native_seed_sd": {
+          "nonfinite": "nan"
+        },
+        "rmse_native_seed_sd": {
+          "nonfinite": "nan"
+        },
+        "runs": 1,
+        "runs_with_valid_error": 1,
+        "requested_per_run": 5,
+        "requested_model_origins": 5,
+        "failed_model_origins": 0,
+        "unavailable_model_origins": 0,
+        "valid_fraction_mean": 1.0,
+        "valid_fraction_seed_sd": {
+          "nonfinite": "nan"
+        },
+        "failure_fraction_mean": 0.0,
+        "failure_fraction_seed_sd": {
+          "nonfinite": "nan"
+        }
+      },
+      {
+        "family": "mlp",
+        "mode": "free_running",
+        "condition": "clean",
+        "horizon": 4,
+        "definition": "endpoint",
+        "variable": "floor_heat_kw",
+        "unit": "kW",
+        "mae_native_mean": 1.4405073842396958,
+        "rmse_native_mean": 1.4560936035841339,
+        "mae_native_seed_sd": {
+          "nonfinite": "nan"
+        },
+        "rmse_native_seed_sd": {
+          "nonfinite": "nan"
+        },
+        "runs": 1,
+        "runs_with_valid_error": 1,
+        "requested_per_run": 5,
+        "requested_model_origins": 5,
+        "failed_model_origins": 0,
+        "unavailable_model_origins": 0,
+        "valid_fraction_mean": 1.0,
+        "valid_fraction_seed_sd": {
+          "nonfinite": "nan"
+        },
+        "failure_fraction_mean": 0.0,
+        "failure_fraction_seed_sd": {
+          "nonfinite": "nan"
+        }
+      },
+      {
+        "family": "mlp",
+        "mode": "free_running",
+        "condition": "clean",
+        "horizon": 4,
+        "definition": "endpoint",
+        "variable": "interval_energy_kwh",
+        "unit": "kWh",
+        "mae_native_mean": 0.18311379983605466,
+        "rmse_native_mean": 0.1835873379716696,
+        "mae_native_seed_sd": {
+          "nonfinite": "nan"
+        },
+        "rmse_native_seed_sd": {
+          "nonfinite": "nan"
+        },
+        "runs": 1,
+        "runs_with_valid_error": 1,
+        "requested_per_run": 5,
+        "requested_model_origins": 5,
+        "failed_model_origins": 0,
+        "unavailable_model_origins": 0,
+        "valid_fraction_mean": 1.0,
+        "valid_fraction_seed_sd": {
+          "nonfinite": "nan"
+        },
+        "failure_fraction_mean": 0.0,
+        "failure_fraction_seed_sd": {
+          "nonfinite": "nan"
+        }
+      },
+      {
+        "family": "mlp",
+        "mode": "free_running",
+        "condition": "clean",
+        "horizon": 4,
+        "definition": "endpoint",
+        "variable": "return_c",
+        "unit": "degC",
+        "mae_native_mean": 0.5712471098124766,
+        "rmse_native_mean": 0.778308797710089,
+        "mae_native_seed_sd": {
+          "nonfinite": "nan"
+        },
+        "rmse_native_seed_sd": {
+          "nonfinite": "nan"
+        },
+        "runs": 1,
+        "runs_with_valid_error": 1,
+        "requested_per_run": 5,
+        "requested_model_origins": 5,
+        "failed_model_origins": 0,
+        "unavailable_model_origins": 0,
+        "valid_fraction_mean": 1.0,
+        "valid_fraction_seed_sd": {
+          "nonfinite": "nan"
+        },
+        "failure_fraction_mean": 0.0,
+        "failure_fraction_seed_sd": {
+          "nonfinite": "nan"
+        }
+      },
+      {
+        "family": "mlp",
+        "mode": "free_running",
+        "condition": "clean",
+        "horizon": 4,
+        "definition": "endpoint",
+        "variable": "supply_c",
+        "unit": "degC",
+        "mae_native_mean": 0.9654079274905634,
+        "rmse_native_mean": 0.9881700123925579,
+        "mae_native_seed_sd": {
+          "nonfinite": "nan"
+        },
+        "rmse_native_seed_sd": {
+          "nonfinite": "nan"
+        },
+        "runs": 1,
+        "runs_with_valid_error": 1,
+        "requested_per_run": 5,
+        "requested_model_origins": 5,
+        "failed_model_origins": 0,
+        "unavailable_model_origins": 0,
+        "valid_fraction_mean": 1.0,
+        "valid_fraction_seed_sd": {
+          "nonfinite": "nan"
+        },
+        "failure_fraction_mean": 0.0,
+        "failure_fraction_seed_sd": {
+          "nonfinite": "nan"
+        }
+      },
+      {
+        "family": "mlp",
+        "mode": "free_running",
+        "condition": "clean",
+        "horizon": 4,
+        "definition": "endpoint",
+        "variable": "zone_c",
+        "unit": "degC",
+        "mae_native_mean": 0.09426967863567626,
+        "rmse_native_mean": 0.10164321791860932,
+        "mae_native_seed_sd": {
+          "nonfinite": "nan"
+        },
+        "rmse_native_seed_sd": {
+          "nonfinite": "nan"
+        },
+        "runs": 1,
+        "runs_with_valid_error": 1,
+        "requested_per_run": 5,
+        "requested_model_origins": 5,
+        "failed_model_origins": 0,
+        "unavailable_model_origins": 0,
+        "valid_fraction_mean": 1.0,
+        "valid_fraction_seed_sd": {
+          "nonfinite": "nan"
+        },
+        "failure_fraction_mean": 0.0,
+        "failure_fraction_seed_sd": {
+          "nonfinite": "nan"
+        }
+      },
+      {
+        "family": "mlp",
+        "mode": "teacher_forcing",
+        "condition": "clean",
+        "horizon": 1,
+        "definition": "endpoint",
+        "variable": "electric_kw",
+        "unit": "kW",
+        "mae_native_mean": 0.8306895132310818,
+        "rmse_native_mean": 0.8398655289025184,
+        "mae_native_seed_sd": {
+          "nonfinite": "nan"
+        },
+        "rmse_native_seed_sd": {
+          "nonfinite": "nan"
+        },
+        "runs": 1,
+        "runs_with_valid_error": 1,
+        "requested_per_run": 5,
+        "requested_model_origins": 5,
+        "failed_model_origins": 0,
+        "unavailable_model_origins": 0,
+        "valid_fraction_mean": 1.0,
+        "valid_fraction_seed_sd": {
+          "nonfinite": "nan"
+        },
+        "failure_fraction_mean": 0.0,
+        "failure_fraction_seed_sd": {
+          "nonfinite": "nan"
+        }
+      },
+      {
+        "family": "mlp",
+        "mode": "teacher_forcing",
+        "condition": "clean",
+        "horizon": 1,
+        "definition": "endpoint",
+        "variable": "floor_heat_kw",
+        "unit": "kW",
+        "mae_native_mean": 1.856663007523828,
+        "rmse_native_mean": 1.8889790770279316,
+        "mae_native_seed_sd": {
+          "nonfinite": "nan"
+        },
+        "rmse_native_seed_sd": {
+          "nonfinite": "nan"
+        },
+        "runs": 1,
+        "runs_with_valid_error": 1,
+        "requested_per_run": 5,
+        "requested_model_origins": 5,
+        "failed_model_origins": 0,
+        "unavailable_model_origins": 0,
+        "valid_fraction_mean": 1.0,
+        "valid_fraction_seed_sd": {
+          "nonfinite": "nan"
+        },
+        "failure_fraction_mean": 0.0,
+        "failure_fraction_seed_sd": {
+          "nonfinite": "nan"
+        }
+      },
+      {
+        "family": "mlp",
+        "mode": "teacher_forcing",
+        "condition": "clean",
+        "horizon": 1,
+        "definition": "endpoint",
+        "variable": "interval_energy_kwh",
+        "unit": "kWh",
+        "mae_native_mean": 0.1981790786970466,
+        "rmse_native_mean": 0.20088412951890527,
+        "mae_native_seed_sd": {
+          "nonfinite": "nan"
+        },
+        "rmse_native_seed_sd": {
+          "nonfinite": "nan"
+        },
+        "runs": 1,
+        "runs_with_valid_error": 1,
+        "requested_per_run": 5,
+        "requested_model_origins": 5,
+        "failed_model_origins": 0,
+        "unavailable_model_origins": 0,
+        "valid_fraction_mean": 1.0,
+        "valid_fraction_seed_sd": {
+          "nonfinite": "nan"
+        },
+        "failure_fraction_mean": 0.0,
+        "failure_fraction_seed_sd": {
+          "nonfinite": "nan"
+        }
+      },
+      {
+        "family": "mlp",
+        "mode": "teacher_forcing",
+        "condition": "clean",
+        "horizon": 1,
+        "definition": "endpoint",
+        "variable": "return_c",
+        "unit": "degC",
+        "mae_native_mean": 0.9744460538971801,
+        "rmse_native_mean": 1.2179223190550672,
+        "mae_native_seed_sd": {
+          "nonfinite": "nan"
+        },
+        "rmse_native_seed_sd": {
+          "nonfinite": "nan"
+        },
+        "runs": 1,
+        "runs_with_valid_error": 1,
+        "requested_per_run": 5,
+        "requested_model_origins": 5,
+        "failed_model_origins": 0,
+        "unavailable_model_origins": 0,
+        "valid_fraction_mean": 1.0,
+        "valid_fraction_seed_sd": {
+          "nonfinite": "nan"
+        },
+        "failure_fraction_mean": 0.0,
+        "failure_fraction_seed_sd": {
+          "nonfinite": "nan"
+        }
+      },
+      {
+        "family": "mlp",
+        "mode": "teacher_forcing",
+        "condition": "clean",
+        "horizon": 1,
+        "definition": "endpoint",
+        "variable": "supply_c",
+        "unit": "degC",
+        "mae_native_mean": 1.0548906922152284,
+        "rmse_native_mean": 1.064286692892247,
+        "mae_native_seed_sd": {
+          "nonfinite": "nan"
+        },
+        "rmse_native_seed_sd": {
+          "nonfinite": "nan"
+        },
+        "runs": 1,
+        "runs_with_valid_error": 1,
+        "requested_per_run": 5,
+        "requested_model_origins": 5,
+        "failed_model_origins": 0,
+        "unavailable_model_origins": 0,
+        "valid_fraction_mean": 1.0,
+        "valid_fraction_seed_sd": {
+          "nonfinite": "nan"
+        },
+        "failure_fraction_mean": 0.0,
+        "failure_fraction_seed_sd": {
+          "nonfinite": "nan"
+        }
+      },
+      {
+        "family": "mlp",
+        "mode": "teacher_forcing",
+        "condition": "clean",
+        "horizon": 1,
+        "definition": "endpoint",
+        "variable": "zone_c",
+        "unit": "degC",
+        "mae_native_mean": 0.12475437194551801,
+        "rmse_native_mean": 0.12748698415769041,
+        "mae_native_seed_sd": {
+          "nonfinite": "nan"
+        },
+        "rmse_native_seed_sd": {
+          "nonfinite": "nan"
+        },
+        "runs": 1,
+        "runs_with_valid_error": 1,
+        "requested_per_run": 5,
+        "requested_model_origins": 5,
+        "failed_model_origins": 0,
+        "unavailable_model_origins": 0,
+        "valid_fraction_mean": 1.0,
+        "valid_fraction_seed_sd": {
+          "nonfinite": "nan"
+        },
+        "failure_fraction_mean": 0.0,
+        "failure_fraction_seed_sd": {
+          "nonfinite": "nan"
+        }
+      },
+      {
+        "family": "mlp",
+        "mode": "teacher_forcing",
+        "condition": "clean",
+        "horizon": 4,
+        "definition": "endpoint",
+        "variable": "electric_kw",
+        "unit": "kW",
+        "mae_native_mean": 0.6597360310452182,
+        "rmse_native_mean": 0.6621756890864616,
+        "mae_native_seed_sd": {
+          "nonfinite": "nan"
+        },
+        "rmse_native_seed_sd": {
+          "nonfinite": "nan"
+        },
+        "runs": 1,
+        "runs_with_valid_error": 1,
+        "requested_per_run": 5,
+        "requested_model_origins": 5,
+        "failed_model_origins": 0,
+        "unavailable_model_origins": 0,
+        "valid_fraction_mean": 1.0,
+        "valid_fraction_seed_sd": {
+          "nonfinite": "nan"
+        },
+        "failure_fraction_mean": 0.0,
+        "failure_fraction_seed_sd": {
+          "nonfinite": "nan"
+        }
+      },
+      {
+        "family": "mlp",
+        "mode": "teacher_forcing",
+        "condition": "clean",
+        "horizon": 4,
+        "definition": "endpoint",
+        "variable": "floor_heat_kw",
+        "unit": "kW",
+        "mae_native_mean": 1.2907375324124264,
+        "rmse_native_mean": 1.3070895295357785,
+        "mae_native_seed_sd": {
+          "nonfinite": "nan"
+        },
+        "rmse_native_seed_sd": {
+          "nonfinite": "nan"
+        },
+        "runs": 1,
+        "runs_with_valid_error": 1,
+        "requested_per_run": 5,
+        "requested_model_origins": 5,
+        "failed_model_origins": 0,
+        "unavailable_model_origins": 0,
+        "valid_fraction_mean": 1.0,
+        "valid_fraction_seed_sd": {
+          "nonfinite": "nan"
+        },
+        "failure_fraction_mean": 0.0,
+        "failure_fraction_seed_sd": {
+          "nonfinite": "nan"
+        }
+      },
+      {
+        "family": "mlp",
+        "mode": "teacher_forcing",
+        "condition": "clean",
+        "horizon": 4,
+        "definition": "endpoint",
+        "variable": "interval_energy_kwh",
+        "unit": "kWh",
+        "mae_native_mean": 0.16074333471754917,
+        "rmse_native_mean": 0.1611929882562025,
+        "mae_native_seed_sd": {
+          "nonfinite": "nan"
+        },
+        "rmse_native_seed_sd": {
+          "nonfinite": "nan"
+        },
+        "runs": 1,
+        "runs_with_valid_error": 1,
+        "requested_per_run": 5,
+        "requested_model_origins": 5,
+        "failed_model_origins": 0,
+        "unavailable_model_origins": 0,
+        "valid_fraction_mean": 1.0,
+        "valid_fraction_seed_sd": {
+          "nonfinite": "nan"
+        },
+        "failure_fraction_mean": 0.0,
+        "failure_fraction_seed_sd": {
+          "nonfinite": "nan"
+        }
+      },
+      {
+        "family": "mlp",
+        "mode": "teacher_forcing",
+        "condition": "clean",
+        "horizon": 4,
+        "definition": "endpoint",
+        "variable": "return_c",
+        "unit": "degC",
+        "mae_native_mean": 0.25280898299260174,
+        "rmse_native_mean": 0.2746100864971887,
+        "mae_native_seed_sd": {
+          "nonfinite": "nan"
+        },
+        "rmse_native_seed_sd": {
+          "nonfinite": "nan"
+        },
+        "runs": 1,
+        "runs_with_valid_error": 1,
+        "requested_per_run": 5,
+        "requested_model_origins": 5,
+        "failed_model_origins": 0,
+        "unavailable_model_origins": 0,
+        "valid_fraction_mean": 1.0,
+        "valid_fraction_seed_sd": {
+          "nonfinite": "nan"
+        },
+        "failure_fraction_mean": 0.0,
+        "failure_fraction_seed_sd": {
+          "nonfinite": "nan"
+        }
+      },
+      {
+        "family": "mlp",
+        "mode": "teacher_forcing",
+        "condition": "clean",
+        "horizon": 4,
+        "definition": "endpoint",
+        "variable": "supply_c",
+        "unit": "degC",
+        "mae_native_mean": 1.0121865282449272,
+        "rmse_native_mean": 1.0249496933787225,
+        "mae_native_seed_sd": {
+          "nonfinite": "nan"
+        },
+        "rmse_native_seed_sd": {
+          "nonfinite": "nan"
+        },
+        "runs": 1,
+        "runs_with_valid_error": 1,
+        "requested_per_run": 5,
+        "requested_model_origins": 5,
+        "failed_model_origins": 0,
+        "unavailable_model_origins": 0,
+        "valid_fraction_mean": 1.0,
+        "valid_fraction_seed_sd": {
+          "nonfinite": "nan"
+        },
+        "failure_fraction_mean": 0.0,
+        "failure_fraction_seed_sd": {
+          "nonfinite": "nan"
+        }
+      },
+      {
+        "family": "mlp",
+        "mode": "teacher_forcing",
+        "condition": "clean",
+        "horizon": 4,
+        "definition": "endpoint",
+        "variable": "zone_c",
+        "unit": "degC",
+        "mae_native_mean": 0.05291229622109554,
+        "rmse_native_mean": 0.06322408979968935,
+        "mae_native_seed_sd": {
+          "nonfinite": "nan"
+        },
+        "rmse_native_seed_sd": {
+          "nonfinite": "nan"
+        },
+        "runs": 1,
+        "runs_with_valid_error": 1,
+        "requested_per_run": 5,
+        "requested_model_origins": 5,
+        "failed_model_origins": 0,
+        "unavailable_model_origins": 0,
+        "valid_fraction_mean": 1.0,
+        "valid_fraction_seed_sd": {
+          "nonfinite": "nan"
+        },
+        "failure_fraction_mean": 0.0,
+        "failure_fraction_seed_sd": {
+          "nonfinite": "nan"
+        }
+      }
+    ]
+  }
+}

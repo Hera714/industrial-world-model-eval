@@ -1,0 +1,31 @@
+{
+  "status": "failed",
+  "request": "test",
+  "events": [
+    {
+      "tool": "validate_config",
+      "result": {
+        "ok": false,
+        "result": null,
+        "error": {
+          "message": "bad config"
+        }
+      }
+    }
+  ],
+  "intent": {
+    "environment": "boptest",
+    "models": [
+      "arx"
+    ]
+  },
+  "model_metadata": {
+    "model": "mock",
+    "temperature": 0
+  },
+  "system_prompt": "你是楼宇评测配置助手。只输出 JSON 对象，字段严格为 environment 和 models。environment 只能是 boptest；models 是用户明确指定的检查点名称列表。无法确定或要求额外功能时返回 {\"error\":\"说明原因\"}，不得自行猜测。",
+  "error": {
+    "type": "RuntimeError",
+    "message": "validate_config: bad config"
+  }
+}

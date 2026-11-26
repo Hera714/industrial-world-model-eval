@@ -1,0 +1,529 @@
+{
+  "summary": {
+    "config_correct": {
+      "numerator": 6,
+      "denominator": 6,
+      "rate": 1.0
+    },
+    "tool_correct": {
+      "numerator": 20,
+      "denominator": 20,
+      "rate": 1.0
+    },
+    "error_identified": {
+      "numerator": 14,
+      "denominator": 14,
+      "rate": 1.0
+    },
+    "run_success": {
+      "numerator": 0,
+      "denominator": 0,
+      "rate": null,
+      "reason": "离线模式未执行真实 BOPTEST"
+    }
+  },
+  "cases": [
+    {
+      "id": "agent_01",
+      "category": "valid",
+      "config_correct": true,
+      "tool_correct": true,
+      "error_identified": null,
+      "run_success": null,
+      "missing": false,
+      "trace": [],
+      "failure": null
+    },
+    {
+      "id": "agent_02",
+      "category": "valid",
+      "config_correct": true,
+      "tool_correct": true,
+      "error_identified": null,
+      "run_success": null,
+      "missing": false,
+      "trace": [],
+      "failure": null
+    },
+    {
+      "id": "agent_03",
+      "category": "valid",
+      "config_correct": true,
+      "tool_correct": true,
+      "error_identified": null,
+      "run_success": null,
+      "missing": false,
+      "trace": [],
+      "failure": null
+    },
+    {
+      "id": "agent_04",
+      "category": "candidate",
+      "config_correct": true,
+      "tool_correct": true,
+      "error_identified": null,
+      "run_success": null,
+      "missing": false,
+      "trace": [],
+      "failure": null
+    },
+    {
+      "id": "agent_05",
+      "category": "candidate",
+      "config_correct": true,
+      "tool_correct": true,
+      "error_identified": null,
+      "run_success": null,
+      "missing": false,
+      "trace": [],
+      "failure": null
+    },
+    {
+      "id": "agent_06",
+      "category": "candidate",
+      "config_correct": true,
+      "tool_correct": true,
+      "error_identified": null,
+      "run_success": null,
+      "missing": false,
+      "trace": [],
+      "failure": null
+    },
+    {
+      "id": "agent_07",
+      "category": "ambiguous",
+      "config_correct": null,
+      "tool_correct": true,
+      "error_identified": true,
+      "run_success": null,
+      "missing": false,
+      "trace": [],
+      "failure": null
+    },
+    {
+      "id": "agent_08",
+      "category": "ambiguous",
+      "config_correct": null,
+      "tool_correct": true,
+      "error_identified": true,
+      "run_success": null,
+      "missing": false,
+      "trace": [],
+      "failure": null
+    },
+    {
+      "id": "agent_09",
+      "category": "ambiguous",
+      "config_correct": null,
+      "tool_correct": true,
+      "error_identified": true,
+      "run_success": null,
+      "missing": false,
+      "trace": [],
+      "failure": null
+    },
+    {
+      "id": "agent_10",
+      "category": "invalid_environment",
+      "config_correct": null,
+      "tool_correct": true,
+      "error_identified": true,
+      "run_success": null,
+      "missing": false,
+      "trace": [],
+      "failure": null
+    },
+    {
+      "id": "agent_11",
+      "category": "invalid_environment",
+      "config_correct": null,
+      "tool_correct": true,
+      "error_identified": true,
+      "run_success": null,
+      "missing": false,
+      "trace": [],
+      "failure": null
+    },
+    {
+      "id": "agent_12",
+      "category": "invalid_model",
+      "config_correct": null,
+      "tool_correct": true,
+      "error_identified": true,
+      "run_success": null,
+      "missing": false,
+      "trace": [],
+      "failure": null
+    },
+    {
+      "id": "agent_13",
+      "category": "invalid_tool",
+      "config_correct": null,
+      "tool_correct": true,
+      "error_identified": true,
+      "run_success": null,
+      "missing": false,
+      "trace": [],
+      "failure": null
+    },
+    {
+      "id": "agent_14",
+      "category": "invalid_field",
+      "config_correct": null,
+      "tool_correct": true,
+      "error_identified": true,
+      "run_success": null,
+      "missing": false,
+      "trace": [],
+      "failure": null
+    },
+    {
+      "id": "agent_15",
+      "category": "invalid_field",
+      "config_correct": null,
+      "tool_correct": true,
+      "error_identified": true,
+      "run_success": null,
+      "missing": false,
+      "trace": [],
+      "failure": null
+    },
+    {
+      "id": "agent_16",
+      "category": "invalid_information",
+      "config_correct": null,
+      "tool_correct": true,
+      "error_identified": true,
+      "run_success": null,
+      "missing": false,
+      "trace": [],
+      "failure": null
+    },
+    {
+      "id": "agent_17",
+      "category": "missing_field",
+      "config_correct": null,
+      "tool_correct": true,
+      "error_identified": true,
+      "run_success": null,
+      "missing": false,
+      "trace": [],
+      "failure": null
+    },
+    {
+      "id": "agent_18",
+      "category": "invalid_failure",
+      "config_correct": null,
+      "tool_correct": true,
+      "error_identified": true,
+      "run_success": null,
+      "missing": false,
+      "trace": [],
+      "failure": null
+    },
+    {
+      "id": "agent_19",
+      "category": "invalid_failure",
+      "config_correct": null,
+      "tool_correct": true,
+      "error_identified": true,
+      "run_success": null,
+      "missing": false,
+      "trace": [],
+      "failure": null
+    },
+    {
+      "id": "agent_20",
+      "category": "invalid_audit",
+      "config_correct": null,
+      "tool_correct": true,
+      "error_identified": true,
+      "run_success": null,
+      "missing": false,
+      "trace": [],
+      "failure": null
+    }
+  ],
+  "metadata": {
+    "mode": "offline_rule_baseline",
+    "case_sha256": "7b87f9f8c07be7fff367d7641ad9e16d42d6808e2e614d8b68b70f2ee702bce8",
+    "execution_enabled": false,
+    "executed_real_simulator": false,
+    "used_llm": false
+  },
+  "outcomes": [
+    {
+      "id": "agent_01",
+      "tool_choice": "validate_config",
+      "config_valid": true,
+      "models": [
+        "persistence",
+        "arx"
+      ],
+      "executed": false,
+      "audit_passed": false,
+      "calls": 0,
+      "elapsed_seconds": 0.08265343300445238,
+      "cost": null,
+      "trace": [],
+      "execution_evaluated": false
+    },
+    {
+      "id": "agent_02",
+      "tool_choice": "validate_config",
+      "config_valid": true,
+      "models": [
+        "arx"
+      ],
+      "executed": false,
+      "audit_passed": false,
+      "calls": 0,
+      "elapsed_seconds": 0.07016657499480061,
+      "cost": null,
+      "trace": [],
+      "execution_evaluated": false
+    },
+    {
+      "id": "agent_03",
+      "tool_choice": "validate_config",
+      "config_valid": true,
+      "models": [
+        "persistence"
+      ],
+      "executed": false,
+      "audit_passed": false,
+      "calls": 0,
+      "elapsed_seconds": 0.07264993200078607,
+      "cost": null,
+      "trace": [],
+      "execution_evaluated": false
+    },
+    {
+      "id": "agent_04",
+      "tool_choice": "validate_config",
+      "config_valid": true,
+      "models": [
+        "mlp_seed42"
+      ],
+      "executed": false,
+      "audit_passed": false,
+      "calls": 0,
+      "elapsed_seconds": 0.07437527999718441,
+      "cost": null,
+      "trace": [],
+      "execution_evaluated": false
+    },
+    {
+      "id": "agent_05",
+      "tool_choice": "validate_config",
+      "config_valid": true,
+      "models": [
+        "gru_seed42"
+      ],
+      "executed": false,
+      "audit_passed": false,
+      "calls": 0,
+      "elapsed_seconds": 0.07894524000585079,
+      "cost": null,
+      "trace": [],
+      "execution_evaluated": false
+    },
+    {
+      "id": "agent_06",
+      "tool_choice": "validate_config",
+      "config_valid": true,
+      "models": [
+        "residual_mlp_seed42"
+      ],
+      "executed": false,
+      "audit_passed": false,
+      "calls": 0,
+      "elapsed_seconds": 0.07588421300170012,
+      "cost": null,
+      "trace": [],
+      "execution_evaluated": false
+    },
+    {
+      "id": "agent_07",
+      "tool_choice": "reject_or_clarify",
+      "config_valid": false,
+      "models": [],
+      "executed": false,
+      "audit_passed": false,
+      "calls": 0,
+      "elapsed_seconds": 9.16099816095084e-06,
+      "cost": null,
+      "trace": [],
+      "execution_evaluated": false
+    },
+    {
+      "id": "agent_08",
+      "tool_choice": "reject_or_clarify",
+      "config_valid": false,
+      "models": [],
+      "executed": false,
+      "audit_passed": false,
+      "calls": 0,
+      "elapsed_seconds": 8.315997547470033e-06,
+      "cost": null,
+      "trace": [],
+      "execution_evaluated": false
+    },
+    {
+      "id": "agent_09",
+      "tool_choice": "reject_or_clarify",
+      "config_valid": false,
+      "models": [],
+      "executed": false,
+      "audit_passed": false,
+      "calls": 0,
+      "elapsed_seconds": 4.000998160336167e-06,
+      "cost": null,
+      "trace": [],
+      "execution_evaluated": false
+    },
+    {
+      "id": "agent_10",
+      "tool_choice": "reject_or_clarify",
+      "config_valid": false,
+      "models": [],
+      "executed": false,
+      "audit_passed": false,
+      "calls": 0,
+      "elapsed_seconds": 8.407994755543768e-06,
+      "cost": null,
+      "trace": [],
+      "execution_evaluated": false
+    },
+    {
+      "id": "agent_11",
+      "tool_choice": "reject_or_clarify",
+      "config_valid": false,
+      "models": [],
+      "executed": false,
+      "audit_passed": false,
+      "calls": 0,
+      "elapsed_seconds": 7.82799907028675e-06,
+      "cost": null,
+      "trace": [],
+      "execution_evaluated": false
+    },
+    {
+      "id": "agent_12",
+      "tool_choice": "reject_or_clarify",
+      "config_valid": false,
+      "models": [],
+      "executed": false,
+      "audit_passed": false,
+      "calls": 0,
+      "elapsed_seconds": 3.859000571537763e-06,
+      "cost": null,
+      "trace": [],
+      "execution_evaluated": false
+    },
+    {
+      "id": "agent_13",
+      "tool_choice": "reject_or_clarify",
+      "config_valid": false,
+      "models": [],
+      "executed": false,
+      "audit_passed": false,
+      "calls": 0,
+      "elapsed_seconds": 3.8090001908130944e-06,
+      "cost": null,
+      "trace": [],
+      "execution_evaluated": false
+    },
+    {
+      "id": "agent_14",
+      "tool_choice": "reject_or_clarify",
+      "config_valid": false,
+      "models": [],
+      "executed": false,
+      "audit_passed": false,
+      "calls": 0,
+      "elapsed_seconds": 3.2179959816858172e-06,
+      "cost": null,
+      "trace": [],
+      "execution_evaluated": false
+    },
+    {
+      "id": "agent_15",
+      "tool_choice": "reject_or_clarify",
+      "config_valid": false,
+      "models": [],
+      "executed": false,
+      "audit_passed": false,
+      "calls": 0,
+      "elapsed_seconds": 3.002998710144311e-06,
+      "cost": null,
+      "trace": [],
+      "execution_evaluated": false
+    },
+    {
+      "id": "agent_16",
+      "tool_choice": "reject_or_clarify",
+      "config_valid": false,
+      "models": [],
+      "executed": false,
+      "audit_passed": false,
+      "calls": 0,
+      "elapsed_seconds": 2.863998815882951e-06,
+      "cost": null,
+      "trace": [],
+      "execution_evaluated": false
+    },
+    {
+      "id": "agent_17",
+      "tool_choice": "reject_or_clarify",
+      "config_valid": false,
+      "models": [],
+      "executed": false,
+      "audit_passed": false,
+      "calls": 0,
+      "elapsed_seconds": 2.8799986466765404e-06,
+      "cost": null,
+      "trace": [],
+      "execution_evaluated": false
+    },
+    {
+      "id": "agent_18",
+      "tool_choice": "reject_or_clarify",
+      "config_valid": false,
+      "models": [],
+      "executed": false,
+      "audit_passed": false,
+      "calls": 0,
+      "elapsed_seconds": 3.077002475038171e-06,
+      "cost": null,
+      "trace": [],
+      "execution_evaluated": false
+    },
+    {
+      "id": "agent_19",
+      "tool_choice": "reject_or_clarify",
+      "config_valid": false,
+      "models": [],
+      "executed": false,
+      "audit_passed": false,
+      "calls": 0,
+      "elapsed_seconds": 5.687004886567593e-06,
+      "cost": null,
+      "trace": [],
+      "execution_evaluated": false
+    },
+    {
+      "id": "agent_20",
+      "tool_choice": "reject_or_clarify",
+      "config_valid": false,
+      "models": [],
+      "executed": false,
+      "audit_passed": false,
+      "calls": 0,
+      "elapsed_seconds": 3.907000063918531e-06,
+      "cost": null,
+      "trace": [],
+      "execution_evaluated": false
+    }
+  ]
+}

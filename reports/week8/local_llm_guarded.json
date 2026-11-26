@@ -1,0 +1,115 @@
+{
+  "status": "running",
+  "cases": [
+    {
+      "id": "agent_01",
+      "tool_choice_evaluated": false,
+      "execution_evaluated": true,
+      "executed": false,
+      "audit_passed": false,
+      "trace": [
+        {
+          "tool": "validate_config",
+          "result": {
+            "ok": true,
+            "result": {
+              "valid": true,
+              "models": [
+                "persistence",
+                "arx"
+              ]
+            },
+            "error": null
+          }
+        },
+        {
+          "tool": "run_benchmark",
+          "result": {
+            "ok": false,
+            "result": null,
+            "error": {
+              "code": "TIMEOUT",
+              "type": "RuntimeError",
+              "message": "BOPTEST POST /testcases/bestest_hydronic_heat_pump/select: timed out",
+              "suggestion": "检查模型服务或 BOPTEST 是否可用和超时预算；推进失败后重新初始化回合。"
+            }
+          }
+        }
+      ],
+      "calls": 1,
+      "models": [
+        "persistence",
+        "arx"
+      ],
+      "config_valid": true,
+      "tool_choice": "validate_config",
+      "model_metadata": {
+        "model": "external/qwen-agent",
+        "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+        "prompt_version": "week8-intent-v1",
+        "temperature": 0,
+        "raw_response": "{\n  \"environment\": \"boptest\",\n  \"models\": [\"persistence\", \"arx\"]\n}",
+        "device": "cuda"
+      },
+      "execution_guard": {
+        "eligible": true,
+        "reason": "仅标准答案允许且模型选择精确一致时实跑"
+      },
+      "elapsed_seconds": 181.80405626700303
+    },
+    {
+      "id": "agent_02",
+      "tool_choice_evaluated": false,
+      "execution_evaluated": true,
+      "executed": false,
+      "audit_passed": false,
+      "trace": [
+        {
+          "tool": "validate_config",
+          "result": {
+            "ok": true,
+            "result": {
+              "valid": true,
+              "models": [
+                "arx"
+              ]
+            },
+            "error": null
+          }
+        },
+        {
+          "tool": "run_benchmark",
+          "result": {
+            "ok": false,
+            "result": null,
+            "error": {
+              "code": "TIMEOUT",
+              "type": "RuntimeError",
+              "message": "BOPTEST POST /testcases/bestest_hydronic_heat_pump/select: timed out",
+              "suggestion": "检查模型服务或 BOPTEST 是否可用和超时预算；推进失败后重新初始化回合。"
+            }
+          }
+        }
+      ],
+      "calls": 1,
+      "models": [
+        "arx"
+      ],
+      "config_valid": true,
+      "tool_choice": "validate_config",
+      "model_metadata": {
+        "model": "external/qwen-agent",
+        "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+        "prompt_version": "week8-intent-v1",
+        "temperature": 0,
+        "raw_response": "{\"environment\": \"boptest\", \"models\": [\"arx\"]}",
+        "device": "cuda"
+      },
+      "execution_guard": {
+        "eligible": true,
+        "reason": "仅标准答案允许且模型选择精确一致时实跑"
+      },
+      "elapsed_seconds": 181.04210188199795
+    }
+  ]
+}

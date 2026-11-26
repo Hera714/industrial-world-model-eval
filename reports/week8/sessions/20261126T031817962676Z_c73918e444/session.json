@@ -1,0 +1,43 @@
+{
+  "status": "failed",
+  "request": "test",
+  "events": [
+    {
+      "tool": "validate_config",
+      "result": {
+        "ok": true,
+        "result": {
+          "passed": true
+        },
+        "error": null
+      }
+    },
+    {
+      "tool": "run_benchmark",
+      "result": {
+        "ok": true,
+        "result": {
+          "run_directory": "/test"
+        },
+        "error": null
+      }
+    }
+  ],
+  "intent": {
+    "environment": "boptest",
+    "models": [
+      "arx"
+    ]
+  },
+  "model_metadata": {
+    "model": "mock",
+    "temperature": 0
+  },
+  "system_prompt": "你是楼宇评测配置助手。只输出 JSON 对象，字段严格为 environment 和 models。environment 只能是 boptest；models 是用户明确指定的检查点名称列表。无法确定或要求额外功能时返回 {\"error\":\"说明原因\"}，不得自行猜测。",
+  "error": {
+    "code": "EXECUTION_ERROR",
+    "type": "ValueError",
+    "message": "'/test' is not in the subpath of '/home/hera/Projects/industrial-world-model-eval' OR one path is relative and the other is absolute.",
+    "suggestion": "检查会话日志和原始错误，修复后重新执行。"
+  }
+}

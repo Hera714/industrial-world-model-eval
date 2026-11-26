@@ -1,0 +1,2 @@
+{"time": "2026-11-25T13:10:39.301983+00:00", "level": "INFO", "event": "run_started", "context": {}}
+{"time": "2026-11-25T13:10:40.983228+00:00", "level": "ERROR", "event": "run_failed", "context": {"phase": "reset", "task": "closed_loop", "model": "persistence", "episode": "id_test_day160", "condition": "clean", "step": -1}, "error_type": "RuntimeError", "message": "BOPTEST GET /version: <urlopen error timed out>"}

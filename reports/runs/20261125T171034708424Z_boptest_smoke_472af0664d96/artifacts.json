@@ -1,0 +1,42 @@
+{
+  "config.yaml": {
+    "bytes": 3351,
+    "sha256": "c3b2a505c612c513aeafa02ae050ddb81c46781cb5ab9c6ff5a60bffe1ac2de0"
+  },
+  "context.json": {
+    "bytes": 238,
+    "sha256": "37103e268c7caf2ceef87eba0845cf076452b3f537819ec0fa5cfbbd1b40f8bb"
+  },
+  "events.jsonl": {
+    "bytes": 11024,
+    "sha256": "df9f5d4ef48b5aed5178dfc7d3e2ac78416d0a038bbc9ed9051d782d3cd4bd77"
+  },
+  "input_hashes.json": {
+    "bytes": 4030,
+    "sha256": "9f75cc4bab6aa6992fb168738b7a385986bbd53a53446d052b9af88d92bbabd9"
+  },
+  "metrics.json": {
+    "bytes": 47401,
+    "sha256": "e84b8fce38d5d1bfb50983e79ec9ccd447855101d223fe3f354d8a7ef81c39c2"
+  },
+  "predictions.npz": {
+    "bytes": 4500,
+    "sha256": "6167ce018a5ccb2c32ac91d093674bdd332fd1be99cbe3d5b1309d2137f32d97"
+  },
+  "report.md": {
+    "bytes": 1309,
+    "sha256": "8dca82a4102165e24979eff7feaa5ba2aba3313bcd6f14b06ac0d0406c3a74fa"
+  },
+  "run.log": {
+    "bytes": 6690,
+    "sha256": "8c3d2e58f54e4ec8dfb5a82757a075fe73d119e836ea072d2618d825456fdc10"
+  },
+  "trajectories.csv": {
+    "bytes": 437923,
+    "sha256": "6f9176c1923d4e096e2459c4080502013131bc63c217450b59bed95359007e2a"
+  },
+  "versions.json": {
+    "bytes": 4213,
+    "sha256": "e1092ea80dfdd9edd8663805dc05ae938184fb7a1cfa51160972e8add48cdc30"
+  }
+}

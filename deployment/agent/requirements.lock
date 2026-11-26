@@ -1,0 +1,15 @@
+# Agent 容器中新增依赖；基础评测依赖由 deployment/benchmark/requirements.lock 固定。
+accelerate==1.12.0
+certifi==2026.11.20
+charset-normalizer==3.5.3
+hf-xet==1.8.0
+huggingface-hub==0.36.2
+idna==3.20
+psutil==7.2.2
+regex==2026.11.25
+requests==2.34.2
+safetensors==0.8.0
+tokenizers==0.22.2
+tqdm==4.70.1
+transformers==4.57.3
+urllib3==2.8.0

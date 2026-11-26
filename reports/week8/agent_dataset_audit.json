@@ -1,0 +1,9 @@
+{
+  "status": "passed",
+  "cases": 20,
+  "sha256": "7b87f9f8c07be7fff367d7641ad9e16d42d6808e2e614d8b68b70f2ee702bce8",
+  "issues": [],
+  "limitations": [
+    "规则未验证自然语言语义、标准答案正确性或 LLM 评分可靠性，仍需人工复核。"
+  ]
+}

@@ -1,0 +1,437 @@
+{
+  "passed": true,
+  "dataset_sha256": "7b87f9f8c07be7fff367d7641ad9e16d42d6808e2e614d8b68b70f2ee702bce8",
+  "runs_audited": 12,
+  "checks": [
+    {
+      "name": "case_hash_rule",
+      "passed": true,
+      "detail": "7b87f9f8c07be7fff367d7641ad9e16d42d6808e2e614d8b68b70f2ee702bce8"
+    },
+    {
+      "name": "case_hash_llm",
+      "passed": true,
+      "detail": "7b87f9f8c07be7fff367d7641ad9e16d42d6808e2e614d8b68b70f2ee702bce8"
+    },
+    {
+      "name": "coverage",
+      "passed": true,
+      "detail": "20 条请求"
+    },
+    {
+      "name": "unique_ids",
+      "passed": true,
+      "detail": "两组请求均无重复身份"
+    },
+    {
+      "name": "rule:agent_01:tool_order",
+      "passed": true,
+      "detail": "校验、运行、审核"
+    },
+    {
+      "name": "rule:agent_01:unique",
+      "passed": true,
+      "detail": "reports/runs/20261125T170619805733Z_boptest_smoke_7b8d6e1e0adc"
+    },
+    {
+      "name": "rule:agent_01:audit",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "rule:agent_01:recorded_audit",
+      "passed": true,
+      "detail": "记录中的运行及审核状态"
+    },
+    {
+      "name": "llm:agent_01:tool_order",
+      "passed": true,
+      "detail": "校验、运行、审核"
+    },
+    {
+      "name": "llm:agent_01:unique",
+      "passed": true,
+      "detail": "reports/runs/20261125T170953605943Z_boptest_smoke_173d93611117"
+    },
+    {
+      "name": "llm:agent_01:audit",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "llm:agent_01:recorded_audit",
+      "passed": true,
+      "detail": "记录中的运行及审核状态"
+    },
+    {
+      "name": "pair:agent_01:config",
+      "passed": true,
+      "detail": "配对配置相同"
+    },
+    {
+      "name": "rule:agent_02:tool_order",
+      "passed": true,
+      "detail": "校验、运行、审核"
+    },
+    {
+      "name": "rule:agent_02:unique",
+      "passed": true,
+      "detail": "reports/runs/20261125T170700819219Z_boptest_smoke_fc91b0678894"
+    },
+    {
+      "name": "rule:agent_02:audit",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "rule:agent_02:recorded_audit",
+      "passed": true,
+      "detail": "记录中的运行及审核状态"
+    },
+    {
+      "name": "llm:agent_02:tool_order",
+      "passed": true,
+      "detail": "校验、运行、审核"
+    },
+    {
+      "name": "llm:agent_02:unique",
+      "passed": true,
+      "detail": "reports/runs/20261125T171034708424Z_boptest_smoke_472af0664d96"
+    },
+    {
+      "name": "llm:agent_02:audit",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "llm:agent_02:recorded_audit",
+      "passed": true,
+      "detail": "记录中的运行及审核状态"
+    },
+    {
+      "name": "pair:agent_02:config",
+      "passed": true,
+      "detail": "配对配置相同"
+    },
+    {
+      "name": "rule:agent_03:tool_order",
+      "passed": true,
+      "detail": "校验、运行、审核"
+    },
+    {
+      "name": "rule:agent_03:unique",
+      "passed": true,
+      "detail": "reports/runs/20261125T170731611269Z_boptest_smoke_ee7dae3360cc"
+    },
+    {
+      "name": "rule:agent_03:audit",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "rule:agent_03:recorded_audit",
+      "passed": true,
+      "detail": "记录中的运行及审核状态"
+    },
+    {
+      "name": "llm:agent_03:tool_order",
+      "passed": true,
+      "detail": "校验、运行、审核"
+    },
+    {
+      "name": "llm:agent_03:unique",
+      "passed": true,
+      "detail": "reports/runs/20261125T171105151166Z_boptest_smoke_a75b9814bc02"
+    },
+    {
+      "name": "llm:agent_03:audit",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "llm:agent_03:recorded_audit",
+      "passed": true,
+      "detail": "记录中的运行及审核状态"
+    },
+    {
+      "name": "pair:agent_03:config",
+      "passed": true,
+      "detail": "配对配置相同"
+    },
+    {
+      "name": "rule:agent_04:tool_order",
+      "passed": true,
+      "detail": "校验、运行、审核"
+    },
+    {
+      "name": "rule:agent_04:unique",
+      "passed": true,
+      "detail": "reports/runs/20261125T170800701697Z_boptest_smoke_b461069fac1e"
+    },
+    {
+      "name": "rule:agent_04:audit",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "rule:agent_04:recorded_audit",
+      "passed": true,
+      "detail": "记录中的运行及审核状态"
+    },
+    {
+      "name": "llm:agent_04:tool_order",
+      "passed": true,
+      "detail": "校验、运行、审核"
+    },
+    {
+      "name": "llm:agent_04:unique",
+      "passed": true,
+      "detail": "reports/runs/20261125T171135151409Z_boptest_smoke_137f82267ac0"
+    },
+    {
+      "name": "llm:agent_04:audit",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "llm:agent_04:recorded_audit",
+      "passed": true,
+      "detail": "记录中的运行及审核状态"
+    },
+    {
+      "name": "pair:agent_04:config",
+      "passed": true,
+      "detail": "配对配置相同"
+    },
+    {
+      "name": "rule:agent_05:tool_order",
+      "passed": true,
+      "detail": "校验、运行、审核"
+    },
+    {
+      "name": "rule:agent_05:unique",
+      "passed": true,
+      "detail": "reports/runs/20261125T170831606286Z_boptest_smoke_627aad6d4ce6"
+    },
+    {
+      "name": "rule:agent_05:audit",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "rule:agent_05:recorded_audit",
+      "passed": true,
+      "detail": "记录中的运行及审核状态"
+    },
+    {
+      "name": "llm:agent_05:tool_order",
+      "passed": true,
+      "detail": "校验、运行、审核"
+    },
+    {
+      "name": "llm:agent_05:unique",
+      "passed": true,
+      "detail": "reports/runs/20261125T171205947724Z_boptest_smoke_e0a03ea3749c"
+    },
+    {
+      "name": "llm:agent_05:audit",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "llm:agent_05:recorded_audit",
+      "passed": true,
+      "detail": "记录中的运行及审核状态"
+    },
+    {
+      "name": "pair:agent_05:config",
+      "passed": true,
+      "detail": "配对配置相同"
+    },
+    {
+      "name": "rule:agent_06:tool_order",
+      "passed": true,
+      "detail": "校验、运行、审核"
+    },
+    {
+      "name": "rule:agent_06:unique",
+      "passed": true,
+      "detail": "reports/runs/20261125T170902485957Z_boptest_smoke_289abc099c6b"
+    },
+    {
+      "name": "rule:agent_06:audit",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "rule:agent_06:recorded_audit",
+      "passed": true,
+      "detail": "记录中的运行及审核状态"
+    },
+    {
+      "name": "llm:agent_06:tool_order",
+      "passed": true,
+      "detail": "校验、运行、审核"
+    },
+    {
+      "name": "llm:agent_06:unique",
+      "passed": true,
+      "detail": "reports/runs/20261125T171237713986Z_boptest_smoke_fe1925799124"
+    },
+    {
+      "name": "llm:agent_06:audit",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "llm:agent_06:recorded_audit",
+      "passed": true,
+      "detail": "记录中的运行及审核状态"
+    },
+    {
+      "name": "pair:agent_06:config",
+      "passed": true,
+      "detail": "配对配置相同"
+    },
+    {
+      "name": "rule:agent_07:no_execution",
+      "passed": true,
+      "detail": "拒绝或澄清"
+    },
+    {
+      "name": "llm:agent_07:no_execution",
+      "passed": true,
+      "detail": "拒绝或澄清"
+    },
+    {
+      "name": "rule:agent_08:no_execution",
+      "passed": true,
+      "detail": "拒绝或澄清"
+    },
+    {
+      "name": "llm:agent_08:no_execution",
+      "passed": true,
+      "detail": "拒绝或澄清"
+    },
+    {
+      "name": "rule:agent_09:no_execution",
+      "passed": true,
+      "detail": "拒绝或澄清"
+    },
+    {
+      "name": "llm:agent_09:no_execution",
+      "passed": true,
+      "detail": "拒绝或澄清"
+    },
+    {
+      "name": "rule:agent_10:no_execution",
+      "passed": true,
+      "detail": "拒绝或澄清"
+    },
+    {
+      "name": "llm:agent_10:no_execution",
+      "passed": true,
+      "detail": "拒绝或澄清"
+    },
+    {
+      "name": "rule:agent_11:no_execution",
+      "passed": true,
+      "detail": "拒绝或澄清"
+    },
+    {
+      "name": "llm:agent_11:no_execution",
+      "passed": true,
+      "detail": "拒绝或澄清"
+    },
+    {
+      "name": "rule:agent_12:no_execution",
+      "passed": true,
+      "detail": "拒绝或澄清"
+    },
+    {
+      "name": "llm:agent_12:no_execution",
+      "passed": true,
+      "detail": "拒绝或澄清"
+    },
+    {
+      "name": "rule:agent_13:no_execution",
+      "passed": true,
+      "detail": "拒绝或澄清"
+    },
+    {
+      "name": "llm:agent_13:no_execution",
+      "passed": true,
+      "detail": "拒绝或澄清"
+    },
+    {
+      "name": "rule:agent_14:no_execution",
+      "passed": true,
+      "detail": "拒绝或澄清"
+    },
+    {
+      "name": "llm:agent_14:no_execution",
+      "passed": true,
+      "detail": "拒绝或澄清"
+    },
+    {
+      "name": "rule:agent_15:no_execution",
+      "passed": true,
+      "detail": "拒绝或澄清"
+    },
+    {
+      "name": "llm:agent_15:no_execution",
+      "passed": true,
+      "detail": "拒绝或澄清"
+    },
+    {
+      "name": "rule:agent_16:no_execution",
+      "passed": true,
+      "detail": "拒绝或澄清"
+    },
+    {
+      "name": "llm:agent_16:no_execution",
+      "passed": true,
+      "detail": "拒绝或澄清"
+    },
+    {
+      "name": "rule:agent_17:no_execution",
+      "passed": true,
+      "detail": "拒绝或澄清"
+    },
+    {
+      "name": "llm:agent_17:no_execution",
+      "passed": true,
+      "detail": "拒绝或澄清"
+    },
+    {
+      "name": "rule:agent_18:no_execution",
+      "passed": true,
+      "detail": "拒绝或澄清"
+    },
+    {
+      "name": "llm:agent_18:no_execution",
+      "passed": true,
+      "detail": "拒绝或澄清"
+    },
+    {
+      "name": "rule:agent_19:no_execution",
+      "passed": true,
+      "detail": "拒绝或澄清"
+    },
+    {
+      "name": "llm:agent_19:no_execution",
+      "passed": true,
+      "detail": "拒绝或澄清"
+    },
+    {
+      "name": "rule:agent_20:no_execution",
+      "passed": true,
+      "detail": "拒绝或澄清"
+    },
+    {
+      "name": "llm:agent_20:no_execution",
+      "passed": true,
+      "detail": "拒绝或澄清"
+    }
+  ]
+}

@@ -1,0 +1,867 @@
+{
+  "status": "completed",
+  "model_sha256": "dd924a11b4c220f385b51ffa522daea7c9f3d850e31b162bb5661df483c6d3ee",
+  "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+  "execution_enabled": false,
+  "test_sha256": "7b87f9f8c07be7fff367d7641ad9e16d42d6808e2e614d8b68b70f2ee702bce8",
+  "tool_selection_note": "工具由固定编排调用，不评估 LLM 自主工具选择",
+  "summary": {
+    "config_correct": {
+      "numerator": 6,
+      "denominator": 6,
+      "rate": 1.0
+    },
+    "tool_correct": {
+      "numerator": 0,
+      "denominator": 0,
+      "rate": null
+    },
+    "error_identified": {
+      "numerator": 14,
+      "denominator": 14,
+      "rate": 1.0
+    },
+    "run_success": {
+      "numerator": 0,
+      "denominator": 0,
+      "rate": null
+    }
+  },
+  "scores": [
+    {
+      "id": "agent_01",
+      "category": "valid",
+      "config_correct": true,
+      "tool_correct": null,
+      "error_identified": null,
+      "run_success": null,
+      "missing": false,
+      "trace": [
+        {
+          "tool": "validate_config",
+          "result": {
+            "ok": true,
+            "result": {
+              "valid": true,
+              "models": [
+                "persistence",
+                "arx"
+              ]
+            },
+            "error": null
+          }
+        }
+      ],
+      "failure": null
+    },
+    {
+      "id": "agent_02",
+      "category": "valid",
+      "config_correct": true,
+      "tool_correct": null,
+      "error_identified": null,
+      "run_success": null,
+      "missing": false,
+      "trace": [
+        {
+          "tool": "validate_config",
+          "result": {
+            "ok": true,
+            "result": {
+              "valid": true,
+              "models": [
+                "arx"
+              ]
+            },
+            "error": null
+          }
+        }
+      ],
+      "failure": null
+    },
+    {
+      "id": "agent_03",
+      "category": "valid",
+      "config_correct": true,
+      "tool_correct": null,
+      "error_identified": null,
+      "run_success": null,
+      "missing": false,
+      "trace": [
+        {
+          "tool": "validate_config",
+          "result": {
+            "ok": true,
+            "result": {
+              "valid": true,
+              "models": [
+                "persistence"
+              ]
+            },
+            "error": null
+          }
+        }
+      ],
+      "failure": null
+    },
+    {
+      "id": "agent_04",
+      "category": "candidate",
+      "config_correct": true,
+      "tool_correct": null,
+      "error_identified": null,
+      "run_success": null,
+      "missing": false,
+      "trace": [
+        {
+          "tool": "validate_config",
+          "result": {
+            "ok": true,
+            "result": {
+              "valid": true,
+              "models": [
+                "mlp_seed42"
+              ]
+            },
+            "error": null
+          }
+        }
+      ],
+      "failure": null
+    },
+    {
+      "id": "agent_05",
+      "category": "candidate",
+      "config_correct": true,
+      "tool_correct": null,
+      "error_identified": null,
+      "run_success": null,
+      "missing": false,
+      "trace": [
+        {
+          "tool": "validate_config",
+          "result": {
+            "ok": true,
+            "result": {
+              "valid": true,
+              "models": [
+                "gru_seed42"
+              ]
+            },
+            "error": null
+          }
+        }
+      ],
+      "failure": null
+    },
+    {
+      "id": "agent_06",
+      "category": "candidate",
+      "config_correct": true,
+      "tool_correct": null,
+      "error_identified": null,
+      "run_success": null,
+      "missing": false,
+      "trace": [
+        {
+          "tool": "validate_config",
+          "result": {
+            "ok": true,
+            "result": {
+              "valid": true,
+              "models": [
+                "residual_mlp_seed42"
+              ]
+            },
+            "error": null
+          }
+        }
+      ],
+      "failure": null
+    },
+    {
+      "id": "agent_07",
+      "category": "ambiguous",
+      "config_correct": null,
+      "tool_correct": null,
+      "error_identified": true,
+      "run_success": null,
+      "missing": false,
+      "trace": [],
+      "failure": {
+        "type": "ValueError",
+        "message": "ENV_NOT_ALLOWED: 任务须明确使用 BOPTEST，且不能混用其他环境"
+      }
+    },
+    {
+      "id": "agent_08",
+      "category": "ambiguous",
+      "config_correct": null,
+      "tool_correct": null,
+      "error_identified": true,
+      "run_success": null,
+      "missing": false,
+      "trace": [],
+      "failure": {
+        "type": "ValueError",
+        "message": "ENV_NOT_ALLOWED: 任务须明确使用 BOPTEST，且不能混用其他环境"
+      }
+    },
+    {
+      "id": "agent_09",
+      "category": "ambiguous",
+      "config_correct": null,
+      "tool_correct": null,
+      "error_identified": true,
+      "run_success": null,
+      "missing": false,
+      "trace": [],
+      "failure": {
+        "type": "ValueError",
+        "message": "ENV_NOT_ALLOWED: 任务须明确使用 BOPTEST，且不能混用其他环境"
+      }
+    },
+    {
+      "id": "agent_10",
+      "category": "invalid_environment",
+      "config_correct": null,
+      "tool_correct": null,
+      "error_identified": true,
+      "run_success": null,
+      "missing": false,
+      "trace": [],
+      "failure": {
+        "type": "ValueError",
+        "message": "ENV_NOT_ALLOWED: 任务须明确使用 BOPTEST，且不能混用其他环境"
+      }
+    },
+    {
+      "id": "agent_11",
+      "category": "invalid_environment",
+      "config_correct": null,
+      "tool_correct": null,
+      "error_identified": true,
+      "run_success": null,
+      "missing": false,
+      "trace": [],
+      "failure": {
+        "type": "ValueError",
+        "message": "ENV_NOT_ALLOWED: 任务须明确使用 BOPTEST，且不能混用其他环境"
+      }
+    },
+    {
+      "id": "agent_12",
+      "category": "invalid_model",
+      "config_correct": null,
+      "tool_correct": null,
+      "error_identified": true,
+      "run_success": null,
+      "missing": false,
+      "trace": [],
+      "failure": {
+        "type": "ValueError",
+        "message": "ENV_NOT_ALLOWED: 任务须明确使用 BOPTEST，且不能混用其他环境"
+      }
+    },
+    {
+      "id": "agent_13",
+      "category": "invalid_tool",
+      "config_correct": null,
+      "tool_correct": null,
+      "error_identified": true,
+      "run_success": null,
+      "missing": false,
+      "trace": [],
+      "failure": {
+        "type": "ValueError",
+        "message": "ENV_NOT_ALLOWED: 任务须明确使用 BOPTEST，且不能混用其他环境"
+      }
+    },
+    {
+      "id": "agent_14",
+      "category": "invalid_field",
+      "config_correct": null,
+      "tool_correct": null,
+      "error_identified": true,
+      "run_success": null,
+      "missing": false,
+      "trace": [],
+      "failure": {
+        "type": "ValueError",
+        "message": "ENV_NOT_ALLOWED: 任务须明确使用 BOPTEST，且不能混用其他环境"
+      }
+    },
+    {
+      "id": "agent_15",
+      "category": "invalid_field",
+      "config_correct": null,
+      "tool_correct": null,
+      "error_identified": true,
+      "run_success": null,
+      "missing": false,
+      "trace": [],
+      "failure": {
+        "type": "ValueError",
+        "message": "ENV_NOT_ALLOWED: 任务须明确使用 BOPTEST，且不能混用其他环境"
+      }
+    },
+    {
+      "id": "agent_16",
+      "category": "invalid_information",
+      "config_correct": null,
+      "tool_correct": null,
+      "error_identified": true,
+      "run_success": null,
+      "missing": false,
+      "trace": [],
+      "failure": {
+        "type": "ValueError",
+        "message": "ENV_NOT_ALLOWED: 任务须明确使用 BOPTEST，且不能混用其他环境"
+      }
+    },
+    {
+      "id": "agent_17",
+      "category": "missing_field",
+      "config_correct": null,
+      "tool_correct": null,
+      "error_identified": true,
+      "run_success": null,
+      "missing": false,
+      "trace": [],
+      "failure": {
+        "type": "ValueError",
+        "message": "ENV_NOT_ALLOWED: 任务须明确使用 BOPTEST，且不能混用其他环境"
+      }
+    },
+    {
+      "id": "agent_18",
+      "category": "invalid_failure",
+      "config_correct": null,
+      "tool_correct": null,
+      "error_identified": true,
+      "run_success": null,
+      "missing": false,
+      "trace": [],
+      "failure": {
+        "type": "ValueError",
+        "message": "ENV_NOT_ALLOWED: 任务须明确使用 BOPTEST，且不能混用其他环境"
+      }
+    },
+    {
+      "id": "agent_19",
+      "category": "invalid_failure",
+      "config_correct": null,
+      "tool_correct": null,
+      "error_identified": true,
+      "run_success": null,
+      "missing": false,
+      "trace": [],
+      "failure": {
+        "type": "ValueError",
+        "message": "ENV_NOT_ALLOWED: 任务须明确使用 BOPTEST，且不能混用其他环境"
+      }
+    },
+    {
+      "id": "agent_20",
+      "category": "invalid_audit",
+      "config_correct": null,
+      "tool_correct": null,
+      "error_identified": true,
+      "run_success": null,
+      "missing": false,
+      "trace": [],
+      "failure": {
+        "type": "ValueError",
+        "message": "ENV_NOT_ALLOWED: 任务须明确使用 BOPTEST，且不能混用其他环境"
+      }
+    }
+  ],
+  "cases": [
+    {
+      "id": "agent_01",
+      "tool_choice_evaluated": false,
+      "execution_evaluated": false,
+      "executed": false,
+      "audit_passed": false,
+      "trace": [
+        {
+          "tool": "validate_config",
+          "result": {
+            "ok": true,
+            "result": {
+              "valid": true,
+              "models": [
+                "persistence",
+                "arx"
+              ]
+            },
+            "error": null
+          }
+        }
+      ],
+      "calls": 1,
+      "models": [
+        "persistence",
+        "arx"
+      ],
+      "config_valid": true,
+      "tool_choice": "validate_config",
+      "model_metadata": {
+        "model": "external/qwen-agent",
+        "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+        "prompt_version": "week8-intent-v1",
+        "temperature": 0,
+        "raw_response": "{\n  \"environment\": \"boptest\",\n  \"models\": [\"persistence\", \"arx\"]\n}",
+        "device": "cuda"
+      },
+      "execution_guard": {
+        "eligible": true,
+        "reason": "仅标准答案允许且模型选择精确一致时实跑"
+      },
+      "elapsed_seconds": 1.3683753090008395
+    },
+    {
+      "id": "agent_02",
+      "tool_choice_evaluated": false,
+      "execution_evaluated": false,
+      "executed": false,
+      "audit_passed": false,
+      "trace": [
+        {
+          "tool": "validate_config",
+          "result": {
+            "ok": true,
+            "result": {
+              "valid": true,
+              "models": [
+                "arx"
+              ]
+            },
+            "error": null
+          }
+        }
+      ],
+      "calls": 1,
+      "models": [
+        "arx"
+      ],
+      "config_valid": true,
+      "tool_choice": "validate_config",
+      "model_metadata": {
+        "model": "external/qwen-agent",
+        "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+        "prompt_version": "week8-intent-v1",
+        "temperature": 0,
+        "raw_response": "{\"environment\": \"boptest\", \"models\": [\"arx\"]}",
+        "device": "cuda"
+      },
+      "execution_guard": {
+        "eligible": true,
+        "reason": "仅标准答案允许且模型选择精确一致时实跑"
+      },
+      "elapsed_seconds": 0.6137498960015364
+    },
+    {
+      "id": "agent_03",
+      "tool_choice_evaluated": false,
+      "execution_evaluated": false,
+      "executed": false,
+      "audit_passed": false,
+      "trace": [
+        {
+          "tool": "validate_config",
+          "result": {
+            "ok": true,
+            "result": {
+              "valid": true,
+              "models": [
+                "persistence"
+              ]
+            },
+            "error": null
+          }
+        }
+      ],
+      "calls": 1,
+      "models": [
+        "persistence"
+      ],
+      "config_valid": true,
+      "tool_choice": "validate_config",
+      "model_metadata": {
+        "model": "external/qwen-agent",
+        "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+        "prompt_version": "week8-intent-v1",
+        "temperature": 0,
+        "raw_response": "{\n  \"environment\": \"boptest\",\n  \"models\": [\"persistence\"]\n}",
+        "device": "cuda"
+      },
+      "execution_guard": {
+        "eligible": true,
+        "reason": "仅标准答案允许且模型选择精确一致时实跑"
+      },
+      "elapsed_seconds": 0.7460561730003974
+    },
+    {
+      "id": "agent_04",
+      "tool_choice_evaluated": false,
+      "execution_evaluated": false,
+      "executed": false,
+      "audit_passed": false,
+      "trace": [
+        {
+          "tool": "validate_config",
+          "result": {
+            "ok": true,
+            "result": {
+              "valid": true,
+              "models": [
+                "mlp_seed42"
+              ]
+            },
+            "error": null
+          }
+        }
+      ],
+      "calls": 1,
+      "models": [
+        "mlp_seed42"
+      ],
+      "config_valid": true,
+      "tool_choice": "validate_config",
+      "model_metadata": {
+        "model": "external/qwen-agent",
+        "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+        "prompt_version": "week8-intent-v1",
+        "temperature": 0,
+        "raw_response": "{\"environment\": \"boptest\", \"models\": [\"mlp_seed42\"]}",
+        "device": "cuda"
+      },
+      "execution_guard": {
+        "eligible": true,
+        "reason": "仅标准答案允许且模型选择精确一致时实跑"
+      },
+      "elapsed_seconds": 0.7071132249984657
+    },
+    {
+      "id": "agent_05",
+      "tool_choice_evaluated": false,
+      "execution_evaluated": false,
+      "executed": false,
+      "audit_passed": false,
+      "trace": [
+        {
+          "tool": "validate_config",
+          "result": {
+            "ok": true,
+            "result": {
+              "valid": true,
+              "models": [
+                "gru_seed42"
+              ]
+            },
+            "error": null
+          }
+        }
+      ],
+      "calls": 1,
+      "models": [
+        "gru_seed42"
+      ],
+      "config_valid": true,
+      "tool_choice": "validate_config",
+      "model_metadata": {
+        "model": "external/qwen-agent",
+        "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+        "prompt_version": "week8-intent-v1",
+        "temperature": 0,
+        "raw_response": "{\"environment\": \"boptest\", \"models\": [\"gru_seed42\"]}",
+        "device": "cuda"
+      },
+      "execution_guard": {
+        "eligible": true,
+        "reason": "仅标准答案允许且模型选择精确一致时实跑"
+      },
+      "elapsed_seconds": 0.6673717910016421
+    },
+    {
+      "id": "agent_06",
+      "tool_choice_evaluated": false,
+      "execution_evaluated": false,
+      "executed": false,
+      "audit_passed": false,
+      "trace": [
+        {
+          "tool": "validate_config",
+          "result": {
+            "ok": true,
+            "result": {
+              "valid": true,
+              "models": [
+                "residual_mlp_seed42"
+              ]
+            },
+            "error": null
+          }
+        }
+      ],
+      "calls": 1,
+      "models": [
+        "residual_mlp_seed42"
+      ],
+      "config_valid": true,
+      "tool_choice": "validate_config",
+      "model_metadata": {
+        "model": "external/qwen-agent",
+        "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+        "prompt_version": "week8-intent-v1",
+        "temperature": 0,
+        "raw_response": "{\"environment\": \"boptest\", \"models\": [\"residual_mlp_seed42\"]}",
+        "device": "cuda"
+      },
+      "execution_guard": {
+        "eligible": true,
+        "reason": "仅标准答案允许且模型选择精确一致时实跑"
+      },
+      "elapsed_seconds": 0.7875257899977441
+    },
+    {
+      "id": "agent_07",
+      "tool_choice_evaluated": false,
+      "execution_evaluated": false,
+      "executed": false,
+      "audit_passed": false,
+      "trace": [],
+      "calls": 1,
+      "tool_choice": "reject_or_clarify",
+      "config_valid": false,
+      "models": [],
+      "failure": {
+        "type": "ValueError",
+        "message": "ENV_NOT_ALLOWED: 任务须明确使用 BOPTEST，且不能混用其他环境"
+      },
+      "elapsed_seconds": 2.147000122931786e-05
+    },
+    {
+      "id": "agent_08",
+      "tool_choice_evaluated": false,
+      "execution_evaluated": false,
+      "executed": false,
+      "audit_passed": false,
+      "trace": [],
+      "calls": 1,
+      "tool_choice": "reject_or_clarify",
+      "config_valid": false,
+      "models": [],
+      "failure": {
+        "type": "ValueError",
+        "message": "ENV_NOT_ALLOWED: 任务须明确使用 BOPTEST，且不能混用其他环境"
+      },
+      "elapsed_seconds": 1.4481000107480213e-05
+    },
+    {
+      "id": "agent_09",
+      "tool_choice_evaluated": false,
+      "execution_evaluated": false,
+      "executed": false,
+      "audit_passed": false,
+      "trace": [],
+      "calls": 1,
+      "tool_choice": "reject_or_clarify",
+      "config_valid": false,
+      "models": [],
+      "failure": {
+        "type": "ValueError",
+        "message": "ENV_NOT_ALLOWED: 任务须明确使用 BOPTEST，且不能混用其他环境"
+      },
+      "elapsed_seconds": 7.956998160807416e-06
+    },
+    {
+      "id": "agent_10",
+      "tool_choice_evaluated": false,
+      "execution_evaluated": false,
+      "executed": false,
+      "audit_passed": false,
+      "trace": [],
+      "calls": 1,
+      "tool_choice": "reject_or_clarify",
+      "config_valid": false,
+      "models": [],
+      "failure": {
+        "type": "ValueError",
+        "message": "ENV_NOT_ALLOWED: 任务须明确使用 BOPTEST，且不能混用其他环境"
+      },
+      "elapsed_seconds": 9.981002222048119e-06
+    },
+    {
+      "id": "agent_11",
+      "tool_choice_evaluated": false,
+      "execution_evaluated": false,
+      "executed": false,
+      "audit_passed": false,
+      "trace": [],
+      "calls": 1,
+      "tool_choice": "reject_or_clarify",
+      "config_valid": false,
+      "models": [],
+      "failure": {
+        "type": "ValueError",
+        "message": "ENV_NOT_ALLOWED: 任务须明确使用 BOPTEST，且不能混用其他环境"
+      },
+      "elapsed_seconds": 9.716000931803137e-06
+    },
+    {
+      "id": "agent_12",
+      "tool_choice_evaluated": false,
+      "execution_evaluated": false,
+      "executed": false,
+      "audit_passed": false,
+      "trace": [],
+      "calls": 1,
+      "tool_choice": "reject_or_clarify",
+      "config_valid": false,
+      "models": [],
+      "failure": {
+        "type": "ValueError",
+        "message": "ENV_NOT_ALLOWED: 任务须明确使用 BOPTEST，且不能混用其他环境"
+      },
+      "elapsed_seconds": 9.123999916482717e-06
+    },
+    {
+      "id": "agent_13",
+      "tool_choice_evaluated": false,
+      "execution_evaluated": false,
+      "executed": false,
+      "audit_passed": false,
+      "trace": [],
+      "calls": 1,
+      "tool_choice": "reject_or_clarify",
+      "config_valid": false,
+      "models": [],
+      "failure": {
+        "type": "ValueError",
+        "message": "ENV_NOT_ALLOWED: 任务须明确使用 BOPTEST，且不能混用其他环境"
+      },
+      "elapsed_seconds": 8.462000550935045e-06
+    },
+    {
+      "id": "agent_14",
+      "tool_choice_evaluated": false,
+      "execution_evaluated": false,
+      "executed": false,
+      "audit_passed": false,
+      "trace": [],
+      "calls": 1,
+      "tool_choice": "reject_or_clarify",
+      "config_valid": false,
+      "models": [],
+      "failure": {
+        "type": "ValueError",
+        "message": "ENV_NOT_ALLOWED: 任务须明确使用 BOPTEST，且不能混用其他环境"
+      },
+      "elapsed_seconds": 8.818002243060619e-06
+    },
+    {
+      "id": "agent_15",
+      "tool_choice_evaluated": false,
+      "execution_evaluated": false,
+      "executed": false,
+      "audit_passed": false,
+      "trace": [],
+      "calls": 1,
+      "tool_choice": "reject_or_clarify",
+      "config_valid": false,
+      "models": [],
+      "failure": {
+        "type": "ValueError",
+        "message": "ENV_NOT_ALLOWED: 任务须明确使用 BOPTEST，且不能混用其他环境"
+      },
+      "elapsed_seconds": 7.989001460373402e-06
+    },
+    {
+      "id": "agent_16",
+      "tool_choice_evaluated": false,
+      "execution_evaluated": false,
+      "executed": false,
+      "audit_passed": false,
+      "trace": [],
+      "calls": 1,
+      "tool_choice": "reject_or_clarify",
+      "config_valid": false,
+      "models": [],
+      "failure": {
+        "type": "ValueError",
+        "message": "ENV_NOT_ALLOWED: 任务须明确使用 BOPTEST，且不能混用其他环境"
+      },
+      "elapsed_seconds": 7.665999874006957e-06
+    },
+    {
+      "id": "agent_17",
+      "tool_choice_evaluated": false,
+      "execution_evaluated": false,
+      "executed": false,
+      "audit_passed": false,
+      "trace": [],
+      "calls": 1,
+      "tool_choice": "reject_or_clarify",
+      "config_valid": false,
+      "models": [],
+      "failure": {
+        "type": "ValueError",
+        "message": "ENV_NOT_ALLOWED: 任务须明确使用 BOPTEST，且不能混用其他环境"
+      },
+      "elapsed_seconds": 2.3467997380066663e-05
+    },
+    {
+      "id": "agent_18",
+      "tool_choice_evaluated": false,
+      "execution_evaluated": false,
+      "executed": false,
+      "audit_passed": false,
+      "trace": [],
+      "calls": 1,
+      "tool_choice": "reject_or_clarify",
+      "config_valid": false,
+      "models": [],
+      "failure": {
+        "type": "ValueError",
+        "message": "ENV_NOT_ALLOWED: 任务须明确使用 BOPTEST，且不能混用其他环境"
+      },
+      "elapsed_seconds": 1.0671999916667119e-05
+    },
+    {
+      "id": "agent_19",
+      "tool_choice_evaluated": false,
+      "execution_evaluated": false,
+      "executed": false,
+      "audit_passed": false,
+      "trace": [],
+      "calls": 1,
+      "tool_choice": "reject_or_clarify",
+      "config_valid": false,
+      "models": [],
+      "failure": {
+        "type": "ValueError",
+        "message": "ENV_NOT_ALLOWED: 任务须明确使用 BOPTEST，且不能混用其他环境"
+      },
+      "elapsed_seconds": 1.0029001714428887e-05
+    },
+    {
+      "id": "agent_20",
+      "tool_choice_evaluated": false,
+      "execution_evaluated": false,
+      "executed": false,
+      "audit_passed": false,
+      "trace": [],
+      "calls": 1,
+      "tool_choice": "reject_or_clarify",
+      "config_valid": false,
+      "models": [],
+      "failure": {
+        "type": "ValueError",
+        "message": "ENV_NOT_ALLOWED: 任务须明确使用 BOPTEST，且不能混用其他环境"
+      },
+      "elapsed_seconds": 8.519000402884558e-06
+    }
+  ]
+}

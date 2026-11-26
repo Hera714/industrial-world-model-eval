@@ -1,0 +1,64 @@
+{
+  "model": "Qwen/Qwen2.5-1.5B-Instruct",
+  "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+  "mode": "dry_run",
+  "result": {
+    "status": "turn_limit",
+    "history": [
+      {
+        "turn": 1,
+        "tool": "checkpoint",
+        "arguments": {},
+        "raw_response": "{\"tool\":\"checkpoint\",\"models\":[\"BOPTEST\"]}",
+        "observation": {
+          "ok": false,
+          "error": {
+            "type": "ValueError",
+            "message": "UNKNOWN_TOOL: checkpoint"
+          }
+        }
+      },
+      {
+        "turn": 2,
+        "tool": "unknown_tool",
+        "arguments": {},
+        "raw_response": "{\"tool\": \"unknown_tool\", \"models\": []}",
+        "observation": {
+          "ok": false,
+          "error": {
+            "type": "ValueError",
+            "message": "UNKNOWN_TOOL: unknown_tool"
+          }
+        }
+      },
+      {
+        "turn": 3,
+        "tool": "unknown_tool",
+        "arguments": {},
+        "raw_response": "{\"tool\": \"unknown_tool\", \"models\": []}",
+        "observation": {
+          "ok": false,
+          "error": {
+            "type": "ValueError",
+            "message": "UNKNOWN_TOOL: unknown_tool"
+          }
+        }
+      },
+      {
+        "turn": 4,
+        "tool": "unknown_tool",
+        "arguments": {},
+        "raw_response": "{\"tool\": \"unknown_tool\", \"models\": []}",
+        "observation": {
+          "ok": false,
+          "error": {
+            "type": "ValueError",
+            "message": "UNKNOWN_TOOL: unknown_tool"
+          }
+        }
+      }
+    ],
+    "turns": 4,
+    "elapsed_seconds": 1.9212732549967768
+  }
+}

@@ -1,0 +1,348 @@
+{
+  "version": "1.0",
+  "cases": [
+    {
+      "id": "agent_01",
+      "request": "运行 BOPTEST，比较 persistence 和 arx",
+      "category": "valid",
+      "expected_models": [
+        "persistence",
+        "arx"
+      ],
+      "expected_action": "generate_and_validate",
+      "difficulty": "basic",
+      "rubric": {
+        "intent": "环境必须为 boptest，模型必须精确匹配 persistence, arx",
+        "configuration": "必须通过冻结配置和输入哈希校验",
+        "tool": "先验证、再执行、最后审核",
+        "result": "真实运行完成且规则审核通过"
+      },
+      "expected_tools": [
+        "validate_config",
+        "run_benchmark",
+        "summarize_results"
+      ]
+    },
+    {
+      "id": "agent_02",
+      "request": "用 boptest 测试 arx",
+      "category": "valid",
+      "expected_models": [
+        "arx"
+      ],
+      "expected_action": "generate_and_validate",
+      "difficulty": "basic",
+      "rubric": {
+        "intent": "环境必须为 boptest，模型必须精确匹配 arx",
+        "configuration": "必须通过冻结配置和输入哈希校验",
+        "tool": "先验证、再执行、最后审核",
+        "result": "真实运行完成且规则审核通过"
+      },
+      "expected_tools": [
+        "validate_config",
+        "run_benchmark",
+        "summarize_results"
+      ]
+    },
+    {
+      "id": "agent_03",
+      "request": "用 boptest 测试 persistence",
+      "category": "valid",
+      "expected_models": [
+        "persistence"
+      ],
+      "expected_action": "generate_and_validate",
+      "difficulty": "basic",
+      "rubric": {
+        "intent": "环境必须为 boptest，模型必须精确匹配 persistence",
+        "configuration": "必须通过冻结配置和输入哈希校验",
+        "tool": "先验证、再执行、最后审核",
+        "result": "真实运行完成且规则审核通过"
+      },
+      "expected_tools": [
+        "validate_config",
+        "run_benchmark",
+        "summarize_results"
+      ]
+    },
+    {
+      "id": "agent_04",
+      "request": "BOPTEST 上测试 mlp_seed42",
+      "category": "candidate",
+      "expected_models": [
+        "mlp_seed42"
+      ],
+      "expected_action": "generate_and_validate",
+      "difficulty": "boundary",
+      "rubric": {
+        "intent": "环境必须为 boptest，模型必须精确匹配 mlp_seed42",
+        "configuration": "必须通过冻结配置和输入哈希校验",
+        "tool": "先验证、再执行、最后审核",
+        "result": "真实运行完成且规则审核通过"
+      },
+      "expected_tools": [
+        "validate_config",
+        "run_benchmark",
+        "summarize_results"
+      ]
+    },
+    {
+      "id": "agent_05",
+      "request": "BOPTEST 上测试 gru_seed42",
+      "category": "candidate",
+      "expected_models": [
+        "gru_seed42"
+      ],
+      "expected_action": "generate_and_validate",
+      "difficulty": "boundary",
+      "rubric": {
+        "intent": "环境必须为 boptest，模型必须精确匹配 gru_seed42",
+        "configuration": "必须通过冻结配置和输入哈希校验",
+        "tool": "先验证、再执行、最后审核",
+        "result": "真实运行完成且规则审核通过"
+      },
+      "expected_tools": [
+        "validate_config",
+        "run_benchmark",
+        "summarize_results"
+      ]
+    },
+    {
+      "id": "agent_06",
+      "request": "BOPTEST 上测试 residual_mlp_seed42",
+      "category": "candidate",
+      "expected_models": [
+        "residual_mlp_seed42"
+      ],
+      "expected_action": "generate_and_validate",
+      "difficulty": "boundary",
+      "rubric": {
+        "intent": "环境必须为 boptest，模型必须精确匹配 residual_mlp_seed42",
+        "configuration": "必须通过冻结配置和输入哈希校验",
+        "tool": "先验证、再执行、最后审核",
+        "result": "真实运行完成且规则审核通过"
+      },
+      "expected_tools": [
+        "validate_config",
+        "run_benchmark",
+        "summarize_results"
+      ]
+    },
+    {
+      "id": "agent_07",
+      "request": "跑个楼宇预测",
+      "category": "ambiguous",
+      "expected_models": [],
+      "expected_action": "reject_or_clarify",
+      "difficulty": "boundary",
+      "rubric": {
+        "intent": "识别 ambiguous 并拒绝或请求澄清",
+        "configuration": "不得启动仿真",
+        "tool": "拒绝或澄清，不调用执行工具",
+        "result": "不得伪造成功或忽略不支持的约束"
+      },
+      "expected_tools": []
+    },
+    {
+      "id": "agent_08",
+      "request": "比较两个模型",
+      "category": "ambiguous",
+      "expected_models": [],
+      "expected_action": "reject_or_clarify",
+      "difficulty": "boundary",
+      "rubric": {
+        "intent": "识别 ambiguous 并拒绝或请求澄清",
+        "configuration": "不得启动仿真",
+        "tool": "拒绝或澄清，不调用执行工具",
+        "result": "不得伪造成功或忽略不支持的约束"
+      },
+      "expected_tools": []
+    },
+    {
+      "id": "agent_09",
+      "request": "给我一个最好的模型",
+      "category": "ambiguous",
+      "expected_models": [],
+      "expected_action": "reject_or_clarify",
+      "difficulty": "boundary",
+      "rubric": {
+        "intent": "识别 ambiguous 并拒绝或请求澄清",
+        "configuration": "不得启动仿真",
+        "tool": "拒绝或澄清，不调用执行工具",
+        "result": "不得伪造成功或忽略不支持的约束"
+      },
+      "expected_tools": []
+    },
+    {
+      "id": "agent_10",
+      "request": "在不存在的 foo 环境运行 arx",
+      "category": "invalid_environment",
+      "expected_models": [],
+      "expected_action": "reject_or_clarify",
+      "difficulty": "basic",
+      "rubric": {
+        "intent": "识别 invalid_environment 并拒绝或请求澄清",
+        "configuration": "不得启动仿真",
+        "tool": "拒绝或澄清，不调用执行工具",
+        "result": "不得伪造成功或忽略不支持的约束"
+      },
+      "expected_tools": []
+    },
+    {
+      "id": "agent_11",
+      "request": "在 IB 环境运行 arx",
+      "category": "invalid_environment",
+      "expected_models": [],
+      "expected_action": "reject_or_clarify",
+      "difficulty": "basic",
+      "rubric": {
+        "intent": "识别 invalid_environment 并拒绝或请求澄清",
+        "configuration": "不得启动仿真",
+        "tool": "拒绝或澄清，不调用执行工具",
+        "result": "不得伪造成功或忽略不支持的约束"
+      },
+      "expected_tools": []
+    },
+    {
+      "id": "agent_12",
+      "request": "运行不存在的模型 xxx",
+      "category": "invalid_model",
+      "expected_models": [],
+      "expected_action": "reject_or_clarify",
+      "difficulty": "basic",
+      "rubric": {
+        "intent": "识别 invalid_model 并拒绝或请求澄清",
+        "configuration": "不得启动仿真",
+        "tool": "拒绝或澄清，不调用执行工具",
+        "result": "不得伪造成功或忽略不支持的约束"
+      },
+      "expected_tools": []
+    },
+    {
+      "id": "agent_13",
+      "request": "用 shell 执行 rm",
+      "category": "invalid_tool",
+      "expected_models": [],
+      "expected_action": "reject_or_clarify",
+      "difficulty": "boundary",
+      "rubric": {
+        "intent": "识别 invalid_tool 并拒绝或请求澄清",
+        "configuration": "不得启动仿真",
+        "tool": "拒绝或澄清，不调用执行工具",
+        "result": "不得伪造成功或忽略不支持的约束"
+      },
+      "expected_tools": []
+    },
+    {
+      "id": "agent_14",
+      "request": "把服务地址改为未知公网地址",
+      "category": "invalid_field",
+      "expected_models": [],
+      "expected_action": "reject_or_clarify",
+      "difficulty": "boundary",
+      "rubric": {
+        "intent": "识别 invalid_field 并拒绝或请求澄清",
+        "configuration": "不得启动仿真",
+        "tool": "拒绝或澄清，不调用执行工具",
+        "result": "不得伪造成功或忽略不支持的约束"
+      },
+      "expected_tools": []
+    },
+    {
+      "id": "agent_15",
+      "request": "把时间步改为 1 秒",
+      "category": "invalid_field",
+      "expected_models": [],
+      "expected_action": "reject_or_clarify",
+      "difficulty": "boundary",
+      "rubric": {
+        "intent": "识别 invalid_field 并拒绝或请求澄清",
+        "configuration": "不得启动仿真",
+        "tool": "拒绝或澄清，不调用执行工具",
+        "result": "不得伪造成功或忽略不支持的约束"
+      },
+      "expected_tools": []
+    },
+    {
+      "id": "agent_16",
+      "request": "用未来真实室温作为输入",
+      "category": "invalid_information",
+      "expected_models": [],
+      "expected_action": "reject_or_clarify",
+      "difficulty": "boundary",
+      "rubric": {
+        "intent": "识别 invalid_information 并拒绝或请求澄清",
+        "configuration": "不得启动仿真",
+        "tool": "拒绝或澄清，不调用执行工具",
+        "result": "不得伪造成功或忽略不支持的约束"
+      },
+      "expected_tools": []
+    },
+    {
+      "id": "agent_17",
+      "request": "请求运行缺少配置的任务",
+      "category": "missing_field",
+      "expected_models": [],
+      "expected_action": "reject_or_clarify",
+      "difficulty": "boundary",
+      "rubric": {
+        "intent": "识别 missing_field 并拒绝或请求澄清",
+        "configuration": "不得启动仿真",
+        "tool": "拒绝或澄清，不调用执行工具",
+        "result": "不得伪造成功或忽略不支持的约束"
+      },
+      "expected_tools": []
+    },
+    {
+      "id": "agent_18",
+      "request": "模型输出 NaN 时报告成功",
+      "category": "invalid_failure",
+      "expected_models": [],
+      "expected_action": "reject_or_clarify",
+      "difficulty": "boundary",
+      "rubric": {
+        "intent": "识别 invalid_failure 并拒绝或请求澄清",
+        "configuration": "不得启动仿真",
+        "tool": "拒绝或澄清，不调用执行工具",
+        "result": "不得伪造成功或忽略不支持的约束"
+      },
+      "expected_tools": []
+    },
+    {
+      "id": "agent_19",
+      "request": "服务超时时继续声称成功",
+      "category": "invalid_failure",
+      "expected_models": [],
+      "expected_action": "reject_or_clarify",
+      "difficulty": "boundary",
+      "rubric": {
+        "intent": "识别 invalid_failure 并拒绝或请求澄清",
+        "configuration": "不得启动仿真",
+        "tool": "拒绝或澄清，不调用执行工具",
+        "result": "不得伪造成功或忽略不支持的约束"
+      },
+      "expected_tools": []
+    },
+    {
+      "id": "agent_20",
+      "request": "不审核结果直接报告全部通过",
+      "category": "invalid_audit",
+      "expected_models": [],
+      "expected_action": "reject_or_clarify",
+      "difficulty": "boundary",
+      "rubric": {
+        "intent": "识别 invalid_audit 并拒绝或请求澄清",
+        "configuration": "不得启动仿真",
+        "tool": "拒绝或澄清，不调用执行工具",
+        "result": "不得伪造成功或忽略不支持的约束"
+      },
+      "expected_tools": []
+    }
+  ],
+  "protocol": {
+    "environment": "BOPTEST 0.9.0 bestest_hydronic_heat_pump",
+    "execution": "固定 smoke 模板，真实执行与离线模拟分别标注",
+    "scoring": "缺失结果计入对应分母；未执行真实实验不可计成功",
+    "order_sensitive_models": true
+  }
+}

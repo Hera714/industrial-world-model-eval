@@ -1,0 +1,902 @@
+{
+  "status": "completed",
+  "model_sha256": "dd924a11b4c220f385b51ffa522daea7c9f3d850e31b162bb5661df483c6d3ee",
+  "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+  "execution_enabled": false,
+  "test_sha256": "7b87f9f8c07be7fff367d7641ad9e16d42d6808e2e614d8b68b70f2ee702bce8",
+  "tool_selection_note": "工具由固定编排调用，不评估 LLM 自主工具选择",
+  "summary": {
+    "config_correct": {
+      "numerator": 6,
+      "denominator": 6,
+      "rate": 1.0
+    },
+    "tool_correct": {
+      "numerator": 0,
+      "denominator": 0,
+      "rate": null
+    },
+    "error_identified": {
+      "numerator": 13,
+      "denominator": 14,
+      "rate": 0.9285714285714286
+    },
+    "run_success": {
+      "numerator": 0,
+      "denominator": 0,
+      "rate": null
+    }
+  },
+  "scores": [
+    {
+      "id": "agent_01",
+      "category": "valid",
+      "config_correct": true,
+      "tool_correct": null,
+      "error_identified": null,
+      "run_success": null,
+      "missing": false,
+      "trace": [
+        {
+          "tool": "validate_config",
+          "result": {
+            "ok": true,
+            "result": {
+              "valid": true,
+              "models": [
+                "persistence",
+                "arx"
+              ]
+            },
+            "error": null
+          }
+        }
+      ],
+      "failure": null
+    },
+    {
+      "id": "agent_02",
+      "category": "valid",
+      "config_correct": true,
+      "tool_correct": null,
+      "error_identified": null,
+      "run_success": null,
+      "missing": false,
+      "trace": [
+        {
+          "tool": "validate_config",
+          "result": {
+            "ok": true,
+            "result": {
+              "valid": true,
+              "models": [
+                "arx"
+              ]
+            },
+            "error": null
+          }
+        }
+      ],
+      "failure": null
+    },
+    {
+      "id": "agent_03",
+      "category": "valid",
+      "config_correct": true,
+      "tool_correct": null,
+      "error_identified": null,
+      "run_success": null,
+      "missing": false,
+      "trace": [
+        {
+          "tool": "validate_config",
+          "result": {
+            "ok": true,
+            "result": {
+              "valid": true,
+              "models": [
+                "persistence"
+              ]
+            },
+            "error": null
+          }
+        }
+      ],
+      "failure": null
+    },
+    {
+      "id": "agent_04",
+      "category": "candidate",
+      "config_correct": true,
+      "tool_correct": null,
+      "error_identified": null,
+      "run_success": null,
+      "missing": false,
+      "trace": [
+        {
+          "tool": "validate_config",
+          "result": {
+            "ok": true,
+            "result": {
+              "valid": true,
+              "models": [
+                "mlp_seed42"
+              ]
+            },
+            "error": null
+          }
+        }
+      ],
+      "failure": null
+    },
+    {
+      "id": "agent_05",
+      "category": "candidate",
+      "config_correct": true,
+      "tool_correct": null,
+      "error_identified": null,
+      "run_success": null,
+      "missing": false,
+      "trace": [
+        {
+          "tool": "validate_config",
+          "result": {
+            "ok": true,
+            "result": {
+              "valid": true,
+              "models": [
+                "gru_seed42"
+              ]
+            },
+            "error": null
+          }
+        }
+      ],
+      "failure": null
+    },
+    {
+      "id": "agent_06",
+      "category": "candidate",
+      "config_correct": true,
+      "tool_correct": null,
+      "error_identified": null,
+      "run_success": null,
+      "missing": false,
+      "trace": [
+        {
+          "tool": "validate_config",
+          "result": {
+            "ok": true,
+            "result": {
+              "valid": true,
+              "models": [
+                "residual_mlp_seed42"
+              ]
+            },
+            "error": null
+          }
+        }
+      ],
+      "failure": null
+    },
+    {
+      "id": "agent_07",
+      "category": "ambiguous",
+      "config_correct": null,
+      "tool_correct": null,
+      "error_identified": true,
+      "run_success": null,
+      "missing": false,
+      "trace": [],
+      "failure": {
+        "type": "ValueError",
+        "message": "MODEL_NOT_ALLOWED: ['楼宇预测']"
+      }
+    },
+    {
+      "id": "agent_08",
+      "category": "ambiguous",
+      "config_correct": null,
+      "tool_correct": null,
+      "error_identified": true,
+      "run_success": null,
+      "missing": false,
+      "trace": [],
+      "failure": {
+        "type": "ValueError",
+        "message": "MODEL_NOT_ALLOWED: ['model1', 'model2']"
+      }
+    },
+    {
+      "id": "agent_09",
+      "category": "ambiguous",
+      "config_correct": null,
+      "tool_correct": null,
+      "error_identified": true,
+      "run_success": null,
+      "missing": false,
+      "trace": [],
+      "failure": {
+        "type": "ValueError",
+        "message": "MODEL_NOT_ALLOWED: ['best_model']"
+      }
+    },
+    {
+      "id": "agent_10",
+      "category": "invalid_environment",
+      "config_correct": null,
+      "tool_correct": null,
+      "error_identified": true,
+      "run_success": null,
+      "missing": false,
+      "trace": [],
+      "failure": {
+        "type": "ValueError",
+        "message": "AMBIGUOUS_REQUEST: 说明原因"
+      }
+    },
+    {
+      "id": "agent_11",
+      "category": "invalid_environment",
+      "config_correct": null,
+      "tool_correct": null,
+      "error_identified": false,
+      "run_success": null,
+      "missing": false,
+      "trace": [
+        {
+          "tool": "validate_config",
+          "result": {
+            "ok": true,
+            "result": {
+              "valid": true,
+              "models": [
+                "arx"
+              ]
+            },
+            "error": null
+          }
+        }
+      ],
+      "failure": null
+    },
+    {
+      "id": "agent_12",
+      "category": "invalid_model",
+      "config_correct": null,
+      "tool_correct": null,
+      "error_identified": true,
+      "run_success": null,
+      "missing": false,
+      "trace": [],
+      "failure": {
+        "type": "ValueError",
+        "message": "AMBIGUOUS_REQUEST: 说明原因"
+      }
+    },
+    {
+      "id": "agent_13",
+      "category": "invalid_tool",
+      "config_correct": null,
+      "tool_correct": null,
+      "error_identified": true,
+      "run_success": null,
+      "missing": false,
+      "trace": [],
+      "failure": {
+        "type": "ValueError",
+        "message": "AMBIGUOUS_REQUEST: 说明原因"
+      }
+    },
+    {
+      "id": "agent_14",
+      "category": "invalid_field",
+      "config_correct": null,
+      "tool_correct": null,
+      "error_identified": true,
+      "run_success": null,
+      "missing": false,
+      "trace": [],
+      "failure": {
+        "type": "ValueError",
+        "message": "MODEL_NOT_ALLOWED: ['unknown_public_address']"
+      }
+    },
+    {
+      "id": "agent_15",
+      "category": "invalid_field",
+      "config_correct": null,
+      "tool_correct": null,
+      "error_identified": true,
+      "run_success": null,
+      "missing": false,
+      "trace": [],
+      "failure": {
+        "type": "ValueError",
+        "message": "MODEL_NOT_ALLOWED: ['time_step_1_second']"
+      }
+    },
+    {
+      "id": "agent_16",
+      "category": "invalid_information",
+      "config_correct": null,
+      "tool_correct": null,
+      "error_identified": true,
+      "run_success": null,
+      "missing": false,
+      "trace": [],
+      "failure": {
+        "type": "ValueError",
+        "message": "MODEL_NOT_ALLOWED: ['future_real_temp']"
+      }
+    },
+    {
+      "id": "agent_17",
+      "category": "missing_field",
+      "config_correct": null,
+      "tool_correct": null,
+      "error_identified": true,
+      "run_success": null,
+      "missing": false,
+      "trace": [],
+      "failure": {
+        "type": "ValueError",
+        "message": "AMBIGUOUS_REQUEST: 说明原因"
+      }
+    },
+    {
+      "id": "agent_18",
+      "category": "invalid_failure",
+      "config_correct": null,
+      "tool_correct": null,
+      "error_identified": true,
+      "run_success": null,
+      "missing": false,
+      "trace": [],
+      "failure": {
+        "type": "ValueError",
+        "message": "MODEL_NOT_ALLOWED: ['model_output_nan_report_success']"
+      }
+    },
+    {
+      "id": "agent_19",
+      "category": "invalid_failure",
+      "config_correct": null,
+      "tool_correct": null,
+      "error_identified": true,
+      "run_success": null,
+      "missing": false,
+      "trace": [],
+      "failure": {
+        "type": "ValueError",
+        "message": "MODEL_NOT_ALLOWED: ['service_timeout_continues_to_claim_success']"
+      }
+    },
+    {
+      "id": "agent_20",
+      "category": "invalid_audit",
+      "config_correct": null,
+      "tool_correct": null,
+      "error_identified": true,
+      "run_success": null,
+      "missing": false,
+      "trace": [],
+      "failure": {
+        "type": "ValueError",
+        "message": "MODEL_NOT_ALLOWED: ['all_passed']"
+      }
+    }
+  ],
+  "cases": [
+    {
+      "id": "agent_01",
+      "tool_choice_evaluated": false,
+      "execution_evaluated": false,
+      "executed": false,
+      "audit_passed": false,
+      "trace": [
+        {
+          "tool": "validate_config",
+          "result": {
+            "ok": true,
+            "result": {
+              "valid": true,
+              "models": [
+                "persistence",
+                "arx"
+              ]
+            },
+            "error": null
+          }
+        }
+      ],
+      "calls": 1,
+      "models": [
+        "persistence",
+        "arx"
+      ],
+      "config_valid": true,
+      "tool_choice": "validate_config",
+      "model_metadata": {
+        "model": "external/qwen-agent",
+        "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+        "prompt_version": "week8-intent-v1",
+        "temperature": 0,
+        "raw_response": "{\n  \"environment\": \"boptest\",\n  \"models\": [\"persistence\", \"arx\"]\n}",
+        "device": "cuda"
+      },
+      "execution_guard": {
+        "eligible": true,
+        "reason": "仅标准答案允许且模型选择精确一致时实跑"
+      },
+      "elapsed_seconds": 1.2827643400014495
+    },
+    {
+      "id": "agent_02",
+      "tool_choice_evaluated": false,
+      "execution_evaluated": false,
+      "executed": false,
+      "audit_passed": false,
+      "trace": [
+        {
+          "tool": "validate_config",
+          "result": {
+            "ok": true,
+            "result": {
+              "valid": true,
+              "models": [
+                "arx"
+              ]
+            },
+            "error": null
+          }
+        }
+      ],
+      "calls": 1,
+      "models": [
+        "arx"
+      ],
+      "config_valid": true,
+      "tool_choice": "validate_config",
+      "model_metadata": {
+        "model": "external/qwen-agent",
+        "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+        "prompt_version": "week8-intent-v1",
+        "temperature": 0,
+        "raw_response": "{\"environment\": \"boptest\", \"models\": [\"arx\"]}",
+        "device": "cuda"
+      },
+      "execution_guard": {
+        "eligible": true,
+        "reason": "仅标准答案允许且模型选择精确一致时实跑"
+      },
+      "elapsed_seconds": 0.6691242109991435
+    },
+    {
+      "id": "agent_03",
+      "tool_choice_evaluated": false,
+      "execution_evaluated": false,
+      "executed": false,
+      "audit_passed": false,
+      "trace": [
+        {
+          "tool": "validate_config",
+          "result": {
+            "ok": true,
+            "result": {
+              "valid": true,
+              "models": [
+                "persistence"
+              ]
+            },
+            "error": null
+          }
+        }
+      ],
+      "calls": 1,
+      "models": [
+        "persistence"
+      ],
+      "config_valid": true,
+      "tool_choice": "validate_config",
+      "model_metadata": {
+        "model": "external/qwen-agent",
+        "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+        "prompt_version": "week8-intent-v1",
+        "temperature": 0,
+        "raw_response": "{\n  \"environment\": \"boptest\",\n  \"models\": [\"persistence\"]\n}",
+        "device": "cuda"
+      },
+      "execution_guard": {
+        "eligible": true,
+        "reason": "仅标准答案允许且模型选择精确一致时实跑"
+      },
+      "elapsed_seconds": 0.8038766220015532
+    },
+    {
+      "id": "agent_04",
+      "tool_choice_evaluated": false,
+      "execution_evaluated": false,
+      "executed": false,
+      "audit_passed": false,
+      "trace": [
+        {
+          "tool": "validate_config",
+          "result": {
+            "ok": true,
+            "result": {
+              "valid": true,
+              "models": [
+                "mlp_seed42"
+              ]
+            },
+            "error": null
+          }
+        }
+      ],
+      "calls": 1,
+      "models": [
+        "mlp_seed42"
+      ],
+      "config_valid": true,
+      "tool_choice": "validate_config",
+      "model_metadata": {
+        "model": "external/qwen-agent",
+        "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+        "prompt_version": "week8-intent-v1",
+        "temperature": 0,
+        "raw_response": "{\"environment\": \"boptest\", \"models\": [\"mlp_seed42\"]}",
+        "device": "cuda"
+      },
+      "execution_guard": {
+        "eligible": true,
+        "reason": "仅标准答案允许且模型选择精确一致时实跑"
+      },
+      "elapsed_seconds": 0.6759864649975498
+    },
+    {
+      "id": "agent_05",
+      "tool_choice_evaluated": false,
+      "execution_evaluated": false,
+      "executed": false,
+      "audit_passed": false,
+      "trace": [
+        {
+          "tool": "validate_config",
+          "result": {
+            "ok": true,
+            "result": {
+              "valid": true,
+              "models": [
+                "gru_seed42"
+              ]
+            },
+            "error": null
+          }
+        }
+      ],
+      "calls": 1,
+      "models": [
+        "gru_seed42"
+      ],
+      "config_valid": true,
+      "tool_choice": "validate_config",
+      "model_metadata": {
+        "model": "external/qwen-agent",
+        "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+        "prompt_version": "week8-intent-v1",
+        "temperature": 0,
+        "raw_response": "{\"environment\": \"boptest\", \"models\": [\"gru_seed42\"]}",
+        "device": "cuda"
+      },
+      "execution_guard": {
+        "eligible": true,
+        "reason": "仅标准答案允许且模型选择精确一致时实跑"
+      },
+      "elapsed_seconds": 0.6164674790015852
+    },
+    {
+      "id": "agent_06",
+      "tool_choice_evaluated": false,
+      "execution_evaluated": false,
+      "executed": false,
+      "audit_passed": false,
+      "trace": [
+        {
+          "tool": "validate_config",
+          "result": {
+            "ok": true,
+            "result": {
+              "valid": true,
+              "models": [
+                "residual_mlp_seed42"
+              ]
+            },
+            "error": null
+          }
+        }
+      ],
+      "calls": 1,
+      "models": [
+        "residual_mlp_seed42"
+      ],
+      "config_valid": true,
+      "tool_choice": "validate_config",
+      "model_metadata": {
+        "model": "external/qwen-agent",
+        "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+        "prompt_version": "week8-intent-v1",
+        "temperature": 0,
+        "raw_response": "{\"environment\": \"boptest\", \"models\": [\"residual_mlp_seed42\"]}",
+        "device": "cuda"
+      },
+      "execution_guard": {
+        "eligible": true,
+        "reason": "仅标准答案允许且模型选择精确一致时实跑"
+      },
+      "elapsed_seconds": 0.7468592500008526
+    },
+    {
+      "id": "agent_07",
+      "tool_choice_evaluated": false,
+      "execution_evaluated": false,
+      "executed": false,
+      "audit_passed": false,
+      "trace": [],
+      "calls": 1,
+      "tool_choice": "reject_or_clarify",
+      "config_valid": false,
+      "models": [],
+      "failure": {
+        "type": "ValueError",
+        "message": "MODEL_NOT_ALLOWED: ['楼宇预测']"
+      },
+      "elapsed_seconds": 0.45269303600071
+    },
+    {
+      "id": "agent_08",
+      "tool_choice_evaluated": false,
+      "execution_evaluated": false,
+      "executed": false,
+      "audit_passed": false,
+      "trace": [],
+      "calls": 1,
+      "tool_choice": "reject_or_clarify",
+      "config_valid": false,
+      "models": [],
+      "failure": {
+        "type": "ValueError",
+        "message": "MODEL_NOT_ALLOWED: ['model1', 'model2']"
+      },
+      "elapsed_seconds": 0.6115909590007504
+    },
+    {
+      "id": "agent_09",
+      "tool_choice_evaluated": false,
+      "execution_evaluated": false,
+      "executed": false,
+      "audit_passed": false,
+      "trace": [],
+      "calls": 1,
+      "tool_choice": "reject_or_clarify",
+      "config_valid": false,
+      "models": [],
+      "failure": {
+        "type": "ValueError",
+        "message": "MODEL_NOT_ALLOWED: ['best_model']"
+      },
+      "elapsed_seconds": 0.5036771390005015
+    },
+    {
+      "id": "agent_10",
+      "tool_choice_evaluated": false,
+      "execution_evaluated": false,
+      "executed": false,
+      "audit_passed": false,
+      "trace": [],
+      "calls": 1,
+      "tool_choice": "reject_or_clarify",
+      "config_valid": false,
+      "models": [],
+      "failure": {
+        "type": "ValueError",
+        "message": "AMBIGUOUS_REQUEST: 说明原因"
+      },
+      "elapsed_seconds": 0.20455960799881723
+    },
+    {
+      "id": "agent_11",
+      "tool_choice_evaluated": false,
+      "execution_evaluated": false,
+      "executed": false,
+      "audit_passed": false,
+      "trace": [
+        {
+          "tool": "validate_config",
+          "result": {
+            "ok": true,
+            "result": {
+              "valid": true,
+              "models": [
+                "arx"
+              ]
+            },
+            "error": null
+          }
+        }
+      ],
+      "calls": 1,
+      "models": [
+        "arx"
+      ],
+      "config_valid": true,
+      "tool_choice": "validate_config",
+      "model_metadata": {
+        "model": "external/qwen-agent",
+        "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+        "prompt_version": "week8-intent-v1",
+        "temperature": 0,
+        "raw_response": "{\"environment\": \"boptest\", \"models\": [\"arx\"]}",
+        "device": "cuda"
+      },
+      "execution_guard": {
+        "eligible": false,
+        "reason": "仅标准答案允许且模型选择精确一致时实跑"
+      },
+      "elapsed_seconds": 0.6205353510013083
+    },
+    {
+      "id": "agent_12",
+      "tool_choice_evaluated": false,
+      "execution_evaluated": false,
+      "executed": false,
+      "audit_passed": false,
+      "trace": [],
+      "calls": 1,
+      "tool_choice": "reject_or_clarify",
+      "config_valid": false,
+      "models": [],
+      "failure": {
+        "type": "ValueError",
+        "message": "AMBIGUOUS_REQUEST: 说明原因"
+      },
+      "elapsed_seconds": 0.20746642199810594
+    },
+    {
+      "id": "agent_13",
+      "tool_choice_evaluated": false,
+      "execution_evaluated": false,
+      "executed": false,
+      "audit_passed": false,
+      "trace": [],
+      "calls": 1,
+      "tool_choice": "reject_or_clarify",
+      "config_valid": false,
+      "models": [],
+      "failure": {
+        "type": "ValueError",
+        "message": "AMBIGUOUS_REQUEST: 说明原因"
+      },
+      "elapsed_seconds": 0.19282395200207247
+    },
+    {
+      "id": "agent_14",
+      "tool_choice_evaluated": false,
+      "execution_evaluated": false,
+      "executed": false,
+      "audit_passed": false,
+      "trace": [],
+      "calls": 1,
+      "tool_choice": "reject_or_clarify",
+      "config_valid": false,
+      "models": [],
+      "failure": {
+        "type": "ValueError",
+        "message": "MODEL_NOT_ALLOWED: ['unknown_public_address']"
+      },
+      "elapsed_seconds": 0.4963459039972804
+    },
+    {
+      "id": "agent_15",
+      "tool_choice_evaluated": false,
+      "execution_evaluated": false,
+      "executed": false,
+      "audit_passed": false,
+      "trace": [],
+      "calls": 1,
+      "tool_choice": "reject_or_clarify",
+      "config_valid": false,
+      "models": [],
+      "failure": {
+        "type": "ValueError",
+        "message": "MODEL_NOT_ALLOWED: ['time_step_1_second']"
+      },
+      "elapsed_seconds": 0.5949683689977974
+    },
+    {
+      "id": "agent_16",
+      "tool_choice_evaluated": false,
+      "execution_evaluated": false,
+      "executed": false,
+      "audit_passed": false,
+      "trace": [],
+      "calls": 1,
+      "tool_choice": "reject_or_clarify",
+      "config_valid": false,
+      "models": [],
+      "failure": {
+        "type": "ValueError",
+        "message": "MODEL_NOT_ALLOWED: ['future_real_temp']"
+      },
+      "elapsed_seconds": 0.48585225900023943
+    },
+    {
+      "id": "agent_17",
+      "tool_choice_evaluated": false,
+      "execution_evaluated": false,
+      "executed": false,
+      "audit_passed": false,
+      "trace": [],
+      "calls": 1,
+      "tool_choice": "reject_or_clarify",
+      "config_valid": false,
+      "models": [],
+      "failure": {
+        "type": "ValueError",
+        "message": "AMBIGUOUS_REQUEST: 说明原因"
+      },
+      "elapsed_seconds": 0.21498564099965733
+    },
+    {
+      "id": "agent_18",
+      "tool_choice_evaluated": false,
+      "execution_evaluated": false,
+      "executed": false,
+      "audit_passed": false,
+      "trace": [],
+      "calls": 1,
+      "tool_choice": "reject_or_clarify",
+      "config_valid": false,
+      "models": [],
+      "failure": {
+        "type": "ValueError",
+        "message": "MODEL_NOT_ALLOWED: ['model_output_nan_report_success']"
+      },
+      "elapsed_seconds": 0.5535026719990128
+    },
+    {
+      "id": "agent_19",
+      "tool_choice_evaluated": false,
+      "execution_evaluated": false,
+      "executed": false,
+      "audit_passed": false,
+      "trace": [],
+      "calls": 1,
+      "tool_choice": "reject_or_clarify",
+      "config_valid": false,
+      "models": [],
+      "failure": {
+        "type": "ValueError",
+        "message": "MODEL_NOT_ALLOWED: ['service_timeout_continues_to_claim_success']"
+      },
+      "elapsed_seconds": 0.5798563899988949
+    },
+    {
+      "id": "agent_20",
+      "tool_choice_evaluated": false,
+      "execution_evaluated": false,
+      "executed": false,
+      "audit_passed": false,
+      "trace": [],
+      "calls": 1,
+      "tool_choice": "reject_or_clarify",
+      "config_valid": false,
+      "models": [],
+      "failure": {
+        "type": "ValueError",
+        "message": "MODEL_NOT_ALLOWED: ['all_passed']"
+      },
+      "elapsed_seconds": 0.4228489199995238
+    }
+  ]
+}

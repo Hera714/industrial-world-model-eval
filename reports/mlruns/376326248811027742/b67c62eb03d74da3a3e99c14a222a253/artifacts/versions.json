@@ -1,0 +1,29 @@
+{
+  "python": "3.11.18 (main, Oct 26 2026, 18:19:35) [GCC 14.3.0]",
+  "executable": "/tmp/week7-mlflow/bin/python",
+  "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.35",
+  "packages": {
+    "numpy": "2.4.6",
+    "pandas": "3.1.1",
+    "torch": "2.8.0+cu128",
+    "PyYAML": "6.0.3",
+    "gymnasium": "1.4.0",
+    "fmpy": "0.3.32"
+  },
+  "commit": "e215c60259f56e2d6a667993c6ea5ad09bb540e9",
+  "git_dirty": true,
+  "git_changes": [
+    "M README.md",
+    " M benchmark/artifacts.py",
+    " M benchmark/runner.py",
+    " M reports/week7/week7.md",
+    " M run_benchmark.py",
+    "?? benchmark/tracking.py",
+    "?? configs/tracking/",
+    "?? deployment/benchmark/requirements-tracking.txt",
+    "?? reports/mlruns/",
+    "?? reports/runs/20261125T130928714205Z_boptest_smoke_922f3e456582/",
+    "?? reports/runs/20261125T131039236145Z_boptest_smoke_523b65e2d0db/",
+    "?? tests/test_benchmark_tracking.py"
+  ]
+}

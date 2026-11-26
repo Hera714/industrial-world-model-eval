@@ -79,7 +79,7 @@ def version_info(root):
 
 class RunArtifacts:
     """一个实例对应一个 run；上下文内异常会记为 failed 并继续抛出，正常退出完成产物校验。"""
-    def __init__(self, config, root=None):
+    def __init__(self, config, root=None, tracking_config=None):
         self.root = Path(root or Path(__file__).resolve().parents[1]).resolve()
         self.config = validate_config(config, self.root)
         parent = checked_path(self.root, self.config['output']['directory'], 'output.directory')
@@ -87,6 +87,7 @@ class RunArtifacts:
                        + self.config['output']['run_name'] + '_' + uuid.uuid4().hex[:12])
         self.path = parent / self.run_id
         self.path.mkdir(parents=True, exist_ok=False)
+        self.tracker = None
         self.context = {}
         self.rows = 0
         self.fields = None
@@ -103,6 +104,9 @@ class RunArtifacts:
             for name in ['trajectories.csv', 'events.jsonl', 'run.log']:
                 (self.path/name).touch()
             self.log('run_started')
+            if tracking_config:
+                from benchmark.tracking import LocalTracking
+                self.tracker = LocalTracking(tracking_config, self)
         except BaseException as error:
             self.fail(error)
             raise
@@ -222,12 +226,22 @@ class RunArtifacts:
         return self
 
     def __exit__(self, exc_type, error, tb):
-        if error is not None:
-            self.fail(error)
-        elif self.state['status'] == 'running':
-            try:
-                self.finish()
-            except BaseException as failure:
-                self.fail(failure)
-                raise
+        try:
+            if error is not None:
+                self.fail(error)
+            elif self.state['status'] == 'running':
+                try:
+                    self.finish()
+                except BaseException as failure:
+                    self.fail(failure)
+                    raise
+        finally:
+            if self.tracker:
+                try:
+                    self.tracker.finish()
+                except Exception as tracking_error:
+                    self._json('tracking_error.json', dict(error_type=type(tracking_error).__name__, message=str(tracking_error)))
+                    self._manifest()
+                    import warnings
+                    warnings.warn('MLflow 同步失败，详见 tracking_error.json: '+str(tracking_error))
         return False

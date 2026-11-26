@@ -1,0 +1,66 @@
+{
+  "model": "Qwen/Qwen2.5-1.5B-Instruct",
+  "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+  "mode": "dry_run",
+  "result": {
+    "status": "turn_limit",
+    "history": [
+      {
+        "turn": 1,
+        "tool": "list_envs",
+        "arguments": {},
+        "raw_response": "{\"tool\":\"list_envs\"}",
+        "observation": {
+          "ok": true,
+          "result": {
+            "environments": [
+              "boptest"
+            ]
+          },
+          "error": null
+        }
+      },
+      {
+        "turn": 2,
+        "tool": "invalid",
+        "arguments": {},
+        "raw_response": null,
+        "observation": {
+          "ok": false,
+          "error": {
+            "type": "ValueError",
+            "message": "INVALID_MODELS: models 必须为非空且不重复的模型名称列表"
+          }
+        }
+      },
+      {
+        "turn": 3,
+        "tool": "invalid",
+        "arguments": {},
+        "raw_response": null,
+        "observation": {
+          "ok": false,
+          "error": {
+            "type": "ValueError",
+            "message": "INVALID_MODELS: models 必须为非空且不重复的模型名称列表"
+          }
+        }
+      },
+      {
+        "turn": 4,
+        "tool": "invalid",
+        "arguments": {},
+        "raw_response": null,
+        "observation": {
+          "ok": false,
+          "error": {
+            "type": "ValueError",
+            "message": "INVALID_MODELS: models 必须为非空且不重复的模型名称列表"
+          }
+        }
+      }
+    ],
+    "turns": 4,
+    "elapsed_seconds": 2.114694313000655
+  }
+}

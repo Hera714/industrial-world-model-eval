@@ -1,0 +1,4 @@
+# 本地追踪数据库和实验名称；不访问外部 MLflow 服务。
+backend: local_file
+directory: reports/mlruns
+experiment: industrial-world-model-eval

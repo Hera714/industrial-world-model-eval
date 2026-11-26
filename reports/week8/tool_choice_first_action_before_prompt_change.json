@@ -1,0 +1,2727 @@
+{
+  "status": "complete",
+  "scope": "仅模型自主选择首个工具；未调用工具或评测完整链路",
+  "case_sha256": "7b87f9f8c07be7fff367d7641ad9e16d42d6808e2e614d8b68b70f2ee702bce8",
+  "model_sha256": "dd924a11b4c220f385b51ffa522daea7c9f3d850e31b162bb5661df483c6d3ee",
+  "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+  "correct": 5,
+  "total": 20,
+  "cases": [
+    {
+      "id": "agent_01",
+      "expected_first_action": "validate_config",
+      "chosen": "run_benchmark",
+      "correct": false,
+      "action": {
+        "tool": "run_benchmark",
+        "arguments": {
+          "config": {
+            "schema_version": "1.0",
+            "model": {
+              "instances": [
+                {
+                  "name": "persistence",
+                  "kind": "persistence",
+                  "checkpoint": {
+                    "path": "reports/week6/results/training/persistence.pt",
+                    "sha256": "e694c3a9a716860947c443151678800588e0f879f2022fbc2b2ecd207ef811f2"
+                  }
+                },
+                {
+                  "name": "arx",
+                  "kind": "arx",
+                  "checkpoint": {
+                    "path": "reports/week6/results/training/arx.pt",
+                    "sha256": "08dbf7ac2a67fb916050f472e1e7f1983bbd755c5d360808b06a060870a7b33e"
+                  }
+                }
+              ],
+              "history_steps": 16,
+              "device": "cpu",
+              "observation_names": [
+                "zone_c",
+                "supply_c",
+                "return_c",
+                "floor_heat_kw",
+                "electric_kw"
+              ],
+              "observation_units": [
+                "degC",
+                "degC",
+                "degC",
+                "kW",
+                "kW"
+              ],
+              "exogenous_names": [
+                "outdoor_c",
+                "solar_w_m2",
+                "sin_day",
+                "cos_day",
+                "sin_year",
+                "cos_year"
+              ],
+              "exogenous_units": [
+                "degC",
+                "W/m2",
+                "1",
+                "1",
+                "1",
+                "1"
+              ],
+              "input_features": 12,
+              "output_features": 6
+            },
+            "env": {
+              "type": "boptest",
+              "url": "http://127.0.0.1:80",
+              "version": "0.9.0",
+              "upstream_commit": "9b1610bf7a108826bb3d22c72bffd2d71d7bb0a9",
+              "case": "bestest_hydronic_heat_pump",
+              "step_seconds": 900,
+              "warmup_seconds": 604800,
+              "context_steps": 96,
+              "episode_steps": 8,
+              "area_m2": 192.0,
+              "assets": {
+                "path": "reports/week6/results/assets/manifest.json",
+                "sha256": "68d47e8628ed24de43cf7546c9811989460631423bf8bf30b6e0a0e6592a0e5e"
+              },
+              "action": {
+                "point": "oveTSet_u",
+                "activation": "oveTSet_activate",
+                "unit": "degC",
+                "api_unit": "K",
+                "bounds": [
+                  18.0,
+                  24.0
+                ]
+              }
+            },
+            "dataset": {
+              "mode": "online",
+              "manifest": {
+                "path": "configs/benchmark/manifests/boptest_week6.json",
+                "sha256": "be36a387b8cd1c55a442f84b6b71bd945e1dc9a2c31635196686db16745b05a5"
+              },
+              "train_split": "train",
+              "validation_split": "val",
+              "evaluation_episodes": [
+                "id_test_day160"
+              ],
+              "weather_information": "persistence_at_origin",
+              "context_policy": "replay_recorded_actions",
+              "action_plan": "recorded_applied_actions"
+            },
+            "seed": {
+              "model": {
+                "persistence": null,
+                "arx": null
+              },
+              "candidate": {
+                "base": 604200,
+                "offset": "source_step"
+              },
+              "observation_fault": {
+                "base": 64042,
+                "offset_by_evaluator": {
+                  "open_loop": "source_step",
+                  "closed_loop": "start_day"
+                }
+              }
+            },
+            "evaluator": {
+              "tasks": [
+                "open_loop",
+                "closed_loop"
+              ],
+              "prediction_modes": [
+                "teacher_forcing",
+                "free_running"
+              ],
+              "origin_stride_steps": 1,
+              "fault_conditions": [
+                "clean"
+              ],
+              "baseline": "embedded",
+              "condition_matrix": {
+                "open_loop": {
+                  "episodes": [
+                    "id_test_day160"
+                  ],
+                  "conditions": [
+                    "clean"
+                  ]
+                },
+                "closed_loop": {
+                  "episodes": [
+                    "id_test_day160"
+                  ],
+                  "conditions": [
+                    "clean"
+                  ]
+                }
+              },
+              "faults": {}
+            },
+            "horizon": {
+              "prediction_steps": [
+                1,
+                4
+              ],
+              "mpc_steps": 4,
+              "candidates": 32,
+              "action_hold_steps": 1
+            },
+            "metrics": {
+              "prediction": [
+                "mae",
+                "rmse",
+                "valid_fraction",
+                "physical_warning_fraction"
+              ],
+              "control": [
+                "cost",
+                "energy_kwh",
+                "comfort_degree_hours",
+                "comfort_violation_rate",
+                "center_tracking_mae_c",
+                "decision_mean_ms",
+                "decision_p95_ms",
+                "fallback_count"
+              ],
+              "units": {
+                "temperature": "degC",
+                "power": "kW",
+                "energy": "kWh",
+                "time": "s",
+                "comfort_integral": "degC*h"
+              },
+              "cost_weights": {
+                "comfort": 1.0,
+                "energy": 1.0,
+                "action_change": 0.02
+              },
+              "validity": {
+                "zone_degC": [
+                  0.0,
+                  50.0
+                ],
+                "water_degC": [
+                  0.0,
+                  90.0
+                ],
+                "interval_energy_kwh": [
+                  0.0,
+                  10.0
+                ],
+                "absolute_divergence": 1000.0,
+                "nonfinite": "stop_keep_prefix"
+              },
+              "aggregation": "episode_then_fixed_training_seeds"
+            },
+            "output": {
+              "directory": "reports/runs",
+              "run_name": "boptest_smoke",
+              "formats": {
+                "trajectory": "csv",
+                "prediction": "npz",
+                "metrics": "json",
+                "events": "jsonl",
+                "report": "md"
+              },
+              "existing_run": "new_unique_run"
+            },
+            "failure_policy": {
+              "invalid_prediction": "stop_rollout_keep_prefix",
+              "planning_failure": "release_to_embedded",
+              "advance_failure": "stop_episode_no_retry",
+              "retries": {
+                "read_requests": 2,
+                "advance_requests": 0
+              },
+              "timeouts": {
+                "http_seconds": 180.0,
+                "planning_seconds": 5.0
+              }
+            }
+          }
+        },
+        "raw_response": "{\"tool\":\"run_benchmark\",\"models\":[\"persistence\",\"arx\"]}"
+      },
+      "error": null,
+      "elapsed_seconds": 0.9740459010063205
+    },
+    {
+      "id": "agent_02",
+      "expected_first_action": "validate_config",
+      "chosen": "validate_config",
+      "correct": true,
+      "action": {
+        "tool": "validate_config",
+        "arguments": {
+          "config": {
+            "schema_version": "1.0",
+            "model": {
+              "instances": [
+                {
+                  "name": "arx",
+                  "kind": "arx",
+                  "checkpoint": {
+                    "path": "reports/week6/results/training/arx.pt",
+                    "sha256": "08dbf7ac2a67fb916050f472e1e7f1983bbd755c5d360808b06a060870a7b33e"
+                  }
+                }
+              ],
+              "history_steps": 16,
+              "device": "cpu",
+              "observation_names": [
+                "zone_c",
+                "supply_c",
+                "return_c",
+                "floor_heat_kw",
+                "electric_kw"
+              ],
+              "observation_units": [
+                "degC",
+                "degC",
+                "degC",
+                "kW",
+                "kW"
+              ],
+              "exogenous_names": [
+                "outdoor_c",
+                "solar_w_m2",
+                "sin_day",
+                "cos_day",
+                "sin_year",
+                "cos_year"
+              ],
+              "exogenous_units": [
+                "degC",
+                "W/m2",
+                "1",
+                "1",
+                "1",
+                "1"
+              ],
+              "input_features": 12,
+              "output_features": 6
+            },
+            "env": {
+              "type": "boptest",
+              "url": "http://127.0.0.1:80",
+              "version": "0.9.0",
+              "upstream_commit": "9b1610bf7a108826bb3d22c72bffd2d71d7bb0a9",
+              "case": "bestest_hydronic_heat_pump",
+              "step_seconds": 900,
+              "warmup_seconds": 604800,
+              "context_steps": 96,
+              "episode_steps": 8,
+              "area_m2": 192.0,
+              "assets": {
+                "path": "reports/week6/results/assets/manifest.json",
+                "sha256": "68d47e8628ed24de43cf7546c9811989460631423bf8bf30b6e0a0e6592a0e5e"
+              },
+              "action": {
+                "point": "oveTSet_u",
+                "activation": "oveTSet_activate",
+                "unit": "degC",
+                "api_unit": "K",
+                "bounds": [
+                  18.0,
+                  24.0
+                ]
+              }
+            },
+            "dataset": {
+              "mode": "online",
+              "manifest": {
+                "path": "configs/benchmark/manifests/boptest_week6.json",
+                "sha256": "be36a387b8cd1c55a442f84b6b71bd945e1dc9a2c31635196686db16745b05a5"
+              },
+              "train_split": "train",
+              "validation_split": "val",
+              "evaluation_episodes": [
+                "id_test_day160"
+              ],
+              "weather_information": "persistence_at_origin",
+              "context_policy": "replay_recorded_actions",
+              "action_plan": "recorded_applied_actions"
+            },
+            "seed": {
+              "model": {
+                "arx": null
+              },
+              "candidate": {
+                "base": 604200,
+                "offset": "source_step"
+              },
+              "observation_fault": {
+                "base": 64042,
+                "offset_by_evaluator": {
+                  "open_loop": "source_step",
+                  "closed_loop": "start_day"
+                }
+              }
+            },
+            "evaluator": {
+              "tasks": [
+                "open_loop",
+                "closed_loop"
+              ],
+              "prediction_modes": [
+                "teacher_forcing",
+                "free_running"
+              ],
+              "origin_stride_steps": 1,
+              "fault_conditions": [
+                "clean"
+              ],
+              "baseline": "embedded",
+              "condition_matrix": {
+                "open_loop": {
+                  "episodes": [
+                    "id_test_day160"
+                  ],
+                  "conditions": [
+                    "clean"
+                  ]
+                },
+                "closed_loop": {
+                  "episodes": [
+                    "id_test_day160"
+                  ],
+                  "conditions": [
+                    "clean"
+                  ]
+                }
+              },
+              "faults": {}
+            },
+            "horizon": {
+              "prediction_steps": [
+                1,
+                4
+              ],
+              "mpc_steps": 4,
+              "candidates": 32,
+              "action_hold_steps": 1
+            },
+            "metrics": {
+              "prediction": [
+                "mae",
+                "rmse",
+                "valid_fraction",
+                "physical_warning_fraction"
+              ],
+              "control": [
+                "cost",
+                "energy_kwh",
+                "comfort_degree_hours",
+                "comfort_violation_rate",
+                "center_tracking_mae_c",
+                "decision_mean_ms",
+                "decision_p95_ms",
+                "fallback_count"
+              ],
+              "units": {
+                "temperature": "degC",
+                "power": "kW",
+                "energy": "kWh",
+                "time": "s",
+                "comfort_integral": "degC*h"
+              },
+              "cost_weights": {
+                "comfort": 1.0,
+                "energy": 1.0,
+                "action_change": 0.02
+              },
+              "validity": {
+                "zone_degC": [
+                  0.0,
+                  50.0
+                ],
+                "water_degC": [
+                  0.0,
+                  90.0
+                ],
+                "interval_energy_kwh": [
+                  0.0,
+                  10.0
+                ],
+                "absolute_divergence": 1000.0,
+                "nonfinite": "stop_keep_prefix"
+              },
+              "aggregation": "episode_then_fixed_training_seeds"
+            },
+            "output": {
+              "directory": "reports/runs",
+              "run_name": "boptest_smoke",
+              "formats": {
+                "trajectory": "csv",
+                "prediction": "npz",
+                "metrics": "json",
+                "events": "jsonl",
+                "report": "md"
+              },
+              "existing_run": "new_unique_run"
+            },
+            "failure_policy": {
+              "invalid_prediction": "stop_rollout_keep_prefix",
+              "planning_failure": "release_to_embedded",
+              "advance_failure": "stop_episode_no_retry",
+              "retries": {
+                "read_requests": 2,
+                "advance_requests": 0
+              },
+              "timeouts": {
+                "http_seconds": 180.0,
+                "planning_seconds": 5.0
+              }
+            }
+          }
+        },
+        "raw_response": "{\"tool\":\"validate_config\",\"models\":[\"arx\"]}"
+      },
+      "error": null,
+      "elapsed_seconds": 0.45467435300088255
+    },
+    {
+      "id": "agent_03",
+      "expected_first_action": "validate_config",
+      "chosen": "validate_config",
+      "correct": true,
+      "action": {
+        "tool": "validate_config",
+        "arguments": {
+          "config": {
+            "schema_version": "1.0",
+            "model": {
+              "instances": [
+                {
+                  "name": "persistence",
+                  "kind": "persistence",
+                  "checkpoint": {
+                    "path": "reports/week6/results/training/persistence.pt",
+                    "sha256": "e694c3a9a716860947c443151678800588e0f879f2022fbc2b2ecd207ef811f2"
+                  }
+                }
+              ],
+              "history_steps": 16,
+              "device": "cpu",
+              "observation_names": [
+                "zone_c",
+                "supply_c",
+                "return_c",
+                "floor_heat_kw",
+                "electric_kw"
+              ],
+              "observation_units": [
+                "degC",
+                "degC",
+                "degC",
+                "kW",
+                "kW"
+              ],
+              "exogenous_names": [
+                "outdoor_c",
+                "solar_w_m2",
+                "sin_day",
+                "cos_day",
+                "sin_year",
+                "cos_year"
+              ],
+              "exogenous_units": [
+                "degC",
+                "W/m2",
+                "1",
+                "1",
+                "1",
+                "1"
+              ],
+              "input_features": 12,
+              "output_features": 6
+            },
+            "env": {
+              "type": "boptest",
+              "url": "http://127.0.0.1:80",
+              "version": "0.9.0",
+              "upstream_commit": "9b1610bf7a108826bb3d22c72bffd2d71d7bb0a9",
+              "case": "bestest_hydronic_heat_pump",
+              "step_seconds": 900,
+              "warmup_seconds": 604800,
+              "context_steps": 96,
+              "episode_steps": 8,
+              "area_m2": 192.0,
+              "assets": {
+                "path": "reports/week6/results/assets/manifest.json",
+                "sha256": "68d47e8628ed24de43cf7546c9811989460631423bf8bf30b6e0a0e6592a0e5e"
+              },
+              "action": {
+                "point": "oveTSet_u",
+                "activation": "oveTSet_activate",
+                "unit": "degC",
+                "api_unit": "K",
+                "bounds": [
+                  18.0,
+                  24.0
+                ]
+              }
+            },
+            "dataset": {
+              "mode": "online",
+              "manifest": {
+                "path": "configs/benchmark/manifests/boptest_week6.json",
+                "sha256": "be36a387b8cd1c55a442f84b6b71bd945e1dc9a2c31635196686db16745b05a5"
+              },
+              "train_split": "train",
+              "validation_split": "val",
+              "evaluation_episodes": [
+                "id_test_day160"
+              ],
+              "weather_information": "persistence_at_origin",
+              "context_policy": "replay_recorded_actions",
+              "action_plan": "recorded_applied_actions"
+            },
+            "seed": {
+              "model": {
+                "persistence": null
+              },
+              "candidate": {
+                "base": 604200,
+                "offset": "source_step"
+              },
+              "observation_fault": {
+                "base": 64042,
+                "offset_by_evaluator": {
+                  "open_loop": "source_step",
+                  "closed_loop": "start_day"
+                }
+              }
+            },
+            "evaluator": {
+              "tasks": [
+                "open_loop",
+                "closed_loop"
+              ],
+              "prediction_modes": [
+                "teacher_forcing",
+                "free_running"
+              ],
+              "origin_stride_steps": 1,
+              "fault_conditions": [
+                "clean"
+              ],
+              "baseline": "embedded",
+              "condition_matrix": {
+                "open_loop": {
+                  "episodes": [
+                    "id_test_day160"
+                  ],
+                  "conditions": [
+                    "clean"
+                  ]
+                },
+                "closed_loop": {
+                  "episodes": [
+                    "id_test_day160"
+                  ],
+                  "conditions": [
+                    "clean"
+                  ]
+                }
+              },
+              "faults": {}
+            },
+            "horizon": {
+              "prediction_steps": [
+                1,
+                4
+              ],
+              "mpc_steps": 4,
+              "candidates": 32,
+              "action_hold_steps": 1
+            },
+            "metrics": {
+              "prediction": [
+                "mae",
+                "rmse",
+                "valid_fraction",
+                "physical_warning_fraction"
+              ],
+              "control": [
+                "cost",
+                "energy_kwh",
+                "comfort_degree_hours",
+                "comfort_violation_rate",
+                "center_tracking_mae_c",
+                "decision_mean_ms",
+                "decision_p95_ms",
+                "fallback_count"
+              ],
+              "units": {
+                "temperature": "degC",
+                "power": "kW",
+                "energy": "kWh",
+                "time": "s",
+                "comfort_integral": "degC*h"
+              },
+              "cost_weights": {
+                "comfort": 1.0,
+                "energy": 1.0,
+                "action_change": 0.02
+              },
+              "validity": {
+                "zone_degC": [
+                  0.0,
+                  50.0
+                ],
+                "water_degC": [
+                  0.0,
+                  90.0
+                ],
+                "interval_energy_kwh": [
+                  0.0,
+                  10.0
+                ],
+                "absolute_divergence": 1000.0,
+                "nonfinite": "stop_keep_prefix"
+              },
+              "aggregation": "episode_then_fixed_training_seeds"
+            },
+            "output": {
+              "directory": "reports/runs",
+              "run_name": "boptest_smoke",
+              "formats": {
+                "trajectory": "csv",
+                "prediction": "npz",
+                "metrics": "json",
+                "events": "jsonl",
+                "report": "md"
+              },
+              "existing_run": "new_unique_run"
+            },
+            "failure_policy": {
+              "invalid_prediction": "stop_rollout_keep_prefix",
+              "planning_failure": "release_to_embedded",
+              "advance_failure": "stop_episode_no_retry",
+              "retries": {
+                "read_requests": 2,
+                "advance_requests": 0
+              },
+              "timeouts": {
+                "http_seconds": 180.0,
+                "planning_seconds": 5.0
+              }
+            }
+          }
+        },
+        "raw_response": "{\"tool\":\"validate_config\",\"models\":[\"persistence\"]}"
+      },
+      "error": null,
+      "elapsed_seconds": 0.4749991680000676
+    },
+    {
+      "id": "agent_04",
+      "expected_first_action": "validate_config",
+      "chosen": "validate_config",
+      "correct": true,
+      "action": {
+        "tool": "validate_config",
+        "arguments": {
+          "config": {
+            "schema_version": "1.0",
+            "model": {
+              "instances": [
+                {
+                  "name": "mlp_seed42",
+                  "kind": "mlp",
+                  "checkpoint": {
+                    "path": "reports/week6/results/training/mlp_seed42.pt",
+                    "sha256": "573d58752b13a3f06c3c518fcd5e949088962fa9c3311bba475cfc0001625714"
+                  }
+                }
+              ],
+              "history_steps": 16,
+              "device": "cpu",
+              "observation_names": [
+                "zone_c",
+                "supply_c",
+                "return_c",
+                "floor_heat_kw",
+                "electric_kw"
+              ],
+              "observation_units": [
+                "degC",
+                "degC",
+                "degC",
+                "kW",
+                "kW"
+              ],
+              "exogenous_names": [
+                "outdoor_c",
+                "solar_w_m2",
+                "sin_day",
+                "cos_day",
+                "sin_year",
+                "cos_year"
+              ],
+              "exogenous_units": [
+                "degC",
+                "W/m2",
+                "1",
+                "1",
+                "1",
+                "1"
+              ],
+              "input_features": 12,
+              "output_features": 6
+            },
+            "env": {
+              "type": "boptest",
+              "url": "http://127.0.0.1:80",
+              "version": "0.9.0",
+              "upstream_commit": "9b1610bf7a108826bb3d22c72bffd2d71d7bb0a9",
+              "case": "bestest_hydronic_heat_pump",
+              "step_seconds": 900,
+              "warmup_seconds": 604800,
+              "context_steps": 96,
+              "episode_steps": 8,
+              "area_m2": 192.0,
+              "assets": {
+                "path": "reports/week6/results/assets/manifest.json",
+                "sha256": "68d47e8628ed24de43cf7546c9811989460631423bf8bf30b6e0a0e6592a0e5e"
+              },
+              "action": {
+                "point": "oveTSet_u",
+                "activation": "oveTSet_activate",
+                "unit": "degC",
+                "api_unit": "K",
+                "bounds": [
+                  18.0,
+                  24.0
+                ]
+              }
+            },
+            "dataset": {
+              "mode": "online",
+              "manifest": {
+                "path": "configs/benchmark/manifests/boptest_week6.json",
+                "sha256": "be36a387b8cd1c55a442f84b6b71bd945e1dc9a2c31635196686db16745b05a5"
+              },
+              "train_split": "train",
+              "validation_split": "val",
+              "evaluation_episodes": [
+                "id_test_day160"
+              ],
+              "weather_information": "persistence_at_origin",
+              "context_policy": "replay_recorded_actions",
+              "action_plan": "recorded_applied_actions"
+            },
+            "seed": {
+              "model": {
+                "mlp_seed42": 42
+              },
+              "candidate": {
+                "base": 604200,
+                "offset": "source_step"
+              },
+              "observation_fault": {
+                "base": 64042,
+                "offset_by_evaluator": {
+                  "open_loop": "source_step",
+                  "closed_loop": "start_day"
+                }
+              }
+            },
+            "evaluator": {
+              "tasks": [
+                "open_loop",
+                "closed_loop"
+              ],
+              "prediction_modes": [
+                "teacher_forcing",
+                "free_running"
+              ],
+              "origin_stride_steps": 1,
+              "fault_conditions": [
+                "clean"
+              ],
+              "baseline": "embedded",
+              "condition_matrix": {
+                "open_loop": {
+                  "episodes": [
+                    "id_test_day160"
+                  ],
+                  "conditions": [
+                    "clean"
+                  ]
+                },
+                "closed_loop": {
+                  "episodes": [
+                    "id_test_day160"
+                  ],
+                  "conditions": [
+                    "clean"
+                  ]
+                }
+              },
+              "faults": {}
+            },
+            "horizon": {
+              "prediction_steps": [
+                1,
+                4
+              ],
+              "mpc_steps": 4,
+              "candidates": 32,
+              "action_hold_steps": 1
+            },
+            "metrics": {
+              "prediction": [
+                "mae",
+                "rmse",
+                "valid_fraction",
+                "physical_warning_fraction"
+              ],
+              "control": [
+                "cost",
+                "energy_kwh",
+                "comfort_degree_hours",
+                "comfort_violation_rate",
+                "center_tracking_mae_c",
+                "decision_mean_ms",
+                "decision_p95_ms",
+                "fallback_count"
+              ],
+              "units": {
+                "temperature": "degC",
+                "power": "kW",
+                "energy": "kWh",
+                "time": "s",
+                "comfort_integral": "degC*h"
+              },
+              "cost_weights": {
+                "comfort": 1.0,
+                "energy": 1.0,
+                "action_change": 0.02
+              },
+              "validity": {
+                "zone_degC": [
+                  0.0,
+                  50.0
+                ],
+                "water_degC": [
+                  0.0,
+                  90.0
+                ],
+                "interval_energy_kwh": [
+                  0.0,
+                  10.0
+                ],
+                "absolute_divergence": 1000.0,
+                "nonfinite": "stop_keep_prefix"
+              },
+              "aggregation": "episode_then_fixed_training_seeds"
+            },
+            "output": {
+              "directory": "reports/runs",
+              "run_name": "boptest_smoke",
+              "formats": {
+                "trajectory": "csv",
+                "prediction": "npz",
+                "metrics": "json",
+                "events": "jsonl",
+                "report": "md"
+              },
+              "existing_run": "new_unique_run"
+            },
+            "failure_policy": {
+              "invalid_prediction": "stop_rollout_keep_prefix",
+              "planning_failure": "release_to_embedded",
+              "advance_failure": "stop_episode_no_retry",
+              "retries": {
+                "read_requests": 2,
+                "advance_requests": 0
+              },
+              "timeouts": {
+                "http_seconds": 180.0,
+                "planning_seconds": 5.0
+              }
+            }
+          }
+        },
+        "raw_response": "{\"tool\":\"validate_config\",\"models\":[\"mlp_seed42\"]}"
+      },
+      "error": null,
+      "elapsed_seconds": 0.5789436680061044
+    },
+    {
+      "id": "agent_05",
+      "expected_first_action": "validate_config",
+      "chosen": "validate_config",
+      "correct": true,
+      "action": {
+        "tool": "validate_config",
+        "arguments": {
+          "config": {
+            "schema_version": "1.0",
+            "model": {
+              "instances": [
+                {
+                  "name": "gru_seed42",
+                  "kind": "gru",
+                  "checkpoint": {
+                    "path": "reports/week6/results/training/gru_seed42.pt",
+                    "sha256": "40b535beaa507ab2344ecd833deb699bca7ef2a98695abbd9e4af0c63fc5027a"
+                  }
+                }
+              ],
+              "history_steps": 16,
+              "device": "cpu",
+              "observation_names": [
+                "zone_c",
+                "supply_c",
+                "return_c",
+                "floor_heat_kw",
+                "electric_kw"
+              ],
+              "observation_units": [
+                "degC",
+                "degC",
+                "degC",
+                "kW",
+                "kW"
+              ],
+              "exogenous_names": [
+                "outdoor_c",
+                "solar_w_m2",
+                "sin_day",
+                "cos_day",
+                "sin_year",
+                "cos_year"
+              ],
+              "exogenous_units": [
+                "degC",
+                "W/m2",
+                "1",
+                "1",
+                "1",
+                "1"
+              ],
+              "input_features": 12,
+              "output_features": 6
+            },
+            "env": {
+              "type": "boptest",
+              "url": "http://127.0.0.1:80",
+              "version": "0.9.0",
+              "upstream_commit": "9b1610bf7a108826bb3d22c72bffd2d71d7bb0a9",
+              "case": "bestest_hydronic_heat_pump",
+              "step_seconds": 900,
+              "warmup_seconds": 604800,
+              "context_steps": 96,
+              "episode_steps": 8,
+              "area_m2": 192.0,
+              "assets": {
+                "path": "reports/week6/results/assets/manifest.json",
+                "sha256": "68d47e8628ed24de43cf7546c9811989460631423bf8bf30b6e0a0e6592a0e5e"
+              },
+              "action": {
+                "point": "oveTSet_u",
+                "activation": "oveTSet_activate",
+                "unit": "degC",
+                "api_unit": "K",
+                "bounds": [
+                  18.0,
+                  24.0
+                ]
+              }
+            },
+            "dataset": {
+              "mode": "online",
+              "manifest": {
+                "path": "configs/benchmark/manifests/boptest_week6.json",
+                "sha256": "be36a387b8cd1c55a442f84b6b71bd945e1dc9a2c31635196686db16745b05a5"
+              },
+              "train_split": "train",
+              "validation_split": "val",
+              "evaluation_episodes": [
+                "id_test_day160"
+              ],
+              "weather_information": "persistence_at_origin",
+              "context_policy": "replay_recorded_actions",
+              "action_plan": "recorded_applied_actions"
+            },
+            "seed": {
+              "model": {
+                "gru_seed42": 42
+              },
+              "candidate": {
+                "base": 604200,
+                "offset": "source_step"
+              },
+              "observation_fault": {
+                "base": 64042,
+                "offset_by_evaluator": {
+                  "open_loop": "source_step",
+                  "closed_loop": "start_day"
+                }
+              }
+            },
+            "evaluator": {
+              "tasks": [
+                "open_loop",
+                "closed_loop"
+              ],
+              "prediction_modes": [
+                "teacher_forcing",
+                "free_running"
+              ],
+              "origin_stride_steps": 1,
+              "fault_conditions": [
+                "clean"
+              ],
+              "baseline": "embedded",
+              "condition_matrix": {
+                "open_loop": {
+                  "episodes": [
+                    "id_test_day160"
+                  ],
+                  "conditions": [
+                    "clean"
+                  ]
+                },
+                "closed_loop": {
+                  "episodes": [
+                    "id_test_day160"
+                  ],
+                  "conditions": [
+                    "clean"
+                  ]
+                }
+              },
+              "faults": {}
+            },
+            "horizon": {
+              "prediction_steps": [
+                1,
+                4
+              ],
+              "mpc_steps": 4,
+              "candidates": 32,
+              "action_hold_steps": 1
+            },
+            "metrics": {
+              "prediction": [
+                "mae",
+                "rmse",
+                "valid_fraction",
+                "physical_warning_fraction"
+              ],
+              "control": [
+                "cost",
+                "energy_kwh",
+                "comfort_degree_hours",
+                "comfort_violation_rate",
+                "center_tracking_mae_c",
+                "decision_mean_ms",
+                "decision_p95_ms",
+                "fallback_count"
+              ],
+              "units": {
+                "temperature": "degC",
+                "power": "kW",
+                "energy": "kWh",
+                "time": "s",
+                "comfort_integral": "degC*h"
+              },
+              "cost_weights": {
+                "comfort": 1.0,
+                "energy": 1.0,
+                "action_change": 0.02
+              },
+              "validity": {
+                "zone_degC": [
+                  0.0,
+                  50.0
+                ],
+                "water_degC": [
+                  0.0,
+                  90.0
+                ],
+                "interval_energy_kwh": [
+                  0.0,
+                  10.0
+                ],
+                "absolute_divergence": 1000.0,
+                "nonfinite": "stop_keep_prefix"
+              },
+              "aggregation": "episode_then_fixed_training_seeds"
+            },
+            "output": {
+              "directory": "reports/runs",
+              "run_name": "boptest_smoke",
+              "formats": {
+                "trajectory": "csv",
+                "prediction": "npz",
+                "metrics": "json",
+                "events": "jsonl",
+                "report": "md"
+              },
+              "existing_run": "new_unique_run"
+            },
+            "failure_policy": {
+              "invalid_prediction": "stop_rollout_keep_prefix",
+              "planning_failure": "release_to_embedded",
+              "advance_failure": "stop_episode_no_retry",
+              "retries": {
+                "read_requests": 2,
+                "advance_requests": 0
+              },
+              "timeouts": {
+                "http_seconds": 180.0,
+                "planning_seconds": 5.0
+              }
+            }
+          }
+        },
+        "raw_response": "{\"tool\":\"validate_config\",\"models\":[\"gru_seed42\"]}"
+      },
+      "error": null,
+      "elapsed_seconds": 0.6164121699985117
+    },
+    {
+      "id": "agent_06",
+      "expected_first_action": "validate_config",
+      "chosen": "validate_config",
+      "correct": true,
+      "action": {
+        "tool": "validate_config",
+        "arguments": {
+          "config": {
+            "schema_version": "1.0",
+            "model": {
+              "instances": [
+                {
+                  "name": "residual_mlp_seed42",
+                  "kind": "residual_mlp",
+                  "checkpoint": {
+                    "path": "reports/week6/results/residual_mlp/residual_mlp_seed42.pt",
+                    "sha256": "92cc13670060b9304d5d50bcfb8c584df8a8b7ee6cdd2a32f3b896cd7527d1c4"
+                  }
+                }
+              ],
+              "history_steps": 16,
+              "device": "cpu",
+              "observation_names": [
+                "zone_c",
+                "supply_c",
+                "return_c",
+                "floor_heat_kw",
+                "electric_kw"
+              ],
+              "observation_units": [
+                "degC",
+                "degC",
+                "degC",
+                "kW",
+                "kW"
+              ],
+              "exogenous_names": [
+                "outdoor_c",
+                "solar_w_m2",
+                "sin_day",
+                "cos_day",
+                "sin_year",
+                "cos_year"
+              ],
+              "exogenous_units": [
+                "degC",
+                "W/m2",
+                "1",
+                "1",
+                "1",
+                "1"
+              ],
+              "input_features": 12,
+              "output_features": 6
+            },
+            "env": {
+              "type": "boptest",
+              "url": "http://127.0.0.1:80",
+              "version": "0.9.0",
+              "upstream_commit": "9b1610bf7a108826bb3d22c72bffd2d71d7bb0a9",
+              "case": "bestest_hydronic_heat_pump",
+              "step_seconds": 900,
+              "warmup_seconds": 604800,
+              "context_steps": 96,
+              "episode_steps": 8,
+              "area_m2": 192.0,
+              "assets": {
+                "path": "reports/week6/results/assets/manifest.json",
+                "sha256": "68d47e8628ed24de43cf7546c9811989460631423bf8bf30b6e0a0e6592a0e5e"
+              },
+              "action": {
+                "point": "oveTSet_u",
+                "activation": "oveTSet_activate",
+                "unit": "degC",
+                "api_unit": "K",
+                "bounds": [
+                  18.0,
+                  24.0
+                ]
+              }
+            },
+            "dataset": {
+              "mode": "online",
+              "manifest": {
+                "path": "configs/benchmark/manifests/boptest_week6.json",
+                "sha256": "be36a387b8cd1c55a442f84b6b71bd945e1dc9a2c31635196686db16745b05a5"
+              },
+              "train_split": "train",
+              "validation_split": "val",
+              "evaluation_episodes": [
+                "id_test_day160"
+              ],
+              "weather_information": "persistence_at_origin",
+              "context_policy": "replay_recorded_actions",
+              "action_plan": "recorded_applied_actions"
+            },
+            "seed": {
+              "model": {
+                "residual_mlp_seed42": 42
+              },
+              "candidate": {
+                "base": 604200,
+                "offset": "source_step"
+              },
+              "observation_fault": {
+                "base": 64042,
+                "offset_by_evaluator": {
+                  "open_loop": "source_step",
+                  "closed_loop": "start_day"
+                }
+              }
+            },
+            "evaluator": {
+              "tasks": [
+                "open_loop",
+                "closed_loop"
+              ],
+              "prediction_modes": [
+                "teacher_forcing",
+                "free_running"
+              ],
+              "origin_stride_steps": 1,
+              "fault_conditions": [
+                "clean"
+              ],
+              "baseline": "embedded",
+              "condition_matrix": {
+                "open_loop": {
+                  "episodes": [
+                    "id_test_day160"
+                  ],
+                  "conditions": [
+                    "clean"
+                  ]
+                },
+                "closed_loop": {
+                  "episodes": [
+                    "id_test_day160"
+                  ],
+                  "conditions": [
+                    "clean"
+                  ]
+                }
+              },
+              "faults": {}
+            },
+            "horizon": {
+              "prediction_steps": [
+                1,
+                4
+              ],
+              "mpc_steps": 4,
+              "candidates": 32,
+              "action_hold_steps": 1
+            },
+            "metrics": {
+              "prediction": [
+                "mae",
+                "rmse",
+                "valid_fraction",
+                "physical_warning_fraction"
+              ],
+              "control": [
+                "cost",
+                "energy_kwh",
+                "comfort_degree_hours",
+                "comfort_violation_rate",
+                "center_tracking_mae_c",
+                "decision_mean_ms",
+                "decision_p95_ms",
+                "fallback_count"
+              ],
+              "units": {
+                "temperature": "degC",
+                "power": "kW",
+                "energy": "kWh",
+                "time": "s",
+                "comfort_integral": "degC*h"
+              },
+              "cost_weights": {
+                "comfort": 1.0,
+                "energy": 1.0,
+                "action_change": 0.02
+              },
+              "validity": {
+                "zone_degC": [
+                  0.0,
+                  50.0
+                ],
+                "water_degC": [
+                  0.0,
+                  90.0
+                ],
+                "interval_energy_kwh": [
+                  0.0,
+                  10.0
+                ],
+                "absolute_divergence": 1000.0,
+                "nonfinite": "stop_keep_prefix"
+              },
+              "aggregation": "episode_then_fixed_training_seeds"
+            },
+            "output": {
+              "directory": "reports/runs",
+              "run_name": "boptest_smoke",
+              "formats": {
+                "trajectory": "csv",
+                "prediction": "npz",
+                "metrics": "json",
+                "events": "jsonl",
+                "report": "md"
+              },
+              "existing_run": "new_unique_run"
+            },
+            "failure_policy": {
+              "invalid_prediction": "stop_rollout_keep_prefix",
+              "planning_failure": "release_to_embedded",
+              "advance_failure": "stop_episode_no_retry",
+              "retries": {
+                "read_requests": 2,
+                "advance_requests": 0
+              },
+              "timeouts": {
+                "http_seconds": 180.0,
+                "planning_seconds": 5.0
+              }
+            }
+          }
+        },
+        "raw_response": "{\"tool\":\"validate_config\",\"models\":[\"residual_mlp_seed42\"]}"
+      },
+      "error": null,
+      "elapsed_seconds": 0.6817188210043241
+    },
+    {
+      "id": "agent_07",
+      "expected_first_action": "finish",
+      "chosen": "run_benchmark",
+      "correct": false,
+      "action": {
+        "tool": "run_benchmark",
+        "arguments": {
+          "config": {
+            "schema_version": "1.0",
+            "model": {
+              "instances": [
+                {
+                  "name": "arx",
+                  "kind": "arx",
+                  "checkpoint": {
+                    "path": "reports/week6/results/training/arx.pt",
+                    "sha256": "08dbf7ac2a67fb916050f472e1e7f1983bbd755c5d360808b06a060870a7b33e"
+                  }
+                }
+              ],
+              "history_steps": 16,
+              "device": "cpu",
+              "observation_names": [
+                "zone_c",
+                "supply_c",
+                "return_c",
+                "floor_heat_kw",
+                "electric_kw"
+              ],
+              "observation_units": [
+                "degC",
+                "degC",
+                "degC",
+                "kW",
+                "kW"
+              ],
+              "exogenous_names": [
+                "outdoor_c",
+                "solar_w_m2",
+                "sin_day",
+                "cos_day",
+                "sin_year",
+                "cos_year"
+              ],
+              "exogenous_units": [
+                "degC",
+                "W/m2",
+                "1",
+                "1",
+                "1",
+                "1"
+              ],
+              "input_features": 12,
+              "output_features": 6
+            },
+            "env": {
+              "type": "boptest",
+              "url": "http://127.0.0.1:80",
+              "version": "0.9.0",
+              "upstream_commit": "9b1610bf7a108826bb3d22c72bffd2d71d7bb0a9",
+              "case": "bestest_hydronic_heat_pump",
+              "step_seconds": 900,
+              "warmup_seconds": 604800,
+              "context_steps": 96,
+              "episode_steps": 8,
+              "area_m2": 192.0,
+              "assets": {
+                "path": "reports/week6/results/assets/manifest.json",
+                "sha256": "68d47e8628ed24de43cf7546c9811989460631423bf8bf30b6e0a0e6592a0e5e"
+              },
+              "action": {
+                "point": "oveTSet_u",
+                "activation": "oveTSet_activate",
+                "unit": "degC",
+                "api_unit": "K",
+                "bounds": [
+                  18.0,
+                  24.0
+                ]
+              }
+            },
+            "dataset": {
+              "mode": "online",
+              "manifest": {
+                "path": "configs/benchmark/manifests/boptest_week6.json",
+                "sha256": "be36a387b8cd1c55a442f84b6b71bd945e1dc9a2c31635196686db16745b05a5"
+              },
+              "train_split": "train",
+              "validation_split": "val",
+              "evaluation_episodes": [
+                "id_test_day160"
+              ],
+              "weather_information": "persistence_at_origin",
+              "context_policy": "replay_recorded_actions",
+              "action_plan": "recorded_applied_actions"
+            },
+            "seed": {
+              "model": {
+                "arx": null
+              },
+              "candidate": {
+                "base": 604200,
+                "offset": "source_step"
+              },
+              "observation_fault": {
+                "base": 64042,
+                "offset_by_evaluator": {
+                  "open_loop": "source_step",
+                  "closed_loop": "start_day"
+                }
+              }
+            },
+            "evaluator": {
+              "tasks": [
+                "open_loop",
+                "closed_loop"
+              ],
+              "prediction_modes": [
+                "teacher_forcing",
+                "free_running"
+              ],
+              "origin_stride_steps": 1,
+              "fault_conditions": [
+                "clean"
+              ],
+              "baseline": "embedded",
+              "condition_matrix": {
+                "open_loop": {
+                  "episodes": [
+                    "id_test_day160"
+                  ],
+                  "conditions": [
+                    "clean"
+                  ]
+                },
+                "closed_loop": {
+                  "episodes": [
+                    "id_test_day160"
+                  ],
+                  "conditions": [
+                    "clean"
+                  ]
+                }
+              },
+              "faults": {}
+            },
+            "horizon": {
+              "prediction_steps": [
+                1,
+                4
+              ],
+              "mpc_steps": 4,
+              "candidates": 32,
+              "action_hold_steps": 1
+            },
+            "metrics": {
+              "prediction": [
+                "mae",
+                "rmse",
+                "valid_fraction",
+                "physical_warning_fraction"
+              ],
+              "control": [
+                "cost",
+                "energy_kwh",
+                "comfort_degree_hours",
+                "comfort_violation_rate",
+                "center_tracking_mae_c",
+                "decision_mean_ms",
+                "decision_p95_ms",
+                "fallback_count"
+              ],
+              "units": {
+                "temperature": "degC",
+                "power": "kW",
+                "energy": "kWh",
+                "time": "s",
+                "comfort_integral": "degC*h"
+              },
+              "cost_weights": {
+                "comfort": 1.0,
+                "energy": 1.0,
+                "action_change": 0.02
+              },
+              "validity": {
+                "zone_degC": [
+                  0.0,
+                  50.0
+                ],
+                "water_degC": [
+                  0.0,
+                  90.0
+                ],
+                "interval_energy_kwh": [
+                  0.0,
+                  10.0
+                ],
+                "absolute_divergence": 1000.0,
+                "nonfinite": "stop_keep_prefix"
+              },
+              "aggregation": "episode_then_fixed_training_seeds"
+            },
+            "output": {
+              "directory": "reports/runs",
+              "run_name": "boptest_smoke",
+              "formats": {
+                "trajectory": "csv",
+                "prediction": "npz",
+                "metrics": "json",
+                "events": "jsonl",
+                "report": "md"
+              },
+              "existing_run": "new_unique_run"
+            },
+            "failure_policy": {
+              "invalid_prediction": "stop_rollout_keep_prefix",
+              "planning_failure": "release_to_embedded",
+              "advance_failure": "stop_episode_no_retry",
+              "retries": {
+                "read_requests": 2,
+                "advance_requests": 0
+              },
+              "timeouts": {
+                "http_seconds": 180.0,
+                "planning_seconds": 5.0
+              }
+            }
+          }
+        },
+        "raw_response": "{\"tool\":\"run_benchmark\",\"models\":[\"arx\"]}"
+      },
+      "error": null,
+      "elapsed_seconds": 0.5401342769982875
+    },
+    {
+      "id": "agent_08",
+      "expected_first_action": "finish",
+      "chosen": "validate_config",
+      "correct": false,
+      "action": {
+        "tool": "validate_config",
+        "arguments": {
+          "config": {
+            "schema_version": "1.0",
+            "model": {
+              "instances": [
+                {
+                  "name": "arx",
+                  "kind": "arx",
+                  "checkpoint": {
+                    "path": "reports/week6/results/training/arx.pt",
+                    "sha256": "08dbf7ac2a67fb916050f472e1e7f1983bbd755c5d360808b06a060870a7b33e"
+                  }
+                },
+                {
+                  "name": "mlp_seed42",
+                  "kind": "mlp",
+                  "checkpoint": {
+                    "path": "reports/week6/results/training/mlp_seed42.pt",
+                    "sha256": "573d58752b13a3f06c3c518fcd5e949088962fa9c3311bba475cfc0001625714"
+                  }
+                }
+              ],
+              "history_steps": 16,
+              "device": "cpu",
+              "observation_names": [
+                "zone_c",
+                "supply_c",
+                "return_c",
+                "floor_heat_kw",
+                "electric_kw"
+              ],
+              "observation_units": [
+                "degC",
+                "degC",
+                "degC",
+                "kW",
+                "kW"
+              ],
+              "exogenous_names": [
+                "outdoor_c",
+                "solar_w_m2",
+                "sin_day",
+                "cos_day",
+                "sin_year",
+                "cos_year"
+              ],
+              "exogenous_units": [
+                "degC",
+                "W/m2",
+                "1",
+                "1",
+                "1",
+                "1"
+              ],
+              "input_features": 12,
+              "output_features": 6
+            },
+            "env": {
+              "type": "boptest",
+              "url": "http://127.0.0.1:80",
+              "version": "0.9.0",
+              "upstream_commit": "9b1610bf7a108826bb3d22c72bffd2d71d7bb0a9",
+              "case": "bestest_hydronic_heat_pump",
+              "step_seconds": 900,
+              "warmup_seconds": 604800,
+              "context_steps": 96,
+              "episode_steps": 8,
+              "area_m2": 192.0,
+              "assets": {
+                "path": "reports/week6/results/assets/manifest.json",
+                "sha256": "68d47e8628ed24de43cf7546c9811989460631423bf8bf30b6e0a0e6592a0e5e"
+              },
+              "action": {
+                "point": "oveTSet_u",
+                "activation": "oveTSet_activate",
+                "unit": "degC",
+                "api_unit": "K",
+                "bounds": [
+                  18.0,
+                  24.0
+                ]
+              }
+            },
+            "dataset": {
+              "mode": "online",
+              "manifest": {
+                "path": "configs/benchmark/manifests/boptest_week6.json",
+                "sha256": "be36a387b8cd1c55a442f84b6b71bd945e1dc9a2c31635196686db16745b05a5"
+              },
+              "train_split": "train",
+              "validation_split": "val",
+              "evaluation_episodes": [
+                "id_test_day160"
+              ],
+              "weather_information": "persistence_at_origin",
+              "context_policy": "replay_recorded_actions",
+              "action_plan": "recorded_applied_actions"
+            },
+            "seed": {
+              "model": {
+                "arx": null,
+                "mlp_seed42": 42
+              },
+              "candidate": {
+                "base": 604200,
+                "offset": "source_step"
+              },
+              "observation_fault": {
+                "base": 64042,
+                "offset_by_evaluator": {
+                  "open_loop": "source_step",
+                  "closed_loop": "start_day"
+                }
+              }
+            },
+            "evaluator": {
+              "tasks": [
+                "open_loop",
+                "closed_loop"
+              ],
+              "prediction_modes": [
+                "teacher_forcing",
+                "free_running"
+              ],
+              "origin_stride_steps": 1,
+              "fault_conditions": [
+                "clean"
+              ],
+              "baseline": "embedded",
+              "condition_matrix": {
+                "open_loop": {
+                  "episodes": [
+                    "id_test_day160"
+                  ],
+                  "conditions": [
+                    "clean"
+                  ]
+                },
+                "closed_loop": {
+                  "episodes": [
+                    "id_test_day160"
+                  ],
+                  "conditions": [
+                    "clean"
+                  ]
+                }
+              },
+              "faults": {}
+            },
+            "horizon": {
+              "prediction_steps": [
+                1,
+                4
+              ],
+              "mpc_steps": 4,
+              "candidates": 32,
+              "action_hold_steps": 1
+            },
+            "metrics": {
+              "prediction": [
+                "mae",
+                "rmse",
+                "valid_fraction",
+                "physical_warning_fraction"
+              ],
+              "control": [
+                "cost",
+                "energy_kwh",
+                "comfort_degree_hours",
+                "comfort_violation_rate",
+                "center_tracking_mae_c",
+                "decision_mean_ms",
+                "decision_p95_ms",
+                "fallback_count"
+              ],
+              "units": {
+                "temperature": "degC",
+                "power": "kW",
+                "energy": "kWh",
+                "time": "s",
+                "comfort_integral": "degC*h"
+              },
+              "cost_weights": {
+                "comfort": 1.0,
+                "energy": 1.0,
+                "action_change": 0.02
+              },
+              "validity": {
+                "zone_degC": [
+                  0.0,
+                  50.0
+                ],
+                "water_degC": [
+                  0.0,
+                  90.0
+                ],
+                "interval_energy_kwh": [
+                  0.0,
+                  10.0
+                ],
+                "absolute_divergence": 1000.0,
+                "nonfinite": "stop_keep_prefix"
+              },
+              "aggregation": "episode_then_fixed_training_seeds"
+            },
+            "output": {
+              "directory": "reports/runs",
+              "run_name": "boptest_smoke",
+              "formats": {
+                "trajectory": "csv",
+                "prediction": "npz",
+                "metrics": "json",
+                "events": "jsonl",
+                "report": "md"
+              },
+              "existing_run": "new_unique_run"
+            },
+            "failure_policy": {
+              "invalid_prediction": "stop_rollout_keep_prefix",
+              "planning_failure": "release_to_embedded",
+              "advance_failure": "stop_episode_no_retry",
+              "retries": {
+                "read_requests": 2,
+                "advance_requests": 0
+              },
+              "timeouts": {
+                "http_seconds": 180.0,
+                "planning_seconds": 5.0
+              }
+            }
+          }
+        },
+        "raw_response": "{\"tool\":\"validate_config\",\"models\":[\"arx\",\"mlp_seed42\"]}"
+      },
+      "error": null,
+      "elapsed_seconds": 0.6330661570027587
+    },
+    {
+      "id": "agent_09",
+      "expected_first_action": "finish",
+      "chosen": "list_envs",
+      "correct": false,
+      "action": {
+        "tool": "list_envs",
+        "arguments": {},
+        "raw_response": "{\"tool\":\"list_envs\"}"
+      },
+      "error": null,
+      "elapsed_seconds": 0.30894066000473686
+    },
+    {
+      "id": "agent_10",
+      "expected_first_action": "finish",
+      "chosen": "validate_config",
+      "correct": false,
+      "action": {
+        "tool": "validate_config",
+        "arguments": {
+          "config": {
+            "schema_version": "1.0",
+            "model": {
+              "instances": [
+                {
+                  "name": "arx",
+                  "kind": "arx",
+                  "checkpoint": {
+                    "path": "reports/week6/results/training/arx.pt",
+                    "sha256": "08dbf7ac2a67fb916050f472e1e7f1983bbd755c5d360808b06a060870a7b33e"
+                  }
+                }
+              ],
+              "history_steps": 16,
+              "device": "cpu",
+              "observation_names": [
+                "zone_c",
+                "supply_c",
+                "return_c",
+                "floor_heat_kw",
+                "electric_kw"
+              ],
+              "observation_units": [
+                "degC",
+                "degC",
+                "degC",
+                "kW",
+                "kW"
+              ],
+              "exogenous_names": [
+                "outdoor_c",
+                "solar_w_m2",
+                "sin_day",
+                "cos_day",
+                "sin_year",
+                "cos_year"
+              ],
+              "exogenous_units": [
+                "degC",
+                "W/m2",
+                "1",
+                "1",
+                "1",
+                "1"
+              ],
+              "input_features": 12,
+              "output_features": 6
+            },
+            "env": {
+              "type": "boptest",
+              "url": "http://127.0.0.1:80",
+              "version": "0.9.0",
+              "upstream_commit": "9b1610bf7a108826bb3d22c72bffd2d71d7bb0a9",
+              "case": "bestest_hydronic_heat_pump",
+              "step_seconds": 900,
+              "warmup_seconds": 604800,
+              "context_steps": 96,
+              "episode_steps": 8,
+              "area_m2": 192.0,
+              "assets": {
+                "path": "reports/week6/results/assets/manifest.json",
+                "sha256": "68d47e8628ed24de43cf7546c9811989460631423bf8bf30b6e0a0e6592a0e5e"
+              },
+              "action": {
+                "point": "oveTSet_u",
+                "activation": "oveTSet_activate",
+                "unit": "degC",
+                "api_unit": "K",
+                "bounds": [
+                  18.0,
+                  24.0
+                ]
+              }
+            },
+            "dataset": {
+              "mode": "online",
+              "manifest": {
+                "path": "configs/benchmark/manifests/boptest_week6.json",
+                "sha256": "be36a387b8cd1c55a442f84b6b71bd945e1dc9a2c31635196686db16745b05a5"
+              },
+              "train_split": "train",
+              "validation_split": "val",
+              "evaluation_episodes": [
+                "id_test_day160"
+              ],
+              "weather_information": "persistence_at_origin",
+              "context_policy": "replay_recorded_actions",
+              "action_plan": "recorded_applied_actions"
+            },
+            "seed": {
+              "model": {
+                "arx": null
+              },
+              "candidate": {
+                "base": 604200,
+                "offset": "source_step"
+              },
+              "observation_fault": {
+                "base": 64042,
+                "offset_by_evaluator": {
+                  "open_loop": "source_step",
+                  "closed_loop": "start_day"
+                }
+              }
+            },
+            "evaluator": {
+              "tasks": [
+                "open_loop",
+                "closed_loop"
+              ],
+              "prediction_modes": [
+                "teacher_forcing",
+                "free_running"
+              ],
+              "origin_stride_steps": 1,
+              "fault_conditions": [
+                "clean"
+              ],
+              "baseline": "embedded",
+              "condition_matrix": {
+                "open_loop": {
+                  "episodes": [
+                    "id_test_day160"
+                  ],
+                  "conditions": [
+                    "clean"
+                  ]
+                },
+                "closed_loop": {
+                  "episodes": [
+                    "id_test_day160"
+                  ],
+                  "conditions": [
+                    "clean"
+                  ]
+                }
+              },
+              "faults": {}
+            },
+            "horizon": {
+              "prediction_steps": [
+                1,
+                4
+              ],
+              "mpc_steps": 4,
+              "candidates": 32,
+              "action_hold_steps": 1
+            },
+            "metrics": {
+              "prediction": [
+                "mae",
+                "rmse",
+                "valid_fraction",
+                "physical_warning_fraction"
+              ],
+              "control": [
+                "cost",
+                "energy_kwh",
+                "comfort_degree_hours",
+                "comfort_violation_rate",
+                "center_tracking_mae_c",
+                "decision_mean_ms",
+                "decision_p95_ms",
+                "fallback_count"
+              ],
+              "units": {
+                "temperature": "degC",
+                "power": "kW",
+                "energy": "kWh",
+                "time": "s",
+                "comfort_integral": "degC*h"
+              },
+              "cost_weights": {
+                "comfort": 1.0,
+                "energy": 1.0,
+                "action_change": 0.02
+              },
+              "validity": {
+                "zone_degC": [
+                  0.0,
+                  50.0
+                ],
+                "water_degC": [
+                  0.0,
+                  90.0
+                ],
+                "interval_energy_kwh": [
+                  0.0,
+                  10.0
+                ],
+                "absolute_divergence": 1000.0,
+                "nonfinite": "stop_keep_prefix"
+              },
+              "aggregation": "episode_then_fixed_training_seeds"
+            },
+            "output": {
+              "directory": "reports/runs",
+              "run_name": "boptest_smoke",
+              "formats": {
+                "trajectory": "csv",
+                "prediction": "npz",
+                "metrics": "json",
+                "events": "jsonl",
+                "report": "md"
+              },
+              "existing_run": "new_unique_run"
+            },
+            "failure_policy": {
+              "invalid_prediction": "stop_rollout_keep_prefix",
+              "planning_failure": "release_to_embedded",
+              "advance_failure": "stop_episode_no_retry",
+              "retries": {
+                "read_requests": 2,
+                "advance_requests": 0
+              },
+              "timeouts": {
+                "http_seconds": 180.0,
+                "planning_seconds": 5.0
+              }
+            }
+          }
+        },
+        "raw_response": "{\"tool\":\"validate_config\",\"models\":[\"arx\"]}"
+      },
+      "error": null,
+      "elapsed_seconds": 0.5218052820055163
+    },
+    {
+      "id": "agent_11",
+      "expected_first_action": "finish",
+      "chosen": "run_benchmark",
+      "correct": false,
+      "action": {
+        "tool": "run_benchmark",
+        "arguments": {
+          "config": {
+            "schema_version": "1.0",
+            "model": {
+              "instances": [
+                {
+                  "name": "arx",
+                  "kind": "arx",
+                  "checkpoint": {
+                    "path": "reports/week6/results/training/arx.pt",
+                    "sha256": "08dbf7ac2a67fb916050f472e1e7f1983bbd755c5d360808b06a060870a7b33e"
+                  }
+                }
+              ],
+              "history_steps": 16,
+              "device": "cpu",
+              "observation_names": [
+                "zone_c",
+                "supply_c",
+                "return_c",
+                "floor_heat_kw",
+                "electric_kw"
+              ],
+              "observation_units": [
+                "degC",
+                "degC",
+                "degC",
+                "kW",
+                "kW"
+              ],
+              "exogenous_names": [
+                "outdoor_c",
+                "solar_w_m2",
+                "sin_day",
+                "cos_day",
+                "sin_year",
+                "cos_year"
+              ],
+              "exogenous_units": [
+                "degC",
+                "W/m2",
+                "1",
+                "1",
+                "1",
+                "1"
+              ],
+              "input_features": 12,
+              "output_features": 6
+            },
+            "env": {
+              "type": "boptest",
+              "url": "http://127.0.0.1:80",
+              "version": "0.9.0",
+              "upstream_commit": "9b1610bf7a108826bb3d22c72bffd2d71d7bb0a9",
+              "case": "bestest_hydronic_heat_pump",
+              "step_seconds": 900,
+              "warmup_seconds": 604800,
+              "context_steps": 96,
+              "episode_steps": 8,
+              "area_m2": 192.0,
+              "assets": {
+                "path": "reports/week6/results/assets/manifest.json",
+                "sha256": "68d47e8628ed24de43cf7546c9811989460631423bf8bf30b6e0a0e6592a0e5e"
+              },
+              "action": {
+                "point": "oveTSet_u",
+                "activation": "oveTSet_activate",
+                "unit": "degC",
+                "api_unit": "K",
+                "bounds": [
+                  18.0,
+                  24.0
+                ]
+              }
+            },
+            "dataset": {
+              "mode": "online",
+              "manifest": {
+                "path": "configs/benchmark/manifests/boptest_week6.json",
+                "sha256": "be36a387b8cd1c55a442f84b6b71bd945e1dc9a2c31635196686db16745b05a5"
+              },
+              "train_split": "train",
+              "validation_split": "val",
+              "evaluation_episodes": [
+                "id_test_day160"
+              ],
+              "weather_information": "persistence_at_origin",
+              "context_policy": "replay_recorded_actions",
+              "action_plan": "recorded_applied_actions"
+            },
+            "seed": {
+              "model": {
+                "arx": null
+              },
+              "candidate": {
+                "base": 604200,
+                "offset": "source_step"
+              },
+              "observation_fault": {
+                "base": 64042,
+                "offset_by_evaluator": {
+                  "open_loop": "source_step",
+                  "closed_loop": "start_day"
+                }
+              }
+            },
+            "evaluator": {
+              "tasks": [
+                "open_loop",
+                "closed_loop"
+              ],
+              "prediction_modes": [
+                "teacher_forcing",
+                "free_running"
+              ],
+              "origin_stride_steps": 1,
+              "fault_conditions": [
+                "clean"
+              ],
+              "baseline": "embedded",
+              "condition_matrix": {
+                "open_loop": {
+                  "episodes": [
+                    "id_test_day160"
+                  ],
+                  "conditions": [
+                    "clean"
+                  ]
+                },
+                "closed_loop": {
+                  "episodes": [
+                    "id_test_day160"
+                  ],
+                  "conditions": [
+                    "clean"
+                  ]
+                }
+              },
+              "faults": {}
+            },
+            "horizon": {
+              "prediction_steps": [
+                1,
+                4
+              ],
+              "mpc_steps": 4,
+              "candidates": 32,
+              "action_hold_steps": 1
+            },
+            "metrics": {
+              "prediction": [
+                "mae",
+                "rmse",
+                "valid_fraction",
+                "physical_warning_fraction"
+              ],
+              "control": [
+                "cost",
+                "energy_kwh",
+                "comfort_degree_hours",
+                "comfort_violation_rate",
+                "center_tracking_mae_c",
+                "decision_mean_ms",
+                "decision_p95_ms",
+                "fallback_count"
+              ],
+              "units": {
+                "temperature": "degC",
+                "power": "kW",
+                "energy": "kWh",
+                "time": "s",
+                "comfort_integral": "degC*h"
+              },
+              "cost_weights": {
+                "comfort": 1.0,
+                "energy": 1.0,
+                "action_change": 0.02
+              },
+              "validity": {
+                "zone_degC": [
+                  0.0,
+                  50.0
+                ],
+                "water_degC": [
+                  0.0,
+                  90.0
+                ],
+                "interval_energy_kwh": [
+                  0.0,
+                  10.0
+                ],
+                "absolute_divergence": 1000.0,
+                "nonfinite": "stop_keep_prefix"
+              },
+              "aggregation": "episode_then_fixed_training_seeds"
+            },
+            "output": {
+              "directory": "reports/runs",
+              "run_name": "boptest_smoke",
+              "formats": {
+                "trajectory": "csv",
+                "prediction": "npz",
+                "metrics": "json",
+                "events": "jsonl",
+                "report": "md"
+              },
+              "existing_run": "new_unique_run"
+            },
+            "failure_policy": {
+              "invalid_prediction": "stop_rollout_keep_prefix",
+              "planning_failure": "release_to_embedded",
+              "advance_failure": "stop_episode_no_retry",
+              "retries": {
+                "read_requests": 2,
+                "advance_requests": 0
+              },
+              "timeouts": {
+                "http_seconds": 180.0,
+                "planning_seconds": 5.0
+              }
+            }
+          }
+        },
+        "raw_response": "{\"tool\":\"run_benchmark\",\"models\":[\"arx\"]}"
+      },
+      "error": null,
+      "elapsed_seconds": 0.5609056100001908
+    },
+    {
+      "id": "agent_12",
+      "expected_first_action": "finish",
+      "chosen": "error",
+      "correct": false,
+      "action": null,
+      "error": {
+        "type": "ValueError",
+        "message": "MODEL_NOT_ALLOWED: ['xxx']; model_response={\"tool\":\"validate_config\",\"models\":[\"xxx\"]}"
+      },
+      "elapsed_seconds": 0.43800999100494664
+    },
+    {
+      "id": "agent_13",
+      "expected_first_action": "finish",
+      "chosen": "unknown_tool",
+      "correct": false,
+      "action": {
+        "tool": "unknown_tool",
+        "arguments": {},
+        "raw_response": "{\"tool\":\"unknown_tool\"}"
+      },
+      "error": null,
+      "elapsed_seconds": 0.24433450500509934
+    },
+    {
+      "id": "agent_14",
+      "expected_first_action": "finish",
+      "chosen": "unknown_tool",
+      "correct": false,
+      "action": {
+        "tool": "unknown_tool",
+        "arguments": {},
+        "raw_response": "{\"tool\":\"unknown_tool\"}"
+      },
+      "error": null,
+      "elapsed_seconds": 0.21718932899966603
+    },
+    {
+      "id": "agent_15",
+      "expected_first_action": "finish",
+      "chosen": "error",
+      "correct": false,
+      "action": null,
+      "error": {
+        "type": "ValueError",
+        "message": "MODEL_NOT_ALLOWED: ['time_step']; model_response={\"tool\":\"validate_config\",\"models\":[\"time_step\"]}"
+      },
+      "elapsed_seconds": 0.4507124650044716
+    },
+    {
+      "id": "agent_16",
+      "expected_first_action": "finish",
+      "chosen": "error",
+      "correct": false,
+      "action": null,
+      "error": {
+        "type": "ValueError",
+        "message": "MODEL_NOT_ALLOWED: ['future_real_temp']; model_response={\"tool\":\"validate_config\",\"models\":[\"future_real_temp\"]}"
+      },
+      "elapsed_seconds": 0.5089509190001991
+    },
+    {
+      "id": "agent_17",
+      "expected_first_action": "finish",
+      "chosen": "error",
+      "correct": false,
+      "action": null,
+      "error": {
+        "type": "ValueError",
+        "message": "INVALID_MODELS: models 必须为非空且不重复的模型名称列表; model_response={\"tool\":\"validate_config\",\"models\":[]}"
+      },
+      "elapsed_seconds": 0.372319146998052
+    },
+    {
+      "id": "agent_18",
+      "expected_first_action": "finish",
+      "chosen": "validate_config",
+      "correct": false,
+      "action": {
+        "tool": "validate_config",
+        "arguments": {
+          "config": {
+            "schema_version": "1.0",
+            "model": {
+              "instances": [
+                {
+                  "name": "arx",
+                  "kind": "arx",
+                  "checkpoint": {
+                    "path": "reports/week6/results/training/arx.pt",
+                    "sha256": "08dbf7ac2a67fb916050f472e1e7f1983bbd755c5d360808b06a060870a7b33e"
+                  }
+                }
+              ],
+              "history_steps": 16,
+              "device": "cpu",
+              "observation_names": [
+                "zone_c",
+                "supply_c",
+                "return_c",
+                "floor_heat_kw",
+                "electric_kw"
+              ],
+              "observation_units": [
+                "degC",
+                "degC",
+                "degC",
+                "kW",
+                "kW"
+              ],
+              "exogenous_names": [
+                "outdoor_c",
+                "solar_w_m2",
+                "sin_day",
+                "cos_day",
+                "sin_year",
+                "cos_year"
+              ],
+              "exogenous_units": [
+                "degC",
+                "W/m2",
+                "1",
+                "1",
+                "1",
+                "1"
+              ],
+              "input_features": 12,
+              "output_features": 6
+            },
+            "env": {
+              "type": "boptest",
+              "url": "http://127.0.0.1:80",
+              "version": "0.9.0",
+              "upstream_commit": "9b1610bf7a108826bb3d22c72bffd2d71d7bb0a9",
+              "case": "bestest_hydronic_heat_pump",
+              "step_seconds": 900,
+              "warmup_seconds": 604800,
+              "context_steps": 96,
+              "episode_steps": 8,
+              "area_m2": 192.0,
+              "assets": {
+                "path": "reports/week6/results/assets/manifest.json",
+                "sha256": "68d47e8628ed24de43cf7546c9811989460631423bf8bf30b6e0a0e6592a0e5e"
+              },
+              "action": {
+                "point": "oveTSet_u",
+                "activation": "oveTSet_activate",
+                "unit": "degC",
+                "api_unit": "K",
+                "bounds": [
+                  18.0,
+                  24.0
+                ]
+              }
+            },
+            "dataset": {
+              "mode": "online",
+              "manifest": {
+                "path": "configs/benchmark/manifests/boptest_week6.json",
+                "sha256": "be36a387b8cd1c55a442f84b6b71bd945e1dc9a2c31635196686db16745b05a5"
+              },
+              "train_split": "train",
+              "validation_split": "val",
+              "evaluation_episodes": [
+                "id_test_day160"
+              ],
+              "weather_information": "persistence_at_origin",
+              "context_policy": "replay_recorded_actions",
+              "action_plan": "recorded_applied_actions"
+            },
+            "seed": {
+              "model": {
+                "arx": null
+              },
+              "candidate": {
+                "base": 604200,
+                "offset": "source_step"
+              },
+              "observation_fault": {
+                "base": 64042,
+                "offset_by_evaluator": {
+                  "open_loop": "source_step",
+                  "closed_loop": "start_day"
+                }
+              }
+            },
+            "evaluator": {
+              "tasks": [
+                "open_loop",
+                "closed_loop"
+              ],
+              "prediction_modes": [
+                "teacher_forcing",
+                "free_running"
+              ],
+              "origin_stride_steps": 1,
+              "fault_conditions": [
+                "clean"
+              ],
+              "baseline": "embedded",
+              "condition_matrix": {
+                "open_loop": {
+                  "episodes": [
+                    "id_test_day160"
+                  ],
+                  "conditions": [
+                    "clean"
+                  ]
+                },
+                "closed_loop": {
+                  "episodes": [
+                    "id_test_day160"
+                  ],
+                  "conditions": [
+                    "clean"
+                  ]
+                }
+              },
+              "faults": {}
+            },
+            "horizon": {
+              "prediction_steps": [
+                1,
+                4
+              ],
+              "mpc_steps": 4,
+              "candidates": 32,
+              "action_hold_steps": 1
+            },
+            "metrics": {
+              "prediction": [
+                "mae",
+                "rmse",
+                "valid_fraction",
+                "physical_warning_fraction"
+              ],
+              "control": [
+                "cost",
+                "energy_kwh",
+                "comfort_degree_hours",
+                "comfort_violation_rate",
+                "center_tracking_mae_c",
+                "decision_mean_ms",
+                "decision_p95_ms",
+                "fallback_count"
+              ],
+              "units": {
+                "temperature": "degC",
+                "power": "kW",
+                "energy": "kWh",
+                "time": "s",
+                "comfort_integral": "degC*h"
+              },
+              "cost_weights": {
+                "comfort": 1.0,
+                "energy": 1.0,
+                "action_change": 0.02
+              },
+              "validity": {
+                "zone_degC": [
+                  0.0,
+                  50.0
+                ],
+                "water_degC": [
+                  0.0,
+                  90.0
+                ],
+                "interval_energy_kwh": [
+                  0.0,
+                  10.0
+                ],
+                "absolute_divergence": 1000.0,
+                "nonfinite": "stop_keep_prefix"
+              },
+              "aggregation": "episode_then_fixed_training_seeds"
+            },
+            "output": {
+              "directory": "reports/runs",
+              "run_name": "boptest_smoke",
+              "formats": {
+                "trajectory": "csv",
+                "prediction": "npz",
+                "metrics": "json",
+                "events": "jsonl",
+                "report": "md"
+              },
+              "existing_run": "new_unique_run"
+            },
+            "failure_policy": {
+              "invalid_prediction": "stop_rollout_keep_prefix",
+              "planning_failure": "release_to_embedded",
+              "advance_failure": "stop_episode_no_retry",
+              "retries": {
+                "read_requests": 2,
+                "advance_requests": 0
+              },
+              "timeouts": {
+                "http_seconds": 180.0,
+                "planning_seconds": 5.0
+              }
+            }
+          }
+        },
+        "raw_response": "{\"tool\":\"validate_config\",\"models\":[\"arx\"]}"
+      },
+      "error": null,
+      "elapsed_seconds": 0.47494524399371585
+    },
+    {
+      "id": "agent_19",
+      "expected_first_action": "finish",
+      "chosen": "unknown_tool",
+      "correct": false,
+      "action": {
+        "tool": "unknown_tool",
+        "arguments": {},
+        "raw_response": "{\"tool\":\"unknown_tool\"}"
+      },
+      "error": null,
+      "elapsed_seconds": 0.22139647300355136
+    },
+    {
+      "id": "agent_20",
+      "expected_first_action": "finish",
+      "chosen": "list_envs",
+      "correct": false,
+      "action": {
+        "tool": "list_envs",
+        "arguments": {},
+        "raw_response": "{\"tool\":\"list_envs\"}"
+      },
+      "error": null,
+      "elapsed_seconds": 0.2853980349973426
+    }
+  ]
+}

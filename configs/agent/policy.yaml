@@ -1,0 +1,15 @@
+# Week8 第一版可执行范围；不能由模型自行扩大。
+version: '1.0'
+environments: [boptest]
+case: bestest_hydronic_heat_pump
+template: configs/benchmark/boptest_smoke.yaml
+models: [persistence, arx, mlp, residual_mlp, gru]
+tools: [list_envs, validate_config, run_benchmark, summarize_results]
+max_episode_steps: 192
+max_horizon_steps: 20
+max_candidates: 256
+max_models: 11
+max_episodes: 8
+max_workers: 2
+approval_required_above_models: 2
+allow_shell: false

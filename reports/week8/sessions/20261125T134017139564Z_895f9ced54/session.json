@@ -1,0 +1,9 @@
+{
+  "status": "failed",
+  "request": "test",
+  "events": [],
+  "error": {
+    "type": "TimeoutError",
+    "message": "model timeout"
+  }
+}

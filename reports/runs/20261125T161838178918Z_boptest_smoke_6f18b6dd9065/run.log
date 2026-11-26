@@ -1,0 +1,3 @@
+2026-11-25T16:18:38.245370+00:00 INFO run_started {}
+Run directory: /home/hera/Projects/industrial-world-model-eval/reports/runs/20261125T161838178918Z_boptest_smoke_6f18b6dd9065
+2026-11-25T16:21:24.602830+00:00 ERROR run_failed {"error_type": "RuntimeError", "message": "BOPTEST POST /testcases/bestest_hydronic_heat_pump/select: timed out"}

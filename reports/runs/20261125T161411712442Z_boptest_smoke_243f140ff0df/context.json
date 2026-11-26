@@ -1,0 +1,11 @@
+{
+  "phase": "advance",
+  "task": "closed_loop",
+  "model": "embedded",
+  "episode": "id_test_day160",
+  "condition": "clean",
+  "step": 103,
+  "testid": "d883a400-326b-4ee7-8d07-0e2800f1a36f",
+  "mode": "free_running",
+  "origin": 100
+}

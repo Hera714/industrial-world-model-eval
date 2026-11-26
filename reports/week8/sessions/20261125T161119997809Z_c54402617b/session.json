@@ -1,0 +1,863 @@
+{
+  "status": "completed",
+  "request": "运行 BOPTEST，比较 persistence 和 arx",
+  "events": [
+    {
+      "tool": "validate_config",
+      "result": {
+        "ok": true,
+        "result": {
+          "valid": true,
+          "models": [
+            "persistence",
+            "arx"
+          ]
+        },
+        "error": null
+      }
+    },
+    {
+      "tool": "run_benchmark",
+      "result": {
+        "ok": true,
+        "result": {
+          "run_directory": "/home/hera/Projects/industrial-world-model-eval/reports/runs/20261125T161124183844Z_boptest_smoke_d1f6120092c3"
+        },
+        "error": null
+      }
+    },
+    {
+      "tool": "summarize_results",
+      "result": {
+        "ok": true,
+        "result": {
+          "passed": true,
+          "checks": [
+            {
+              "name": "file:config.yaml",
+              "passed": true,
+              "detail": "/home/hera/Projects/industrial-world-model-eval/reports/runs/20261125T161124183844Z_boptest_smoke_d1f6120092c3/config.yaml"
+            },
+            {
+              "name": "file:status.json",
+              "passed": true,
+              "detail": "/home/hera/Projects/industrial-world-model-eval/reports/runs/20261125T161124183844Z_boptest_smoke_d1f6120092c3/status.json"
+            },
+            {
+              "name": "file:metrics.json",
+              "passed": true,
+              "detail": "/home/hera/Projects/industrial-world-model-eval/reports/runs/20261125T161124183844Z_boptest_smoke_d1f6120092c3/metrics.json"
+            },
+            {
+              "name": "file:trajectories.csv",
+              "passed": true,
+              "detail": "/home/hera/Projects/industrial-world-model-eval/reports/runs/20261125T161124183844Z_boptest_smoke_d1f6120092c3/trajectories.csv"
+            },
+            {
+              "name": "file:input_hashes.json",
+              "passed": true,
+              "detail": "/home/hera/Projects/industrial-world-model-eval/reports/runs/20261125T161124183844Z_boptest_smoke_d1f6120092c3/input_hashes.json"
+            },
+            {
+              "name": "file:artifacts.json",
+              "passed": true,
+              "detail": "/home/hera/Projects/industrial-world-model-eval/reports/runs/20261125T161124183844Z_boptest_smoke_d1f6120092c3/artifacts.json"
+            },
+            {
+              "name": "completion",
+              "passed": true,
+              "detail": "completed"
+            },
+            {
+              "name": "run_id",
+              "passed": true,
+              "detail": "20261125T161124183844Z_boptest_smoke_d1f6120092c3"
+            },
+            {
+              "name": "hash:config.yaml",
+              "passed": true,
+              "detail": "/home/hera/Projects/industrial-world-model-eval/reports/runs/20261125T161124183844Z_boptest_smoke_d1f6120092c3/config.yaml"
+            },
+            {
+              "name": "hash:context.json",
+              "passed": true,
+              "detail": "/home/hera/Projects/industrial-world-model-eval/reports/runs/20261125T161124183844Z_boptest_smoke_d1f6120092c3/context.json"
+            },
+            {
+              "name": "hash:events.jsonl",
+              "passed": true,
+              "detail": "/home/hera/Projects/industrial-world-model-eval/reports/runs/20261125T161124183844Z_boptest_smoke_d1f6120092c3/events.jsonl"
+            },
+            {
+              "name": "hash:input_hashes.json",
+              "passed": true,
+              "detail": "/home/hera/Projects/industrial-world-model-eval/reports/runs/20261125T161124183844Z_boptest_smoke_d1f6120092c3/input_hashes.json"
+            },
+            {
+              "name": "hash:metrics.json",
+              "passed": true,
+              "detail": "/home/hera/Projects/industrial-world-model-eval/reports/runs/20261125T161124183844Z_boptest_smoke_d1f6120092c3/metrics.json"
+            },
+            {
+              "name": "hash:predictions.npz",
+              "passed": true,
+              "detail": "/home/hera/Projects/industrial-world-model-eval/reports/runs/20261125T161124183844Z_boptest_smoke_d1f6120092c3/predictions.npz"
+            },
+            {
+              "name": "hash:report.md",
+              "passed": true,
+              "detail": "/home/hera/Projects/industrial-world-model-eval/reports/runs/20261125T161124183844Z_boptest_smoke_d1f6120092c3/report.md"
+            },
+            {
+              "name": "hash:run.log",
+              "passed": true,
+              "detail": "/home/hera/Projects/industrial-world-model-eval/reports/runs/20261125T161124183844Z_boptest_smoke_d1f6120092c3/run.log"
+            },
+            {
+              "name": "hash:trajectories.csv",
+              "passed": true,
+              "detail": "/home/hera/Projects/industrial-world-model-eval/reports/runs/20261125T161124183844Z_boptest_smoke_d1f6120092c3/trajectories.csv"
+            },
+            {
+              "name": "hash:versions.json",
+              "passed": true,
+              "detail": "/home/hera/Projects/industrial-world-model-eval/reports/runs/20261125T161124183844Z_boptest_smoke_d1f6120092c3/versions.json"
+            },
+            {
+              "name": "manifest_required",
+              "passed": true,
+              "detail": "[]"
+            },
+            {
+              "name": "config_hash",
+              "passed": true,
+              "detail": "config.yaml"
+            },
+            {
+              "name": "input_hash:configs/benchmark/manifests/boptest_week6.json",
+              "passed": true,
+              "detail": "/home/hera/Projects/industrial-world-model-eval/configs/benchmark/manifests/boptest_week6.json"
+            },
+            {
+              "name": "input_hash:reports/week6/results/assets/manifest.json",
+              "passed": true,
+              "detail": "/home/hera/Projects/industrial-world-model-eval/reports/week6/results/assets/manifest.json"
+            },
+            {
+              "name": "input_hash:reports/week6/results/training/persistence.pt",
+              "passed": true,
+              "detail": "/home/hera/Projects/industrial-world-model-eval/reports/week6/results/training/persistence.pt"
+            },
+            {
+              "name": "input_hash:reports/week6/results/training/arx.pt",
+              "passed": true,
+              "detail": "/home/hera/Projects/industrial-world-model-eval/reports/week6/results/training/arx.pt"
+            },
+            {
+              "name": "input_hash:reports/week6/results/data/train_day040.csv",
+              "passed": true,
+              "detail": "/home/hera/Projects/industrial-world-model-eval/reports/week6/results/data/train_day040.csv"
+            },
+            {
+              "name": "input_hash:reports/week6/results/data/train_day052.csv",
+              "passed": true,
+              "detail": "/home/hera/Projects/industrial-world-model-eval/reports/week6/results/data/train_day052.csv"
+            },
+            {
+              "name": "input_hash:reports/week6/results/data/train_day064.csv",
+              "passed": true,
+              "detail": "/home/hera/Projects/industrial-world-model-eval/reports/week6/results/data/train_day064.csv"
+            },
+            {
+              "name": "input_hash:reports/week6/results/data/train_day076.csv",
+              "passed": true,
+              "detail": "/home/hera/Projects/industrial-world-model-eval/reports/week6/results/data/train_day076.csv"
+            },
+            {
+              "name": "input_hash:reports/week6/results/data/train_day088.csv",
+              "passed": true,
+              "detail": "/home/hera/Projects/industrial-world-model-eval/reports/week6/results/data/train_day088.csv"
+            },
+            {
+              "name": "input_hash:reports/week6/results/data/train_day100.csv",
+              "passed": true,
+              "detail": "/home/hera/Projects/industrial-world-model-eval/reports/week6/results/data/train_day100.csv"
+            },
+            {
+              "name": "input_hash:reports/week6/results/data/train_day112.csv",
+              "passed": true,
+              "detail": "/home/hera/Projects/industrial-world-model-eval/reports/week6/results/data/train_day112.csv"
+            },
+            {
+              "name": "input_hash:reports/week6/results/data/train_day124.csv",
+              "passed": true,
+              "detail": "/home/hera/Projects/industrial-world-model-eval/reports/week6/results/data/train_day124.csv"
+            },
+            {
+              "name": "input_hash:reports/week6/results/data/val_day136.csv",
+              "passed": true,
+              "detail": "/home/hera/Projects/industrial-world-model-eval/reports/week6/results/data/val_day136.csv"
+            },
+            {
+              "name": "input_hash:reports/week6/results/data/val_day148.csv",
+              "passed": true,
+              "detail": "/home/hera/Projects/industrial-world-model-eval/reports/week6/results/data/val_day148.csv"
+            },
+            {
+              "name": "input_hash:reports/week6/results/data/id_test_day160.csv",
+              "passed": true,
+              "detail": "/home/hera/Projects/industrial-world-model-eval/reports/week6/results/data/id_test_day160.csv"
+            },
+            {
+              "name": "input_hash:reports/week6/results/data/id_test_day172.csv",
+              "passed": true,
+              "detail": "/home/hera/Projects/industrial-world-model-eval/reports/week6/results/data/id_test_day172.csv"
+            },
+            {
+              "name": "input_hash:reports/week6/results/data/ood_cold_day012.csv",
+              "passed": true,
+              "detail": "/home/hera/Projects/industrial-world-model-eval/reports/week6/results/data/ood_cold_day012.csv"
+            },
+            {
+              "name": "input_hash:reports/week6/results/data/ood_cold_day024.csv",
+              "passed": true,
+              "detail": "/home/hera/Projects/industrial-world-model-eval/reports/week6/results/data/ood_cold_day024.csv"
+            },
+            {
+              "name": "input_hash:reports/week6/results/data/ood_warm_day196.csv",
+              "passed": true,
+              "detail": "/home/hera/Projects/industrial-world-model-eval/reports/week6/results/data/ood_warm_day196.csv"
+            },
+            {
+              "name": "input_hash:reports/week6/results/data/ood_warm_day208.csv",
+              "passed": true,
+              "detail": "/home/hera/Projects/industrial-world-model-eval/reports/week6/results/data/ood_warm_day208.csv"
+            },
+            {
+              "name": "input_hash:reports/week6/results/data/id_test_day292.csv",
+              "passed": true,
+              "detail": "/home/hera/Projects/industrial-world-model-eval/reports/week6/results/data/id_test_day292.csv"
+            },
+            {
+              "name": "input_hash:reports/week6/results/data/id_test_day340.csv",
+              "passed": true,
+              "detail": "/home/hera/Projects/industrial-world-model-eval/reports/week6/results/data/id_test_day340.csv"
+            },
+            {
+              "name": "input_hash:external/project1-boptest/testcases/bestest_hydronic_heat_pump/models/wrapped.fmu",
+              "passed": true,
+              "detail": "/home/hera/Projects/industrial-world-model-eval/external/project1-boptest/testcases/bestest_hydronic_heat_pump/models/wrapped.fmu"
+            },
+            {
+              "name": "input_hash:external/project1-boptest/testcases/bestest_hydronic_heat_pump/models/config.json",
+              "passed": true,
+              "detail": "/home/hera/Projects/industrial-world-model-eval/external/project1-boptest/testcases/bestest_hydronic_heat_pump/models/config.json"
+            },
+            {
+              "name": "input_hash:external/project1-boptest/testcases/bestest_hydronic_heat_pump/models/kpis.json",
+              "passed": true,
+              "detail": "/home/hera/Projects/industrial-world-model-eval/external/project1-boptest/testcases/bestest_hydronic_heat_pump/models/kpis.json"
+            },
+            {
+              "name": "input_hash:external/project1-boptest/testcases/bestest_hydronic_heat_pump/models/days.json",
+              "passed": true,
+              "detail": "/home/hera/Projects/industrial-world-model-eval/external/project1-boptest/testcases/bestest_hydronic_heat_pump/models/days.json"
+            },
+            {
+              "name": "input_hash:external/project1-boptest/version.txt",
+              "passed": true,
+              "detail": "/home/hera/Projects/industrial-world-model-eval/external/project1-boptest/version.txt"
+            },
+            {
+              "name": "input_hash:external/project1-boptest/testcases/bestest_hydronic_heat_pump/models/Resources/weather.csv",
+              "passed": true,
+              "detail": "/home/hera/Projects/industrial-world-model-eval/external/project1-boptest/testcases/bestest_hydronic_heat_pump/models/Resources/weather.csv"
+            },
+            {
+              "name": "input_hash:external/project1-boptest/testcases/bestest_hydronic_heat_pump/models/Resources/dataFromModel.csv",
+              "passed": true,
+              "detail": "/home/hera/Projects/industrial-world-model-eval/external/project1-boptest/testcases/bestest_hydronic_heat_pump/models/Resources/dataFromModel.csv"
+            },
+            {
+              "name": "input_hash:external/project1-boptest/testcases/bestest_hydronic_heat_pump/models/Resources/emissions.csv",
+              "passed": true,
+              "detail": "/home/hera/Projects/industrial-world-model-eval/external/project1-boptest/testcases/bestest_hydronic_heat_pump/models/Resources/emissions.csv"
+            },
+            {
+              "name": "input_hash:external/project1-boptest/testcases/bestest_hydronic_heat_pump/models/Resources/prices.csv",
+              "passed": true,
+              "detail": "/home/hera/Projects/industrial-world-model-eval/external/project1-boptest/testcases/bestest_hydronic_heat_pump/models/Resources/prices.csv"
+            },
+            {
+              "name": "input_manifest_nonempty",
+              "passed": true,
+              "detail": "input_hashes.json"
+            },
+            {
+              "name": "trajectory_count",
+              "passed": true,
+              "detail": "496/496"
+            },
+            {
+              "name": "open_loop_matrix",
+              "passed": true,
+              "detail": "8/8"
+            },
+            {
+              "name": "closed_loop_matrix",
+              "passed": true,
+              "detail": "3/3"
+            },
+            {
+              "name": "units",
+              "passed": true,
+              "detail": "{'temperature': 'degC', 'power': 'kW', 'energy': 'kWh', 'time': 's', 'comfort_integral': 'degC*h'}"
+            },
+            {
+              "name": "metrics_finite",
+              "passed": true,
+              "detail": "逐条指标"
+            },
+            {
+              "name": "prediction_counts:persistence:id_test_day160:1",
+              "passed": true,
+              "detail": "5/5; failed=0"
+            },
+            {
+              "name": "prediction_all_valid:persistence:id_test_day160:1",
+              "passed": true,
+              "detail": "失败预测必须明确报告，不视为完全通过"
+            },
+            {
+              "name": "prediction_counts:persistence:id_test_day160:4",
+              "passed": true,
+              "detail": "5/5; failed=0"
+            },
+            {
+              "name": "prediction_all_valid:persistence:id_test_day160:4",
+              "passed": true,
+              "detail": "失败预测必须明确报告，不视为完全通过"
+            },
+            {
+              "name": "prediction_counts:persistence:id_test_day160:1",
+              "passed": true,
+              "detail": "5/5; failed=0"
+            },
+            {
+              "name": "prediction_all_valid:persistence:id_test_day160:1",
+              "passed": true,
+              "detail": "失败预测必须明确报告，不视为完全通过"
+            },
+            {
+              "name": "prediction_counts:persistence:id_test_day160:4",
+              "passed": true,
+              "detail": "5/5; failed=0"
+            },
+            {
+              "name": "prediction_all_valid:persistence:id_test_day160:4",
+              "passed": true,
+              "detail": "失败预测必须明确报告，不视为完全通过"
+            },
+            {
+              "name": "prediction_counts:arx:id_test_day160:1",
+              "passed": true,
+              "detail": "5/5; failed=0"
+            },
+            {
+              "name": "prediction_all_valid:arx:id_test_day160:1",
+              "passed": true,
+              "detail": "失败预测必须明确报告，不视为完全通过"
+            },
+            {
+              "name": "prediction_counts:arx:id_test_day160:4",
+              "passed": true,
+              "detail": "5/5; failed=0"
+            },
+            {
+              "name": "prediction_all_valid:arx:id_test_day160:4",
+              "passed": true,
+              "detail": "失败预测必须明确报告，不视为完全通过"
+            },
+            {
+              "name": "prediction_counts:arx:id_test_day160:1",
+              "passed": true,
+              "detail": "5/5; failed=0"
+            },
+            {
+              "name": "prediction_all_valid:arx:id_test_day160:1",
+              "passed": true,
+              "detail": "失败预测必须明确报告，不视为完全通过"
+            },
+            {
+              "name": "prediction_counts:arx:id_test_day160:4",
+              "passed": true,
+              "detail": "5/5; failed=0"
+            },
+            {
+              "name": "prediction_all_valid:arx:id_test_day160:4",
+              "passed": true,
+              "detail": "失败预测必须明确报告，不视为完全通过"
+            },
+            {
+              "name": "control_steps:persistence:id_test_day160",
+              "passed": true,
+              "detail": "8"
+            },
+            {
+              "name": "fallback_count:persistence:id_test_day160",
+              "passed": true,
+              "detail": "0"
+            },
+            {
+              "name": "control_steps:arx:id_test_day160",
+              "passed": true,
+              "detail": "8"
+            },
+            {
+              "name": "fallback_count:arx:id_test_day160",
+              "passed": true,
+              "detail": "0"
+            },
+            {
+              "name": "control_steps:embedded:id_test_day160",
+              "passed": true,
+              "detail": "8"
+            },
+            {
+              "name": "fallback_count:embedded:id_test_day160",
+              "passed": true,
+              "detail": "0"
+            },
+            {
+              "name": "trajectory_nonempty",
+              "passed": true,
+              "detail": "496"
+            }
+          ]
+        },
+        "error": null
+      }
+    }
+  ],
+  "intent": {
+    "environment": "boptest",
+    "models": [
+      "persistence",
+      "arx"
+    ]
+  },
+  "model_metadata": {
+    "model": "/home/hera/Projects/industrial-world-model-eval/external/qwen-agent",
+    "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+    "prompt_version": "week8-intent-v1",
+    "temperature": 0,
+    "raw_response": "{\n  \"environment\": \"boptest\",\n  \"models\": [\"persistence\", \"arx\"]\n}",
+    "device": "cuda"
+  },
+  "system_prompt": "你是楼宇评测配置助手。只输出 JSON 对象，字段严格为 environment 和 models。environment 只能是 boptest；models 是用户明确指定的检查点名称列表。无法确定或要求额外功能时返回 {\"error\":\"说明原因\"}，不得自行猜测。",
+  "audit": {
+    "passed": true,
+    "checks": [
+      {
+        "name": "file:config.yaml",
+        "passed": true,
+        "detail": "/home/hera/Projects/industrial-world-model-eval/reports/runs/20261125T161124183844Z_boptest_smoke_d1f6120092c3/config.yaml"
+      },
+      {
+        "name": "file:status.json",
+        "passed": true,
+        "detail": "/home/hera/Projects/industrial-world-model-eval/reports/runs/20261125T161124183844Z_boptest_smoke_d1f6120092c3/status.json"
+      },
+      {
+        "name": "file:metrics.json",
+        "passed": true,
+        "detail": "/home/hera/Projects/industrial-world-model-eval/reports/runs/20261125T161124183844Z_boptest_smoke_d1f6120092c3/metrics.json"
+      },
+      {
+        "name": "file:trajectories.csv",
+        "passed": true,
+        "detail": "/home/hera/Projects/industrial-world-model-eval/reports/runs/20261125T161124183844Z_boptest_smoke_d1f6120092c3/trajectories.csv"
+      },
+      {
+        "name": "file:input_hashes.json",
+        "passed": true,
+        "detail": "/home/hera/Projects/industrial-world-model-eval/reports/runs/20261125T161124183844Z_boptest_smoke_d1f6120092c3/input_hashes.json"
+      },
+      {
+        "name": "file:artifacts.json",
+        "passed": true,
+        "detail": "/home/hera/Projects/industrial-world-model-eval/reports/runs/20261125T161124183844Z_boptest_smoke_d1f6120092c3/artifacts.json"
+      },
+      {
+        "name": "completion",
+        "passed": true,
+        "detail": "completed"
+      },
+      {
+        "name": "run_id",
+        "passed": true,
+        "detail": "20261125T161124183844Z_boptest_smoke_d1f6120092c3"
+      },
+      {
+        "name": "hash:config.yaml",
+        "passed": true,
+        "detail": "/home/hera/Projects/industrial-world-model-eval/reports/runs/20261125T161124183844Z_boptest_smoke_d1f6120092c3/config.yaml"
+      },
+      {
+        "name": "hash:context.json",
+        "passed": true,
+        "detail": "/home/hera/Projects/industrial-world-model-eval/reports/runs/20261125T161124183844Z_boptest_smoke_d1f6120092c3/context.json"
+      },
+      {
+        "name": "hash:events.jsonl",
+        "passed": true,
+        "detail": "/home/hera/Projects/industrial-world-model-eval/reports/runs/20261125T161124183844Z_boptest_smoke_d1f6120092c3/events.jsonl"
+      },
+      {
+        "name": "hash:input_hashes.json",
+        "passed": true,
+        "detail": "/home/hera/Projects/industrial-world-model-eval/reports/runs/20261125T161124183844Z_boptest_smoke_d1f6120092c3/input_hashes.json"
+      },
+      {
+        "name": "hash:metrics.json",
+        "passed": true,
+        "detail": "/home/hera/Projects/industrial-world-model-eval/reports/runs/20261125T161124183844Z_boptest_smoke_d1f6120092c3/metrics.json"
+      },
+      {
+        "name": "hash:predictions.npz",
+        "passed": true,
+        "detail": "/home/hera/Projects/industrial-world-model-eval/reports/runs/20261125T161124183844Z_boptest_smoke_d1f6120092c3/predictions.npz"
+      },
+      {
+        "name": "hash:report.md",
+        "passed": true,
+        "detail": "/home/hera/Projects/industrial-world-model-eval/reports/runs/20261125T161124183844Z_boptest_smoke_d1f6120092c3/report.md"
+      },
+      {
+        "name": "hash:run.log",
+        "passed": true,
+        "detail": "/home/hera/Projects/industrial-world-model-eval/reports/runs/20261125T161124183844Z_boptest_smoke_d1f6120092c3/run.log"
+      },
+      {
+        "name": "hash:trajectories.csv",
+        "passed": true,
+        "detail": "/home/hera/Projects/industrial-world-model-eval/reports/runs/20261125T161124183844Z_boptest_smoke_d1f6120092c3/trajectories.csv"
+      },
+      {
+        "name": "hash:versions.json",
+        "passed": true,
+        "detail": "/home/hera/Projects/industrial-world-model-eval/reports/runs/20261125T161124183844Z_boptest_smoke_d1f6120092c3/versions.json"
+      },
+      {
+        "name": "manifest_required",
+        "passed": true,
+        "detail": "[]"
+      },
+      {
+        "name": "config_hash",
+        "passed": true,
+        "detail": "config.yaml"
+      },
+      {
+        "name": "input_hash:configs/benchmark/manifests/boptest_week6.json",
+        "passed": true,
+        "detail": "/home/hera/Projects/industrial-world-model-eval/configs/benchmark/manifests/boptest_week6.json"
+      },
+      {
+        "name": "input_hash:reports/week6/results/assets/manifest.json",
+        "passed": true,
+        "detail": "/home/hera/Projects/industrial-world-model-eval/reports/week6/results/assets/manifest.json"
+      },
+      {
+        "name": "input_hash:reports/week6/results/training/persistence.pt",
+        "passed": true,
+        "detail": "/home/hera/Projects/industrial-world-model-eval/reports/week6/results/training/persistence.pt"
+      },
+      {
+        "name": "input_hash:reports/week6/results/training/arx.pt",
+        "passed": true,
+        "detail": "/home/hera/Projects/industrial-world-model-eval/reports/week6/results/training/arx.pt"
+      },
+      {
+        "name": "input_hash:reports/week6/results/data/train_day040.csv",
+        "passed": true,
+        "detail": "/home/hera/Projects/industrial-world-model-eval/reports/week6/results/data/train_day040.csv"
+      },
+      {
+        "name": "input_hash:reports/week6/results/data/train_day052.csv",
+        "passed": true,
+        "detail": "/home/hera/Projects/industrial-world-model-eval/reports/week6/results/data/train_day052.csv"
+      },
+      {
+        "name": "input_hash:reports/week6/results/data/train_day064.csv",
+        "passed": true,
+        "detail": "/home/hera/Projects/industrial-world-model-eval/reports/week6/results/data/train_day064.csv"
+      },
+      {
+        "name": "input_hash:reports/week6/results/data/train_day076.csv",
+        "passed": true,
+        "detail": "/home/hera/Projects/industrial-world-model-eval/reports/week6/results/data/train_day076.csv"
+      },
+      {
+        "name": "input_hash:reports/week6/results/data/train_day088.csv",
+        "passed": true,
+        "detail": "/home/hera/Projects/industrial-world-model-eval/reports/week6/results/data/train_day088.csv"
+      },
+      {
+        "name": "input_hash:reports/week6/results/data/train_day100.csv",
+        "passed": true,
+        "detail": "/home/hera/Projects/industrial-world-model-eval/reports/week6/results/data/train_day100.csv"
+      },
+      {
+        "name": "input_hash:reports/week6/results/data/train_day112.csv",
+        "passed": true,
+        "detail": "/home/hera/Projects/industrial-world-model-eval/reports/week6/results/data/train_day112.csv"
+      },
+      {
+        "name": "input_hash:reports/week6/results/data/train_day124.csv",
+        "passed": true,
+        "detail": "/home/hera/Projects/industrial-world-model-eval/reports/week6/results/data/train_day124.csv"
+      },
+      {
+        "name": "input_hash:reports/week6/results/data/val_day136.csv",
+        "passed": true,
+        "detail": "/home/hera/Projects/industrial-world-model-eval/reports/week6/results/data/val_day136.csv"
+      },
+      {
+        "name": "input_hash:reports/week6/results/data/val_day148.csv",
+        "passed": true,
+        "detail": "/home/hera/Projects/industrial-world-model-eval/reports/week6/results/data/val_day148.csv"
+      },
+      {
+        "name": "input_hash:reports/week6/results/data/id_test_day160.csv",
+        "passed": true,
+        "detail": "/home/hera/Projects/industrial-world-model-eval/reports/week6/results/data/id_test_day160.csv"
+      },
+      {
+        "name": "input_hash:reports/week6/results/data/id_test_day172.csv",
+        "passed": true,
+        "detail": "/home/hera/Projects/industrial-world-model-eval/reports/week6/results/data/id_test_day172.csv"
+      },
+      {
+        "name": "input_hash:reports/week6/results/data/ood_cold_day012.csv",
+        "passed": true,
+        "detail": "/home/hera/Projects/industrial-world-model-eval/reports/week6/results/data/ood_cold_day012.csv"
+      },
+      {
+        "name": "input_hash:reports/week6/results/data/ood_cold_day024.csv",
+        "passed": true,
+        "detail": "/home/hera/Projects/industrial-world-model-eval/reports/week6/results/data/ood_cold_day024.csv"
+      },
+      {
+        "name": "input_hash:reports/week6/results/data/ood_warm_day196.csv",
+        "passed": true,
+        "detail": "/home/hera/Projects/industrial-world-model-eval/reports/week6/results/data/ood_warm_day196.csv"
+      },
+      {
+        "name": "input_hash:reports/week6/results/data/ood_warm_day208.csv",
+        "passed": true,
+        "detail": "/home/hera/Projects/industrial-world-model-eval/reports/week6/results/data/ood_warm_day208.csv"
+      },
+      {
+        "name": "input_hash:reports/week6/results/data/id_test_day292.csv",
+        "passed": true,
+        "detail": "/home/hera/Projects/industrial-world-model-eval/reports/week6/results/data/id_test_day292.csv"
+      },
+      {
+        "name": "input_hash:reports/week6/results/data/id_test_day340.csv",
+        "passed": true,
+        "detail": "/home/hera/Projects/industrial-world-model-eval/reports/week6/results/data/id_test_day340.csv"
+      },
+      {
+        "name": "input_hash:external/project1-boptest/testcases/bestest_hydronic_heat_pump/models/wrapped.fmu",
+        "passed": true,
+        "detail": "/home/hera/Projects/industrial-world-model-eval/external/project1-boptest/testcases/bestest_hydronic_heat_pump/models/wrapped.fmu"
+      },
+      {
+        "name": "input_hash:external/project1-boptest/testcases/bestest_hydronic_heat_pump/models/config.json",
+        "passed": true,
+        "detail": "/home/hera/Projects/industrial-world-model-eval/external/project1-boptest/testcases/bestest_hydronic_heat_pump/models/config.json"
+      },
+      {
+        "name": "input_hash:external/project1-boptest/testcases/bestest_hydronic_heat_pump/models/kpis.json",
+        "passed": true,
+        "detail": "/home/hera/Projects/industrial-world-model-eval/external/project1-boptest/testcases/bestest_hydronic_heat_pump/models/kpis.json"
+      },
+      {
+        "name": "input_hash:external/project1-boptest/testcases/bestest_hydronic_heat_pump/models/days.json",
+        "passed": true,
+        "detail": "/home/hera/Projects/industrial-world-model-eval/external/project1-boptest/testcases/bestest_hydronic_heat_pump/models/days.json"
+      },
+      {
+        "name": "input_hash:external/project1-boptest/version.txt",
+        "passed": true,
+        "detail": "/home/hera/Projects/industrial-world-model-eval/external/project1-boptest/version.txt"
+      },
+      {
+        "name": "input_hash:external/project1-boptest/testcases/bestest_hydronic_heat_pump/models/Resources/weather.csv",
+        "passed": true,
+        "detail": "/home/hera/Projects/industrial-world-model-eval/external/project1-boptest/testcases/bestest_hydronic_heat_pump/models/Resources/weather.csv"
+      },
+      {
+        "name": "input_hash:external/project1-boptest/testcases/bestest_hydronic_heat_pump/models/Resources/dataFromModel.csv",
+        "passed": true,
+        "detail": "/home/hera/Projects/industrial-world-model-eval/external/project1-boptest/testcases/bestest_hydronic_heat_pump/models/Resources/dataFromModel.csv"
+      },
+      {
+        "name": "input_hash:external/project1-boptest/testcases/bestest_hydronic_heat_pump/models/Resources/emissions.csv",
+        "passed": true,
+        "detail": "/home/hera/Projects/industrial-world-model-eval/external/project1-boptest/testcases/bestest_hydronic_heat_pump/models/Resources/emissions.csv"
+      },
+      {
+        "name": "input_hash:external/project1-boptest/testcases/bestest_hydronic_heat_pump/models/Resources/prices.csv",
+        "passed": true,
+        "detail": "/home/hera/Projects/industrial-world-model-eval/external/project1-boptest/testcases/bestest_hydronic_heat_pump/models/Resources/prices.csv"
+      },
+      {
+        "name": "input_manifest_nonempty",
+        "passed": true,
+        "detail": "input_hashes.json"
+      },
+      {
+        "name": "trajectory_count",
+        "passed": true,
+        "detail": "496/496"
+      },
+      {
+        "name": "open_loop_matrix",
+        "passed": true,
+        "detail": "8/8"
+      },
+      {
+        "name": "closed_loop_matrix",
+        "passed": true,
+        "detail": "3/3"
+      },
+      {
+        "name": "units",
+        "passed": true,
+        "detail": "{'temperature': 'degC', 'power': 'kW', 'energy': 'kWh', 'time': 's', 'comfort_integral': 'degC*h'}"
+      },
+      {
+        "name": "metrics_finite",
+        "passed": true,
+        "detail": "逐条指标"
+      },
+      {
+        "name": "prediction_counts:persistence:id_test_day160:1",
+        "passed": true,
+        "detail": "5/5; failed=0"
+      },
+      {
+        "name": "prediction_all_valid:persistence:id_test_day160:1",
+        "passed": true,
+        "detail": "失败预测必须明确报告，不视为完全通过"
+      },
+      {
+        "name": "prediction_counts:persistence:id_test_day160:4",
+        "passed": true,
+        "detail": "5/5; failed=0"
+      },
+      {
+        "name": "prediction_all_valid:persistence:id_test_day160:4",
+        "passed": true,
+        "detail": "失败预测必须明确报告，不视为完全通过"
+      },
+      {
+        "name": "prediction_counts:persistence:id_test_day160:1",
+        "passed": true,
+        "detail": "5/5; failed=0"
+      },
+      {
+        "name": "prediction_all_valid:persistence:id_test_day160:1",
+        "passed": true,
+        "detail": "失败预测必须明确报告，不视为完全通过"
+      },
+      {
+        "name": "prediction_counts:persistence:id_test_day160:4",
+        "passed": true,
+        "detail": "5/5; failed=0"
+      },
+      {
+        "name": "prediction_all_valid:persistence:id_test_day160:4",
+        "passed": true,
+        "detail": "失败预测必须明确报告，不视为完全通过"
+      },
+      {
+        "name": "prediction_counts:arx:id_test_day160:1",
+        "passed": true,
+        "detail": "5/5; failed=0"
+      },
+      {
+        "name": "prediction_all_valid:arx:id_test_day160:1",
+        "passed": true,
+        "detail": "失败预测必须明确报告，不视为完全通过"
+      },
+      {
+        "name": "prediction_counts:arx:id_test_day160:4",
+        "passed": true,
+        "detail": "5/5; failed=0"
+      },
+      {
+        "name": "prediction_all_valid:arx:id_test_day160:4",
+        "passed": true,
+        "detail": "失败预测必须明确报告，不视为完全通过"
+      },
+      {
+        "name": "prediction_counts:arx:id_test_day160:1",
+        "passed": true,
+        "detail": "5/5; failed=0"
+      },
+      {
+        "name": "prediction_all_valid:arx:id_test_day160:1",
+        "passed": true,
+        "detail": "失败预测必须明确报告，不视为完全通过"
+      },
+      {
+        "name": "prediction_counts:arx:id_test_day160:4",
+        "passed": true,
+        "detail": "5/5; failed=0"
+      },
+      {
+        "name": "prediction_all_valid:arx:id_test_day160:4",
+        "passed": true,
+        "detail": "失败预测必须明确报告，不视为完全通过"
+      },
+      {
+        "name": "control_steps:persistence:id_test_day160",
+        "passed": true,
+        "detail": "8"
+      },
+      {
+        "name": "fallback_count:persistence:id_test_day160",
+        "passed": true,
+        "detail": "0"
+      },
+      {
+        "name": "control_steps:arx:id_test_day160",
+        "passed": true,
+        "detail": "8"
+      },
+      {
+        "name": "fallback_count:arx:id_test_day160",
+        "passed": true,
+        "detail": "0"
+      },
+      {
+        "name": "control_steps:embedded:id_test_day160",
+        "passed": true,
+        "detail": "8"
+      },
+      {
+        "name": "fallback_count:embedded:id_test_day160",
+        "passed": true,
+        "detail": "0"
+      },
+      {
+        "name": "trajectory_nonempty",
+        "passed": true,
+        "detail": "496"
+      }
+    ]
+  }
+}

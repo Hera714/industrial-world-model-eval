@@ -23,8 +23,8 @@ jobs:
           python -m pip install ruff==0.14.10
       - name: Python 静态错误检查
         run: |
-          python -m compileall -q benchmark controllers evaluators metrics models simulators tests scripts run_benchmark.py
-          ruff check --select E9,F63,F7,F82 benchmark controllers evaluators metrics models simulators tests scripts run_benchmark.py
+          python -m compileall -q agents benchmark controllers evaluators metrics models simulators tests scripts run_benchmark.py
+          ruff check --select E9,F63,F7,F82 agents benchmark controllers evaluators metrics models simulators tests scripts run_benchmark.py
       - name: 不依赖服务和实验数据的短单元测试
-        run: python -m unittest tests.test_metrics tests.test_boptest_control tests.test_week6_control
+        run: python -m unittest tests.test_metrics tests.test_boptest_control tests.test_week6_control tests.test_agent_errors tests.test_agent_eval tests.test_agent_schemas tests.test_agent_react_guard
 # 真实 BOPTEST 回合需要服务、FMU 和冻结资产，不在 GitHub 托管 runner 自动执行。
