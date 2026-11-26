@@ -10,8 +10,10 @@ BOPTEST 世界模型预测与控制评测项目。
 | Week 5–7 代表性实验表、失败案例和局限 | [Week 8 报告](reports/week8/week8.md) |
 | 5 分钟介绍、10 分钟深挖、10 个问答 | [面试材料](docs/interview/) |
 | Agent 工作边界和人工审批 | [Agent 协议](docs/agent_protocol.md) |
+| 数据、第三方代码来源 | [第三方来源与许可线索](docs/third_party.md) |
+| 实验文件如何保存 | [产物保存策略](docs/artifact_policy.md) |
 
-3 分钟体验的前提是：已准备好 BOPTEST 服务、冻结数据和检查点、Qwen 模型及镜像；首次安装、构建和下载不计入。CPU 容器中一次已准备资产后的实测为 92.96 秒，命令见下文“在 CPU 容器中复现”；运行时间因设备和服务负载而异。
+3 分钟体验的前提是：已准备好 BOPTEST 服务、冻结数据和检查点、Qwen 模型及镜像；首次安装、构建和下载不计入。CPU 容器中一次已准备资产后的实测为 92.96 秒，命令见下文“在 CPU 容器中复现”；运行时间因设备和服务负载而异。[从零准备与故障排查](docs/setup_reproduction.md)列出了前置步骤。
 
 ## 环境准备
 
@@ -119,7 +121,7 @@ python -m pip install 'langgraph==0.6.11' 'langgraph-checkpoint-sqlite==3.1.3'
 python -m unittest tests.test_agent_tools tests.test_agent_pipeline tests.test_agent_errors tests.test_agent_graph tests.test_agent_graph_sqlite
 ```
 
-当已有可用模型服务时，使用 `scripts/run_agent.py --request <任务> --endpoint <chat_completions地址> --model <模型名>`。当前 Agent 工具仅允许选择冻结 smoke 模板的模型；其他配置会被拒绝。本地 Qwen 已完成一次真实端到端演示；外部模型服务入口和跨环境三分钟体验尚未验收。详见 `docs/agent_protocol.md`。
+当已有可用模型服务时，使用 `scripts/run_agent.py --request <任务> --endpoint <chat_completions地址> --model <模型名>`。当前 Agent 工具仅允许选择冻结 smoke 模板的模型；其他配置会被拒绝。本地 Qwen 已完成真实端到端和 CPU 容器复现；外部模型服务入口尚未做同等真实验收。详见 `docs/agent_protocol.md`。
 
 ### 本地 LLM 快速体验（模型和 BOPTEST 已准备）
 
